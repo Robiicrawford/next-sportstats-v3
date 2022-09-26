@@ -76,7 +76,6 @@ const Card = ({e, sx}) => {
 					    </Col>
 				    	<Col xs='12'  >
 					    	<h4 
-					    		width={1}  py={[2,1]} mx={1} fontSize={[1,2,3]}
 					    		style={{whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis'}}
 					    	>
 					    		{e.info?.name}
