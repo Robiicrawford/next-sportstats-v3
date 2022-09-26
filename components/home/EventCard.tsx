@@ -48,50 +48,52 @@ const Card = ({e, sx}) => {
    
 			<Link style={{maxWidth:'100%'}} href={`/event/${slugSet(e.info?.name).toLowerCase()}-results`} > 
 			
-					<Container >
+					<Container style={{gap:'0'}} >
 				
-						<Row >
-							<LazyLoadImage 
-								width='auto' height='100%' maxHeight={['100px','150px']}  
-								src={e.info?.imageUrl?e.info.imageUrl:ss} 
-								alt={e.info?.name}
-								loading="lazy"
-								className="card__image"
-          			effect="blur"
-								
-							/>
-				   </Row>
-			
-				    <Row  > 
-				    	<h5 width={1} display='inline' px={2} > 
-				    		{ new Date(
-				    			e.info?.date.slice(0,4)+'/'+e.info?.date.slice(4,6)+'/'+e.info?.date.slice(6,8)
-				    			).toLocaleDateString('en-CA', { month: 'long', day: 'numeric' }
-				    		)} {" "}
-				    		{new Date(
-				    			e.info?.date.slice(0,4)+'/'+e.info?.date.slice(4,6)+'/'+e.info?.date.slice(6,8)
-				    		).toLocaleDateString('en-CA', {year: 'numeric'})} 
-				    	</h5>
-				    	<Col />
-				    	<h4 
-				    		width={1}  py={[2,1]} mx={1} fontSize={[1,2,3]}
-				    		sx={{whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis'}}
-				    	>
-				    		{e.info?.name}
-				    	</h4> 
+						<Row  >
+							<Col xs='12' style={{display:'flex', justifyContent:'center', minHeight:'210px'}}> 
+								<LazyLoadImage 
+									width='auto' height='100%' maxHeight={['100px','150px']}  
+									src={e.info?.imageUrl?e.info.imageUrl:ss} 
+									alt={e.info?.name}
+									loading="lazy"
+									className="card__image"
+	          			effect="blur"
+									
+								/>
+							</Col>
+
+				    	<Col xs='12' >
+					    	<h5 width={1} display='inline' px={2} > 
+					    		{ new Date(
+					    			e.info?.date.slice(0,4)+'/'+e.info?.date.slice(4,6)+'/'+e.info?.date.slice(6,8)
+					    			).toLocaleDateString('en-CA', { month: 'long', day: 'numeric' }
+					    		)} {" "}
+					    		{new Date(
+					    			e.info?.date.slice(0,4)+'/'+e.info?.date.slice(4,6)+'/'+e.info?.date.slice(6,8)
+					    		).toLocaleDateString('en-CA', {year: 'numeric'})} 
+					    	</h5>
+					    </Col>
+				    	<Col xs='12'  >
+					    	<h4 
+					    		width={1}  py={[2,1]} mx={1} fontSize={[1,2,3]}
+					    		style={{whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis'}}
+					    	>
+					    		{e.info?.name}
+					    	</h4> 
+					    </Col>
 				    </Row>
 				    <Row>
 
-				    	<Col >
+				    	<Col xs='12' >
 					    	<h4
 					    		style={{whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis'}}
 					    	> 
 					    		{e.events[0]?.city} | {e.events[0]?.country}
 					    	</h4>
 				    	</Col>
-				    	<Col />
 				    	<Col>
-				    		 <FontAwesomeIcon icon={faShareAlt} />
+				    		 <FontAwesomeIcon icon={faShareAlt} size='sm' />
 				    	</Col>
 
 				    </Row>

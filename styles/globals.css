@@ -65,7 +65,7 @@ code {
 }
 
 .card__image {
-  max-height: 230px;
+  max-height: 210px;
   max-width: 100%;
   display: block;
   object-fit: cover;

@@ -57,11 +57,20 @@ export default function Home({sportstats}) {
         </div>
           
         <Section.Container id="events" Background={Background} className='px-2'>
+
             <SectionSlider 
               data={sportstats?.upcomingEvents?.masterEvents}
-              section={'Upcoming Events'}
+              section={'recent results'}
               isLoadingSection={(sportstats?.upcomingEvents?.masterEvents)?false:true}
             />  
+
+
+            <SectionSlider 
+              data={sportstats?.recentEvents?.masterEvents}
+              section={'Upcoming Events'}
+              isLoadingSection={(sportstats?.recentEvents?.masterEvents)?false:true}
+            />  
+
         </Section.Container>
 
       </main>
@@ -76,6 +85,22 @@ export async function getStaticProps() {
       query: gql`
         query Countries {
           upcomingEvents {
+            masterEvents {
+              id
+              mid
+              info {
+                name
+                date
+                imageUrl
+                country
+              }
+              events {
+                country
+                city
+              }
+            }
+          }
+          recentEvents {
             masterEvents {
               id
               mid

@@ -12,7 +12,7 @@ export default function Header({ color }) {
     <header className="header" > 
       <Navbar collapseOnSelect expand="lg" bg={color==='none'?'none':"dark"} variant="dark" fixed="top" >
          <Container>
-            <Navbar.Brand href="#home">
+            <Navbar.Brand href="/">
               <Image
                 alt="Sportstats"
                 src={sportstats_logo}
