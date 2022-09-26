@@ -64,7 +64,7 @@ const Card = ({e, sx}) => {
 							</Col>
 
 				    	<Col xs='12' >
-					    	<h5 width={1} display='inline' px={2} > 
+					    	<h5> 
 					    		{ new Date(
 					    			e.info?.date.slice(0,4)+'/'+e.info?.date.slice(4,6)+'/'+e.info?.date.slice(6,8)
 					    			).toLocaleDateString('en-CA', { month: 'long', day: 'numeric' }
