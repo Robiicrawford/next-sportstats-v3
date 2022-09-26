@@ -10,7 +10,7 @@ import { getMainDefinition, relayStylePagination  } from '@apollo/client/utiliti
 
 //const wsForNode = typeof window === "undefined" ? ws : null
 
-import { sha256 } from 'crypto-hash';
+//import { sha256 } from 'crypto-hash';
 
 
 const http = new HttpLink({
