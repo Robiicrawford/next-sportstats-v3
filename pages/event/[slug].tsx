@@ -4,6 +4,8 @@ import Layout from '../../components/layout/Layout'
 import { gql } from "@apollo/client";
 import {client} from "../../apollo/apollo-client";
 
+import {slugSet } from "../../utils/setSlug"
+
 function Master({ post }) {
   console.log(post)
   return (
@@ -37,7 +39,7 @@ export async function getStaticPaths() {
   const paths = data.masterEvents.masterEvents.map((master) => ({
 
     params: { 
-      slug: master.info.name.toString(), 
+      slug: slugSet(master.info.name), 
       mid: master.id.toString() 
     }
   }))
