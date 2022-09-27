@@ -42,7 +42,7 @@ const Card = ({e}) => {
 
   return (
    <EventCard flexWrap='wrap' className="card" >
-   	<Flex flexWrap='wrap' px={[1,2,3]}  maxWidth={'100%'} mx={[3]} >
+   	<Flex flexWrap='wrap' px={[1,2,3]}  maxWidth={'100%'} mx={[3]} pb='3' >
 			<Link style={{maxWidth:'100%'}} href={`/event/${slugSet(e.info?.name).toLowerCase()}-results`} > 
 				<Flex flexWrap='wrap' color='black' >
 						<Center  w='100%' height={['100px','150px']} >
