@@ -1,7 +1,5 @@
 import Head from 'next/head'
-import Header from '../../components/Header'
-import Footer from '../../components/Footer'
-
+import Layout from '../../components/layout/Layout'
 
 import { gql } from "@apollo/client";
 import {client} from "../../apollo/apollo-client";
@@ -9,11 +7,10 @@ import {client} from "../../apollo/apollo-client";
 function Master({ post }) {
   console.log(post)
   return (
-    <div className='container-main'>
-      <Header />
+    <Layout >
+ 
       here
-      <Footer />
-    </div>
+    </Layout>
   )
 }
 

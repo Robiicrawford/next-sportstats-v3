@@ -2,10 +2,7 @@ import React from "react"
 
 
 import styled from 'styled-components';
-
-import Container from 'react-bootstrap/Container';
-import Row from 'react-bootstrap/Row';
-import Col from 'react-bootstrap/Col';
+import { Box, Flex, Text, Heading, Center } from '@chakra-ui/react'
 
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faShareAlt} from "@fortawesome/free-solid-svg-icons";
@@ -44,66 +41,61 @@ const Card = ({e}) => {
   };
 
   return (
-   <EventCard  className="card" >
-   
+   <EventCard flexWrap='wrap' className="card" >
+   	<Flex flexWrap='wrap' px={[1,2,3]}  maxWidth={'100%'} mx={[3]} >
 			<Link style={{maxWidth:'100%'}} href={`/event/${slugSet(e.info?.name).toLowerCase()}-results`} > 
-			
-					<Container style={{gap:'0'}} >
-				
-						<Row  >
-							<Col xs='12' style={{display:'flex', justifyContent:'center', minHeight:'210px'}}> 
-								<LazyLoadImage 
-									width='auto' height='100%' maxHeight={['100px','150px']}  
-									src={e.info?.imageUrl?e.info.imageUrl:ss} 
-									alt={e.info?.name}
-									loading="lazy"
-									className="card__image"
-	          			effect="blur"
-									
-								/>
-							</Col>
+				<Flex flexWrap='wrap' color='black' >
+						<Center  w='100%' height={['100px','150px']} >
+							<LazyLoadImage 
+								width='auto' height='100%' maxHeight={['100px','150px']}  
+								src={e.info?.imageUrl?e.info.imageUrl:ss} 
+								alt={e.info?.name}
+								loading="lazy"
+								className="card__image"
+          			effect="blur"
+								
+							/>
+				   </Center>
+				   <Box w='100%'>
+				    	<Text > 
+				    		{ new Date(
+				    			e.info?.date.slice(0,4)+'/'+e.info?.date.slice(4,6)+'/'+e.info?.date.slice(6,8)
+				    			).toLocaleDateString('en-CA', { month: 'long', day: 'numeric' }
+				    		)} {" "}
+				    		{new Date(
+				    			e.info?.date.slice(0,4)+'/'+e.info?.date.slice(4,6)+'/'+e.info?.date.slice(6,8)
+				    		).toLocaleDateString('en-CA', {year: 'numeric'})} 
+				    	</Text>
+				    	<Box  w='20%' h='1' bg='#0CAA56' />
+				    </Box>
+				    <Box w='100%'>
+				    
+				    		{e.info?.name}
+				    </Box>
+				    <Flex flexWrap='wrap' w='100%' > 
+				    	
+				    	<Text 
+				    		w={'100%'}
+				    		sx={{whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis'}}
+				    		color='black'
+				    	> 
+				    		{e.events[0]?.city} | {e.events[0]?.country}
 
-				    	<Col xs='12' >
-					    	<h5> 
-					    		{ new Date(
-					    			e.info?.date.slice(0,4)+'/'+e.info?.date.slice(4,6)+'/'+e.info?.date.slice(6,8)
-					    			).toLocaleDateString('en-CA', { month: 'long', day: 'numeric' }
-					    		)} {" "}
-					    		{new Date(
-					    			e.info?.date.slice(0,4)+'/'+e.info?.date.slice(4,6)+'/'+e.info?.date.slice(6,8)
-					    		).toLocaleDateString('en-CA', {year: 'numeric'})} 
-					    	</h5>
-					    </Col>
-				    	<Col xs='12'  >
-					    	<h4 
-					    		style={{whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis'}}
-					    	>
-					    		{e.info?.name}
-					    	</h4> 
-					    </Col>
-				    </Row>
-				    <Row>
+				    		<Box sx={{position:'absolute', right:'5px', bottom:'5px'}} className='shareButton'  onClick={handleOnClick} >
+		              <FontAwesomeIcon icon={faShareAlt} size="lg" />
+		            </Box>
 
-				    	<Col xs='12' >
-					    	<h4
-					    		style={{whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis'}}
-					    	> 
-					    		{e.events[0]?.city} | {e.events[0]?.country}
-					    	</h4>
-				    	</Col>
-				    	<Col>
-				    		 <FontAwesomeIcon icon={faShareAlt} size='sm' />
-				    	</Col>
+				    	</Text>
+				    </Flex>
 
-				    </Row>
-
-				</Container>
+				</Flex>
 			</Link>
+		</Flex>
 	</EventCard>
   )
 }
 
-export const EventCard = styled(Col)`
+export const EventCard = styled(Flex)`
 	max-width: 100%;
 	transform: scale(1);
 	cursor: pointer;

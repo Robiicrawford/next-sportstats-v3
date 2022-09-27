@@ -3,6 +3,8 @@ import { Navigation } from "swiper";
 import { Swiper, SwiperSlide } from "swiper/react";
 import Skeleton from "../Skeleton";
 
+
+
 import Card from "./EventCard"
 
 

@@ -17,7 +17,15 @@ module.exports = {
       },
       {
         domain: 'sportstats.ca',
-        defaultLocale: 'nl-NL',
+        defaultLocale: 'en-CA',
+      },
+      {
+        domain: 'sportstats.ome',
+        defaultLocale: 'en-CA',
+      },
+      {
+        domain: 'sportstats.today',
+        defaultLocale: 'en-CA',
       },
       {
         domain: 'sportstats.th',

@@ -1,13 +1,11 @@
 import Head from 'next/head'
-import Header from '../components/Header'
-import Footer from '../components/Footer'
 
-import Container from 'react-bootstrap/Container';
-import Row from 'react-bootstrap/Row';
-import Col from 'react-bootstrap/Col';
+import { Box, Flex, Heading, Text } from '@chakra-ui/react';
 
 import { gql } from "@apollo/client";
 import {client} from "../apollo/apollo-client";
+
+import Layout from '../components/layout/Layout'
 
 import Section from '../components/section';
 import Triangle from '../components/triangle';
@@ -22,14 +20,12 @@ import "react-lazy-load-image-component/src/effects/opacity.css";
 export default function Home({sportstats}) {
 
   return (
-    <div className='container-main'>
+    <Layout header_color='none'>
       <Head>
-        <title>Next.js Starter!</title>
+        <title>Sportstats || Home</title>
         <link rel="icon" href="/favicon.ico" />
       </Head>
       
-      <Header color='none' />
-
       <main style={{padding:'0', margin:'0', justifyContent:'flex-start'}}>
         
         <div 
@@ -51,8 +47,6 @@ export default function Home({sportstats}) {
                   <video width="1414" autoPlay muted loop style={{display: 'block', height: '100%', width: '100vw'}} >
                     <source src="https://d33vaoadodpfl.cloudfront.net/miami-cut.mp4" type="video/mp4"/>Please update your browser to support video
                   </video>
-
-                  test
               
         </div>
           
@@ -75,8 +69,7 @@ export default function Home({sportstats}) {
 
       </main>
 
-      <Footer />
-    </div>
+    </Layout>
   )
 }
 
