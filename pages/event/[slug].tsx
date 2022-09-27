@@ -37,8 +37,8 @@ export async function getStaticPaths() {
   const paths = data.masterEvents.masterEvents.map((master) => ({
 
     params: { 
-      slug: master.id.toString(), 
-      mid: master.id 
+      slug: master.info.name.toString(), 
+      mid: master.id.toString() 
     }
   }))
 
