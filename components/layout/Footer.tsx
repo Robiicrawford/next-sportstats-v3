@@ -44,7 +44,7 @@ export default function Footer() {
                         <svg 
                           version="1.1" id="Capa_1" xmlns="http://www.w3.org/2000/svg" x="0px" y="0px"
                           aria-hidden="false" aria-label="Navigate to Youtube" focusable="false"
-                          viewBox="0 0 209.673 209.673" style={{enableBackground:'new 0 0 209.673 209.673'}} 
+                          viewBox="0 0 209.673 209.673"
                           width="31" height="31"
                         >
                           <path d="M173.075,29.203H36.599C16.418,29.203,0,45.626,0,65.812v78.05c0,20.186,16.418,36.608,36.599,36.608h136.477
