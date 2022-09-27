@@ -1,0 +1,25 @@
+{
+  "NotAuthorizedException": "Nombre de usuario o contraseña incorrectos.",
+  "UserNotConfirmedException": "Cuenta no activada",
+  "UserNotFoundException": "Nombre de usuario o contraseña incorrectos.",
+  "dashboard": {
+    "awards": "Premios",
+    "confirm": "Confirm",
+    "delete": "Delete",
+    "find-an-event": "Encuentra un evento cerca de ti",
+    "find-friends": "Find Friends",
+    "find-people": "Encuentra amigos a seguir",
+    "followers": "Followers",
+    "friend": "Friend",
+    "friend-request": "Friend Request",
+    "friends": "Amigos",
+    "my-stats": "Mis estadísticas",
+    "news": "Noticias",
+    "photos": "Fotos",
+    "requests": "Requests ",
+    "title": "Panel",
+    "view-profile": "View Profile",
+    "you": "Tú",
+    "your-watchlist": "Su lista de seguimiento"
+  }
+}

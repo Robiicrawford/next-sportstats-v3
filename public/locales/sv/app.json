@@ -1,0 +1,16 @@
+{
+  "404": {
+    "linl": "Return to the home page ",
+    "sub-text": "You just hit a route that doesn't exist... the sadness.",
+    "title": "404: Not Found"
+  },
+  "author": "@rcrawford",
+  "description": "Professionell tidtagning och resultat",
+  "footer": {
+    "privacy": "Sekretesspolicy",
+    "reserved": "Copyright",
+    "terms": "Användarvillkor",
+    "title": "Följ oss"
+  },
+  "title": "Sportstats"
+}

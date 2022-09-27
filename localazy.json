@@ -1,0 +1,43 @@
+{
+  "writeKey": "a8861405451172333139-ab2bc79473e8c394633a4e94bce03a8a91c1b28ba0e3d8cd68260956ee79e70f",
+  "readKey": "a8861405451172333139-006dc7347dfb1cd5b619acb611ab3664d9ed41e483f6db7554e3e734581376f3",
+
+  "transformations": [
+    {
+      "name": "cleaned_file",
+      "source": "${file}",
+      "operations": ["remove: _en"]
+    },
+    {
+      "name": "file_without_ext",
+      "source": "${file}",
+      "operations": ["substringBeforeLast: ."]
+    },
+    {
+        "name": "lang_from_path",
+        "source": "${lang}",
+        "operations": [
+          "remove: -MX"
+        ]
+    }
+  ],
+
+  "upload": {
+    "appVersion": 0,
+    "type": "json",
+    "allowDuplicateKeys": true,
+    "deprecateMissing": true,
+    "folder": "public/locales/en",
+    "files": [
+      "app.json",
+      "common.json",
+      "public.json",
+      "member.json"
+    ]
+  },
+
+  "download": {
+    "metadataFileJson": "languages.json",
+    "files": "public/locales/${lang_from_path}/${file_without_ext}.json"
+  }
+}

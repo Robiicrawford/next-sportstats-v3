@@ -1,0 +1,16 @@
+{
+  "404": {
+    "linl": "Return to the home page ",
+    "sub-text": "You just hit a route that doesn't exist... the sadness.",
+    "title": "404: Not Found"
+  },
+  "author": "@rcrawford",
+  "description": "Professional Finish Line Timing & Results",
+  "footer": {
+    "privacy": "PRIVACY POLICY",
+    "reserved": "ALL RIGHTS RESERVED.",
+    "terms": "TERMS OF USE",
+    "title": "FOLLOW US"
+  },
+  "title": "Sportstats"
+}

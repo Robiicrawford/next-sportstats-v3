@@ -1,16 +1,17 @@
-
+import { useTranslation } from 'next-i18next';
 
 import { Flex, Center, Box, Heading, Grid, GridItem, Link  } from '@chakra-ui/react'
 import styled from 'styled-components';
 import styles from './Footer.module.css'
 
 export default function Footer() {
+  const { t } = useTranslation('app');
   return (
     <>
       <footer className={styles.footer}>
         <Flex flexWrap='wrap' minWidth='max-content' alignItems='center' gap='2'>
           <Center flexWrap='wrap' py='8' >
-            <Box w='100%' ><Heading align='center'>FOLLOW US</Heading></Box>
+            <Box w='100%' ><Heading align='center'>{t('footer.title')}</Heading></Box>
             <Flex w='100%'>
               <Menu >
                     <Link target="_blank" rel="noopener noreferrer" href="https://www.instagram.com/sportstatsworld">

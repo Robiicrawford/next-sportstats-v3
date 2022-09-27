@@ -1,73 +1,66 @@
+import Link from 'next/link'
+import { useRouter } from "next/router";
+
+import { useTranslation } from 'next-i18next';
 
 import { 
-	Box, Flex, Heading, Text, 
+	Grid, GridItem,
 	Modal, ModalOverlay, ModalContent, ModalHeader, ModalCloseButton, ModalBody 
 } from '@chakra-ui/react';
 
-
 import styled from 'styled-components';
-
 
 const language = ['en', 'fr', 'th'] ;
 
 const languageName = {
-  en: "English",
+	'en': "English",
+  'en-CA': "English",
+  'en-US': "English",
   fr: "Français",
   th: "ไทย",
   es: "Español"
 }
 
 const Login = ({open, onClose}) => {
-
-
+	const { locale, locales } = useRouter();
+	const { t } = useTranslation('app');
+	console.log(locale)
   return (
     <Modal isOpen={open} onClose={()=>onClose()}  >
     	<ModalOverlay />
     	<ModalContent>
-    		<ModalHeader >Select a Lanuage</ModalHeader>
+    		<ModalHeader >{t('common:prefered-language')}</ModalHeader>
         <ModalCloseButton onClose={()=>onClose()} />
         <ModalBody>
-        	<Flex  w='100%' flexWrap='wrap'>
+        	<Grid  templateColumns='repeat(3, 2fr)' gap={6} w='100%' pb='6'>
 	            {language.map((lng:string) => (
-	          		<Box key={lng} p={1} pb={2} width={[1/2,1/3]}>
-	                <SelectLang
-	               // 	active={lng === language?true:false}
+	          		<SelectLang key={lng} p={1} pb={2} style={{color:lng === locale&&'#0CAA56'}}>
+	                <Link
 	                	width={1}
 	                  href="#"
-	                  as={Text}
-	                //  className={lng === language&&'active'}
-	                  onClick={(e) => {
-	                    e.preventDefault();
-	                 //   changeLanguage(lng);
-	                  }}>
+	                  locale={lng}
+	                >
 	                    {languageName[lng]}
-	                </SelectLang>   
-	         			</Box>
+	                </Link>   
+	         			</SelectLang>
 	            ))}
-          </Flex>
+          </Grid>
         </ModalBody>
       </ModalContent>
     </Modal>
   )
 }
 
-
-const SelectLang = styled.a`
+const SelectLang = styled(GridItem)`
   color: black;
   width: 100%;
   min-width: 110px;
   white-space: nowrap;
   text-align: center;
   padding: 0.3em 1em;
-  border-style:solid;
-	border-width:thin;
+  border: 2px solid black ;
 	border-radius:10px;
 	cursor: pointer;
-  ${({ active }) => 
-	  	active && `
-	   	color: #0CAA56;
-	  	`
-	};
 	&:hover {
 	    color: #0CAA56; 
 	    border-color: #0CAA56;

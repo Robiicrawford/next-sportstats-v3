@@ -44,14 +44,16 @@ export async function getStaticPaths() {
 
   // We'll pre-render only these paths at build time.
   // { fallback: false } means other routes should 404.
-  return { paths, fallback: false }
+  return { 
+    paths, 
+    fallback: true 
+  }
 }
 
 // This also gets called at build time
 export async function getStaticProps({ params }) {
   // params contains the post `slug`.
   // If the route is like /posts/1, then params.slug is 1
- console.log(params)
 
   const query = gql`
     query Sportstats($mid: String!) {

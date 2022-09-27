@@ -1,0 +1,16 @@
+{
+  "404": {
+    "linl": "Regresar al Inicio",
+    "sub-text": "Acabas de llegar a una ruta que no existe... que tristeza.",
+    "title": "404: No encontrado"
+  },
+  "author": "@rcrawford",
+  "description": "Servicios profesionales en tiempos y resultados",
+  "footer": {
+    "privacy": "Política de Privacidad",
+    "reserved": "Todos los derechos reservados.",
+    "terms": "Términos de uso",
+    "title": "Síganos"
+  },
+  "title": "Sportstats"
+}

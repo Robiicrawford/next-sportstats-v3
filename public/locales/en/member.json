@@ -1,0 +1,26 @@
+{
+  "NotAuthorizedException":"Incorrect username or password.",
+  "UserNotFoundException":"Incorrect username or password.",
+  "UserNotConfirmedException":"Account not activated",
+  "dashboard": {
+  	"title":"Dashboard",
+  	"find-an-event":"Find an event near you",
+  	"find-people": "Find friends to follow",
+    "friend-request": "Friend Request",
+    "friends":"Friends",
+    "friend":"Friend",
+    "followers":"Followers",
+    "find-friends":"Find Friends",
+    "requests":"Requests ",
+    "view-profile":"View Profile",
+  	"your-watchlist":"Your Watchlist",
+  	"photos":"Photos",
+  	"awards":"Awards",
+  	"friends":"Friends",
+  	"you":"You",
+  	"news":"News",
+    "my-stats":"My Stats",
+    "confirm":"Confirm",
+    "delete":"Delete"
+  }
+}

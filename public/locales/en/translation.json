@@ -1,0 +1,41 @@
+{
+  "title": "Sportstats",
+  "description": "Professional Finish Line Timing & Results",
+  "author": "@rcrawford",
+  "home": "Home",
+  "results": "RESULTS",
+  "search": "Search",
+  "featuredEvents": "Featured Events",
+  "mainnav": {
+    "about": "ABOUT",
+    "faq": "FAQ"
+  },
+  "signup":{
+    "signup":"Sign up",
+    "title":"Join Sportstats today, it's Free.",
+    "birthdate":"Birthdate",
+    "first_name":"First Name",
+    "last_name":"Last Name",
+    "mm":"Month",
+    "dd":"Day",
+    "yyyy":"Year"
+  },
+  "about": {
+    "sub-menu":{
+      "overview":"Overview",
+      "company":"Company",
+      "careers":"Careers",
+      "contact":"Contact",
+      "help-center":"Help Center"
+    },
+    "overview": {
+      "overview": "Overview",
+      "title": "The Largest Sports Timing Company in the World",
+      "sub-title": "Timing over 1000 races in 2020",
+      "sub-heading":"State of the art timing systems using technology from MyLaps (ChampionChip, ProChip and BibTag) and race|result",
+      "sub-heading2":"Customized Results Tables",
+      "content2":"We always cater for each of your race age divisions, special categories, overall standings, teams and relays. Style your athletes experience with customized finishing certificates and access to finishline photos",
+      "sub-heading3":"Chronos - Powering Social"
+    }
+  }
+}

@@ -1,0 +1,25 @@
+{
+  "NotAuthorizedException": "Nom d'utilisateur ou mot de passe incorrect.",
+  "UserNotConfirmedException": "Compte non activé",
+  "UserNotFoundException": "Nom d'utilisateur ou mot de passe incorrect.",
+  "dashboard": {
+    "awards": "Prix",
+    "confirm": "Confirmer",
+    "delete": "Supprimer",
+    "find-an-event": "Find an event near you",
+    "find-friends": "Trouver des amis",
+    "find-people": "Trouvez des amis à suivre",
+    "followers": "Abonnés",
+    "friend": "Ami",
+    "friend-request": "Demande d'ami",
+    "friends": "Amis",
+    "my-stats": "My Stats",
+    "news": "Actualités",
+    "photos": "Photos",
+    "requests": "Invitations",
+    "title": "Tableau de bord",
+    "view-profile": "Afficher votre profil",
+    "you": "Vous",
+    "your-watchlist": "Your Watchlist"
+  }
+}

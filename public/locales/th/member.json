@@ -1,0 +1,25 @@
+{
+  "NotAuthorizedException": "ชื่อผู้ใช้หรือรหัสผ่านไม่ถูกต้อง",
+  "UserNotConfirmedException": "บัญชีไม่ได้เปิดใช้งาน",
+  "UserNotFoundException": "ชื่อผู้ใช้หรือรหัสผ่านไม่ถูกต้อง",
+  "dashboard": {
+    "awards": "รางวัล",
+    "confirm": "ยืนยัน",
+    "delete": "ลบ",
+    "find-an-event": "ค้นหากิจกรรมใกล้คุณ",
+    "find-friends": "ค้นหาเพื่อน",
+    "find-people": "ค้นหาเพื่อนเพื่อติดตาม",
+    "followers": "ผู้ติดตาม",
+    "friend": "เพื่อน",
+    "friend-request": "คำขอเป็นเพื่อน",
+    "friends": "เพื่อน",
+    "my-stats": "สถิติของฉัน",
+    "news": "ข่าว",
+    "photos": "ภาพถ่าย",
+    "requests": "คำขอ",
+    "title": "แดชบอร์ด",
+    "view-profile": "ดูประวัติ",
+    "you": "คุณ",
+    "your-watchlist": "รายการที่จับตามองของคุณ"
+  }
+}

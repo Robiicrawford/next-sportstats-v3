@@ -1,5 +1,7 @@
 import Head from 'next/head'
 
+import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
+
 import { Box, Flex, Heading, Text } from '@chakra-ui/react';
 
 import { gql } from "@apollo/client";
@@ -73,7 +75,7 @@ export default function Home({sportstats}) {
   )
 }
 
-export async function getStaticProps() {
+export async function getStaticProps({locale}) {
     const { data } = await client.query({
       query: gql`
         query Countries {
@@ -115,6 +117,7 @@ export async function getStaticProps() {
 
     return {
       props: {
+        ...(await serverSideTranslations(locale, ['common', 'public', 'app'], null, ['en', 'fr'])),
         sportstats: data,
       },
    };

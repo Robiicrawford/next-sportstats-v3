@@ -2,6 +2,8 @@ import  React from "react"
 import Head from "next/head";
 import Script from "next/script";
 
+import { appWithTranslation } from 'next-i18next';
+
 import { ChakraProvider, extendTheme  } from '@chakra-ui/react'
 
 import '../styles/globals.css'
@@ -26,4 +28,4 @@ function Application({ Component, pageProps }) {
   )
 }
 
-export default Application
+export default appWithTranslation(Application)
