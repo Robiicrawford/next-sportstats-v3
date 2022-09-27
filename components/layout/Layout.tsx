@@ -1,6 +1,6 @@
 import * as React from "react"
 
-import Header from "./header"
+import Header from "./Header"
 import Footer from "./Footer"
 
 // The following import prevents a Font Awesome icon server-side rendering bug,
