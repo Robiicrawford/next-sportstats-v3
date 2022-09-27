@@ -18,7 +18,9 @@ const MainHomeFilms = ({
           <>
             {new Array(2).fill("").map((_, index) => (
               <div key={index}>
-                <Skeleton className="mb-3 max-w-[10%] h-8 rounded-md" />
+                <Skeleton className="mb-3 max-w-[10%] h-8 rounded-md" >
+                here
+                </Skeleton>
                 <SectionSlider events={undefined} />
               </div>
             ))}
