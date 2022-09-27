@@ -59,7 +59,7 @@ export default function Home({sportstats}) {
               section={'recent results'}
               isLoadingSection={(sportstats?.upcomingEvents?.masterEvents)?false:true}
             />  
-
+            
 
             <SectionSlider 
               data={sportstats?.recentEvents?.masterEvents}
