@@ -52,7 +52,7 @@ export default function Home({sportstats}) {
               
         </div>
           
-        <Section.Container id="events" Background={Background} className='px-2'>
+        <Section.Container id="events" Background={Background} >
 
             <SectionSlider 
               data={sportstats?.upcomingEvents?.masterEvents}
