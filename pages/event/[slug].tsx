@@ -39,7 +39,10 @@ export async function getStaticPaths() {
   // Get the paths we want to pre-render based on posts
   const paths = data.masterEvents.masterEvents.map((master) => ({
 
-    params: { slug: master.id.toString(), mid: master.id }
+    params: { 
+      slug: master.id.toString(), 
+      mid: master.id 
+    }
   }))
 
   // We'll pre-render only these paths at build time.
@@ -95,7 +98,7 @@ export async function getStaticProps({ params }) {
   const { data } = await client.query({
       query: query,
       variables: {
-        mid: params.slug
+        mid: params.mid.toString()
       }
     });
 
