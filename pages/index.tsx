@@ -34,7 +34,7 @@ export default function Home({sportstats}) {
         
         <div 
               style={{
-                  posistion:'relative',
+                  position:'relative',
                   display:'grid',
                   top:'0',
                   width: '100%',

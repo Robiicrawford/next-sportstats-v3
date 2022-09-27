@@ -30,7 +30,9 @@ const SectionSlider = ({ events }) => {
               .fill("")
               .map((_, index) => (
                 <SwiperSlide key={index} className="!w-[175px]">
-                  <Skeleton className="!w-[175px] !h-[280px] shadow-sm" />
+                  <Skeleton className="!w-[175px] !h-[280px] shadow-sm" >
+                    here
+                  </Skeleton>
                 </SwiperSlide>
               ))}
           </>
