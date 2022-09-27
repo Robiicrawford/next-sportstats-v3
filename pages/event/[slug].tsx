@@ -7,7 +7,7 @@ import {client} from "../../apollo/apollo-client";
 function Master({ post }) {
   console.log(post)
   return (
-    <Layout >
+    <Layout header_color='black' >
  
       here
     </Layout>

@@ -24,7 +24,7 @@ const languageName = {
 const Login = ({open, onClose}) => {
 	const { locale, locales } = useRouter();
 	const { t } = useTranslation('app');
-	console.log(locale)
+
   return (
     <Modal isOpen={open} onClose={()=>onClose()}  >
     	<ModalOverlay />
