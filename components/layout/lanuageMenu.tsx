@@ -30,7 +30,7 @@ const Login = ({open, onClose}) => {
     	<ModalOverlay />
     	<ModalContent>
     		<ModalHeader >{t('common:prefered-language')}</ModalHeader>
-        <ModalCloseButton onClose={()=>onClose()} />
+        <ModalCloseButton />
         <ModalBody>
         	<Grid  templateColumns='repeat(3, 2fr)' gap={6} w='100%' pb='6'>
 	            {language.map((lng:string) => (
