@@ -11,7 +11,7 @@ export default function Footer() {
       <footer className={styles.footer}>
         <Flex flexWrap='wrap' minWidth='max-content' alignItems='center' gap='2'>
           <Center flexWrap='wrap' py='8' >
-            <Box w='100%' ><Heading align='center'>{t('footer.title')}</Heading></Box>
+            <Box w='100%' ><Heading textAlign='center'>{t('footer.title')}</Heading></Box>
             <Flex w='100%'>
               <Menu >
                     <Link target="_blank" rel="noopener noreferrer" href="https://www.instagram.com/sportstatsworld">
