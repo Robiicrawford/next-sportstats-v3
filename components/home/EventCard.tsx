@@ -21,7 +21,7 @@ import { LazyLoadImage } from "react-lazy-load-image-component";
 
 const getCountryISO2 = require("country-iso-3-to-2");
 
-const Card = ({e, sx}) => {
+const Card = ({e}) => {
 
   const handleOnClick = (event) => {
   	event.preventDefault()
@@ -44,7 +44,7 @@ const Card = ({e, sx}) => {
   };
 
   return (
-   <EventCard  sx={sx} className="card" >
+   <EventCard  className="card" >
    
 			<Link style={{maxWidth:'100%'}} href={`/event/${slugSet(e.info?.name).toLowerCase()}-results`} > 
 			
