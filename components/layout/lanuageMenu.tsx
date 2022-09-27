@@ -36,7 +36,6 @@ const Login = ({open, onClose}) => {
 	            {language.map((lng:string) => (
 	          		<SelectLang key={lng} p={1} pb={2} style={{color:lng === locale&&'#0CAA56'}}>
 	                <Link
-	                	w='100%'
 	                  href="#"
 	                  locale={lng}
 	                >
