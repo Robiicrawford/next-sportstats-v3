@@ -76,6 +76,8 @@
     }
   },
     "signup":{
+        "hide":"Hide",
+        "show":"Show",
         "title":"Join Sportstats today, it's Free.",
         "birthdate":"Birthdate",
         "name":"Legal name",

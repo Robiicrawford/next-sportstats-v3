@@ -1,6 +1,8 @@
 import * as React from "react"
 import Skeleton from "../Skeleton";
 
+import {  Heading } from '@chakra-ui/react'
+
 import SectionSlider from "./SectionSlider";
 
 
@@ -28,9 +30,13 @@ const MainHomeFilms = ({
         ) : (
               <>
             
-                <h2 style={{borderBottom:'5px solid black', width:'fit-content'}}>
+                <Heading 
+                  style={{borderBottom:'5px solid #0CAA56', width:'fit-content'}} 
+                  mb='2'
+                  pl='3'
+                >
                   {section}
-                </h2>
+                </Heading>
                 <SectionSlider events={data} />
                 
               </>

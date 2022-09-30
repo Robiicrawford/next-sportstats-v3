@@ -5,7 +5,6 @@ import { gql } from "@apollo/client";
 import {client} from "../../apollo/apollo-client";
 
 import {slugSet } from "../../utils/setSlug"
-
 function Master({ post }) {
   console.log(post)
   return (
@@ -24,6 +23,7 @@ export async function getStaticPaths() {
           masterEvents {
             masterEvents{
               id :mid
+              slug
               info{
                 name
                 latestEventId
@@ -35,12 +35,12 @@ export async function getStaticPaths() {
       `,
     });
 
+  console.log(data.masterEvents.masterEvents)
   // Get the paths we want to pre-render based on posts
   const paths = data.masterEvents.masterEvents.map((master) => ({
-
+    
     params: { 
-      slug: slugSet(master.info.name), 
-      mid: master.id.toString() 
+      slug: master.info.name.toString()
     }
   }))
 
@@ -58,8 +58,8 @@ export async function getStaticProps({ params }) {
   // If the route is like /posts/1, then params.slug is 1
 
   const query = gql`
-    query Sportstats($mid: String!) {
-      masterEvent(mid: $mid) {
+    query Sportstats(slug: String!) {
+      masterEvent(slug: slug) {
             mid
             sid
             info{
@@ -99,7 +99,7 @@ export async function getStaticProps({ params }) {
   const { data } = await client.query({
       query: query,
       variables: {
-        mid: params.mid.toString()
+        slug: params.slug
       }
     });
 

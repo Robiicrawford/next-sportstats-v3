@@ -4,12 +4,13 @@ import Image from 'next/image'
 import Link from 'next/link'
 
 import styled from 'styled-components';
-import { Box, Flex, Text, Spacer, useDisclosure  } from '@chakra-ui/react'
+import { Box, Flex, Text, Spacer, useDisclosure, Show  } from '@chakra-ui/react'
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faGlobe } from '@fortawesome/free-solid-svg-icons'
 
 import LanuageModal from './lanuageMenu';
+import AccountMenu from './AccountMenu';
 
 import sportstats_logo from '../../public/images/sportstats_logo.png'
 
@@ -18,7 +19,7 @@ const  LanguageMenu = ()=> {
   const { isOpen, onOpen, onClose } = useDisclosure()
   return (
     <>
-      <Dropbtn aria-label="change language" onClick={onOpen}>
+      <Dropbtn aria-label="change language" onClick={onOpen} mx='3'>
         <FontAwesomeIcon icon={faGlobe} size="2x" aria-hidden="false" aria-label="Open Language Menu" />
       </Dropbtn>
      <LanuageModal open={isOpen} onClose={() => onClose()}/> 
@@ -27,11 +28,15 @@ const  LanguageMenu = ()=> {
 }
 
 export default function Header({ header_color }) {
-
+  var position = (header_color !== 'none')?'relative':'absolute'
   return (
     <header 
       className="header" 
-      style={{position:'absolute', top:'0', right:'0', width:'100%', zIndex:'12'}}
+      style={{
+        position:position, 
+        top:'0', right:'0', width:'100%', 
+        zIndex:'12'
+      }}
     > 
       <Flex
           px={2} pl={[2,5]} pt={2}
@@ -48,21 +53,23 @@ export default function Header({ header_color }) {
               textDecoration: `none`,
             }}
           >
-            <Image 
-              src={sportstats_logo}
-              alt="Sportstats"
-              height={75}
-              width={400}
-            />
+            <a>
+              <Image 
+                src={sportstats_logo}
+                alt="Sportstats"
+                height={75}
+                width={400}
+              />
+            </a>
           </Link>
           <Spacer   />
            
          <LanguageMenu />
-          {/*  
-          <Hide query='xs'>
-            <Burger  />
-          </Hide>
-
+         
+          <Show above='sm'>
+            <AccountMenu  />
+          </Show>
+ {/*  
          <Dropbtn>
             <Burger open={isOpen} setOpen={setOpen} />
           </Dropbtn>

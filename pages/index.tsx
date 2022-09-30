@@ -1,8 +1,9 @@
 import Head from 'next/head'
 
 import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
+import { useTranslation } from 'next-i18next';
 
-import { Box, Flex, Heading, Text } from '@chakra-ui/react';
+import { Box } from '@chakra-ui/react';
 
 import { gql } from "@apollo/client";
 import {client} from "../apollo/apollo-client";
@@ -13,6 +14,7 @@ import Section from '../components/section';
 import Triangle from '../components/triangle';
 
 import SectionSlider from "../components/home/MainSection"; 
+import Search from "../components/home/Search"; 
 
 import "swiper/css";
 import "swiper/css/navigation";
@@ -20,18 +22,17 @@ import "react-lazy-load-image-component/src/effects/blur.css";
 import "react-lazy-load-image-component/src/effects/opacity.css";
 
 export default function Home({sportstats}) {
+  const { t } = useTranslation('common');
 
   return (
     <Layout header_color='none'>
       <Head>
-        <title>Sportstats || Home</title>
-        <link rel="icon" href="/favicon.ico" />
+        <title>Sportstats - Home</title>
       </Head>
-      
-      <main style={{padding:'0', margin:'0', justifyContent:'flex-start'}}>
+      <main style={{padding:'0'}} >
         
         <div 
-              style={{
+          style={{
                   position:'relative',
                   display:'grid',
                   top:'0',
@@ -41,31 +42,30 @@ export default function Home({sportstats}) {
                   overflow: 'hidden',
                 //  backgroundImage: "url('https://cdn.athlinks.com/images/home/hero.jpg')",
                   backgroundSize: 'cover',
-                  filter: 'grayscale(100%) brightness(80%) sepia(300%) hue-rotate(50deg) saturate(500%)'
-                }} 
-              >
-               
-                
-                  <video width="1414" autoPlay muted loop style={{display: 'block', height: '100%', width: '100vw'}} >
-                    <source src="https://d33vaoadodpfl.cloudfront.net/miami-cut.mp4" type="video/mp4"/>Please update your browser to support video
-                  </video>
-              
+                  
+          }} 
+        >
+          <video width="1414" autoPlay muted loop style={{display: 'block', height: '100%', width: '100vw', filter: 'grayscale(100%) brightness(80%) sepia(300%) hue-rotate(50deg) saturate(500%)'}} >
+            <source src="https://d33vaoadodpfl.cloudfront.net/miami-cut.mp4" type="video/mp4"/>Please update your browser to support video
+          </video>
+          <Search />    
         </div>
           
         <Section.Container id="events" Background={Background} >
-
+          <Box my='3'>
             <SectionSlider 
               data={sportstats?.upcomingEvents?.masterEvents}
-              section={'recent results'}
+              section={t('recent-results')}
               isLoadingSection={(sportstats?.upcomingEvents?.masterEvents)?false:true}
             />  
-            
-
+          </Box>
+          <Box my='3'>
             <SectionSlider 
               data={sportstats?.recentEvents?.masterEvents}
-              section={'Upcoming Events'}
+              section={t('upcoming-event')}
               isLoadingSection={(sportstats?.recentEvents?.masterEvents)?false:true}
-            />  
+            /> 
+          </Box> 
 
         </Section.Container>
 
@@ -117,7 +117,7 @@ export async function getStaticProps({locale}) {
 
     return {
       props: {
-        ...(await serverSideTranslations(locale, ['common', 'public', 'app'], null, ['en', 'fr'])),
+        ...(await serverSideTranslations(locale, ['common', 'public', 'app','translation'], null, ['en', 'fr'])),
         sportstats: data,
       },
    };

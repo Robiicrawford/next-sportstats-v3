@@ -22,13 +22,13 @@ const SectionSlider = ({ events }) => {
         // I substracted 17px because the default scrollbar's width is 17px, which I may change later (to 10px now)
        
       >
-        {events?.map((event) => (
-          <SwiperSlide key={event.id} className="card card_swipe">
-            <Card key={event.mid+'mastercard-results'} e={event}  /> 
+        {events?.map((event, idx) => (
+          <SwiperSlide key={event.id+"."+idx} className="card card_swipe">
+            <Card key={event.mid+'mastercard'+idx} e={event}  /> 
           </SwiperSlide>
         )) || (
           <>
-            {new Array(Math.ceil(window.innerWidth / 200))
+            {new Array(Math.ceil(1000 / 200))
               .fill("")
               .map((_, index) => (
                 <SwiperSlide key={index} className="!w-[175px]">

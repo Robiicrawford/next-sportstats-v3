@@ -21,7 +21,7 @@ const languageName = {
   es: "Español"
 }
 
-const Login = ({open, onClose}) => {
+const LanguageMenu = ({open, onClose}) => {
 	const { locale, locales } = useRouter();
 	const { t } = useTranslation('app');
 
@@ -66,4 +66,4 @@ const SelectLang = styled(GridItem)`
 	}
 `;
 
-export default Login
+export default LanguageMenu
