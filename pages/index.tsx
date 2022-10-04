@@ -16,8 +16,6 @@ import Triangle from '../components/triangle';
 import SectionSlider from "../components/home/MainSection"; 
 import Search from "../components/home/Search"; 
 
-import "swiper/css";
-import "swiper/css/navigation";
 import "react-lazy-load-image-component/src/effects/blur.css";
 import "react-lazy-load-image-component/src/effects/opacity.css";
 
@@ -56,14 +54,14 @@ export default function Home({sportstats}) {
             <SectionSlider 
               data={sportstats?.upcomingEvents?.masterEvents}
               section={t('recent-results')}
-              isLoadingSection={(sportstats?.upcomingEvents?.masterEvents)?false:true}
+              isLoadingSection={(sportstats?.recentEvents?.masterEvents)?false:true}
             />  
           </Box>
           <Box my='3'>
             <SectionSlider 
               data={sportstats?.recentEvents?.masterEvents}
               section={t('upcoming-event')}
-              isLoadingSection={(sportstats?.recentEvents?.masterEvents)?false:true}
+              isLoadingSection={(sportstats?.upcomingEvents?.masterEvents)?false:true}
             /> 
           </Box> 
 

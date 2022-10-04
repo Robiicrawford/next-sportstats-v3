@@ -15,6 +15,7 @@ import { DefaultSeo } from 'next-seo';
 import '../styles/globals.css'
 
 const colors = {
+  'ss_green':'#0caa56',
   brand: {
     900: '#1a365d',
     800: '#153e75',

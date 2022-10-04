@@ -84,6 +84,18 @@ code {
   color: black;
 }
 
+.card__base {
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  box-shadow: 0 .1rem 1rem rgba(0, 0, 0, 0.1);
+  border-radius: 1em;
+  background: #ECE9E6;
+  background: linear-gradient(to right, #FFFFFF, #ECE9E6);
+  text-decoration:  none;
+  color: black;
+}
+
 .card {
   display: flex;
   flex-direction: column;

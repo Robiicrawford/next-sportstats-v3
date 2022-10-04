@@ -6,11 +6,11 @@ import { useLazyQuery, gql  } from '@apollo/client';
 
 import styled from 'styled-components';
 import { Flex, Box, Image, Heading, Text, Button, Stack, Spacer  } from '@chakra-ui/react';
-import { Input, Select } from '@chakra-ui/react'
+import { Input, InputGroup, InputLeftElement, Select } from '@chakra-ui/react'
 
 
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faCaretRight, faCaretLeft, faTimes } from "@fortawesome/free-solid-svg-icons";
+import { faCaretRight, faCaretLeft, faTimes, faSearch } from "@fortawesome/free-solid-svg-icons";
 
 import ResultCard from "./ResultCard"
 import EventCard from "./EventCardSearch"
@@ -197,11 +197,15 @@ const IndexPage = () => {
                          <option value='events'>{t('common:events')}</option>
                        </Select>
           </Box>
-          <Box flex='1 1 70%'>
+          <InputGroup flex='1 1 70%'>
+            <InputLeftElement
+              pointerEvents='none'
+              children={<FontAwesomeIcon icon={faSearch} color='gray.300' />}
+            />
             <Input 
               w='100%' bg='white' color='black' height={['50px']} 
               id='input_search'
-              sx={{borderRadius:'0 10px 10px 0'}}
+             // sx={{borderRadius:'0 10px 10px 0'}}
               onChange={changeWords}
               autoComplete="off"
               placeholder={
@@ -211,7 +215,7 @@ const IndexPage = () => {
               } 
               value={words? words:''}   
             />
-          </Box>
+          </InputGroup>
         </Flex>
 
           {words&&

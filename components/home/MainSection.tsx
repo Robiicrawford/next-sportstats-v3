@@ -1,17 +1,19 @@
 import * as React from "react"
 import Skeleton from "../Skeleton";
 
-import {  Heading } from '@chakra-ui/react'
+import {  Heading, Box } from '@chakra-ui/react'
 
 import SectionSlider from "./SectionSlider";
 
+import "swiper/css";
+import "swiper/css/navigation";
 
 const MainHomeFilms = ({
   data,
   section,
   isLoadingSection,
 }) => {
- 
+
   return (
     <>
 
@@ -37,7 +39,11 @@ const MainHomeFilms = ({
                 >
                   {section}
                 </Heading>
-                <SectionSlider events={data} />
+                {data.length === 0 ?
+                    <Box className='card__base card__title' px='3' fontWeight='semibold'> No Results Found </Box>
+                  : <SectionSlider events={data} />
+                }
+                
                 
               </>
             )

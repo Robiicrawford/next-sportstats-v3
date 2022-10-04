@@ -1,23 +1,144 @@
+import React, {useState, useEffect} from "react"
 import Head from 'next/head'
 
 import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
 import { useTranslation } from 'next-i18next';
 
+import { Flex, Center, Box,InputGroup, InputLeftElement,  Input, Button } from '@chakra-ui/react';
+
 import Layout from '../../components/layout/Layout'
 
-import { gql } from "@apollo/client";
+import Section from '../../components/section';
+import Triangle from '../../components/triangle';
+
+import HeroCard from '../../components/series/HeroCard'
+
+import { useLazyQuery, gql } from "@apollo/client";
 import {client} from "../../apollo/apollo-client";
+
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faSearch} from "@fortawesome/free-solid-svg-icons";
 
 import axios from 'axios'
 import {slugSet } from "../../utils/setSlug"
 
+import SectionSlider from "../../components/home/MainSection"; 
 
-function Master({ series }) {
-  console.log(series)
+import "react-lazy-load-image-component/src/effects/blur.css";
+import "react-lazy-load-image-component/src/effects/opacity.css";
+
+const GET_MASTEREVENT_SERIES = gql`
+  query GetSeries($id: String, $page: Int, $limit: Int, $searchData: String) {
+    series(id: $id, page: $page, limit: $limit, searchData: $searchData) {
+        id
+        sid
+        slug
+        pageInfo{
+          currentPage
+          hasNextPage
+        }
+        masterEvents {
+          id: mid
+          info {
+            name
+            date
+            imageUrl
+            country
+            latestEventId
+          }
+          events {
+            country
+            city
+          }
+        }
+      }
+  }
+`;
+
+function SeriesPage({ series }) {
+  const { t } = useTranslation('common');
+  const [events, setEvents] = useState(null)
+  const [words, setWords] = useState('')
+
+  const [getSeriesEvents, { loading, data: seriesSearchResult, refetch  }] = useLazyQuery(GET_MASTEREVENT_SERIES);
+
+  const handleWord = (e)=>{
+    var words_format = (e.target.value.length > 0 )?e.target.value.trim():null;
+    setWords(words_format)
+    if(seriesSearchResult){
+      refetch({ id: series.sid.toString(), page: 0, limit: 15, searchData: words_format} )
+    }else {
+      getSeriesEvents({ variables: { id: series.sid.toString(), page: 0, limit: 15, searchData: words_format} })
+    }
+  }
+
+
+  useEffect(()=>{
+    if(seriesSearchResult ){
+      if(seriesSearchResult.series.masterEvents.length === 0){
+        setEvents([])
+      } else {
+        setEvents(seriesSearchResult.series.masterEvents)
+      }
+    }
+  },[seriesSearchResult])
+
+  useEffect(()=>{
+    if(words === ''){
+      setEvents(series?.masterEvents)
+    }
+  },[words])
+
   return (
     <Layout header_color='black' >
- 
-      here
+      <Head>
+        <title> {`Sportstats - ${series?.info?.name}`} </title>
+      </Head>
+      <Section.Container id="series" Background={Background} >
+
+        <Flex w='100%' mt={['0','3']} px={['0','3','5']}>
+          <Center w='100%' flexWrap='wrap'>
+            <HeroCard data={series?.info}/>
+            
+            <Box
+              w='100%' mt='4' px='2'
+              sx={{border:'2px solid black', borderRadius:'15px'}}
+              fontWeight='semibold'
+              fontSize='large'
+              as='h3'
+              lineHeight='tight'
+              bg='white'
+            > 
+              <InputGroup>
+                <InputLeftElement
+                  pointerEvents='none'
+                  children={<FontAwesomeIcon icon={faSearch} color='gray.300' />}
+                />
+                <Input 
+                  placeholder={t('common:search-event')}
+                  value={words}
+                  variant='flushed'
+                  onChange={handleWord}
+                />
+                <Button onClick={()=>setWords('')}>Clear</Button>
+              </InputGroup>
+            </Box>
+
+           <Box my='3' w='100%'>
+
+              <SectionSlider 
+                data={events}
+                section={t('recent-results')}
+                isLoadingSection={(events)?false:true}
+              /> 
+
+            </Box>
+
+
+          </Center>
+        </Flex>
+
+      </Section.Container>
     </Layout>
   )
 }
@@ -79,7 +200,7 @@ export async function getStaticProps({ params, locale }) {
           lu
         }
         masterEvents {
-          id
+          id: mid
           mid
           info {
             name
@@ -107,9 +228,39 @@ export async function getStaticProps({ params, locale }) {
   return { 
     props: { 
       ...(await serverSideTranslations(locale, ['common', 'public', 'app','translation'], null, ['en', 'fr'])),
-      series: data 
+      series: data.series
     } 
   }
 }
 
-export default Master
+export default SeriesPage
+
+
+const Background = () => (
+  <>
+    <Triangle
+      color="#f0e6f6"
+      height={['35vh', '80vh']}
+      width={['95vw', '60vw']}
+    />
+   
+      <Triangle
+        color="#0CAA56"
+        height={['38vh', '80vh']}
+        width={['50vw', '30vw']}
+      />
+
+    <Triangle
+      color="#000"
+      height={['25vh', '35vh']}
+      width={['75vw', '60vw']}
+      position="top-right"
+    />
+    <Triangle
+      color="#f0e6f6"
+      height={['20vh', '20vh']}
+      width={['100vw', '100vw']}
+      position="bottom-right"
+    />
+  </>
+);

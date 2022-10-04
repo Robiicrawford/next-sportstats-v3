@@ -35,14 +35,12 @@ const LoginContent = () => {
   const handleClick = () => setShow(!show)
 
   	const onSubmit = async data => {
- 
 		setLoading(true)
 	  	var user = await auth.signin(data.email.trim(), data['current-password'].trim()) ;
 	  	console.log(user)
 	  	if(user){
 	  		router.push('/app/home')
-	  	}
-			  
+	  	}	  
 	}
 
   const handleChangeEmail = (e) => setError(false);

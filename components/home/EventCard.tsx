@@ -12,8 +12,6 @@ import { faShareAlt} from "@fortawesome/free-solid-svg-icons";
 
 import {slugSet } from "../../utils/setSlug"
 
-import ss from '../../public/images/icons/white_sportstats.png'
-
 import { LazyLoadImage } from "react-lazy-load-image-component";
 
 const getCountryISO2 = require("country-iso-3-to-2");
@@ -53,12 +51,15 @@ const Card = ({e}) => {
 						<Center  w='100%' height={['100px','150px']} pt='2' >
 							<LazyLoadImage 
 								width='auto' height='100%' maxHeight={['100px','150px']}  
-								src={e.info?.imageUrl?e.info.imageUrl:ss} 
+								src={e.info?.imageUrl?e.info.imageUrl:'https://ss-event-images.s3.us-west-2.amazonaws.com/ss_triathlon.jpeg'} 
 								alt={e.info?.name}
+								onError={({ currentTarget }) => {
+                  currentTarget.onerror = null; // prevents looping
+                  currentTarget.src='https://ss-event-images.s3.us-west-2.amazonaws.com/ss_triathlon.jpeg';
+                }}
 								loading="lazy"
 								className="card__image"
           			effect="blur"
-								
 							/>
 				   </Center>
 				   <Box w='100%'>
