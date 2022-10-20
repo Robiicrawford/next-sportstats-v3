@@ -50,7 +50,7 @@ const Card = ({e}) => {
 				<Flex flexWrap='wrap' color='black' >
 						<Center  w='100%' height={['100px','150px']} pt='2' >
 							<LazyLoadImage 
-								width='auto' height='100%' maxHeight={['100px','150px']}  
+								width='auto' height='100%'
 								src={e.info?.imageUrl?e.info.imageUrl:'https://ss-event-images.s3.us-west-2.amazonaws.com/ss_triathlon.jpeg'} 
 								alt={e.info?.name}
 								onError={({ currentTarget }) => {
@@ -65,18 +65,18 @@ const Card = ({e}) => {
 				   <Box w='100%'>
 				    	<Text > 
 				    		{ new Date(
-				    			e.info?.date.slice(0,4)+'/'+e.info?.date.slice(4,6)+'/'+e.info?.date.slice(6,8)
+				    			e.info?.date?.slice(0,4)+'/'+e.info?.date?.slice(4,6)+'/'+e.info?.date?.slice(6,8)
 				    			).toLocaleDateString(locale, { month: 'long', day: 'numeric' }
 				    		)} {" "}
 				    		{new Date(
-				    			e.info?.date.slice(0,4)+'/'+e.info?.date.slice(4,6)+'/'+e.info?.date.slice(6,8)
+				    			e.info?.date?.slice(0,4)+'/'+e.info?.date?.slice(4,6)+'/'+e.info?.date?.slice(6,8)
 				    		).toLocaleDateString(locale, {year: 'numeric'})} 
 				    	</Text>
 				    	<Box  w='20%' h='1' bg='#0CAA56' />
 				    </Box>
 				    <NextLink 
 				    	style={{maxWidth:'100%'}} 
-				    	href={`/event/${slugSet(e.info?.name).toLowerCase()}-results`} 
+				    	href={`/event/${e.slug}`} 
 				    	passHref
 				    > 
 					    <LinkOverlay
@@ -100,7 +100,7 @@ const Card = ({e}) => {
 		          	sx={{whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis'}}
 				    	
 		        >
-				    		{e.events[0]?.city} | {e.events[0]?.country}
+				    		{e.info?.city}, {e.info?.state} | {e.info?.country}
 
 				    		<Box sx={{position:'absolute', right:'5px', bottom:'5px'}} className='shareButton'  onClick={handleOnClick} >
 		              <FontAwesomeIcon icon={faShareAlt} size="lg" />

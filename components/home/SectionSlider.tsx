@@ -5,6 +5,11 @@ import Skeleton from "../Skeleton";
 
 import Card from "./EventCard"
 
+import "swiper/css/pagination";
+
+// import required modules
+import { Pagination } from "swiper";
+
 const SectionSlider = ({ events }) => {
   return (
    
@@ -20,7 +25,11 @@ const SectionSlider = ({ events }) => {
        
       >
         {events?.map((event, idx) => (
-          <SwiperSlide key={event.id+"."+idx} className="card card_swipe">
+          <SwiperSlide 
+            key={event.id+"."+idx} 
+            className="card card_swipe"
+            modules={[Pagination]}
+          >
             <Card key={event.mid+'mastercard'+idx} e={event}  /> 
           </SwiperSlide>
         )) || (

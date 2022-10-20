@@ -20,19 +20,23 @@ const Card = ({e}) => {
   const region = (language == 'en') ? 'en-US' : language ;
   return (
     <EventCard w='100%' p={[1,2]}  >
-			<Link  href={`/event/${slugSet(e.info.name).toLowerCase()}-results`} style={{marginTop:'0'}}> 
+			<Link  href={`/event/${slugSet(e.info.name).toLowerCase()}`} style={{marginTop:'0'}}> 
 				<Flex>
 					<Flex flexWrap='wrap' flex='1 1 20%' style={{position:'relative'}} >
 						<Image 
 							height={[55,84]} width={[60,110]}  
 							src={e.info.imageUrl?e.info.imageUrl:'../../public/images/icons/white_sportstats.png'} 
+							onError={({ currentTarget }) => {
+                currentTarget.onerror = null; // prevents looping
+              	currentTarget.src='https://ss-event-images.s3.us-west-2.amazonaws.com/ss_triathlon.jpeg';
+             	}}
 						/>
 
 					          <Box sx={{position:'absolute' ,right:'0', bottom:'10px'}}> 
-											{e.events[0].country&&(
+											{e.info.country&&(
 										    	<ReactCountryFlag 
 													svg 
-													countryCode={getCountryISO2(e.events[0].country)}
+													countryCode={getCountryISO2(e.info.country)}
 													title={e.country}
 
 													style={{marginBottom:'0',width:'1.5em', height:'1.5em'}}
@@ -72,7 +76,7 @@ const Card = ({e}) => {
 		            textTransform='uppercase'
 		            ml='2'
 		          >
-					    		{e.events[0].city} | {e.events[0].country}
+					    		{e.info.city} | {e.info.country}
 					    </Box>
 
 					</Flex>

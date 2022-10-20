@@ -38,16 +38,16 @@ const GET_MASTEREVENT_SERIES = gql`
           hasNextPage
         }
         masterEvents {
-          id: mid
+          id
+          mid
+          slug
           info {
+            id
             name
             date
             imageUrl
             country
-            latestEventId
-          }
-          events {
-            country
+            state
             city
           }
         }
@@ -124,7 +124,7 @@ function SeriesPage({ series }) {
               </InputGroup>
             </Box>
 
-           <Box my='3' w='100%'>
+           <Box my='3' w='100%' >
 
               <SectionSlider 
                 data={events}
@@ -133,7 +133,6 @@ function SeriesPage({ series }) {
               /> 
 
             </Box>
-
 
           </Center>
         </Flex>
@@ -145,6 +144,12 @@ function SeriesPage({ series }) {
 
 export async function getStaticPaths() {
   // Call an external API endpoint to get all series
+  if (process.env.SKIP_BUILD_STATIC_GENERATION) {
+    return {
+      paths: [],
+      fallback: 'blocking',
+    }
+  }
 
     const res = await fetch('http://admin.sportstats.ca/event_master/adminapi.php', {
       method: 'POST',
@@ -172,7 +177,7 @@ export async function getStaticPaths() {
   // { fallback: false } means other routes should 404.
   return { 
     paths, 
-    fallback: true 
+    fallback: 'blocking'
   }
 }
 
@@ -200,17 +205,18 @@ export async function getStaticProps({ params, locale }) {
           lu
         }
         masterEvents {
-          id: mid
+          id
           mid
           info {
             name
             date
             imageUrl
             country
+            city
           }
           events {
-            country
-            city
+            id
+            eid
           }
         }
       }

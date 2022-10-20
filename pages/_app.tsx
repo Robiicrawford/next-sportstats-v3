@@ -34,8 +34,7 @@ function Application({ Component, session, pageProps }) {
       <ProvideAuth>
         <ApolloProvider client={client} >
           <DefaultSeo
-            title = 'Professional Finish Line Timing & Results'
-            titleTemplate = 'Sportstats - %s'
+            
             description= 'Claim and share your race results, receive live race notifications and more!'
             openGraph={{
               type: 'website',
@@ -46,7 +45,7 @@ function Application({ Component, session, pageProps }) {
               description: 'Claim and share your race results, receive live race notifications and more!'
             }}
             twitter={{
-              handle: '@handle',
+              handle: '@sportstats',
               site: '@site',
               cardType: 'summary_large_image',
             }}

@@ -25,14 +25,12 @@ const GET_EVENTS_SEARCH = gql`
           hasNextPage
       }
       masterEvents {
+        id
         mid
         info{
           name
           imageUrl
-          status
           date
-        }
-        events {
           country
           city
         }

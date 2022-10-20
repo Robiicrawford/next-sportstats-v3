@@ -91,6 +91,7 @@ const Card = ({e}) => {
 
 export const EventCard = styled(Flex)`
 	transform: scale(1);
+	cursor: pointer;
 	border-bottom: 1px dashed black !important;
 `
 

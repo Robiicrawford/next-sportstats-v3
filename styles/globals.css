@@ -74,7 +74,7 @@ code {
 .card_info {
   display: flex;
   flex-direction: column;
-  width: clamp(20rem, calc(30rem + 2vw), 32rem);
+  width: clamp(13rem, calc(13rem + 2vw), 14rem);
   overflow: hidden;
   box-shadow: 0 .1rem 1rem rgba(0, 0, 0, 0.1);
   border-radius: 1em;
@@ -108,6 +108,7 @@ code {
   text-decoration:  none;
   color: black;
 }
+
 
 .card_swipe{
   width: clamp(20rem, calc(20rem + 2vw), 22rem) !important;
@@ -174,9 +175,15 @@ background: linear-gradient(to bottom, #FFD194, #D1913C);
   text-transform: capitalize;
 }
 
+.tag-empty {
+  background: #56CCF2;
+  background: linear-gradient(to bottom, #7a00ff, #b38bd1);
+  color: #fafafa;
+}
+
 .tag-preview {
   background: #56CCF2;
-background: linear-gradient(to bottom, #2F80ED, #56CCF2);
+  background: linear-gradient(to bottom, #2F80ED, #56CCF2);
   color: #fafafa;
 }
 

@@ -39,7 +39,7 @@ const MainHomeFilms = ({
                 >
                   {section}
                 </Heading>
-                {data.length === 0 ?
+                {data?.length === 0 ?
                     <Box className='card__base card__title' px='3' fontWeight='semibold'> No Results Found </Box>
                   : <SectionSlider events={data} />
                 }

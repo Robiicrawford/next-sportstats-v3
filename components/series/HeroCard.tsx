@@ -5,7 +5,7 @@ import Link from 'next/link'
 import { useTranslation } from 'next-i18next';
 
 import styled from "styled-components";
-import { Box, Flex, Heading, Text, Center } from '@chakra-ui/react';
+import { Box, Flex, Heading, Text, Center, Image } from '@chakra-ui/react';
 
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faShareAlt, faInfo, faClock} from "@fortawesome/free-solid-svg-icons";
@@ -42,27 +42,29 @@ const Index = ({data}) => {
 
         <Flex flexWrap='wrap' w={['100%','50%','33%','25%']} justifyContent='center' >
           <Center w='100%' className="card__header" m='2' > 
-            <img
+            <Image
               src={data?.imageUrl? data.imageUrl : 'https://ss-event-images.s3.us-west-2.amazonaws.com/ss_triathlon.jpeg'}
               alt={data?.name}
               loading="lazy"
-              className="card__image" width="480" height='500'
-              style={{height:'100%', width:'auto'}}
+              className="card__image" 
+              width="480" height='auto'
+              
             />
           </Center>
         </Flex>
         
         <Box w={['100%','50%','33%','75%']} my={[1,2]} pl='3'  color='#000'>
           <Heading textAlign='left' > {data?.name} </Heading>
-          <Box
-            w='100%'
+          <Flex
+            w='92%'
             mt='1'
             fontWeight='semibold'
             lineHeight='tight'
             ml={['3','5']}
+            mt='4'
           >
-            <div dangerouslySetInnerHTML={{ __html: md().render(data?.description) }} />
-          </Box>
+            <Box dangerouslySetInnerHTML={{ __html: md().render(data?.description) }} />
+          </Flex>
           
         </Box>
       </Flex>
