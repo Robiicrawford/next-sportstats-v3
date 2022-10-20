@@ -20,7 +20,7 @@ const Index = ({data}) => {
       <Flex flexWrap='wrap' justifyContent='left' w='100%' my='3' mx='4' >
         {data.races.map((r)=>(
           <Link href={`/results/${r.rid}`} style={{width:'100%', cursor:'pointer'}} key={r.id}>  
-            <Box w={'100%'}  style={{borderBottom:'1px solid #fff'}} style={{cursor:'pointer'}}>
+            <Box w={'100%'}  style={{borderBottom:'1px solid #fff'}} >
               <Text color='black' > <span className={`tag tag-status tag-${r.status}`}> {r.status} </span> {r.name} - {r.date}</Text>
             </Box>
           </Link>
