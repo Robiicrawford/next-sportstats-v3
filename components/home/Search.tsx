@@ -302,15 +302,11 @@ const IndexPage = () => {
                         </Stack>
                       </>)
 
-                  : 
-                    <Box width={1} height='30vh'><Text fontSize={[3,4]} textAlign='center'>No Events Where Found For Your Search :-(</Text></Box>
-                  
-              )}
-
-        </Flex> 
-      }
-
-       
+              : 
+                <Box width={1} height='30vh'><Text fontSize={[3,4]} textAlign='center'>No Events Where Found For Your Search :-(</Text></Box>
+            )}
+          </Flex> 
+        }
       </SearchFlex>
     </>
 )}

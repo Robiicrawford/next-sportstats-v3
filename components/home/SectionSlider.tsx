@@ -14,7 +14,7 @@ const SectionSlider = ({ events }) => {
   return (
    
       <Swiper
-        modules={[Navigation]}
+        modules={[Navigation, Pagination]}
         navigation
         slidesPerView='auto'
        slidesPerGroupAuto
@@ -28,7 +28,6 @@ const SectionSlider = ({ events }) => {
           <SwiperSlide 
             key={event.id+"."+idx} 
             className="card card_swipe"
-            modules={[Pagination]}
           >
             <Card key={event.mid+'mastercard'+idx} e={event}  /> 
           </SwiperSlide>
