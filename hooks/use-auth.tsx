@@ -9,7 +9,7 @@ type AuthContextType = {
     auth?: string
 }
 
-const authContext = createContext<AuthContextType>();
+const authContext = createContext<AuthContextType>({});
 
 export function ProvideAuth({ children }) {
   const auth = useProvideAuth();
