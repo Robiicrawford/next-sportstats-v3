@@ -225,10 +225,11 @@ export async function getStaticProps({ params, locale }) {
           id
           name
           description
-          imageUrl
           country
           state
           city
+          mlimg
+          mcimg
         }
         events {
           id

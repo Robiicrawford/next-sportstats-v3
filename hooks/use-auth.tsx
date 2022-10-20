@@ -70,7 +70,6 @@ const useProvideAuth =  () => {
         }
       } catch (error) { 
         setError(error.code)
-        setLoading(false)
         console.log('error signing in', error);
       }
     }
