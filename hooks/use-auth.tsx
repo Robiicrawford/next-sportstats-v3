@@ -39,7 +39,7 @@ const useProvideAuth =  () => {
  	setUser(unsubscribe)
  }
 
-  const signout = async () :any => {
+  const signout = async ()  => {
     return Auth
       .signOut()
       .then(() => {
@@ -48,7 +48,7 @@ const useProvideAuth =  () => {
   };
 
  
-  const signin = async (email, password) :any => {
+  const signin = async (email, password)  => {
     Auth.configure({authenticationFlowType:'USER_SRP_AUTH'});
     try {
       const user2 = await Auth.signIn(email.trim(), password.trim());
