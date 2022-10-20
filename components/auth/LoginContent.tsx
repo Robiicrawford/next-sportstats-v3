@@ -21,7 +21,7 @@ const eye = <FontAwesomeIcon icon={faEye} size="lg" style={{color:'black'}}/>;
 const eyex = <FontAwesomeIcon icon={faEyeSlash} size="lg" style={{color:'black'}}/>;
 
 const LoginContent = () => {
-	const auth = useAuth<any>();
+	const auth = useAuth();
 	const {t} = useTranslation();
 	const router = useRouter()
 
