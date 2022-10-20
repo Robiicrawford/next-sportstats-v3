@@ -43,8 +43,6 @@ const LoginContent = () => {
 	  	}	  
 	}
 
-  const handleChangeEmail = (e) => setError(false);
-  const handleChangePass = (e) => setError(false)
 
   return (
 		<Flex flexWrap='wrap'  >
