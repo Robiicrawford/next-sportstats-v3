@@ -256,8 +256,7 @@ const IndexPage = () => {
             sx={{position:'relative',zIndex:'100'}}
           >
             { words && data3 && searchType == 'results' && (
-              <>
-                      
+              <> 
                       {data3.allResults.result.slice(0,3).map((e,i)=>
                         <ResultCard key={i} e={e} />
                       )}
@@ -293,11 +292,11 @@ const IndexPage = () => {
                         <Stack w='100%' direction='row' spacing={4} justifyContent='center' >
                          
                               {data2.masterEvents.pageInfo.currentPage !=0 &&(
-                                <Button primary style={{padding:'0 1rem'}} onClick={backPage} > <FontAwesomeIcon style={{marginRight:'0.5rem'}} icon={faCaretLeft} size="lg"/> Last </Button>
+                                <Button style={{padding:'0 1rem'}} onClick={backPage} > <FontAwesomeIcon style={{marginRight:'0.5rem'}} icon={faCaretLeft} size="lg"/> Last </Button>
                               )}
 
                               {data2.masterEvents.pageInfo.hasNextPage &&(
-                                <Button  primary style={{padding:'0 1rem'}} onClick={nextPage} > Next <FontAwesomeIcon style={{marginLeft:'0.5rem'}} icon={faCaretRight} size="lg"/> </Button>
+                                <Button  style={{padding:'0 1rem'}} onClick={nextPage} > Next <FontAwesomeIcon style={{marginLeft:'0.5rem'}} icon={faCaretRight} size="lg"/> </Button>
                               )}
                         
                         </Stack>
