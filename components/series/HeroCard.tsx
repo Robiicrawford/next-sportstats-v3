@@ -57,7 +57,6 @@ const Index = ({data}) => {
           <Heading textAlign='left' > {data?.name} </Heading>
           <Flex
             w='92%'
-            mt='1'
             fontWeight='semibold'
             lineHeight='tight'
             ml={['3','5']}
