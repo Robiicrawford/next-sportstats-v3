@@ -175,7 +175,7 @@ const IndexPage = () => {
           color='white'
           fontWeight='bold'
           w='100%'
-          align='center'
+          justifyContent='center'
           mb='3'
         >
           {t('translation:description')}
