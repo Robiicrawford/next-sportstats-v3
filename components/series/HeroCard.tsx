@@ -43,8 +43,8 @@ const Index = ({data}) => {
         <Flex flexWrap='wrap' w={['100%','50%','33%','25%']} justifyContent='center' >
           <Center w='100%' className="card__header" m='2' > 
             <Image
-              src={data?.imageUrl? data.imageUrl : 'https://ss-event-images.s3.us-west-2.amazonaws.com/ss_triathlon.jpeg'}
-              alt={data?.name}
+              src={data?.info.mlimg? `https://cdn-1.sportstats.one/img/master_logo/${data?.mid}_${data?.info.mlimg}.png` : 'https://ss-event-images.s3.us-west-2.amazonaws.com/ss_triathlon.jpeg'}
+              alt={data?.info.name}
               loading="lazy"
               className="card__image" 
               width="480" height='auto'

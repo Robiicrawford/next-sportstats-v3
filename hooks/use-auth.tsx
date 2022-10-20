@@ -77,7 +77,6 @@ const useProvideAuth =  () => {
   };
 
 
-
     {/*
 
   const signup = (email, password) => {

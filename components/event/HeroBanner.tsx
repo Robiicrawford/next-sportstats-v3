@@ -50,17 +50,16 @@ const Index = ({data, slug, setA}) => {
     >
       <Flex w='100%' flexWrap='wrap' >
             <Flex flexWrap='wrap' w={['100%','50%','33%','25%']} justifyContent='center' >
-               <Heading  className="card__header"  my='2' > 
+               <Heading  className="card__header"   > 
                   <Image
-                   
-                    src={data?.info?.imageUrl? data.info.imageUrl : 'https://ss-event-images.s3.us-west-2.amazonaws.com/ss_triathlon.jpeg'}
+                    src={data?.info.mlimg? `https://cdn-1.sportstats.one/img/master_logo/${data?.mid}_${data?.info.mlimg}.png` : 'https://ss-event-images.s3.us-west-2.amazonaws.com/ss_triathlon.jpeg'}
                     alt={data?.info?.name}
                     onError={({ currentTarget }) => {
                       currentTarget.onerror = null; // prevents looping
                       currentTarget.src='https://ss-event-images.s3.us-west-2.amazonaws.com/ss_triathlon.jpeg';
                     }}
                     width='auto'
-                    height='200px'
+                    height='250px'
                     objectFit='cover'
                     className="card__image" 
                     style={{borderRadius:'15px'}}
