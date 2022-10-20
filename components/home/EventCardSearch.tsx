@@ -1,5 +1,7 @@
 import React from "react"
 import Link from 'next/link'
+
+import { useRouter } from "next/router";
 import { useTranslation } from 'next-i18next';
 
 import styled from 'styled-components';
@@ -16,8 +18,9 @@ import ss from '../../public/images/icons/white_sportstats.png'
 
 
 const Card = ({e}) => {
-  const {t, language} = useTranslation();
-  const region = (language == 'en') ? 'en-US' : language ;
+  const {t} = useTranslation();
+  const { locale } = useRouter();
+
   return (
     <EventCard w='100%' p={[1,2]}  >
 			<Link  href={`/event/${slugSet(e.info.name).toLowerCase()}`} style={{marginTop:'0'}}> 
@@ -60,11 +63,11 @@ const Card = ({e}) => {
 					   	<Box> 
 					    		{ new Date(
 					    			e.info.date.slice(0,4)+'/'+e.info.date.slice(4,6)+'/'+e.info.date.slice(6,8)
-					    			).toLocaleDateString(region, { month: 'long', day: 'numeric' }
+					    			).toLocaleDateString(locale, { month: 'long', day: 'numeric' }
 					    		)} {" "}
 					    		{new Date(
 					    			e.info.date.slice(0,4)+'/'+e.info.date.slice(4,6)+'/'+e.info.date.slice(6,8)
-					    		).toLocaleDateString(region, {year: 'numeric'})} 
+					    		).toLocaleDateString(locale, {year: 'numeric'})} 
 					    </Box>
 
 							<Box

@@ -1,6 +1,6 @@
 import React from "react"
 import Link from 'next/link'
-
+import { useRouter } from "next/router";
 import {useTranslation} from 'next-i18next';
 
 import styled from 'styled-components';
@@ -19,8 +19,9 @@ import {slugSet } from "../../utils/setSlug"
 const getCountryISO2 = require("country-iso-3-to-2");
 
 const Card = ({e}) => {
-  const {t, language} = useTranslation();
-  const region = (language == 'en') ? 'en-US' : language ;
+  const {t} = useTranslation();
+  const { locale } = useRouter();
+  
   return (
     <EventCard w='100%' p={[1,2]} >
 			<Link href={`/results/${e.race.id}/${e.bib}`} style={{marginTop:'0'}}> 
@@ -56,7 +57,7 @@ const Card = ({e}) => {
 							{e.masterEvent.info.name} 	{' - '}
 							{ new Date(
 								e.race.date.split("-")[1]+'/'+e.race.date.split("-")[2]+'/'+e.race.date.split("-")[0]
-								).toLocaleDateString(region, {year: 'numeric', month: 'short', day: 'numeric' }
+								).toLocaleDateString(locale, {year: 'numeric', month: 'short', day: 'numeric' }
 							)} 
 						</Box> 
 						
