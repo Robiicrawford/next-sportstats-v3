@@ -62,7 +62,7 @@ const useProvideAuth =  () => {
         const user = await Auth.signIn(email.trim(), password.trim());
         if(user) {
           Auth.configure({authenticationFlowType:'USER_SRP_AUTH'});
-          const user3 = await Auth.signIn(data.email.trim(), data['current-password'].trim());
+          const user3 = await Auth.signIn(email.trim(), password.trim());
           if(user3) {
             setUser(user3);
             return user3
