@@ -22,9 +22,10 @@ const LinkCard = ({ id, text : link, index }) => {
   return (
     <a target="_blank" rel="noopener noreferrer" href={link.lu} style={{ ...style }}  className='card_info' >
       {link.la !== 'pub' && <Text pl={2} bg={'red'} > {link.la === 'pub'? 'Public': 'Private'} </Text> }
+      {link.la === 'pub' && <Text pl={2} bg={'none'} color='white' > public </Text>   }
 
        <div className="card__header" style={{textAlign:'center', paddingTop:'1em', minHeight:'100px', display:'flex'}} >
-         <FontAwesomeIcon icon={linkIcon[link.lt]} size="3x" style={{color:'green', margin:'0 auto'}} className="card__image"  />
+         <FontAwesomeIcon icon={linkIcon[link.lt]} size="3x" style={{color:'green', margin:'auto auto'}} className="card__image"  />
         </div>
        <div className="card__body">
         <h4 className='card__title' style={{textAlign:'center'}}>{[4].includes(link.lt)? link.ll:linkType[link.lt] }</h4>

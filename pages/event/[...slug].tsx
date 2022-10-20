@@ -3,6 +3,8 @@ import React, {useState, useEffect} from "react"
 import Head from 'next/head'
 import Link from 'next/link'
 
+import styled from 'styled-components';
+
 import Layout from '../../components/layout/Layout'
 
 import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
@@ -103,7 +105,7 @@ function Master({ master }) {
                   mt='4'
                   justifyContent='center'
                 >
-                  <div style={{textAlign:'center'}} dangerouslySetInnerHTML={{ __html: md().render(master?.info.description) }} />
+                  <Description style={{textAlign:'center'}} dangerouslySetInnerHTML={{ __html: md().render(master?.info.description) }} />
                 </Flex>
              
               </Box>
@@ -311,3 +313,19 @@ const Background = () => (
     />
   </>
 );
+
+const Description = styled.div`
+  width: 75%;
+  h2 {
+    font-size: 36px;
+    line-height: 1.156;
+    font-weight: 600;
+    text-transform: none;
+    margin-bottom: 20px;
+    color: #000000;
+  }
+  p {
+    font-size: 16px;
+    line-height: 1.5;
+  }
+`;

@@ -43,7 +43,6 @@ const LoginContent = () => {
 	  	}	  
 	}
 
-
   return (
 		<Flex flexWrap='wrap'  >
         	{loading
