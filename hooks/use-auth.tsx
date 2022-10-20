@@ -14,7 +14,7 @@ export function ProvideAuth({ children }) {
 
 // Hook for child components to get the auth object ...
 // ... and re-render when it changes.
-export const useAuth = () :[()=> void, ()=> void, ()=> void, ()=> void, ] => {
+export const useAuth = () :useAuth => {
   return useContext(authContext);
 };
 
@@ -124,6 +124,12 @@ const useProvideAuth =  () => {
   };
 }
 
+type useAuth = {
+  error: any,
+  signin: any,
+  signout: any,
+  user: any
+}
 
 type error = {
   [key: string]: any; // 👈️ variable key
