@@ -5,7 +5,11 @@ import aws_exports from '../aws-exports'
 
 Amplify.configure(aws_exports);
 
-const authContext = createContext();
+type AuthContextType = {
+    auth?: string
+}
+
+const authContext = createContext<AuthContextType>();
 
 export function ProvideAuth({ children }) {
   const auth = useProvideAuth();
