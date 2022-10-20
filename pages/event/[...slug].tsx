@@ -77,7 +77,8 @@ function Master({ master }) {
             minHeight: '250px',
             overflow: 'hidden',
             backgroundImage: "url('https://cdn-1.sportstats.one/img/master_cover/sportstats_paper_full.jpg')",
-            backgroundSize: 'cover'
+            backgroundSize: 'cover',
+            backgroundPosistion:'center'
           }}
           justifyContent='center'
           pt={['20px']}

@@ -127,3 +127,15 @@ const useProvideAuth =  () => {
 type error = {
   [key: string]: any; // 👈️ variable key
 };
+
+type signin = {
+  [key: string]: any; // 👈️ variable key
+};
+
+type signout = {
+  [key: string]: any; // 👈️ variable key
+};
+
+type user = {
+  [key: string]: any; // 👈️ variable key
+};
