@@ -6,7 +6,11 @@ import aws_exports from '../aws-exports'
 Amplify.configure(aws_exports);
 
 type AuthContextType = {
-    auth?: AuthTypes
+    auth?: any,
+    error?: any,
+    signin?: any,
+    signout?: any,
+    user?: any
 }
 
 const authContext = createContext<AuthContextType>({});
