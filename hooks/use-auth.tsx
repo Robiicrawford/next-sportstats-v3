@@ -26,12 +26,12 @@ const useProvideAuth =  () => {
   // Wrap any Firebase methods we want to use making sure ...
   // ... to save the user to state.
 
- const getUser = async () => {
+ const getUser = async ()  => {
  	var unsubscribe = await Auth.currentUserInfo()
  	setUser(unsubscribe)
  }
 
-  const signout = async () => {
+  const signout = async () :any => {
     return Auth
       .signOut()
       .then(() => {
@@ -40,7 +40,7 @@ const useProvideAuth =  () => {
   };
 
  
-  const signin = async (email, password) => {
+  const signin = async (email, password) :any => {
     Auth.configure({authenticationFlowType:'USER_SRP_AUTH'});
     try {
       const user2 = await Auth.signIn(email.trim(), password.trim());
