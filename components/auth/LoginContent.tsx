@@ -59,7 +59,7 @@ const LoginContent = () => {
 					<Box w='100%' pb={1}>
 						
 						{errors?.password && <FormErrorMessage > Password is needed </FormErrorMessage> }
-						{useAuth.error && <FormErrorMessage> {t('member:'+useAuth.error)} </FormErrorMessage> }
+						{auth.error && <FormErrorMessage> {t('member:'+useAuth.error)} </FormErrorMessage> }
 					
 					</Box>
 				
