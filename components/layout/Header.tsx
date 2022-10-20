@@ -28,12 +28,12 @@ const  LanguageMenu = ()=> {
 }
 
 export default function Header({ header_color }) {
-  var position = (header_color !== 'none')?'relative':'absolute'
+
   return (
     <header 
       className="header" 
       style={{
-        position:position, 
+        position:(header_color !== 'none')?'relative':'absolute', 
         top:'0', right:'0', width:'100%', 
         zIndex:'12'
       }}
