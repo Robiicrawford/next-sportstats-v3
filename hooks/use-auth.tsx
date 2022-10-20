@@ -14,7 +14,7 @@ export function ProvideAuth({ children }) {
 
 // Hook for child components to get the auth object ...
 // ... and re-render when it changes.
-export const useAuth = () :any => {
+export const useAuth = ()  => {
   return useContext(authContext);
 };
 
