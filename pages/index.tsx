@@ -100,7 +100,7 @@ export default function Home({sportstats, irun, locale}) {
                             href={item.link}
                             target="_blank"
                           >
-                            <Box class="card__header" h={['100px','200px']}>
+                            <Box className="card__header" h={['100px','200px']}>
                               <LazyLoadImage 
                                 src={item['content:encoded']?.match(/<img[^>]*\/?>/g)[0]?.split('src=')[1]?.replace(/"/g,'').split(/[ >]/)[0].replace(/"/g,'').split("?")[0].concat('?resize=640%2C350&ssl=1')}
                                 alt="card__image" className="card__image" 
