@@ -58,6 +58,9 @@ function Master({ master }) {
     },
   };
 
+  if(!master.info){
+    return <div> ....loading </div>
+  }
   return (
     <Layout header_color='black' >
       <Head>
