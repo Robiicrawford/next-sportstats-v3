@@ -118,6 +118,8 @@ export default function Home({sportstats, irun, locale}) {
                               <Box 
                                 className='card__title'
                                 noOfLines={2}
+                                fontWeight='semibold'
+                                as='h4'
                               >
                                 {item.title}
                               </Box>
