@@ -15,7 +15,7 @@ import AccountMenu from './AccountMenu';
 import sportstats_logo from '../../public/images/sportstats_logo.png'
 
 type HeaderType = {
-    header_color?: String
+    header_color?: string
 }
 
 const  LanguageMenu = ()=> {
