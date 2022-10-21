@@ -12,17 +12,16 @@ config.autoAddCss = false; /* eslint-disable import/first */
 
 type LayoutType = {
     header_color?: string,
-    children: Element[]
+  //  children: Element[]
 }
 
 
 const Layout = ({ children, header_color }:LayoutType) => {
  
-
   return (
    <>
     <Header header_color={header_color} />
-    {children}
+      {children}
     <Footer/>
    </>
   )
