@@ -129,7 +129,7 @@ function Master({ master }) {
           {master?.sid > 0 &&
             <>
 
-              <Box display='flex' w='100%' className='card__base' flexWrap='wrap'  sx={{borderRadius:'15px', flexDirection:'row'}} mt='4' >
+              <Box display='flex' w='100%' className='card__base' flexWrap='wrap'  sx={{borderRadius:'15px', flexDirection:'row', border:'1px solid black'}} mt='4' >
                 <Box
                   px='3'
                   as={Heading}
@@ -235,6 +235,24 @@ export async function getStaticProps({ params, locale }) {
           eid
           start_date
           name
+        }
+        series{
+          id
+          sid
+          slug
+          masterEvents {
+            id
+            mid
+            slug
+            info {
+              name
+              date
+              imageUrl
+              country
+              state
+              city
+            }
+          }
         }
         lastEvent{
           id

@@ -80,8 +80,6 @@ const Index = ({data, slug, setA}) => {
                   lineHeight='42px'
                   noOfLines={2}
                   mb='3'
-                  sx={{whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis'}}
-                  
                 >
                   {data?.info?.city}, {data?.info?.state} | {countries.getName(data?.info?.country, "en", {select: "official"})}
                 </Box>
@@ -106,7 +104,7 @@ const Index = ({data, slug, setA}) => {
                 </Box>
               </Box>
               
-              <Flex flexWrap='wrap' width={[1,1/2,2/3,3/4]}>
+              <Flex flexWrap='wrap' width={['100%',1/2,2/3,3/4]}>
                 
                 
               </Flex>
@@ -115,9 +113,9 @@ const Index = ({data, slug, setA}) => {
             
             <Flex w='100%' bg='ss_green' mt={['50px', 4]} pb={1} flexWrap='wrap' style={{borderRadius:' 0 0 15px 15px', borderTop:'1px solid black'}}>
              
-              <Box w={[1,1/2, 1/3 ,1/4]}  />
+              <Box w={['100%',1/2, 1/3 ,1/4]}  />
 
-              <Flex flexWrap='wrap' w={[1,3/4,3/4,1/3]} justifyContent='space-around'>
+              <Flex flexWrap='wrap' w={['100%',3/4,3/4,1/3]} justifyContent='space-around'>
                
                 <Link href={`#info`} style={{textAlign:'center', textDecoration:'none'}} >
                   <Box    mx={2} mt={1} sx={{ cursor:'pointer'}} bg='none'   > 

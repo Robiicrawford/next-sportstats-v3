@@ -35,20 +35,20 @@ const Index = ({data}) => {
       console.log('share not supported')
     }
   };
+  console.log(data)
   return (
-    <Flex flexWrap='wrap' className='card__base' style={{borderRadius:'15px', border:'1px solid grey'}} w='100%'  justifyContent='center' alignItems='center' >
+    <Flex flexWrap='wrap' w='100%'  className='card__base' style={{borderRadius:'15px', border:'1px solid grey'}}  justifyContent='center' alignItems='center' >
       
       <Flex w='100%'>
 
         <Flex flexWrap='wrap' w={['100%','50%','33%','25%']} justifyContent='center' >
           <Center w='100%' className="card__header" m='2' > 
             <Image
-              src={data?.info.mlimg? `https://cdn-1.sportstats.one/img/master_logo/${data?.mid}_${data?.info.mlimg}.png` : 'https://ss-event-images.s3.us-west-2.amazonaws.com/ss_triathlon.jpeg'}
-              alt={data?.info.name}
+              src={data?.logo? `https://cdn-1.sportstats.one/img/master_logo/${data?.mid}_${data?.info.logo}.png` : 'https://ss-event-images.s3.us-west-2.amazonaws.com/ss_triathlon.jpeg'}
+              alt={data?.name}
               loading="lazy"
               className="card__image" 
               width="480" height='auto'
-              
             />
           </Center>
         </Flex>

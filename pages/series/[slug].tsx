@@ -45,7 +45,6 @@ const GET_MASTEREVENT_SERIES = gql`
             id
             name
             date
-            imageUrl
             country
             state
             city
@@ -151,7 +150,7 @@ export async function getStaticPaths() {
     }
   }
 
-    const res = await fetch('http://admin.sportstats.ca/event_master/adminapi.php', {
+    const res = await fetch('https://admin.sportstats.ca/event_master/adminapi.php', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json'
