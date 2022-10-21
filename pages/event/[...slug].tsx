@@ -196,6 +196,7 @@ export async function getStaticPaths() {
     });
 
   // Get the paths we want to pre-render based on posts
+  console.log(data.masterEvents)
   const paths = data.masterEvents.masterEvents.map((master) => ({
     
     params: { 
