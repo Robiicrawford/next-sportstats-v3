@@ -200,7 +200,7 @@ export async function getStaticPaths() {
   const paths = data.masterEvents.masterEvents.map((master) => ({
     
     params: { 
-      slug: [slugSet(master.info.name.toString())]
+      slug: [master.slug]
     }
   }))
 
