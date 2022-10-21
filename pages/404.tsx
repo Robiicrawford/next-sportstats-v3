@@ -18,9 +18,9 @@ export default function FourOhFour({locale}) {
 
   return (
     <Layout >
-      <NextSeo
+     {/* <NextSeo
         title={`Sportstats - ${t('404.title')} `}
-      />
+      /> */}
         
       <Section.Container id="privacy" Background={Background} >
         <Center h='60ch'>
