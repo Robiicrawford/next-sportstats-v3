@@ -81,7 +81,7 @@ function Master({ master }) {
           justifyContent='center'
           pt={['20px']}
         >
-          <Heading fontSize={['54px','72px']}>{master?.info.name}</Heading>
+          <Heading fontSize={['54px','72px']}>{master?.info?.name}</Heading>
         </Flex>
       
       <Section.Container id="series" Background={Background} >
