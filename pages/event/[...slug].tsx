@@ -64,8 +64,6 @@ function Master({ master }) {
       <Head>
         <title> {title} </title>
       </Head>
-
-      
         <Flex 
           w='100%'
           style={{
@@ -77,9 +75,8 @@ function Master({ master }) {
             minHeight: '250px',
             overflow: 'hidden',
             backgroundImage: `url('${master?.info?.mcimg? `https://cdn-1.sportstats.one/img/master_cover/${master?.mid}_${master?.info?.mcimg}.png`: 'https://cdn-1.sportstats.one/img/master_cover/sportstats_paper_full.jpg'}')`,
-                            
             backgroundSize: 'cover',
-            backgroundPosistion:'center'
+            backgroundPosition:'center'
           }}
           justifyContent='center'
           pt={['20px']}
