@@ -96,14 +96,14 @@ function Master({ master }) {
              
               <Box w='100%' pt={[1,3]} px={[1,3]} mb={[2,4]} >
                 {!master && <Text> ...LOADING... </Text>}
-                {master?.info.description&&
+                {master?.info?.description&&
                   <Flex
                     w='92%'
                     ml={['3','5']}
                     mt='4'
                     justifyContent='center'
                   >
-                    <Description style={{textAlign:'center'}} dangerouslySetInnerHTML={{ __html: md().render(master?.info.description) }} />
+                    <Description style={{textAlign:'center'}} dangerouslySetInnerHTML={{ __html: md().render(master?.info?.description) }} />
                   </Flex>
                 }
              
