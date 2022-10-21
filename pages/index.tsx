@@ -97,7 +97,6 @@ export default function Home({sportstats, irun, locale}) {
                           <a 
                             key={item.id}
                             className="card" 
-                            key={item.id}
                             href={item.link}
                             target="_blank"
                           >
