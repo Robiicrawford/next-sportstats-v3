@@ -1,5 +1,5 @@
 import React, {useState, useEffect} from "react"
-
+import { useRouter } from 'next/router'
 import Head from 'next/head'
 import Link from 'next/link'
 
@@ -39,6 +39,7 @@ import {slugSet } from "../../utils/setSlug"
 import { Pagination } from "swiper";
 
 function Master({ master }) {
+  const router = useRouter()
 
   const [links, setLinks ] = useState(null)
 
@@ -61,6 +62,17 @@ function Master({ master }) {
   if(!master.info){
     return <div> ....loading </div>
   }
+
+  useEffect(()=>{
+    if(!master){
+      router.push('/404')
+    }
+  },[])
+
+  if(!master){
+    return <div> ... error on page ... </div>
+  }
+  
   return (
     <Layout header_color='black' >
       <Head>
@@ -291,17 +303,9 @@ export async function getStaticProps({ params, locale }) {
       }
     });
 
-  console.log(params.slug[0])
   
-  if (!data.masterEvent) {
-    return {
-      redirect: {
-        destination: "/404",
-      },
-    }
-  }
-  
-  
+
+    
   // Pass post data to the page via props
   return { 
     props: { 
