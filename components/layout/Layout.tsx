@@ -12,7 +12,7 @@ config.autoAddCss = false; /* eslint-disable import/first */
 
 type LayoutType = {
     header_color?: string,
-  //  children: Element[]
+    children?: React.ReactNode
 }
 
 
