@@ -1,6 +1,6 @@
 import React, {useState, useEffect} from "react"
 import { useRouter } from 'next/router'
-import Head from 'next/head'
+
 import Link from 'next/link'
 
 import { NextSeo } from 'next-seo';
@@ -43,8 +43,6 @@ function Master({ master }) {
   const router = useRouter()
 
   const [links, setLinks ] = useState(null)
-
-  var title = `Sportstats - ${master?.info?.name}`
   
   useEffect(()=>{
     if(master?.lastEvent && master?.lastEvent?.links){
@@ -76,9 +74,9 @@ function Master({ master }) {
 
   return (
     <Layout header_color='black' >
-      <Head>
-        <title> {title} </title>
-      </Head>
+      <NextSeo
+        title={`${master?.info?.name}`}
+      />
         <Flex 
           w='100%'
           style={{
