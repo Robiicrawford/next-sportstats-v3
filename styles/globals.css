@@ -29,6 +29,7 @@ body {
 header {
   width: 100%;
 }
+
 main {
   padding: 5rem 0;
   flex: 1;
@@ -269,4 +270,9 @@ background: linear-gradient(to bottom, #FFD194, #D1913C);
 .slick-arrow{
   height: 100% !important;
   background: #81e94c96 !important;
+}
+
+.resultLink :hover {
+    color: rgba(0, 0, 0, 0.7); 
+
 }

@@ -53,55 +53,56 @@ export async function getStaticProps({ params, locale }) {
   // If the route is like /series/1, then params.slug is 1
 
   const query = gql`
-    query Sportstats($slug: String!) {
-      series(slug: $slug) {
+    query GetProfileResults($bib: String!, $raceid: String!) {
+      result(bib: $bib, raceId: $raceid) {
         id
-        sid
-        slug
-        info {
-          name
-          logo
-          description
-        }
-        links {
-          id: lid
-          lt
-          lo
-          ll
-          lu
-        }
-        masterEvents {
+        bib
+        status
+        givenName
+        familyName
+        cat
+        cRank
+        gRank
+        oRank
+        gender
+        officialTime : OT
+        country
+        user {
           id
-          mid
+          ssuid
           info {
-            name
-            date
-            imageUrl
-            country
-            city
+            profilePhoto
           }
-          events {
-            id
-            eid
-          }
+        }
+        coldata{
+          id: CID
+          CID
+          RC
+          RG
+          RO
+          CD
+          TOD
+          ST
         }
       }
     }
   `;
 
- /* const { data } = await client.query({
+  const { data } = await client.query({
       query: query,
       variables: {
-        slug: params.slug
+        bib: params.bib.toString(),
+        raceid: params.raceid.toString()
       }
     });
-*/
+
+  console.log(data)
   console.log(params)
   // Pass post data to the page via props
   return { 
     props: { 
       ...(await serverSideTranslations(locale, ['common', 'public', 'app','translation'], null, ['en', 'fr'])),
-      series: 'test'
+      results: 'test'
     } 
   }
 }

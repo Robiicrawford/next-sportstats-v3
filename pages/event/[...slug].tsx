@@ -362,5 +362,6 @@ const Description = styled.div`
   p {
     font-size: 16px;
     line-height: 1.5;
+    padding-bottom: 1em;
   }
 `;
