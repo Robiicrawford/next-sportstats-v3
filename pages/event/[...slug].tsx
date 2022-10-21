@@ -92,19 +92,21 @@ function Master({ master }) {
           <Flex as="a" id="info" flexWrap='wrap' className='card__base' w='100%' mt='4' pt={2} height='fit-content' bg='white' style={{borderRadius:'15px', border:'1px solid black'}} >
              
               <Box w='100%' py={[2,3]} px={[2,4]} >
-                <Heading color='black' style={{borderBottom:'1px solid black'}}>{master?.info.name}</Heading>
+                <Heading color='black' style={{borderBottom:'1px solid black'}}>{master?.info?.name}</Heading>
               </Box>
              
               <Box w='100%' pt={[1,3]} px={[1,3]} mb={[2,4]} >
                 {!master && <Text> ...LOADING... </Text>}
-                <Flex
-                  w='92%'
-                  ml={['3','5']}
-                  mt='4'
-                  justifyContent='center'
-                >
-                  <Description style={{textAlign:'center'}} dangerouslySetInnerHTML={{ __html: md().render(master?.info.description) }} />
-                </Flex>
+                {master?.info.description&&
+                  <Flex
+                    w='92%'
+                    ml={['3','5']}
+                    mt='4'
+                    justifyContent='center'
+                  >
+                    <Description style={{textAlign:'center'}} dangerouslySetInnerHTML={{ __html: md().render(master?.info.description) }} />
+                  </Flex>
+                }
              
               </Box>
               {links && links.length> 0 &&
