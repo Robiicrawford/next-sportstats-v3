@@ -115,12 +115,12 @@ export default function Home({sportstats, irun, locale}) {
                                   <span className="tag tag-blue">{car}</span>
                                 )}
                               </Flex>
-                              <h4 
+                              <Box 
                                 className='card__title'
                                 noOfLines={2}
                               >
                                 {item.title}
-                              </h4>
+                              </Box>
                               <Box 
                                 className='card__content' style={{color:'black'}}
                                 noOfLines={5}
