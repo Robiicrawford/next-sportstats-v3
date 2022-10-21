@@ -109,10 +109,10 @@ export default function Home({sportstats, irun, locale}) {
                                 effect="blur"
                               />
                             </Box>
-                            <div class="card__body">
+                            <div className="card__body">
                               <Flex flexWrap='wrap'>
                                 {item.categories?.slice(0,4).map((car)=>
-                                  <span class="tag tag-blue">{car}</span>
+                                  <span className="tag tag-blue">{car}</span>
                                 )}
                               </Flex>
                               <h4 
@@ -122,15 +122,15 @@ export default function Home({sportstats, irun, locale}) {
                                 {item.title}
                               </h4>
                               <Box 
-                                class='card__content' style={{color:'black'}}
+                                className='card__content' style={{color:'black'}}
                                 noOfLines={5}
                               >
                                 {item.contentSnippet}
                               </Box>
                             </div>
-                            <div class="card__footer">
-                              <div class="user">
-                                <div class="user__info" >
+                            <div className="card__footer">
+                              <div className="user">
+                                <div className="user__info" >
                                   <h5 style={{marginBottom:'0'}}>{item.creator}</h5>
                                   <small>{ new Date( item.isoDate).toLocaleDateString(locale, { month: 'long', day: 'numeric', year: 'numeric' } )}</small>
                                 </div>
