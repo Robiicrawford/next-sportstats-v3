@@ -1,5 +1,5 @@
 import Link from 'next/link'
-import Head from 'next/head'
+import { NextSeo } from 'next-seo';
 
 import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
 import { useTranslation } from 'next-i18next';
@@ -18,9 +18,10 @@ export default function FourOhFour() {
 
   return (
     <Layout >
-      <Head>
-        <title>Sportstats - {t('404.title')} </title>
-      </Head>
+      <NextSeo
+        title={`Sportstats - ${t('404.title')} `}
+      />
+        
 
       <Section.Container id="privacy" Background={Background} >
         <Center h='60ch'>
