@@ -59,6 +59,7 @@ const Index = ({data, slug, setA}) => {
                       currentTarget.src='https://ss-event-images.s3.us-west-2.amazonaws.com/ss_triathlon.jpeg';
                     }}
                     mt='2'
+                    ml='2'
                     width='auto'
                     height='250px'
                     objectFit='cover'
@@ -104,7 +105,7 @@ const Index = ({data, slug, setA}) => {
                 </Box>
               </Box>
               
-              <Flex flexWrap='wrap' width={['100%',1/2,2/3,3/4]}>
+              <Flex flexWrap='wrap' width={['100%',1/2,1/2,1/3,3/4]}>
                 
                 
               </Flex>

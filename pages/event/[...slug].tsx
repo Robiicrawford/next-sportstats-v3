@@ -196,7 +196,7 @@ export async function getStaticPaths() {
     });
 
   // Get the paths we want to pre-render based on posts
-  console.log(data.masterEvents)
+
   const paths = data.masterEvents.masterEvents.map((master) => ({
     
     params: { 
@@ -292,15 +292,16 @@ export async function getStaticProps({ params, locale }) {
     });
 
   console.log(params.slug[0])
+  
   if (!data.masterEvent) {
     return {
       redirect: {
-        destination: "/",
+        destination: "/404",
       },
     }
   }
   
-  console.log(data.masterEvent)
+  
   // Pass post data to the page via props
   return { 
     props: { 
