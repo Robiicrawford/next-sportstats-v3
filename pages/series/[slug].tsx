@@ -1,4 +1,5 @@
 import React, {useState, useEffect} from "react"
+import { useRouter } from 'next/router'
 import Head from 'next/head'
 
 import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
@@ -55,6 +56,7 @@ const GET_MASTEREVENT_SERIES = gql`
 `;
 
 function SeriesPage({ series }) {
+  const router = useRouter()
   const { t } = useTranslation('common');
   const [events, setEvents] = useState(null)
   const [words, setWords] = useState('')
@@ -88,6 +90,16 @@ function SeriesPage({ series }) {
     }
   },[words])
 
+  useEffect(()=>{
+    if(!series){
+      router.push('/404')
+    }
+  },[])
+
+  if(!series){
+    return <div> ... error on page ... </div>
+  }
+  
   return (
     <Layout header_color='black' >
       <Head>
