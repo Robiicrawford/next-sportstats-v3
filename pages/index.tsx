@@ -116,7 +116,7 @@ export default function Home({sportstats, irun, locale}) {
                                 )}
                               </Flex>
                               <h4 
-                                class='card__title'
+                                className='card__title'
                                 noOfLines={2}
                               >
                                 {item.title}
