@@ -35,17 +35,7 @@ function SeriesPage({ result }) {
   )
 }
 
-export async function getStaticPaths() {
-  // When this is true (in preview environments) don't
-  // prerender any static pages
-  // (faster builds, but slower initial page load)
 
-  return {
-    paths: [],
-    fallback: 'blocking',
-  }
- 
-}
 
 // This also gets called at build time
 export async function getStaticProps({ params, locale }) {
@@ -102,7 +92,8 @@ export async function getStaticProps({ params, locale }) {
   return { 
     props: { 
       ...(await serverSideTranslations(locale, ['common', 'public', 'app','translation'], null, ['en', 'fr'])),
-      results: 'test'
+      results: 'test',
+      revalidate: 30, // In seconds
     } 
   }
 }
