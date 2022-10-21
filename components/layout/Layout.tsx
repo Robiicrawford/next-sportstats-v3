@@ -11,7 +11,7 @@ import { config } from '@fortawesome/fontawesome-svg-core';
 config.autoAddCss = false; /* eslint-disable import/first */
 
 type LayoutType = {
-    header_color?: String,
+    header_color?: string,
     children: Element[]
 }
 
