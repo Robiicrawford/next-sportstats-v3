@@ -26,7 +26,7 @@ const colors = {
 const theme = extendTheme({ colors });
 
 
-function Application({ Component, session, pageProps }: AppProps) {
+function Application({ Component, pageProps }: AppProps) {
 
 
   return (
