@@ -28,7 +28,6 @@ import { faShareAlt} from "@fortawesome/free-solid-svg-icons";
 export default function Home({sportstats, irun, locale}) {
   const { t } = useTranslation('common');
 
-  console.log(irun)
   return (
     <Layout header_color='none'>
       <Head>

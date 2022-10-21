@@ -13,7 +13,7 @@ import Layout from '../components/layout/Layout'
 import Section from '../components/section';
 import Triangle from '../components/triangle';
 
-export default function FourOhFour() {
+export default function FourOhFour({locale}) {
   const { t } = useTranslation('app');
 
   return (

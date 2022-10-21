@@ -33,7 +33,8 @@ function Application({ Component, session, pageProps }) {
       <ProvideAuth>
         <ApolloProvider client={client} >
           <DefaultSeo
-            
+            title = 'This is my title';
+            titleTemplate = '%s | Sportstats';
             description= 'Claim and share your race results, receive live race notifications and more!'
             openGraph={{
               type: 'website',
