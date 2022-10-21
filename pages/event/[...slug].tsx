@@ -99,7 +99,6 @@ function Master({ master }) {
                 {!master && <Text> ...LOADING... </Text>}
                 <Flex
                   w='92%'
-                  mt='1'
                   ml={['3','5']}
                   mt='4'
                   justifyContent='center'
