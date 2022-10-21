@@ -14,7 +14,7 @@ import AccountMenu from './AccountMenu';
 
 import sportstats_logo from '../../public/images/sportstats_logo.png'
 
-type Header = {
+type HeaderType = {
     header_color?: String
 }
 
@@ -30,7 +30,7 @@ const  LanguageMenu = ()=> {
   );
 }
 
-export default function Header({ header_color }) {
+export default function Header({ header_color }:HeaderType) {
 
   return (
     <header 

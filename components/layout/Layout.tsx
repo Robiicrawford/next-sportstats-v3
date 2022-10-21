@@ -10,12 +10,13 @@ import '@fortawesome/fontawesome-svg-core/styles.css';
 import { config } from '@fortawesome/fontawesome-svg-core';
 config.autoAddCss = false; /* eslint-disable import/first */
 
-type Layout = {
-    header_color?: String
+type LayoutType = {
+    header_color?: String,
+    children: Element[]
 }
 
 
-const Layout = ({ children, header_color }) => {
+const Layout = ({ children, header_color }:LayoutType) => {
  
 
   return (
