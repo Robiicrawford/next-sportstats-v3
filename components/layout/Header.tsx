@@ -45,7 +45,9 @@ export default function Header({ header_color }:HeaderType) {
       <Flex
           px={2} pl={[2,5]} pt={2}
           color='white'
-          bg={header_color}
+          style={{
+            backgroundColor: header_color
+          }}
           w='100%'
           alignItems='center'
           flexWrap='wrap'
