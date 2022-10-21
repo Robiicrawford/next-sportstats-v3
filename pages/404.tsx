@@ -22,7 +22,6 @@ export default function FourOhFour({locale}) {
         title={`Sportstats - ${t('404.title')} `}
       />
         
-
       <Section.Container id="privacy" Background={Background} >
         <Center h='60ch'>
           <Box maxW='sm' borderWidth='1px' p='3' bg='#8f8f8f4f' borderRadius='lg' overflow='hidden'>
