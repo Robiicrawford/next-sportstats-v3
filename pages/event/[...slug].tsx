@@ -33,7 +33,6 @@ import "swiper/css";
 import "swiper/css/navigation";
 import "swiper/css/pagination";
 
-import {slugSet } from "../../utils/setSlug"
 
 // import required modules
 import { Pagination } from "swiper";
@@ -59,7 +58,7 @@ function Master({ master }) {
     },
   };
 
-  if(!master.info){
+  if(!master){
     return <div> ....loading </div>
   }
 
@@ -72,7 +71,7 @@ function Master({ master }) {
   if(!master){
     return <div> ... error on page ... </div>
   }
-  
+
   return (
     <Layout header_color='black' >
       <Head>
