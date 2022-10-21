@@ -176,11 +176,11 @@ export async function getStaticPaths() {
     });
 
   const series_list = await res.json()
-  console.log(series_list.data.series[0])
+
   // Get the paths we want to pre-render based on series_list
   const paths = series_list.data.series.map((series) => ({
     params: { 
-      slug: slugSet(series.sl)
+      slug: series.slug
     }
   }))
 

@@ -17,8 +17,6 @@ countries.registerLocale(require("i18n-iso-countries/langs/en.json"));
 const Index = ({data, slug, setA}) => {
   const {  t} = useTranslation();
 
-  console.log(data)
-
   const handleShareClick = (event) => {
     event.preventDefault()
     if (navigator.share) {

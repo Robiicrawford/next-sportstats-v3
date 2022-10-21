@@ -35,7 +35,7 @@ const Index = ({data}) => {
       console.log('share not supported')
     }
   };
-  console.log(data)
+
   return (
     <Flex flexWrap='wrap' w='100%'  className='card__base' style={{borderRadius:'15px', border:'1px solid grey'}}  justifyContent='center' alignItems='center' >
       
