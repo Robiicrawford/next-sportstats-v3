@@ -137,10 +137,7 @@ export default function Home({sportstats, irun, locale}) {
                                   <small>{ new Date( item.isoDate).toLocaleDateString(locale, { month: 'long', day: 'numeric', year: 'numeric' } )}</small>
                                 </div>
                               </div>
-                              <div style={{flexGrow:'1'}}/>
-                              <div  className='shareButton'  onClick={(e)=>handleOnClick(e, item)} >
-                                <FontAwesomeIcon icon={faShareAlt} size="lg" />
-                              </div>
+                              
                             </div>
                           </a>
               
