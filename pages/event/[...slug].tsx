@@ -39,7 +39,7 @@ import {slugSet } from "../../utils/setSlug"
 import { Pagination } from "swiper";
 
 function Master({ master }) {
-  console.log(master)
+
   const [links, setLinks ] = useState(null)
 
   var title = `Sportstats - ${master?.info?.name}`
@@ -50,7 +50,6 @@ function Master({ master }) {
     }
   },[master])
 
-  console.log(links)
 
   const pagination = {
     clickable: true,
@@ -288,6 +287,7 @@ export async function getStaticProps({ params, locale }) {
       }
     });
 
+  console.log(params.slug[0])
   if (!data.masterEvent) {
     return {
       redirect: {
