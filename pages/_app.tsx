@@ -1,5 +1,6 @@
 import  React from "react"
 import Script from "next/script";
+import type { AppProps } from "next/app";
 
 import {client} from "../apollo/apollo-client";
 import { ApolloProvider } from "@apollo/client";
@@ -25,7 +26,7 @@ const colors = {
 const theme = extendTheme({ colors });
 
 
-function Application({ Component, session, pageProps }) {
+function Application({ Component, session, pageProps }: AppProps) {
 
 
   return (
