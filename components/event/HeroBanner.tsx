@@ -58,11 +58,12 @@ const Index = ({data, slug, setA}) => {
                       currentTarget.onerror = null; // prevents looping
                       currentTarget.src='https://ss-event-images.s3.us-west-2.amazonaws.com/ss_triathlon.jpeg';
                     }}
+                    mt='2'
                     width='auto'
                     height='250px'
                     objectFit='cover'
                     className="card__image" 
-                    style={{borderRadius:'15px'}}
+                    style={{borderRadius:'15px', border:'1px solid black'}}
                   />
               </Heading>
             </Flex>

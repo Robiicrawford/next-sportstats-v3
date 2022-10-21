@@ -72,7 +72,7 @@ function Master({ master }) {
             top:'0',
             width: '100%',
             maxHeight: '50vh',
-            minHeight: '250px',
+            minHeight: '450px',
             overflow: 'hidden',
             backgroundImage: `url('${master?.info?.mcimg? `https://cdn-1.sportstats.one/img/master_cover/${master?.mid}_${master?.info?.mcimg}.png`: 'https://cdn-1.sportstats.one/img/master_cover/sportstats_paper_full.jpg'}')`,
             backgroundSize: 'cover',
@@ -148,7 +148,7 @@ function Master({ master }) {
                       >
 
                        {master?.series.masterEvents.map((event)=>
-                          <SwiperSlide key={event.id} className="card card_swipe" key={event.id}>
+                          <SwiperSlide key={event.id} className="card card_swipe">
                             <Card key={event.id+'mastercard-results'} e={event}  />
                           </SwiperSlide>
                         )}
