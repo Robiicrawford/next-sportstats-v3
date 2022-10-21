@@ -18,8 +18,8 @@ const Index = ({data}) => {
       <Flex flexWrap='wrap' justifyContent='left' w='100%' my='3' mx='4' >
         {data?.races?.map((r)=>(
           <Link href={`/results/${r.rid}`} style={{width:'100%', cursor:'pointer !important'}} key={r.id}>  
-            <Box w={'100%'}  style={{ cursor:'pointer !important'}} >
-              <Text color='black' sx={{borderBottom:'1px dotted black'}} w='fit-content' mb='1' pb='1' > <span className={`tag tag-status tag-${r.status}`}> {r.status} </span> {r.name} - {r.date}</Text>
+            <Box w={'100%'}  sx={{ cursor:'pointer !important'}} >
+              <Text color='black' sx={{borderBottom:'1px dotted black', cursor:'pointer'}} w='fit-content' mb='1' pb='1' > <span className={`tag tag-status tag-${r.status}`}> {r.status} </span> {r.name} - {r.date}</Text>
             </Box>
           </Link>
         ))}

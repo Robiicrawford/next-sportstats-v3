@@ -68,7 +68,7 @@ const Index = ({data, slug, setA}) => {
             </Flex>
 
 
-            <Flex flexWrap='wrap' w={['100%','50%','33%','75%']} pl={['2','4']}>
+            <Flex flexWrap='wrap' sx={{flexGrow:'1'}} pl={['2','4']}>
              
               <Box my={[1,2]}  color='#000'>
                 <Box
