@@ -31,7 +31,8 @@ const  LanguageMenu = ()=> {
 }
 
 export default function Header({ header_color }:HeaderType) {
-
+  header_color = header_color?header_color:'rgb(23, 29, 37)'
+  
   return (
     <header 
       className="header" 
@@ -44,7 +45,7 @@ export default function Header({ header_color }:HeaderType) {
       <Flex
           px={2} pl={[2,5]} pt={2}
           color='white'
-          bg={header_color?header_color:'rgb(23, 29, 37)'}
+          bg={header_color}
           w='100%'
           alignItems='center'
           flexWrap='wrap'
