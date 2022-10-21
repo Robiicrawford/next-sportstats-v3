@@ -96,7 +96,7 @@ export default function Home({sportstats, irun, locale}) {
             {irun?.items.slice(0, 3).map((item)=>
                           <a 
                             key={item.id}
-                            class="card" 
+                            className="card" 
                             key={item.id}
                             href={item.link}
                             target="_blank"
