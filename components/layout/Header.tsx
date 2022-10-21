@@ -14,6 +14,9 @@ import AccountMenu from './AccountMenu';
 
 import sportstats_logo from '../../public/images/sportstats_logo.png'
 
+type Header = {
+    header_color?: String
+}
 
 const  LanguageMenu = ()=> {
   const { isOpen, onOpen, onClose } = useDisclosure()
