@@ -43,7 +43,7 @@ export const AuthCheck = ({ children }) => {
 
   const { route } = useAuthenticator((context) => [context.route]);
 
-  if(route === 'configuring') {
+  if(route === 'idle') {
     return <>'..loading..'</>
   }
   return (
