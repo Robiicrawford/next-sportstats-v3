@@ -212,7 +212,7 @@ export default function Home({sportstats, irun, locale}) {
                 >
                   Nothing good ever remains stagnant; constantly evolving to be the best version of ourselves is in our very DNA. It is only fair that we developed a line of challenges, events, and products that meet the needs of you, the relentless athlete.  That's why we created True North Challenges.
                 </Box>
-                <Link  href='https://truenorthchallenges.com/' target='_blank' ><a> <Button mt='2' colorScheme='red' style={{border:'2px solid red'}} size='lg'>Learn More </Button> </a></Link>
+                <a  href='https://truenorthchallenges.com/' target='_blank' > <Button mt='2' colorScheme='red' style={{border:'2px solid red'}} size='lg'>Learn More </Button> </a>
               
             </Container>
           </Box>

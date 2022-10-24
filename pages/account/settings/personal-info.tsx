@@ -18,7 +18,6 @@ import { useAuth, AuthCheck } from "../../../hooks/use-auth";
 
 export default function Settings({locale}) {
   const { t } = useTranslation('public');
-  const router = useRouter()
   const auth = useAuth();
 
  
