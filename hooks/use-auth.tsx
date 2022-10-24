@@ -65,7 +65,7 @@ const useProvideAuth =  () => {
   // Wrap any Firebase methods we want to use making sure ...
   // ... to save the user to state.
 
- 
+ const router = useRouter()
 
  const getUser = async ()  => {
  	var unsubscribe = await Auth.currentUserInfo()
