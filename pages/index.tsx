@@ -183,9 +183,13 @@ export default function Home({sportstats, irun, locale}) {
           w='100%'
           height='40ch'
           bg='black'
-          
+          flexWrap='wrap'
         >
-        series llinks
+          <Box w='1/2'>
+          </Box>
+
+          <Box w='1/2'>
+          </Box>
         </Flex>
         <Flex
           w='100%'
