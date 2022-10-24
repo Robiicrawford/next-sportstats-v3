@@ -43,7 +43,23 @@ function Application({ Component, pageProps }: AppProps) {
               url: 'https://www.sportstats.today/',
               site_name: 'Sportstats',
               title: 'Sportstats Professional Finish Line Timing & Results',
-              description: 'Claim and share your race results, receive live race notifications and more!'
+              description: 'Claim and share your race results, receive live race notifications and more!',
+              images: [
+                {
+                  url: 'https://sportstats.today/android-chrome-512x512.png',
+                  width: 800,
+                  height: 600,
+                  alt: 'Og Image Alt',
+                  type: 'image/jpeg',
+                },
+                {
+                  url: 'https://sportstats.today/android-chrome-512x512.png',
+                  width: 900,
+                  height: 800,
+                  alt: 'Og Image Alt Second',
+                  type: 'image/jpeg',
+                }
+              ],
             }}
             twitter={{
               handle: '@sportstats',

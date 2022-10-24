@@ -1,10 +1,10 @@
-import Head from 'next/head'
+import { NextSeo } from 'next-seo';
 import Parser from "rss-parser";
 
 import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
 import { useTranslation } from 'next-i18next';
 
-import { Box, Flex, Image, Center } from '@chakra-ui/react';
+import { Box, Flex, Image, Center, Show } from '@chakra-ui/react';
 
 import { gql } from "@apollo/client";
 import {client} from "../apollo/apollo-client";
@@ -30,12 +30,13 @@ export default function Home({sportstats, irun, locale}) {
 
   return (
     <Layout header_color='none'>
-      <Head>
-        <title>Sportstats - Home</title>
-      </Head>
+      <NextSeo
+        title={`Home`}
+      />
       <main style={{padding:'0'}} >
         
         <div 
+          className='home_image'
           style={{
                   position:'relative',
                   display:'grid',
@@ -44,15 +45,17 @@ export default function Home({sportstats, irun, locale}) {
                   maxHeight: '80vh',
                   minHeight: '450px',
                   overflow: 'hidden',
-                //  backgroundImage: "url('https://cdn.athlinks.com/images/home/hero.jpg')",
-                  backgroundSize: 'cover',
-                  
           }} 
         >
-          <video width="1414" autoPlay muted loop style={{display: 'block', height: '100%', width: '100vw', filter: 'grayscale(100%) brightness(80%) sepia(300%) hue-rotate(50deg) saturate(500%)'}} >
-            <source src="https://d33vaoadodpfl.cloudfront.net/miami-cut.mp4" type="video/mp4"/>Please update your browser to support video
-          </video>
+          
+          <Show above='sm'>
+            <video width="1414" autoPlay muted loop style={{display: 'block', height: '100%', width: '100vw', filter: 'grayscale(100%) brightness(80%) sepia(300%) hue-rotate(50deg) saturate(500%)'}} >
+              <source src="https://d33vaoadodpfl.cloudfront.net/miami-cut.mp4" type="video/mp4"/>Please update your browser to support video
+            </video>
+          </Show>
+
           <Search />    
+      
         </div>
           
         <Section.Container id="events" Background={Background} >

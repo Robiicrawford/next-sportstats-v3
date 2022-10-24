@@ -1,5 +1,5 @@
 import React, {useState, useEffect} from "react"
-import Head from 'next/head'
+import { NextSeo } from 'next-seo';
 
 import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
 import { useTranslation } from 'next-i18next';
@@ -23,9 +23,9 @@ function SeriesPage({ result }) {
 
   return (
     <Layout header_color='black' >
-      <Head>
-        <title> {`Sportstats - results`} </title>
-      </Head>
+      <NextSeo
+        title={`Home`}
+      />
       <Section.Container id="series" Background={Background} >
 
         test

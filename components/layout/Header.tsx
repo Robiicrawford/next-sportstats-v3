@@ -52,22 +52,18 @@ export default function Header({ header_color }:HeaderType) {
           alignItems='center'
           flexWrap='wrap'
         >
-          <Link
-            href="/"
-            style={{
-              color: `white`,
-              textDecoration: `none`,
-            }}
-          >
-            <a>
-              <Image 
-                src={sportstats_logo}
-                alt="Sportstats"
-                height={75}
-                width={400}
-              />
-            </a>
-          </Link>
+          <Box w={['65%', '25%']}>
+            <Link href="/">
+              <a>
+                <Image 
+                  src={sportstats_logo}
+                  alt="Sportstats"
+                  layout="responsive"
+
+                />
+              </a>
+            </Link>
+          </Box>
           <Spacer   />
            
          <LanguageMenu />
