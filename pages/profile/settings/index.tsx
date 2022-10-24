@@ -64,7 +64,7 @@ export default function Home({locale}) {
                           as='h4'
                         >
                           {t('settings-page.'+node.title)}
-                          <FontAwesomeIcon style={{color:'#383'}} icon={faCaretRight} size="sm" style={{marginLeft:'8px'}} />
+                          <FontAwesomeIcon style={{color:'#383', marginLeft:'8px'}} icon={faCaretRight} size="sm"  />
                         </Box>
 
                          <Box 
