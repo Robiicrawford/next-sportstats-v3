@@ -86,8 +86,7 @@ export async function getStaticProps({ params, locale }) {
       }
     });
 */}
-  console.log(data)
-  console.log(params)
+
   // Pass post data to the page via props
   return { 
     props: { 
