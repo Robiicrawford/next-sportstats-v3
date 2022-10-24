@@ -48,7 +48,7 @@ export const AuthCheck = ({ children }) => {
   }
   return (
     <>
-      {route === 'authenticated' ? <> {children} </> : <Container className='card'> <LoginContent style={{flexGrow:'1'}} /> </Container> }
+      {route === 'authenticated' ? <> {children} </> : <Container className='card'> <LoginContent /> </Container> }
     </>
   );
 
