@@ -155,12 +155,12 @@ const useProvideAuth =  () => {
   // ... component that utilizes this hook to re-render with the ...
   // ... latest auth object.
   useEffect(() => {
-    const unsubscribe = getUser()
+   // const unsubscribe = getUser()
    // setUser(unsubscribe)
     getUser()
   //  setLoading(false)
     // Cleanup subscription on unmount
-    return () => unsubscribe;
+   // return () => unsubscribe;
   }, []);
   // Return the user object and auth methods
 
