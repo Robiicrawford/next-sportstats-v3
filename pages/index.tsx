@@ -189,6 +189,17 @@ export default function Home({sportstats, irun, locale}) {
           </Box>
 
           <Box w='1/2'>
+            <Center>
+              <Image
+                src='https://cdn-1.sportstats.one/img/banners/true-north1.jpeg'
+                alt='true north medal'
+                loading="lazy"
+              />
+              <Box>
+                Nothing good ever remains stagnant; constantly evolving to be the best version of ourselves is in our very DNA. It is only fair that we developed a line of challenges, events, and products that meet the needs of you, the relentless athlete.  That's why we created True North Challenges.
+              </Box>
+              <Button>Learn More </Button>
+            </Center>
           </Box>
         </Flex>
         <Flex
