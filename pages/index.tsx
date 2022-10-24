@@ -4,7 +4,7 @@ import Parser from "rss-parser";
 import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
 import { useTranslation } from 'next-i18next';
 
-import { Box, Flex, Image, Center, Show } from '@chakra-ui/react';
+import { Box, Flex, Image, Center, Show, Button } from '@chakra-ui/react';
 
 import { gql } from "@apollo/client";
 import {client} from "../apollo/apollo-client";
