@@ -1,10 +1,11 @@
 import { NextSeo } from 'next-seo';
+import Link from 'next/link'
 import Parser from "rss-parser";
 
 import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
 import { useTranslation } from 'next-i18next';
 
-import { Box, Flex, Image, Center, Show, Button } from '@chakra-ui/react';
+import { Box, Flex, Image, Center, Show, Button, Container } from '@chakra-ui/react';
 
 import { gql } from "@apollo/client";
 import {client} from "../apollo/apollo-client";
@@ -181,25 +182,39 @@ export default function Home({sportstats, irun, locale}) {
 
         <Flex
           w='100%'
-          height='40ch'
+         
           bg='black'
           flexWrap='wrap'
         >
-          <Box w='1/2'>
+          <Box w={['100%','50%']}>
+            <Image
+              src='https://cdn-1.sportstats.one/img/banners/true-north2.jpeg'
+              alt='true north'
+              loading="lazy"
+            />
           </Box>
-
-          <Box w='1/2'>
-            <Center>
-              <Image
-                src='https://cdn-1.sportstats.one/img/banners/true-north1.jpeg'
-                alt='true north medal'
-                loading="lazy"
-              />
-              <Box>
-                Nothing good ever remains stagnant; constantly evolving to be the best version of ourselves is in our very DNA. It is only fair that we developed a line of challenges, events, and products that meet the needs of you, the relentless athlete.  That's why we created True North Challenges.
+          <Box w={['100%','50%']}>
+            <Container  flexWrap='wrap' color='white' py='6' centerContent h='100%' justifyContent='center' >
+              <Box w='100%' py='4' justifyContent='center' textAlign='center'>
+                <Image
+                  src='https://cdn-1.sportstats.one/img/banners/true-north1.jpeg'
+                  alt='true north medal'
+                  loading="lazy"
+                  height={200}
+                  width={240}
+                  display='inline-block'
+                  style={{borderRadius:'15px'}}
+                />
               </Box>
-              <Button>Learn More </Button>
-            </Center>
+                <Box 
+                  fontSize='22px'
+                  mb='2'
+                >
+                  Nothing good ever remains stagnant; constantly evolving to be the best version of ourselves is in our very DNA. It is only fair that we developed a line of challenges, events, and products that meet the needs of you, the relentless athlete.  That's why we created True North Challenges.
+                </Box>
+                <Link  href='https://truenorthchallenges.com/' target='_blank' ><a> <Button mt='2' colorScheme='red' style={{border:'2px solid red'}} size='lg'>Learn More </Button> </a></Link>
+              
+            </Container>
           </Box>
         </Flex>
         <Flex

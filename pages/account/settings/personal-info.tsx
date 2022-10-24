@@ -1,7 +1,6 @@
 import React, { useEffect } from "react";
 import { NextSeo } from 'next-seo';
 import Link from 'next/link'
-import { useRouter } from 'next/router'
 
 import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
 import { useTranslation } from 'next-i18next';
@@ -22,18 +21,7 @@ export default function Settings({locale}) {
   const router = useRouter()
   const auth = useAuth();
 
-
-  const routes = [
-    {icon:faIdCard, link:'settings/personal-info',title:'personal-info-title', desc:'personal-info-desc'},
-    {icon:faShieldAlt, link:'settings/login-and-security',title:'login-info-title', desc:'login-info-desc'},
-    {icon:faBell, link:'settings/notifications',title:'notifications-title', desc:'notifications-desc'},
-    {icon:faEye, link:'settings/privacy-and-sharing',title:'privacy-title', desc:'privacy-desc'},
-    {icon:faSlidersH, link:'settings/preferences',title:'global-title', desc:'global-desc'},
-    {icon:faQuestionCircle, link:'/help',title:'help-title', desc:'help-desc'}
-  ]
-
  
-
   return (
     <Layout>
       <NextSeo
