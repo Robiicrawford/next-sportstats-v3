@@ -4,6 +4,7 @@ html {
 /*  font: 112.5%/1.45em georgia, serif, sans-serif;  */
   font-family: sans-serif !important;
 /*  font: 112%/1.45em sans-serif; */
+  height: 100%;
   box-sizing: border-box;
   overflow-y: scroll;
 }
@@ -26,12 +27,18 @@ body {
   box-sizing: border-box;
 }
 
+#__next {
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
 header {
   width: 100%;
 }
 
 main {
-  padding: 5rem 0;
+  flex-grow: 1;
   flex: 1;
   display: flex;
   flex-direction: column;

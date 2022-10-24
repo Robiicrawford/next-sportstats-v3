@@ -1,9 +1,19 @@
 import React, { useState, useEffect, useContext, createContext } from "react";
 import {Amplify, Auth } from 'aws-amplify';
 
-import aws_exports from '../aws-exports'
+import { useAuthenticator } from '@aws-amplify/ui-react';
 
-Amplify.configure(aws_exports);
+import { useRouter } from 'next/router'
+
+import LoginContent from '../components/auth/LoginContent';
+
+import { 
+  Container
+} from '@chakra-ui/react'
+
+import aws_exports from '../aws-exports'
+Amplify.configure({...aws_exports, ssr: true});
+
 
 type AuthContextType = {
     auth?: any,
@@ -27,16 +37,47 @@ export const useAuth =  () => {
 };
 
 
+
+export const AuthCheck = ({ children }) => {
+  const router = useRouter()
+
+  const { route } = useAuthenticator((context) => [context.route]);
+
+  if(route === 'configuring') {
+    return <>'..loading..'</>
+  }
+  return (
+    <>
+      {route === 'authenticated' ? <> {children} </> : <Container className='card'> <LoginContent style={{flexGrow:'1'}} /> </Container> }
+    </>
+  );
+
+ //  router.push('/sign-in')
+
+}
+
+
 // Provider hook that creates auth object and handles state
 const useProvideAuth =  () => {
   const [user, setUser] = useState<any>(null);
+  const [isLoading, setLoading] = useState<any>(true);
   const [error, setError] = useState<any>(null);
   // Wrap any Firebase methods we want to use making sure ...
   // ... to save the user to state.
 
+ 
+
  const getUser = async ()  => {
  	var unsubscribe = await Auth.currentUserInfo()
- 	setUser(unsubscribe)
+  if(unsubscribe){
+    setUser(unsubscribe)
+    setLoading(false)
+  } else {
+    setUser(false)
+    setLoading(false)
+  }
+ 	
+  
  }
 
   const signout = async ()  => {
@@ -44,11 +85,14 @@ const useProvideAuth =  () => {
       .signOut()
       .then(() => {
         setUser(false);
+        setLoading(null)
+        router.push('/')
       });
   };
 
  
   const signin = async (email, password)  => {
+
     Auth.configure({authenticationFlowType:'USER_SRP_AUTH'});
     try {
       const user2 = await Auth.signIn(email.trim(), password.trim());
@@ -111,15 +155,17 @@ const useProvideAuth =  () => {
   // ... component that utilizes this hook to re-render with the ...
   // ... latest auth object.
   useEffect(() => {
-   // const unsubscribe = Auth.currentUserInfo()
+    const unsubscribe = getUser()
    // setUser(unsubscribe)
     getUser()
+  //  setLoading(false)
     // Cleanup subscription on unmount
-   // return () => unsubscribe();
+    return () => unsubscribe;
   }, []);
   // Return the user object and auth methods
 
   return {
+    isLoading,
     user,
     error,
     signin,

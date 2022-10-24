@@ -21,7 +21,7 @@ const Layout = ({ children, header_color }:LayoutType) => {
   return (
    <>
     <Header header_color={header_color} />
-      {children}
+      <main>{children}</main>
     <Footer/>
    </>
   )

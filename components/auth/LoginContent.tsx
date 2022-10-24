@@ -37,7 +37,6 @@ const LoginContent = () => {
   	const onSubmit = async data => {
 		setLoading(true)
 	  	var user = await auth.signin(data.email.trim(), data['current-password'].trim()) ;
-	  	console.log(user)
 	  	if(user){
 	  		router.push('/app/home')
 	  	}	  
@@ -95,12 +94,12 @@ const LoginContent = () => {
 					<Heading as="h6" my={2}  mb={3}>{t('public:signup.title')}</Heading>
 					
 					<Link href={`/sign-up`}>
-						<Button style={{width:'100%'}} color='black'>{t('common:sign-up')}</Button>
+						<a><Button style={{width:'100%'}} color='black'>{t('common:sign-up')}</Button></a>
 					</Link>
 				</Box>
 			
 				<Box w='100%' px={2} mt={2} style={{textAlign:'center'}}>
-					<Link href={`/app/account/recover`}>
+					<Link href={`/account/recover`}>
 						<a> {t('public:signup.forgot-password')} </a>
 					</Link>
 				</Box>

@@ -7,6 +7,10 @@ import { ApolloProvider } from "@apollo/client";
 import { appWithTranslation } from 'next-i18next';
 
 import { ProvideAuth } from "../hooks/use-auth";
+import { Authenticator } from '@aws-amplify/ui-react';
+import {Amplify } from 'aws-amplify';
+
+import aws_exports from '../aws-exports'
 
 import { ChakraProvider, extendTheme  } from '@chakra-ui/react'
 
@@ -14,6 +18,7 @@ import { DefaultSeo } from 'next-seo';
 
 import '../styles/globals.css'
 
+Amplify.configure({...aws_exports, ssr: true});
 const colors = {
   'ss_green':'#0caa56',
   brand: {
@@ -25,13 +30,12 @@ const colors = {
 
 const theme = extendTheme({ colors });
 
-
 function Application({ Component, pageProps }: AppProps) {
-
 
   return (
     <ChakraProvider theme={theme}>
       <ProvideAuth>
+      <Authenticator.Provider>
         <ApolloProvider client={client} >
           <DefaultSeo
             title = 'This is my title'
@@ -82,6 +86,7 @@ function Application({ Component, pageProps }: AppProps) {
           
           <Component {...pageProps} />
         </ApolloProvider>
+      </Authenticator.Provider>
       </ProvideAuth>
     </ChakraProvider>
   )

@@ -57,7 +57,7 @@ const Header = () => {
                   <>
                     <MenuItem>My Account</MenuItem>
                     <MenuItem>{ t('common:dashboard').toLowerCase() } </MenuItem>
-                    <Link href="/profile/settings"><a><MenuItem>{ t('common:settings').toLowerCase() } </MenuItem></a></Link>
+                    <Link href="/account/settings"><a><MenuItem>{ t('common:settings').toLowerCase() } </MenuItem></a></Link>
                   </>
                   : <MenuItem onClick={onOpen} >{ t('common:login') }</MenuItem>
                 }

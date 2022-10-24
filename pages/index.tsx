@@ -25,8 +25,19 @@ import "react-lazy-load-image-component/src/effects/opacity.css";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faShareAlt} from "@fortawesome/free-solid-svg-icons";
 
+
+import { Swiper, SwiperSlide } from "swiper/react";
+
+import "swiper/css";
+import "swiper/css/navigation";
+import "swiper/css/pagination";
+
+import { Navigation, Pagination } from "swiper";
+
 export default function Home({sportstats, irun, locale}) {
   const { t } = useTranslation('common');
+
+
 
   return (
     <Layout header_color='none'>
@@ -84,6 +95,7 @@ export default function Home({sportstats, irun, locale}) {
             backgroundImage:'url(https://cdn1.sportngin.com/attachments/photo/8e62-161281649/map_los_angeles_cropped_with_gradient.jpg)',
             backgroundSize:'cover'
           }}
+          justifyContent='center'
         >
           <Box w='100%'> 
             <a target="_blank" href="https://www.irun.ca/">
@@ -95,8 +107,25 @@ export default function Home({sportstats, irun, locale}) {
             </a>
           </Box>
           <Center w='100%' color='white' fontWeight='semibold' as='h3' fontSize='48px'>{irun.description} </Center>
-          <Box w='100%' className='container' justifyContent='center' style={{gap:'6em'}} >
-            {irun?.items.slice(0, 3).map((item)=>
+          <Box w={['100%', '75%']} className='container' justifyContent='center' >
+            <Swiper
+              modules={[Navigation, Pagination]}
+   
+              navigation
+               slidesPerView={'auto'}
+              spaceBetween={50}
+               pagination={{
+                clickable: true,
+              }}
+              
+            >
+
+            {irun?.items.slice(0, 6).map((item)=>
+              <SwiperSlide 
+                key={item.id} 
+                className="card card_swipe"
+
+              >
                           <a 
                             key={item.id}
                             className="card" 
@@ -143,8 +172,10 @@ export default function Home({sportstats, irun, locale}) {
                               
                             </div>
                           </a>
+                </SwiperSlide>
               
-            )}
+              )}
+            </Swiper>
           </Box>
         </Flex>
 

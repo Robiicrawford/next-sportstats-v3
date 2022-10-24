@@ -78,14 +78,14 @@ export async function getStaticProps({ params, locale }) {
     }
   `;
 
-  const { data } = await client.query({
+  {/*const { data } = await client.query({
       query: query,
       variables: {
         bib: params.bib.toString(),
         raceid: params.raceid.toString()
       }
     });
-
+*/}
   console.log(data)
   console.log(params)
   // Pass post data to the page via props
