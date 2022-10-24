@@ -87,7 +87,7 @@ export default function Settings({locale}) {
               )}
             </Container>
 
-            <Box my={3} w='100%' textAlign='center' sx={{borderTop:'1px solid black'}} my='3' py='3'>
+            <Box w='100%' textAlign='center' sx={{borderTop:'1px solid black'}} my='3' py='3'>
                 <Button onClick={()=>auth.signout()} bg='ss_green'>{t('common:logout')} </Button>
             </Box>
 
