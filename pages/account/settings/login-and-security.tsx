@@ -86,7 +86,7 @@ export default function Settings({locale}) {
     const userToekn = await Auth.currentAuthenticatedUser()
     var body = {
       "SSUID":userToekn.attributes['custom:ssuid'],
-      "EM": document.getElementById("email").value.trim()
+      "EM": (document.getElementById("email") as HTMLInputElement ).value.trim()
     }
     
     try{
