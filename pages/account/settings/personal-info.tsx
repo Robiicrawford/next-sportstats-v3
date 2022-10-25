@@ -70,11 +70,6 @@ export default function Settings({locale}) {
     setData(user?.attributes?user?.attributes:null)
   },[user])
 
-  useEffect(()=>{
-   if(watch !== {}){
-    reset()
-   }
-  },[edit])
 
   const breadLink = [
     {title:t("account-settings"), to:'/account/settings/', active:false},
