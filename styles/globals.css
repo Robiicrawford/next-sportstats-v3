@@ -88,10 +88,11 @@ code {
   object-fit: cover;
 }
 
+
 .card_info {
   display: flex;
   flex-direction: column;
-  width: clamp(13rem, calc(13rem + 2vw), 14rem);
+  width: 100%;
   overflow: hidden;
   box-shadow: 0 .1rem 1rem rgba(0, 0, 0, 0.1);
   border-radius: 1em;
@@ -100,6 +101,14 @@ code {
   text-decoration:  none;
   color: black;
 }
+
+@media only screen and (min-width: 600px) {
+
+  .card_info {
+    width: clamp(13rem, calc(13rem + 2vw), 14rem);
+  }
+}
+
 
 .card__base {
   display: flex;

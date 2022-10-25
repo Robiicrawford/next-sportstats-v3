@@ -21,6 +21,7 @@ import {slugSet } from "../../../utils/setSlug"
 function SeriesPage({ result }) {
   const { t } = useTranslation('common');
 
+  console.log(result)
   return (
     <Layout header_color='black' >
       <NextSeo
@@ -56,56 +57,30 @@ export async function getStaticProps({ params, locale }) {
   // If the route is like /series/1, then params.slug is 1
 
   const query = gql`
-    query GetProfileResults($bib: String!, $raceid: String!) {
-      result(bib: $bib, raceId: $raceid) {
+    query GetProfileResults($bib: String!, $rid: Int!) {
+      result(bib: $bib, rid: $rid) {
         id
+        rid
         bib
-        status
-        givenName
-        familyName
-        cat
-        cRank
-        gRank
-        oRank
-        gender
-        officialTime : OT
-        country
-        user {
-          id
-          ssuid
-          info {
-            profilePhoto
-          }
-        }
-        coldata{
-          id: CID
-          CID
-          RC
-          RG
-          RO
-          CD
-          TOD
-          ST
-        }
       }
     }
   `;
 
-  {/*const { data } = await client.query({
+  const { data } = await client.query({
       query: query,
       variables: {
         bib: params.bib.toString(),
-        raceid: params.raceid.toString()
+        rid: parseInt(params.raceid)
       }
     });
-*/}
 
+  console.log(data)
   // Pass post data to the page via props
   return { 
     props: { 
       ...(await serverSideTranslations(locale, ['common', 'public', 'app','translation'], null, ['en', 'fr'])),
-      results: 'test',
-      revalidate: 30, // In seconds
+      result: data.result,
+      revalidate: 160, // In seconds
     } 
   }
 }

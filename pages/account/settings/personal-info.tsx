@@ -36,18 +36,18 @@ export default function Settings({locale}) {
   const { register, setValue, handleSubmit, control, watch, reset } = useForm();
 
   const onSubmit = async (data) =>{
-    console.log(data)
+    console.log(user)
     var body = {
       ...data,
       SSUID: userData['custom:ssuid'],
     }
     try{
       var send_update = await fetch(
-        `https://admin.sportstats.ca/member/updateMember.php`
+        `${process.env.NEXT_PUBLIC_MEMBER_URL}`
         ,{  
           method: 'POST',
           headers:{
-            Authorization:`Bearer ${user.signInUserSession.accessToken.jwtToken}`, 
+            Authorization:`Bearer ${user?.signInUserSession.accessToken.jwtToken}`, 
            //     'Content-Type': 'application/json',
           },
           body: JSON.stringify(body)
