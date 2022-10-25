@@ -146,7 +146,7 @@ export default function Settings({locale}) {
                     {/*Member Email Form*/}
                     <Flex flexWrap='wrap' w='100%' pb={[1]} sx={{borderBottom:'2px solid white'}}  >
                       <Flex flexWrap='wrap' w='100%'>
-                        <h4 style={{marginBottom:'0.3em'}} htmlFor='email'> {t('signup.email')} </h4>
+                        <label style={{marginBottom:'0.3em'}} htmlFor='email'> {t('signup.email')} </label>
                         <div style={{flexGrow:'1'}} />
                         <p 
                           style={{textDecoration:'underline', cursor:'pointer', marginBottom:'0', marginRight:'0.5em'}} 
