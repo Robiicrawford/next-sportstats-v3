@@ -54,14 +54,14 @@ export default function Header({ header_color }:HeaderType) {
         >
           <Box w={['65%', '25%']}>
             <Link href="/">
-              <a>
-                <Image 
-                  src={sportstats_logo}
-                  alt="Sportstats"
-                  layout="responsive"
 
-                />
-              </a>
+              <Image 
+                src={sportstats_logo}
+                alt="Sportstats"
+                layout="responsive"
+
+              />
+
             </Link>
           </Box>
           <Spacer   />
@@ -78,7 +78,7 @@ export default function Header({ header_color }:HeaderType) {
     */}
     </Flex>
   </header>
-)}
+  );}
 
 const Dropbtn = styled.i`
   display: inline-block;

@@ -145,7 +145,7 @@ export default function Home({sportstats, irun, locale}) {
                             <div className="card__body">
                               <Flex flexWrap='wrap'>
                                 {item.categories?.slice(0,4).map((car)=>
-                                  <span className="tag tag-blue">{car}</span>
+                                  <span className="tag tag-blue" key={car}>{car}</span>
                                 )}
                               </Flex>
                               <Box 

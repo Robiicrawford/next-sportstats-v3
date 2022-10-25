@@ -43,70 +43,70 @@ const LoginContent = () => {
 	}
 
   return (
-		<Flex flexWrap='wrap'  >
-        	{loading
-        		? <Flex my={3} py={3} flexWrap='wrap' justifyContent="center"> <Spinner/> </Flex>
-        		:
-	   	<Flex
-	   		flexWrap='wrap'
-	   		w='100%'
-	    	color='black'
-				  as='form'
-				  onSubmit={handleSubmit(onSubmit)}
-				  py={3}
-			>
-					<Box w='100%' pb={1}>
-						{errors?.password && <FormErrorMessage > Password is needed </FormErrorMessage> }
-						{auth.error && <FormErrorMessage> {t('member:'+auth.error)} </FormErrorMessage> }
-					
-					</Box>
-				
-						<Box w='100%' mb='3' >
-							 <Input {...register('email',{required: true})} placeholder={t('public:signup.email')} /> 
-							{errors?.email && ( <FormErrorMessage > Account Email is needed </FormErrorMessage> )}
-						</Box>
+      <Flex flexWrap='wrap'  >
+          {loading
+              ? <Flex my={3} py={3} flexWrap='wrap' justifyContent="center"> <Spinner/> </Flex>
+              :
+      <Flex
+          flexWrap='wrap'
+          w='100%'
+          color='black'
+                as='form'
+                onSubmit={handleSubmit(onSubmit)}
+                py={3}
+          >
+                  <Box w='100%' pb={1}>
+                      {errors?.password && <FormErrorMessage > Password is needed </FormErrorMessage> }
+                      {auth.error && <FormErrorMessage> {t('member:'+auth.error)} </FormErrorMessage> }
+                  
+                  </Box>
+              
+                      <Box w='100%' mb='3' >
+                           <Input {...register('email',{required: true})} placeholder={t('public:signup.email')} /> 
+                          {errors?.email && ( <FormErrorMessage > Account Email is needed </FormErrorMessage> )}
+                      </Box>
 
-								<InputGroup size='md'>
-						      <Input
-						        pr='4.5rem'
-						        type={show ? 'text' : 'password'}
-						        placeholder={t('public:signup.enter-password')} 
-						        {...register('current-password',{required: true})}
-						      />
-						      <InputRightElement width='4.5rem'>
-						        <Button h='1.75rem' size='sm' onClick={handleClick}>
-						          {show ? t('public:signup.hide') : t('public:signup.show')}
-						        </Button>
-						      </InputRightElement>
-						    </InputGroup>
+                              <InputGroup size='md'>
+                            <Input
+                              pr='4.5rem'
+                              type={show ? 'text' : 'password'}
+                              placeholder={t('public:signup.enter-password')} 
+                              {...register('current-password',{required: true})}
+                            />
+                            <InputRightElement width='4.5rem'>
+                              <Button h='1.75rem' size='sm' onClick={handleClick}>
+                                {show ? t('public:signup.hide') : t('public:signup.show')}
+                              </Button>
+                            </InputRightElement>
+                          </InputGroup>
 
-					<Button w='100%' mt='3' type='submit'>{t('common:continue')}</Button>
-			
-				</Flex>
-			}
-			
-			<Divider/>
+                  <Button w='100%' mt='3' type='submit'>{t('common:continue')}</Button>
+          
+              </Flex>
+          }
+          
+          <Divider/>
 
-			<Flex mb={1} w='100%' flexWrap='wrap'>
-			
-				<Box w='100%' px={2} mt={2}>
-					
-					<Heading as="h6" my={2}  mb={3}>{t('public:signup.title')}</Heading>
-					
-					<Link href={`/sign-up`}>
-						<a><Button style={{width:'100%'}} color='black'>{t('common:sign-up')}</Button></a>
-					</Link>
-				</Box>
-			
-				<Box w='100%' px={2} mt={2} style={{textAlign:'center'}}>
-					<Link href={`/account/recover`}>
-						<a> {t('public:signup.forgot-password')} </a>
-					</Link>
-				</Box>
-			
-			</Flex>
-    </Flex>
-  )
+          <Flex mb={1} w='100%' flexWrap='wrap'>
+          
+              <Box w='100%' px={2} mt={2}>
+                  
+                  <Heading as="h6" my={2}  mb={3}>{t('public:signup.title')}</Heading>
+                  
+                  <Link href={`/sign-up`}>
+                      <Button style={{width:'100%'}} color='black'>{t('common:sign-up')}</Button>
+                  </Link>
+              </Box>
+          
+              <Box w='100%' px={2} mt={2} style={{textAlign:'center'}}>
+                  <Link href={`/account/recover`}>
+                       {t('public:signup.forgot-password')} 
+                  </Link>
+              </Box>
+          
+          </Flex>
+  </Flex>
+  );
 }
 
 export default LoginContent

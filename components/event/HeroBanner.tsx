@@ -116,7 +116,10 @@ const Index = ({data, slug, setA}) => {
 
               <Flex flexWrap='wrap' w={['100%',3/4,3/4,1/3]} justifyContent='space-around'>
                
-                <Link href={`#info`} style={{textAlign:'center', textDecoration:'none'}} >
+                <Link
+                  href={`#info`}
+                  style={{textAlign:'center', textDecoration:'none'}}
+                  legacyBehavior>
                   <Box    mx={2} mt={1} sx={{ cursor:'pointer'}} bg='none'   > 
                   
                     <Box bg='white' width='70px' height='70px' textAlign='center' display='inline-block' p={3} style={{borderRadius:'50%', border:'1px solid black'}} mt={'-55px'}> 
@@ -128,7 +131,10 @@ const Index = ({data, slug, setA}) => {
                   
                 </Link>
 
-                <Link href={`#results`} style={{textAlign:'center', textDecoration:'none'}} >
+                <Link
+                  href={`#results`}
+                  style={{textAlign:'center', textDecoration:'none'}}
+                  legacyBehavior>
                   <Box    mx={2} mt={1} sx={{ cursor:'pointer'}} bg='none' textAlign='center'   > 
                   
                     <Box bg='white' width='70px' height='70px' textAlign='center' display='inline-block' p={3} style={{borderRadius:'50%', border:'1px solid black'}} mt={'-55px'}> 
@@ -158,8 +164,7 @@ const Index = ({data, slug, setA}) => {
             </Flex>
       </Flex>
     </Flex>
-        
-  )
+  );
 }
 
 export default Index

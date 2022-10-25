@@ -17,7 +17,11 @@ const Index = ({data}) => {
 
       <Flex flexWrap='wrap' justifyContent='left' w='100%' my='3' mx='4' >
         {data?.races?.map((r)=>(
-          <Link href={`/results/${r.rid}`} style={{width:'100%', cursor:'pointer !important'}} key={r.id}>  
+          <Link
+            href={`/results/${r.rid}`}
+            style={{width:'100%', cursor:'pointer !important'}}
+            key={r.id}
+            legacyBehavior>  
             <Box as='a' w={'100%'} className='resultLink'  sx={{ cursor:'pointer !important'}} >
               <Text color='black' sx={{borderBottom:'1px dotted black', cursor:'pointer'}} w='fit-content' mb='1' pb='1' > <span className={`tag tag-status tag-${r.status}`}> {r.status} </span> {r.name} - {r.date}</Text>
             </Box>
@@ -26,8 +30,7 @@ const Index = ({data}) => {
       </Flex>
     
     </Flex>
-        
-  )
+  );
 }
 
 export default Index

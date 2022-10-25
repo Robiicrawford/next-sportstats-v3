@@ -40,78 +40,78 @@ const Card = ({e}) => {
   };
 
   return (
-   <EventCard flexWrap='wrap' className="card" as='article'>
-   	<Flex 
-   		flexWrap='wrap' px={[1,2,3]}  
-   		maxWidth={'100%'} mx={[3]} pb='3' 
-   		style={{cursor:'pointer'}}
-   	>
-			
-				<Flex flexWrap='wrap' color='black' >
-						<Center  w='100%' height={['100px','150px']} pt='2' >
-							<LazyLoadImage 
-								width='auto' height='100%'
-								src={e.info?.imageUrl?e.info.imageUrl:'https://ss-event-images.s3.us-west-2.amazonaws.com/ss_triathlon.jpeg'} 
-								alt={e.info?.name}
-								onError={({ currentTarget }) => {
-                  currentTarget.onerror = null; // prevents looping
-                  currentTarget.src='https://ss-event-images.s3.us-west-2.amazonaws.com/ss_triathlon.jpeg';
-                }}
-								loading="lazy"
-								className="card__image"
-          			effect="blur"
-							/>
-				   </Center>
-				   <Box w='100%'>
-				    	<Text > 
-				    		{ new Date(
-				    			e.info?.date?.slice(0,4)+'/'+e.info?.date?.slice(4,6)+'/'+e.info?.date?.slice(6,8)
-				    			).toLocaleDateString(locale, { month: 'long', day: 'numeric' }
-				    		)} {" "}
-				    		{new Date(
-				    			e.info?.date?.slice(0,4)+'/'+e.info?.date?.slice(4,6)+'/'+e.info?.date?.slice(6,8)
-				    		).toLocaleDateString(locale, {year: 'numeric'})} 
-				    	</Text>
-				    	<Box  w='20%' h='1' bg='#0CAA56' />
-				    </Box>
-				    <NextLink 
-				    	style={{maxWidth:'100%'}} 
-				    	href={`/event/${e.slug}`} 
-				    	passHref
-				    > 
-					    <LinkOverlay
-					    	w='100%'
-			          mt='1'
-			          fontWeight='semibold'
-			          as='h4'
-			          lineHeight='tight'
-			          noOfLines={1}
-			          sx={{whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis'}}
-			        >
-					    		{e.info?.name}
-					    </LinkOverlay>
-					  </NextLink>
-				    <Box
-		          mt='1'
-		          fontWeight='semibold'
-		          as='h5'
-		          lineHeight='tight'
-		          noOfLines={1}
-		          	sx={{whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis'}}
-				    	
-		        >
-				    		{e.info?.city}, {e.info?.state} | {e.info?.country}
+      <EventCard flexWrap='wrap' className="card" as='article'>
+       <Flex 
+           flexWrap='wrap' px={[1,2,3]}  
+           maxWidth={'100%'} mx={[3]} pb='3' 
+           style={{cursor:'pointer'}}
+       >
+               
+                   <Flex flexWrap='wrap' color='black' >
+                           <Center  w='100%' height={['100px','150px']} pt='2' >
+                               <LazyLoadImage 
+                                   width='auto' height='100%'
+                                   src={e.info?.imageUrl?e.info.imageUrl:'https://ss-event-images.s3.us-west-2.amazonaws.com/ss_triathlon.jpeg'} 
+                                   alt={e.info?.name}
+                                   onError={({ currentTarget }) => {
+                     currentTarget.onerror = null; // prevents looping
+                     currentTarget.src='https://ss-event-images.s3.us-west-2.amazonaws.com/ss_triathlon.jpeg';
+                   }}
+                                   loading="lazy"
+                                   className="card__image"
+                       effect="blur"
+                               />
+                      </Center>
+                      <Box w='100%'>
+                           <Text > 
+                               { new Date(
+                                   e.info?.date?.slice(0,4)+'/'+e.info?.date?.slice(4,6)+'/'+e.info?.date?.slice(6,8)
+                                   ).toLocaleDateString(locale, { month: 'long', day: 'numeric' }
+                               )} {" "}
+                               {new Date(
+                                   e.info?.date?.slice(0,4)+'/'+e.info?.date?.slice(4,6)+'/'+e.info?.date?.slice(6,8)
+                               ).toLocaleDateString(locale, {year: 'numeric'})} 
+                           </Text>
+                           <Box  w='20%' h='1' bg='#0CAA56' />
+                       </Box>
+                       <NextLink
+                           style={{maxWidth:'100%'}}
+                           href={`/event/${e.slug}`}
+                           passHref
+                           legacyBehavior> 
+                           <LinkOverlay
+                               w='100%'
+                         mt='1'
+                         fontWeight='semibold'
+                         as='h4'
+                         lineHeight='tight'
+                         noOfLines={1}
+                         sx={{whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis'}}
+                       >
+                                   {e.info?.name}
+                           </LinkOverlay>
+                         </NextLink>
+                       <Box
+                     mt='1'
+                     fontWeight='semibold'
+                     as='h5'
+                     lineHeight='tight'
+                     noOfLines={1}
+                       sx={{whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis'}}
+                           
+                   >
+                               {e.info?.city}, {e.info?.state} | {e.info?.country}
 
-				    		<Box sx={{position:'absolute', right:'5px', bottom:'5px'}} className='shareButton'  onClick={handleOnClick} >
-		              <FontAwesomeIcon icon={faShareAlt} size="lg" />
-		            </Box>
+                               <Box sx={{position:'absolute', right:'5px', bottom:'5px'}} className='shareButton'  onClick={handleOnClick} >
+                         <FontAwesomeIcon icon={faShareAlt} size="lg" />
+                       </Box>
 
-				    </Box>
+                       </Box>
 
-				</Flex>
-		</Flex>
-	</EventCard>
-  )
+                   </Flex>
+           </Flex>
+       </EventCard>
+  );
 }
 
 export const EventCard = styled(LinkBox)`

@@ -35,10 +35,7 @@ const LanguageMenu = ({open, onClose}) => {
         	<Grid  templateColumns='repeat(3, 2fr)' gap={6} w='100%' pb='6'>
 	            {language.map((lng:string) => (
 	          		<SelectLang key={lng} p={1} pb={2} style={{color:lng === locale&&'#0CAA56'}}>
-	                <Link
-	                  href="#"
-	                  locale={lng}
-	                >
+	                <Link href="#" locale={lng} legacyBehavior>
 	                  {languageName[lng]}
 	                </Link>   
 	         			</SelectLang>
@@ -47,7 +44,7 @@ const LanguageMenu = ({open, onClose}) => {
         </ModalBody>
       </ModalContent>
     </Modal>
-  )
+  );
 }
 
 const SelectLang = styled(GridItem)`

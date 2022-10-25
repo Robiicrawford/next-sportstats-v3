@@ -25,67 +25,65 @@ const Header = () => {
   
   const { isOpen, onOpen, onClose } = useDisclosure()
 
-  return (
-    <>
-      <Menu>
+  return <>
+    <Menu>
 
-        <MenuButton 
-          px={2} py={0.3} ml={[2,3,5,6]}
-          sx={{border:'1px solid black', borderRadius:'25px', cursor:'pointer'}} 
-          bg='white' 
-        >
-          <Flex p='1' >
-            <Avatar 
-              size='sm'
-              mr='2' 
-              name={auth.user&& auth.user?.attributes?.given_name+" "+auth.user?.attributes?.family_name }
-              src={auth?.user?.attributes?.picture}
-            />
-     
-            <StyledBurger aria-hidden="false" aria-label="open menu" >
-              <div />
-              <div />
-              <div />
-            </StyledBurger>
-          </Flex>
-        </MenuButton>
+      <MenuButton 
+        px={2} py={0.3} ml={[2,3,5,6]}
+        sx={{border:'1px solid black', borderRadius:'25px', cursor:'pointer'}} 
+        bg='white' 
+      >
+        <Flex p='1' >
+          <Avatar 
+            size='sm'
+            mr='2' 
+            name={auth.user&& auth.user?.attributes?.given_name+" "+auth.user?.attributes?.family_name }
+            src={auth?.user?.attributes?.picture}
+          />
+   
+          <StyledBurger aria-hidden="false" aria-label="open menu" >
+            <div />
+            <div />
+            <div />
+          </StyledBurger>
+        </Flex>
+      </MenuButton>
 
-            <MenuList color='black' >
+          <MenuList color='black' >
 
-              <MenuGroup title='Profile'>
-                {auth?.user ?
-                  <>
-                    <MenuItem>My Account</MenuItem>
-                    <MenuItem>{ t('common:dashboard').toLowerCase() } </MenuItem>
-                    <Link href="/account/settings"><a><MenuItem>{ t('common:settings').toLowerCase() } </MenuItem></a></Link>
-                  </>
-                  : <MenuItem onClick={onOpen} >{ t('common:login') }</MenuItem>
-                }
-              </MenuGroup>
-              
-              <MenuDivider />
-              <MenuGroup title='Help'>
-                {auth.user && <MenuItem onClick={()=>auth.signout()}>{ t('common:logout') }</MenuItem> }
-                <MenuItem>{ t('public:menu.help-center') }</MenuItem>
-              </MenuGroup>
+            <MenuGroup title='Profile'>
+              {auth?.user ?
+                <>
+                  <MenuItem>My Account</MenuItem>
+                  <MenuItem>{ t('common:dashboard').toLowerCase() } </MenuItem>
+                  <Link href="/account/settings"><MenuItem>{ t('common:settings').toLowerCase() } </MenuItem></Link>
+                </>
+                : <MenuItem onClick={onOpen} >{ t('common:login') }</MenuItem>
+              }
+            </MenuGroup>
+            
+            <MenuDivider />
+            <MenuGroup title='Help'>
+              {auth.user && <MenuItem onClick={()=>auth.signout()}>{ t('common:logout') }</MenuItem> }
+              <MenuItem>{ t('public:menu.help-center') }</MenuItem>
+            </MenuGroup>
 
-            </MenuList>
-     
-      </Menu>
+          </MenuList>
+   
+    </Menu>
 
-      <Modal isOpen={isOpen} onClose={onClose}  >
-        <ModalOverlay />
-        <ModalContent>
-          <ModalHeader >{ t('common:login') }</ModalHeader>
-          <ModalCloseButton />
-          <ModalBody>
-            <LoginContent /> 
-          </ModalBody>
-        </ModalContent>
-      </Modal>
+    <Modal isOpen={isOpen} onClose={onClose}  >
+      <ModalOverlay />
+      <ModalContent>
+        <ModalHeader >{ t('common:login') }</ModalHeader>
+        <ModalCloseButton />
+        <ModalBody>
+          <LoginContent /> 
+        </ModalBody>
+      </ModalContent>
+    </Modal>
 
-    </>
-  )
+  </>;
 }
 
 export default Header
