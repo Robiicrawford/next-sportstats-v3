@@ -31,7 +31,7 @@ export default function Settings({locale}) {
   const { user } = useAuthenticator((context) => [context.user]);
 
   const [userData, setData] = useState(null)
-  const [edit, setEdit] = useState(false)
+  const [edit, setEdit] = useState(null)
 
   const [error, setError] = useState<any>(false);
   const [cfmPass, setCFMpass] = useState(false)
