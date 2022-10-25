@@ -156,7 +156,7 @@ export default function Settings({locale}) {
                         </p>
                       </Flex>
                       {edit !== 'email'  &&  <p style={{marginLeft:'0.4em'}}>Update your login email </p> }
-                      {error && <Heading fontSize={3} sx={{color:'#FE0C0B'}} my={1} > {error} </Heading>}
+                      {error && <Heading sx={{color:'#FE0C0B'}} my={1} > {error} </Heading>}
                       {cfmEmail&&   <p style={{width:'100%', borderBottom:'1px solid white'}}> <strong> An Email has been sent to confirm your new email address </strong> </p>}
                       {edit === 'email' &&
                          <Flex flexWrap='wrap'  w='100%' >
