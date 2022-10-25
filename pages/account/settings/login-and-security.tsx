@@ -78,13 +78,13 @@ export default function Settings({locale}) {
 
   const breadLink = [
     {title:t("account-settings"), to:'/account/settings/', active:false},
-    {title:t('settings-page.personal-info-title'), to:'/account/settings/personal-info', active:true }
+    {title:t('settings-page.login-info-title'), to:'/account/settings/login-and-security', active:true }
   ]
 
   return (
     <Layout>
       <NextSeo
-        title={t('settings-page.personal-info-title')}
+        title={t('settings-page.login-info-title')}
         noindex={true}
       />
         <Section.Container id="settings" Background={Background} >
@@ -95,7 +95,7 @@ export default function Settings({locale}) {
 
               <Box w={'100%'} my={4}>
                 <Flex flexWrap='wrap' justifyContent='space-between'>
-                  <Heading as="h1" >{t('settings-page.personal-info-title')}</Heading>
+                  <Heading as="h1" >{t('settings-page.login-info-title')}</Heading>
                 </Flex>
               </Box>
               {!userData && '...loading...' }
@@ -336,17 +336,15 @@ export default function Settings({locale}) {
                 <Flex w={['100%',1/3]} height='fit-content' >
                   <div  className="card_info" height='fit-content' >
                     <div className="card__header" style={{marginTop:'1em'}}>
-                      <svg viewBox="0 0 48 48" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" role="presentation" focusable="false" style={{display: 'block', height: '48px', width: '48px', fill: 'rgb(227, 28, 95)', stroke: 'currentcolor'}}>
-                        <g stroke="none">
-                        <path d="m39 15.999v28.001h-30v-28.001z" fillOpacity=".2"></path>
-                        <path d="m24 0c5.4292399 0 9.8479317 4.32667079 9.9961582 9.72009516l.0038418.27990484v2h7c1.0543618 0 1.9181651.8158778 1.9945143 1.8507377l.0054857.1492623v32c0 1.0543618-.8158778 1.9181651-1.8507377 1.9945143l-.1492623.0054857h-34c-1.0543618 0-1.91816512-.8158778-1.99451426-1.8507377l-.00548574-.1492623v-32c0-1.0543618.81587779-1.9181651 1.85073766-1.9945143l.14926234-.0054857h7v-2c0-5.5228475 4.4771525-10 10-10zm17 14h-34v32h34zm-17 14c1.6568542 0 3 1.3431458 3 3s-1.3431458 3-3 3-3-1.3431458-3-3 1.3431458-3 3-3zm0 2c-.5522847 0-1 .4477153-1 1s.4477153 1 1 1 1-.4477153 1-1-.4477153-1-1-1zm0-28c-4.3349143 0-7.8645429 3.44783777-7.9961932 7.75082067l-.0038068.24917933v2h16v-2c0-4.418278-3.581722-8-8-8z"></path>
-                        </g>
+                      <svg viewBox="0 0 24 24" role="presentation" aria-hidden="true" focusable="false" style={{height: "40px", width: "40px", display: "block", fill: "rgb(255, 180, 0)"}}>
+                        <path d="m5 20.5a.5.5 0 0 1 -.5.5h-.5v.5a.5.5 0 0 1 -1 0v-.5h-.5a.5.5 0 0 1 0-1h .5v-.5a.5.5 0 0 1 1 0v .5h.5a.5.5 0 0 1 .5.5zm1.5 1.5a.5.5 0 1 0 .5.5.5.5 0 0 0 -.5-.5zm16-20h-.5v-.5a.5.5 0 0 0 -1 0v .5h-.5a.5.5 0 0 0 0 1h .5v.5a.5.5 0 0 0 1 0v-.5h.5a.5.5 0 0 0 0-1zm-2.58 4.87a13.41 13.41 0 0 1 -6.76-3.2.37.37 0 0 0 -.63.26l.08 16.22a.38.38 0 0 0 .55.32 11.98 11.98 0 0 0 7.07-13.31.37.37 0 0 0 -.31-.3z"></path>
+                        <path d="m14.39 8.32a1.93 1.93 0 0 0 -3.66 0l-2.42 4.85a3.09 3.09 0 0 0 -.4 1.61 2.36 2.36 0 0 0 2.23 2.23 3.95 3.95 0 0 0 2.42-1.06 3.95 3.95 0 0 0 2.42 1.06 2.36 2.36 0 0 0 2.23-2.23 3.09 3.09 0 0 0 -.4-1.61zm-2.72 4.38c0-.05.01-1.23.89-1.23s.88 1.18.88 1.23a3.25 3.25 0 0 1 -.88 1.83 3.25 3.25 0 0 1 -.89-1.83zm3.31 3.31a2.92 2.92 0 0 1 -1.71-.77 4.3 4.3 0 0 0 1.17-2.54 2.02 2.02 0 0 0 -1.8-2.22l-.08-.01a2.02 2.02 0 0 0 -1.89 2.15l.01.08a4.29 4.29 0 0 0 1.17 2.54 2.92 2.92 0 0 1 -1.71.77 1.36 1.36 0 0 1 -1.23-1.23 2.13 2.13 0 0 1 .29-1.16l2.42-4.85c.33-.65.55-.76.94-.76s.61.11.94.76l2.42 4.85a2.13 2.13 0 0 1 .29 1.16 1.36 1.36 0 0 1 -1.23 1.23zm7.01-10.35a.5.5 0 0 0 -.43-.4 13.03 13.03 0 0 1 -8.68-4.57.52.52 0 0 0 -.77 0 13.03 13.03 0 0 1 -8.68 4.57.5.5 0 0 0 -.43.4c-1.58 8.19 1.55 14.02 9.3 17.31a.5.5 0 0 0 .39 0c7.75-3.29 10.87-9.11 9.3-17.31zm-9.49 16.3c-7.1-3.09-9.91-8.25-8.57-15.76a13.98 13.98 0 0 0 8.57-4.43 13.98 13.98 0 0 0 8.57 4.43c1.33 7.51-1.48 12.67-8.57 15.76z" fill="#484848"></path>
                       </svg>
                     </div>
                     <div className="card__body">
-                        <h4 className='card__title'>Which details can be edited?</h4>
+                        <h4 className='card__title'>Let's make your account more secure</h4>
                         <p style={{color:'black', textAlign:'left'}}>
-                          Details Sportstats uses to verify your identity can be changed here. These details are used to help veify your results when claiming them.
+                          We’re always working on ways to increase safety in our community. That’s why we look at every account to make sure it’s as secure as possible.
                         </p>
                     </div>
                   </div>
