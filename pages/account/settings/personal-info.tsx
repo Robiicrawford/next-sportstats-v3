@@ -47,6 +47,7 @@ export default function Settings({locale}) {
         ,{  
           method: 'POST',
           headers:{
+            /* // @ts-ignore */
             Authorization:`Bearer ${user?.signInUserSession.accessToken.jwtToken}`, 
            //     'Content-Type': 'application/json',
           },
