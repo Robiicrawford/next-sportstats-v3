@@ -33,6 +33,11 @@ export default function Settings({locale}) {
   const [userData, setData] = useState(null)
   const [edit, setEdit] = useState(false)
 
+  const [error, setError] = useState(false);
+  const [cfmPass, setCFMpass] = useState(false)
+  const [cfmEmail, setCFM] = useState(false)
+
+
   const { register, setValue, handleSubmit, control, watch, reset } = useForm();
 
   const onSubmit = async (data) =>{
@@ -76,6 +81,43 @@ export default function Settings({locale}) {
     {title:t('settings-page.login-info-title'), to:'/account/settings/login-and-security', active:true }
   ]
 
+
+  const submitEmail = async () => {
+    const userToekn = await Auth.currentAuthenticatedUser()
+    var body = {
+      "SSUID":userToekn.attributes['custom:ssuid'],
+      "EM": document.getElementById("email").value.trim()
+    }
+    
+    try{
+      var send_update = await fetch(
+        `https://admin.sportstats.ca/member/updateEmail.php`
+        ,{  
+          method: 'POST',
+          headers:{
+            Authorization:`Bearer ${userToekn.signInUserSession.accessToken.jwtToken}`, 
+           //     'Content-Type': 'application/json',
+          },
+          body: JSON.stringify(body)
+        }
+      )
+      const response = await send_update.json();
+      if (response.status === 'success') {
+        setCFM(true)
+        setEdit(false);
+        var getNewData = await Auth.currentAuthenticatedUser({ bypassCache: true });
+        setEdit(null)
+        setError(false)
+      } else {
+        setError([response.data[0].detail])
+      }
+
+    } catch (err) {
+      console.log(err)  
+    }
+
+  }
+
   return (
     <Layout>
       <NextSeo
@@ -100,230 +142,41 @@ export default function Settings({locale}) {
                 <Box w={['100%',2/3]} >
                   <Flex flexWrap='wrap' className='card__base' style={{gap: '1rem'}} pl='4' mr={[0,2,4,5]} mb={3}>
 
-                    {/*Member Name Edit Form*/}
+
+                    {/*Member Email Form*/}
                     <Flex flexWrap='wrap' w='100%' pb={[1]} sx={{borderBottom:'2px solid white'}}  >
                       <Flex flexWrap='wrap' w='100%'>
-                        <h3 style={{marginBottom:'0.3em'}}> {t('Legal Name')} </h3>
+                        <h4 style={{marginBottom:'0.3em'}} htmlFor='email'> {t('signup.email')} </h4>
                         <div style={{flexGrow:'1'}} />
                         <p 
                           style={{textDecoration:'underline', cursor:'pointer', marginBottom:'0', marginRight:'0.5em'}} 
-                          onClick={()=>setEdit(edit === 'name' ?false:'name')}
+                          onClick={()=>setEdit(edit === 'email' ?false:'email')}
                         >
-                          <strong> {edit === 'name' ?'Cancel':'Edit'} </strong> 
+                          <strong> {edit === 'email' ?'Cancel':'Edit'} </strong> 
                         </p>
                       </Flex>
-                      {edit !== 'name'  &&  <p style={{marginLeft:'0.4em'}}>{userData?.given_name}  {userData?.family_name}</p> }
-                      {edit === 'name' &&
-                         <Flex
-                            as='form' flexWrap='wrap'
-                            onSubmit={handleSubmit(onSubmit)} 
-                            w='100%'
-                          >
-                          <p style={{width:'100%', textAlign:'left',marginLeft:'0.4em'}}> This is the name you use to register for events </p>
-                          <Box w={['100%', '50%']} px={[0,2]}>
-                            <label htmlFor='name' >{t('signup.first_name')}</label>
-                            <Input
-                              id='name'
-                              name='given_name'
-                              {...register('GN')}
-                              defaultValue={userData?.given_name}
-                            />
-                          </Box>
-
-                          <Box w={['100%', '50%']} px={[0,2]}>
-                            <label htmlFor='name'>{t('signup.last_name')}</label>
-                            <Input
-                              id='LastName'
-                              name='family_name'
-                              {...register('FN')}
-                              defaultValue={userData?.family_name}
-                            />
-                          </Box>
-                           <Box w='100%'>
-                             <Button type='submit' bg='green' sx={{marginLeft:'1em', marginTop:'0.8em', cursor:'pointer'}}> {t('common:save')}</Button>
+                      {edit !== 'email'  &&  <p style={{marginLeft:'0.4em'}}>Update your login email </p> }
+                      {error && <Heading fontSize={3} sx={{color:'#FE0C0B'}} my={1} > <FormatPasswordValidateError errors={error} /> </Heading>}
+                      {cfmEmail&&   <p style={{width:'100%', borderBottom:'1px solid white'}}> <strong> An Email has been sent to confirm your new email address </strong> </p>}
+                      {edit === 'email' &&
+                         <Flex flexWrap='wrap'  w='100%' >
+                            <Box width={['100%', 6/8]} px={[0,2]}> 
+                               <Input 
+                                 id='email' name='email' 
+                                 type='email'  
+                                 defaultValue={userData.email}
+                                />
+                               
+                             </Box>
+                          
+                           <Box width={'100%'}>
+                             <Button bg='green' onClick={submitEmail} sx={{marginLeft:'1em', marginTop:'0.8em', cursor:'pointer'}}> {t('common:save')}</Button>
                           </Box>
                         </Flex>
                       }
                     </Flex>
+             
 
-                    {/*Gender form*/}
-                    <Flex flexWrap='wrap' w='100%' pb={[1]} sx={{borderBottom:'2px solid white'}}  >
-                      <Flex flexWrap='wrap' w='100%'>
-                        <h4 style={{marginBottom:'0.3em'}}> {t('signup.gender')} </h4>
-                        <div style={{flexGrow:'1'}} />
-                        <p 
-                          style={{textDecoration:'underline', cursor:'pointer', marginBottom:'0', marginRight:'0.5em'}} 
-                          onClick={()=>setEdit(edit === 'gender' ?false:'gender')}
-                        >
-                          <strong> {edit === 'gender' ?'Cancel':'Edit'} </strong> 
-                        </p>
-                      </Flex>
-                      {edit !== 'gender' && edit !== 'gender' &&  <p style={{marginLeft:'0.4em'}}>{t(`signup.gender-data.${userData?.gender.toLowerCase()}`)}  </p> }
-                      {edit === 'gender' &&
-                         <Flex
-                            as='form' flexWrap='wrap'
-                            onSubmit={handleSubmit(onSubmit)} 
-                            w='100%'
-                          >
-                            <Box w={['100%', '50%']} px={[0,2]}>
-                              <label htmlFor='gender'>{t('signup.gender')}</label>
-                              <Select
-                                id='gender'
-                                name='gender'
-                                {...register('GE')}
-                                defaultValue={userData?.gender.toLowerCase()}
-                              >
-                                <option value='m'>{t('signup.gender-data.m')}</option>
-                                <option value='f'>{t('signup.gender-data.f')}</option>
-                                <option value='n'>{t('signup.gender-data.n')}</option>
-                                <option value='u'>{t('signup.gender-data.u')}</option>
-                              </Select>
-                            </Box>
-                             <Box w='100%'>
-                               <Button bg='green' type='submit' sx={{marginLeft:'1em', marginTop:'0.8em', cursor:'pointer'}}> {t('common:save')}</Button>
-                            </Box>
-                          </Flex>
-                        }
-                      </Flex>
-
-
-                      {/*Date of Birth*/}
-                      <Flex flexWrap='wrap' w='100%' pb={[1]} sx={{borderBottom:'2px solid white'}}  >
-                          <Flex flexWrap='wrap' w='100%'>
-                            <h4 style={{marginBottom:'0.3em'}}> {t('signup.birthdate')} </h4>
-                            <div style={{flexGrow:'1'}} />
-                            <p 
-                              style={{textDecoration:'underline', cursor:'pointer', marginBottom:'0', marginRight:'0.5em'}} 
-                              onClick={()=>setEdit(edit === 'birthdate' ?false:'birthdate')}
-                            >
-                              <strong> {edit === 'birthdate' ?'Cancel':'Edit'} </strong> 
-                            </p>
-                          </Flex>
-                          {edit !== 'birthdate' && edit !== 'birthdate' &&  <p style={{marginLeft:'0.4em'}}>{userData?.birthdate}  </p> }
-                          {edit === 'birthdate' &&
-                             <Flex
-                                as='form' flexWrap='wrap'
-                                onSubmit={handleSubmit(onSubmit)} 
-                                w='100%'
-                              >
-                                <Box width={['100%', '50%']} px={[0,2]}>
-                                  <label htmlFor='birthdate'>{t('signup.birthdate')}</label>
-                                  <Input
-                                    id='birthdate'
-                                    name='birthdate'
-                                    type='date'
-                                    {...register('BD')}
-                                    defaultValue={userData.birthdate}
-                                  />
-                                </Box>
-                                 <Box w={'100%'}>
-                                   <Button bg='ss_green' type='submit' sx={{marginLeft:'1em', marginTop:'0.8em', cursor:'pointer'}}> {t('common:save')}</Button>
-                                </Box>
-                              </Flex>
-                            }
-                        </Flex>
-
-                        {/*address*/}
-                      <Flex flexWrap='wrap' w='100%' pb={[1]} sx={{borderBottom:'2px solid white'}}  >
-                          <Flex flexWrap='wrap' w='100%'>
-                            <h4 style={{marginBottom:'0.3em'}}> {t('signup.address')} </h4>
-                            <div style={{flexGrow:'1'}} />
-                            <p 
-                              style={{textDecoration:'underline', cursor:'pointer', marginBottom:'0', marginRight:'0.5em'}} 
-                              onClick={()=>setEdit(edit === 'address' ?false:'address')}
-                            >
-                              <strong> {edit === 'address' ?'Cancel':'Edit'} </strong> 
-                            </p>
-                          </Flex>
-                          {edit !== 'address' && edit !== 'address' &&  
-                            <p style={{marginLeft:'0.4em'}}>
-                              {!userData?.['custom:address1'] ||  !userData?.['custom:country'] || !userData?.['custom:province']
-                                ? 'Full address not provided'
-                                :<> {userData?.['custom:address1']}, {userData?.['custom:city']} {userData?.['custom:province']} {userData?.['custom:country']} </>
-                              } 
-                             </p> 
-                          }
-                          {edit === 'address' &&
-                             <Flex
-                                as='form' flexWrap='wrap'
-                                onSubmit={handleSubmit(onSubmit)} 
-                                w='100%' sx={{gap:'0.5rem'}}
-                              >
-                                <Box width={['100%', '50%']} px={[0,2]}>
-                                  <label htmlFor='country'>{t('signup.country')}</label>
-                                  <Select
-                                    id='country' name='country'
-                                    {...register('A5')}
-                                    defaultValue={userData['custom:country']}
-                                  >
-                                    {Object.entries(countries.getAlpha3Codes()).map(([c,cc],k)=> (
-                                       <option value={c} key={c}> {countries.getName(cc, "en", {select: "official"})} </option>  
-                                    ))}
-                                  </Select>
-                                </Box>
-
-                                <Box width={['100%', '33.3%']} px={[0,2]}>
-                                  <label htmlFor='A1'>{t('signup.address1')}</label>
-                                  <Input
-                                    id='A1'
-                                    name='A1'
-                                    placeholder={t('signup.address1-desc')}
-                                    {...register('A1')}
-                                    defaultValue={userData['custom:address1']}
-                                  />
-                                </Box>
-
-                                <Box width={['100%', '33.3%']} px={[0,2]}>
-                                  <label htmlFor='A2'>{t('signup.address2')}</label>
-                                  <Input
-                                    id='A2'
-                                    name='A2'
-                                    placeholder={t('signup.address2-desc')}
-                                    {...register('A2')}
-                                    defaultValue={userData['custom:address2']}
-                                  />
-                                </Box>
-
-                                <Box width={['100%', '33.3%']} px={[0,2]}>
-                                  <label htmlFor='A3'>{t('signup.city')}</label>
-                                  <Input
-                                    id='A3'
-                                    name='A3'
-                                    placeholder={t('signup.city-desc')}
-                                    {...register('A3')}
-                                    defaultValue={userData['custom:city']}
-                                  />
-                                </Box>
-
-                                <Box width={['100%', '33.3%']} px={[0,2]}>
-                                  <label htmlFor='A4'>{t('signup.state')}</label>
-
-                                  <Input
-                                    id='A4'
-                                    name='A4'
-                                    {...register('A4')}
-                                    placeholder={t('signup.state-desc')}
-                                    defaultValue={userData['custom:province']}
-                                  />
-                                </Box>
-
-                                <Box width={['100%', '33.3%']} px={[0,2]}>
-                                  <label htmlFor='A6'>{t('signup.zip')}</label>
-                                  <Input
-                                    id='A6'
-                                    name='A6'
-                                    {...register('A6')}
-                                    placeholder={t('signup.zip-desc')}
-                                    defaultValue={userData['custom:postal']}
-                                  />
-                                </Box>
-
-                                 <Box width={['100%']}>
-                                   <Button bg='green' type='submit' sx={{marginLeft:'1em', marginTop:'0.8em', cursor:'pointer'}}> {t('common:save')}</Button>
-                                </Box>
-                              </Flex>
-                            }
-                        </Flex>
 
                   </Flex>
                 </Box>

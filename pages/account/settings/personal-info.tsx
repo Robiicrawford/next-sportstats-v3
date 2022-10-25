@@ -36,11 +36,7 @@ export default function Settings({locale}) {
   const { register, setValue, handleSubmit, control, watch, reset } = useForm();
 
   const onSubmit = async (data) =>{
-    console.log(user)
-    var body = {
-      ...data,
-      SSUID: userData['custom:ssuid'],
-    }
+    var body = {...data, SSUID: userData['custom:ssuid'] }
     try{
       var send_update = await fetch(
         `${process.env.NEXT_PUBLIC_MEMBER_URL}`
