@@ -230,7 +230,7 @@ export default function Home({sportstats, irun, locale}) {
       </main>
 
     </Layout>
-  )
+  );
 }
 
 export async function getStaticProps({locale}) {

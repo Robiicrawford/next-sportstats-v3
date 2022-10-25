@@ -54,35 +54,35 @@ export default function Settings({locale}) {
               {routes.map((node, p)=>
             
                   <Link href={node.link} key={node.title} >
-                    <a>
-                      <Box className="card"  >
-                        <Box className="card__header" h={['50px','50px']} ml='3' mt='3'>
-                          <FontAwesomeIcon className="card__image"  style={{color:'#383'}} icon={node.icon} size="2xl"/>
+
+                    <Box className="card"  >
+                      <Box className="card__header" h={['50px','50px']} ml='3' mt='3'>
+                        <FontAwesomeIcon className="card__image"  style={{color:'#383'}} icon={node.icon} size="2xl"/>
+                      </Box>
+
+                      <div className="card__body" style={{paddingTop:'0.1em'}} >
+                       
+                        <Box 
+                          className='card__title'
+                          noOfLines={2}
+                          fontWeight='semibold'
+                          as='h4'
+                        >
+                          {t('settings-page.'+node.title)}
+                          <FontAwesomeIcon style={{color:'#383', marginLeft:'8px'}} icon={faCaretRight} size="sm"  />
                         </Box>
 
-                        <div className="card__body" style={{paddingTop:'0.1em'}} >
-                         
-                          <Box 
-                            className='card__title'
-                            noOfLines={2}
-                            fontWeight='semibold'
-                            as='h4'
-                          >
-                            {t('settings-page.'+node.title)}
-                            <FontAwesomeIcon style={{color:'#383', marginLeft:'8px'}} icon={faCaretRight} size="sm"  />
-                          </Box>
+                         <Box 
+                          className='card__content' style={{color:'black'}}
+                          noOfLines={4}
+                        >
+                          {t('settings-page.'+node.desc)}
+                        </Box>
 
-                           <Box 
-                            className='card__content' style={{color:'black'}}
-                            noOfLines={4}
-                          >
-                            {t('settings-page.'+node.desc)}
-                          </Box>
+                      </div>
 
-                        </div>
+                    </Box>
 
-                      </Box>
-                    </a>
                   </Link>
               )}
             </Container>
@@ -93,13 +93,13 @@ export default function Settings({locale}) {
 
             <Box w='100%' textAlign='center'>
               <Text textAlign='center'>{t('settings-page.deactivate-desc')} </Text>
-              <Link href='/account/deactivate'><a> <Button> {t('settings-page.deactivate')} </Button> </a></Link>
+              <Link href='/account/deactivate'> <Button> {t('settings-page.deactivate')} </Button> </Link>
             </Box>
           </AuthCheck>
         </Section.Container>
  
     </Layout>
-  )
+  );
 }
 
 

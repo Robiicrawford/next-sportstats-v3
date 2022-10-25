@@ -37,15 +37,15 @@ export default function FourOhFour({locale}) {
 
             <Box as='span' py='4' color='gray.600' fontSize='sm'> {t('404.sub-text')} </Box>
             <Link href="/">
-              <a>
-                <Button mt='3'>{t('404.linl')}</Button>
-              </a>
+
+              <Button mt='3'>{t('404.linl')}</Button>
+
             </Link>
           </Box>
         </Center>
       </Section.Container>
   </Layout>
-)}
+  );}
 
 
 export async function getStaticProps({locale}) {
