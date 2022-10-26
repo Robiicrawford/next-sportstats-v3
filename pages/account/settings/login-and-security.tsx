@@ -40,37 +40,6 @@ export default function Settings({locale}) {
 
   const { register, setValue, handleSubmit, control, watch, reset } = useForm();
 
-  const onSubmit = async (data) =>{
-    console.log(user)
-    var body = {
-      ...data,
-      SSUID: userData['custom:ssuid'],
-    }
-    try{
-      var send_update = await fetch(
-        `${process.env.NEXT_PUBLIC_MEMBER_URL}`
-        ,{  
-          method: 'POST',
-          headers:{
-            // @ts-ignore
-            Authorization:`Bearer ${user?.signInUserSession.accessToken.jwtToken}`, 
-           //     'Content-Type': 'application/json',
-          },
-          body: JSON.stringify(body)
-        }
-      )
-      const response = await send_update.json();
-
-      var getNewData = await Auth.currentAuthenticatedUser({ bypassCache: true });
-      setData(getNewData.attributes)
-      setEdit(null)
-      reset()
-
-    } catch (err) {
-      console.log(err)  
-    }
-  }
-
   useEffect(()=>{
     setData(user?.attributes?user?.attributes:null)
   },[user])
@@ -104,8 +73,8 @@ export default function Settings({locale}) {
       const response = await send_update.json();
       if (response.status === 'success') {
         setCFM(true)
-        setEdit(false);
         var getNewData = await Auth.currentAuthenticatedUser({ bypassCache: true });
+        setData(getNewData.attributes)
         setEdit(null)
         setError(false)
       } else {
@@ -182,7 +151,7 @@ export default function Settings({locale}) {
                 </Box>
 
                 <Flex w={['100%',1/3]} height='fit-content' >
-                  <div  className="card_info" height='fit-content' >
+                  <div  className="card_info"  >
                     <div className="card__header" style={{marginTop:'1em'}}>
                       <svg viewBox="0 0 24 24" role="presentation" aria-hidden="true" focusable="false" style={{height: "40px", width: "40px", display: "block", fill: "rgb(255, 180, 0)"}}>
                         <path d="m5 20.5a.5.5 0 0 1 -.5.5h-.5v.5a.5.5 0 0 1 -1 0v-.5h-.5a.5.5 0 0 1 0-1h .5v-.5a.5.5 0 0 1 1 0v .5h.5a.5.5 0 0 1 .5.5zm1.5 1.5a.5.5 0 1 0 .5.5.5.5 0 0 0 -.5-.5zm16-20h-.5v-.5a.5.5 0 0 0 -1 0v .5h-.5a.5.5 0 0 0 0 1h .5v.5a.5.5 0 0 0 1 0v-.5h.5a.5.5 0 0 0 0-1zm-2.58 4.87a13.41 13.41 0 0 1 -6.76-3.2.37.37 0 0 0 -.63.26l.08 16.22a.38.38 0 0 0 .55.32 11.98 11.98 0 0 0 7.07-13.31.37.37 0 0 0 -.31-.3z"></path>

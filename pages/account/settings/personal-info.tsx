@@ -325,7 +325,7 @@ export default function Settings({locale}) {
                 </Box>
 
                 <Flex w={['100%',1/3]} height='fit-content' >
-                  <div  className="card_info" height='fit-content' >
+                  <div  className="card_info" >
                     <div className="card__header" style={{marginTop:'1em'}}>
                       <svg viewBox="0 0 48 48" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" role="presentation" focusable="false" style={{display: 'block', height: '48px', width: '48px', fill: 'rgb(227, 28, 95)', stroke: 'currentcolor'}}>
                         <g stroke="none">
