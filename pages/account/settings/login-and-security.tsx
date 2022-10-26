@@ -7,7 +7,7 @@ import { useTranslation } from 'next-i18next';
 
 import { useForm, Controller } from 'react-hook-form';
 
-import { Box, Flex, Heading, Container, Button, Input, Select } from '@chakra-ui/react';
+import { Box, Flex, Heading, Container, Button, Input, Select, Text } from '@chakra-ui/react';
 
 import Layout from '../../../components/layout/Layout'
 import Section from '../../../components/section';
