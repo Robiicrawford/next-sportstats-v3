@@ -65,11 +65,11 @@ const Card = ({e}) => {
                       <Box w='100%'>
                            <Text > 
                                { new Date(
-                                   e.info?.date?.slice(0,4)+'/'+e.info?.date?.slice(4,6)+'/'+e.info?.date?.slice(6,8)
+                                   e.info?.date?.slice(0,4), e.info?.date?.slice(5,7), e.info?.date?.slice(8,10)
                                    ).toLocaleDateString(locale, { month: 'long', day: 'numeric' }
                                )} {" "}
                                {new Date(
-                                   e.info?.date?.slice(0,4)+'/'+e.info?.date?.slice(4,6)+'/'+e.info?.date?.slice(6,8)
+                                  e.info?.date?.slice(0,4), e.info?.date?.slice(5,7), e.info?.date?.slice(8,10)
                                ).toLocaleDateString(locale, {year: 'numeric'})} 
                            </Text>
                            <Box  w='20%' h='1' bg='#0CAA56' />

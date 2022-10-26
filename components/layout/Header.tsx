@@ -58,6 +58,7 @@ export default function Header({ header_color }:HeaderType) {
               <Image 
                 src={sportstats_logo}
                 alt="Sportstats"
+                priority
               />
 
             </Link>

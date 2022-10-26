@@ -301,3 +301,28 @@ background: linear-gradient(to bottom, #FFD194, #D1913C);
     color: rgba(0, 0, 0, 0.7); 
 
 }
+
+
+    
+
+.min-tablet{
+  display: none;
+} 
+
+@media screen and (min-width: 800px) {
+    .min-tablet{
+      display: table-cell;
+    } 
+}
+
+
+
+    .min-desktop{
+      display: none;
+    }
+    
+@media screen and (min-width: 1024px) {
+  .min-desktop{
+    display: table-cell;
+  } 
+}
