@@ -42,15 +42,17 @@ export default function Settings({locale}) {
       />
         <Section.Container id="settings" Background={Background} >
           <AuthCheck>
-            <Box w='100%' my={[2,4]}>
-              <Heading as="h1" >{t('your-settings')}</Heading>
-              <h3 style={{marginLeft:'1em'}}> 
-                {auth.user?.attributes?.given_name} {auth.user?.attributes?.family_name}, {auth.user?.attributes?.email} - 
-                <Link style={{color:'white'}} href={`/profile/${auth.user?.attributes?.['custom:ssuid']}/${auth.user?.attributes?.family_name}`} > Go To Profile </Link>
-              </h3>
-            </Box>
+           
 
-            <Container  maxW='5x1' px={['', '', '1em', '5em', '5em', '25em']} justifyContent='center' flexDirection='row' className='container' centerContent style={{gap:'1.2em'}} >
+            <Container maxW='1500' flexWrap='wrap' px={[1,3,5,6]} pb={[1,2,3,5]} py={2} sx={{display:'flex', flexDirection:'row', gap:'1em'}} justifyContent='center'>
+              <Box w='100%' my={[2,4]}>
+                <Heading as="h1" >{t('your-settings')}</Heading>
+                <h3 style={{marginLeft:'1em'}}> 
+                  {auth.user?.attributes?.given_name} {auth.user?.attributes?.family_name}, {auth.user?.attributes?.email} - 
+                  <Link style={{color:'white'}} href={`/profile/${auth.user?.attributes?.['custom:ssuid']}/${auth.user?.attributes?.family_name}`} > Go To Profile </Link>
+                </h3>
+              </Box>
+
               {routes.map((node, p)=>
             
                   <Link href={node.link} key={node.title} >
