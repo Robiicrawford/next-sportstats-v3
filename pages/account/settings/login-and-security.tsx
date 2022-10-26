@@ -150,7 +150,7 @@ export default function Settings({locale}) {
                         <div style={{flexGrow:'1'}} />
                         <p 
                           style={{textDecoration:'underline', cursor:'pointer', marginBottom:'0', marginRight:'0.5em'}} 
-                          onClick={()=>setEdit(edit === 'email' ?false:'email')}
+                          onClick={()=>setEdit(edit === 'email' ?null:'email')}
                         >
                           <strong> {edit === 'email' ?'Cancel':'Edit'} </strong> 
                         </p>
