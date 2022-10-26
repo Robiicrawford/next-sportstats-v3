@@ -62,6 +62,23 @@ export async function getStaticProps({ params, locale }) {
         id
         rid
         bib
+        name
+        givenName
+        familyName
+        country
+        state
+        city
+        oRank
+        gRank
+        cRank
+        cat
+        gender
+        status
+        OT
+        user{
+          id
+          ssuid
+        }
       }
     }
   `;
