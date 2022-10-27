@@ -214,7 +214,7 @@ function ResultPageInd({ result, race }) {
   const handleClaim =  async() => {
     console.log('claim')
     try{
-      var send_update = await fetch(
+      var claim = await fetch(
         `${process.env.NEXT_PUBLIC_MEMBER_URL}/resultClaim.php`
         ,{  
           method: 'POST',
@@ -226,12 +226,9 @@ function ResultPageInd({ result, race }) {
           body: JSON.stringify(body)
         }
       )
-      const response = await send_update.json();
+      const response = await claim.json();
 
-      var getNewData = await Auth.currentAuthenticatedUser({ bypassCache: true });
-      setData(getNewData.attributes)
-      setEdit(null)
-      reset()
+      console.log(response)
 
     } catch (err) {
       console.log(err)  
