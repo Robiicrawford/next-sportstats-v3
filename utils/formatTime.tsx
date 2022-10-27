@@ -71,8 +71,8 @@ export function calculatePace(dist, s, type ,name) {
 		dist= getMiles(dist)
 	}
 
-	var format ;
-	var pace ;
+	var format :string ;
+	var pace :any ;
 
 	if(name.match(/bike/gi)){
 		format = 'km/hr'

@@ -29,7 +29,7 @@ import { faCaretRight, faAngleDown, faHashtag, faUserGroup, faShareAlt  } from "
 const getCountryISO2 = require("country-iso-3-to-2");
 
 
-function ResultPageInd({ result, race }) {
+function ResultPageInd({ race }) {
   const { t } = useTranslation('common');
 
 
@@ -95,7 +95,7 @@ export async function getStaticProps({ params, locale }) {
   // If the route is like /series/1, then params.slug is 1
 
   const query = gql`
-    query GetRaceResults($bib: String!, $rid: Int!) {
+    query GetRaceResults($rid: Int!) {
 
       race(rid:$rid){
         id
@@ -146,7 +146,6 @@ export async function getStaticProps({ params, locale }) {
   const { data } = await client.query({
       query: query,
       variables: {
-        bib: params.bib.toString(),
         rid: parseInt(params.raceid)
       }
     });
