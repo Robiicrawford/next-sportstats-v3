@@ -37,8 +37,8 @@ export const msToPace = (duration) => {
 			}
 			
 			var milliseconds = (duration%1000)/100
-			, seconds = Math.round(parseFloat((duration/1000)%60))
-			, minutes = parseInt((duration/(1000*60)))
+			, seconds = Math.round((duration/1000)%60)
+			, minutes = (duration/(1000*60))
 
 			minutes = (minutes < 10) ? "0" + minutes : minutes;
 			seconds = (seconds < 10) ? "0" + seconds : seconds;
@@ -58,7 +58,7 @@ const distanceToDisplay = (distance,metric) =>{
 					return distance/1000 + "km"	
 				}	
 			}else{
-				return parseFloat(getMiles(distance).toFixed(2)) + "mi";
+				return getMiles(distance).toFixed(2) + "mi";
 			}
 		}
 
