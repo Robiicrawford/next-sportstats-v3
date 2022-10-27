@@ -192,7 +192,7 @@ function ordinal_suffix_of(i) {
     var j = i % 10,
         k = i % 100;
     if (j == 1 && k != 11) {
-        return i + "st";
+        return i + "st"; 
     }
     if (j == 2 && k != 12) {
         return i + "nd";
@@ -210,9 +210,9 @@ function ResultPageInd({ result, race }) {
 
   console.log(result)
   console.log(race)
-
+  console.log(user)
   const handleClaim =  async() => {
-    console.log('claim')
+    
     try{
       var claim = await fetch(
         `${process.env.NEXT_PUBLIC_MEMBER_URL}/resultClaim.php`
@@ -223,7 +223,11 @@ function ResultPageInd({ result, race }) {
             Authorization:`Bearer ${user?.signInUserSession.accessToken.jwtToken}`, 
            //     'Content-Type': 'application/json',
           },
-          body: JSON.stringify(body)
+          body: JSON.stringify({
+            SSUID: user.attributes['custom:ssuid'],
+            rid: result.rid,
+            bib: result.bib
+          })
         }
       )
       const response = await claim.json();
@@ -253,14 +257,16 @@ function ResultPageInd({ result, race }) {
           <Flex flexWrap='wrap' w='100%'>
 
             <Flex flexWrap='wrap' w='35%' flex='1 1 15%' sx={{position:'relative'}} justifyContent='space-evenly' >
-               <Button 
-                  colorScheme='green' 
-                  sx={{position:'absolute', top:'0', left:'5', zIndex:'1'}}
-                  py='1px'
-                  onClick={handleClaim}
-                >
-                  Claim
-                </Button>
+               {user && !result.user.ssuid &&
+                 <Button 
+                    colorScheme='green' 
+                    sx={{position:'absolute', top:'0', left:'5', zIndex:'1'}}
+                    py='1px'
+                    onClick={handleClaim}
+                  >
+                    Claim
+                  </Button>
+                }
 
               <Box style={{position:'relative'}}>
                
@@ -286,7 +292,7 @@ function ResultPageInd({ result, race }) {
               </Flex>
             </Flex>
 
-            <Box w='65%' mb={[0,2]}  sx={{borderBottom: '1px solid #000'}}>
+            <Box w='65%' mb={[0,2]}  sx={{borderBottom: '1px solid #000'}} h='fit-content'>
 
               
 
