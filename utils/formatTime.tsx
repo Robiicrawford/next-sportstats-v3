@@ -14,7 +14,7 @@ export  const  msToTime = (s) => {
 	var mins = s % 60;
 	var hrs = (s - mins) / 60;
 
-	return pad(hrs.toString().replace("-"," ").trim()) + ':' + pad(mins.toString().replace("-"," ").trim()) + ':' + pad(secs.toString().replace("-"," ").trim()) ;
+	return pad(hrs.toString().replace("-"," ").trim(),2 ) + ':' + pad(mins.toString().replace("-"," ").trim(),2) + ':' + pad(secs.toString().replace("-"," ").trim(),2) ;
 }
 
 export  const  timeToMs = (t) => {

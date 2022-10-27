@@ -319,7 +319,7 @@ function ResultPageInd({ result, race }) {
 
               
 
-              <Flex flexWrap='wrap' justifyContent='space-evenly' sx={{borderBottom: '1px solid #000'}} >
+              <Flex flexWrap='wrap' mb='3' justifyContent='space-evenly' sx={{borderBottom: '1px solid #000'}} >
                 <Box w={3/9} textAlign='center' my={2} sx={{borderRight: '1px solid #000'}} >
                   <Heading fontSize='1.5em'>Overall</Heading>
                   <Heading fontSize='1.5em'>{ordinal_suffix_of(result?.oRank)} out of {' '} {race?.stats?.PC}</Heading>
@@ -338,8 +338,8 @@ function ResultPageInd({ result, race }) {
                 </Box>
               </Flex>
 
-              <div className="fb-share-button" data-href="https://sportstats.today" data-layout="button" data-size="large">
-                <a target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2Fsportstats.today%2F&amp;src=sdkpreparse" className="fb-xfbml-parse-ignore">Share</a>
+              <div className="fb-share-button" data-href={document.location.href} data-layout="button" data-size="large">
+                <a target="_blank" href={`https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent('https://sportstats.today/results/'+result.rid+"/"+result.bib)}&amp;src=sdkpreparse`} className="fb-xfbml-parse-ignore">Share</a>
               </div>
             </Box>
 
