@@ -338,9 +338,6 @@ function ResultPageInd({ result, race }) {
                 </Box>
               </Flex>
 
-              <div className="fb-share-button" data-href={encodeURIComponent('https://sportstats.today/results/'+result.rid+"/"+result.bib)} data-layout="button" data-size="large">
-                <a target="_blank" href={`https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent('https://sportstats.today/results/'+result.rid+"/"+result.bib)}&amp;src=sdkpreparse`} className="fb-xfbml-parse-ignore">Share</a>
-              </div>
             </Box>
 
           </Flex>

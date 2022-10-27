@@ -117,13 +117,6 @@ function Application({ Component, pageProps }: AppProps) {
             `}
           </Script>
           
-          <Script 
-            strategy="afterInteractive"
-            nonce="t28yKjqj"
-            crossOrigin="anonymous"
-            src="https://connect.facebook.net/en_US/sdk.js#xfbml=1&version=v15.0&appId=1160368297753028&autoLogAppEvents=1" 
-          />
-          <div id="fb-root"></div>
           <Component {...pageProps} />
         </ApolloProvider>
       </Authenticator.Provider>
