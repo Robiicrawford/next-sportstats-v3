@@ -27,7 +27,7 @@ function HeroCard({ race }) {
       <Flex w='100%' flexWrap='wrap' >
         
           <Flex  w={['100%','50%','33%','25%']} justifyContent='center' textAlign="center">
-             <Link href={`/event/test`} >
+             <Link href={`/event/${race?.master?.slug}`} >
                   <Image
                     src={race?.info.img?`${race.info.img}`: race?.event?.eimg?race?.event?.eimg:'https://ss-event-images.s3.us-west-2.amazonaws.com/ss_triathlon.jpeg'}
                     alt={race?.info.name}
@@ -41,23 +41,22 @@ function HeroCard({ race }) {
             </Link>
           </Flex>
 
-          <Flex flexWrap='wrap' h='fit-content'  pl={['2','4']} >
-
+          <Flex flexWrap='wrap' w={['100%','50%','66%','75%']}  alignContent='center'  pl={['2','4']} >
+            <Link href={`/event/${race?.master?.slug}`} >
               <Box
-                mt='1'
+                mt='1' w='100%'
                 fontWeight='semibold'
                 as='h3'
                 fontSize={['36px']}
                 lineHeight='42px'
                 noOfLines={2}
                 mb='3'
-                w='100%'
               >
                 {race?.event?.name}
               </Box>
-              
-              <Box
-              mt='1'
+            </Link>
+            <Box
+              mt='1' w='100%'
               fontWeight='semibold'
               as='h3'
               fontSize={['36px']}
@@ -65,7 +64,7 @@ function HeroCard({ race }) {
               noOfLines={2}
               mb='3'
             >
-              {race?.event?.city}, {race?.event?.state} | {countries.getName(race?.event?.country, "en", {select: "official"})}
+              {race?.master?.city}, {race?.master?.state} | {countries.getName(race?.master?.country, 'en', {select: "official"})}
             </Box>
 
             <Box 

@@ -22,7 +22,7 @@ import {client} from "../../../apollo/apollo-client";
 import {msToTime, msToPace, calculatePace} from '../../../utils/formatTime'
 
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faCaretRight, faAngleDown  } from "@fortawesome/free-solid-svg-icons";
+import { faCaretRight, faAngleDown, faHashtag, faUserGroup  } from "@fortawesome/free-solid-svg-icons";
 
 const getCountryISO2 = require("country-iso-3-to-2");
 
@@ -222,9 +222,17 @@ function ResultPageInd({ result, race }) {
           
           <Flex flexWrap='wrap' w='100%'>
 
-            <Flex flexWrap='wrap' w='35%' flex='1 1 15%' justifyContent='space-evenly' >
-              
+            <Flex flexWrap='wrap' w='35%' flex='1 1 15%' sx={{position:'relative'}} justifyContent='space-evenly' >
+               <Button 
+                  colorScheme='green' 
+                  sx={{position:'absolute', top:'0', left:'5', zIndex:'1'}}
+                  py='1px'
+                >
+                  Claim
+                </Button>
+
               <Box style={{position:'relative'}}>
+               
                 <Avatar size='2xl' name={result.givenName+" "+result.familyName} src={result.user.profilePhoto} />  
                 <Box sx={{position:'absolute' ,right:'0', bottom:'5px'}}> 
                   {result.country&&(
@@ -240,8 +248,10 @@ function ResultPageInd({ result, race }) {
               
               <Flex flexWrap='wrap' h='fit-content'>
                 <Heading w='100%' textAlign='center' pb='2' >{result.givenName+" "+result.familyName} </Heading>
-                <Text fontSize='1.2em'> # {result.bib} </Text>
-                <Text w='100%' fontSize='1.2em'>  {result.cat} </Text>
+              
+                <Flex w='100%'  flexWrap='wrap'><FontAwesomeIcon style={{margin:'auto 0'}} icon={faHashtag} />  <Text ml='2' fontSize='1.2em'>{result.bib} </Text></Flex>
+                <Flex w='100%'  flexWrap='wrap'><FontAwesomeIcon style={{margin:'auto 0'}} icon={faUserGroup} /><Text ml='2' fontSize='1.2em'>  {result.cat} </Text></Flex>
+              
               </Flex>
             </Flex>
 
@@ -420,6 +430,13 @@ export async function getStaticProps({ params, locale }) {
           id
           name
           eimg
+        }
+        master {
+          id
+          slug
+          country
+          state
+          city
         }
       }
     }
