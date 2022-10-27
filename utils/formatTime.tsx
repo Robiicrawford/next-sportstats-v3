@@ -93,8 +93,8 @@ export function calculatePace(dist, s, type ,name) {
 	else {
 		format = '/km'
 		var calculatedPace = Math.floor(s/dist);
-	    var paceMins = Math.floor(calculatedPace/60);
-	    var paceSecs = calculatedPace - (paceMins*60);
+	    var paceMins :any = Math.floor(calculatedPace/60);
+	    var paceSecs :any = calculatedPace - (paceMins*60);
 	    if(paceMins =='Infinity' || paceSecs == 'NaN'){
 			return '---'
 		}
