@@ -36,7 +36,7 @@ export const msToPace = (duration) => {
 			  return null;
 			}
 			
-			var milliseconds = parseInt((duration%1000)/100)
+			var milliseconds = (duration%1000)/100
 			, seconds = Math.round(parseFloat((duration/1000)%60))
 			, minutes = parseInt((duration/(1000*60)))
 
