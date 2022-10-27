@@ -39,7 +39,7 @@ export default function Settings({locale}) {
     var body = {...data, SSUID: userData['custom:ssuid'] }
     try{
       var send_update = await fetch(
-        `${process.env.NEXT_PUBLIC_MEMBER_URL}`
+        `${process.env.NEXT_PUBLIC_MEMBER_URL}/updateMember.php`
         ,{  
           method: 'POST',
           headers:{

@@ -20,10 +20,7 @@ import '../styles/globals.css'
 
 import 'styled-components';
 
-declare module 'styled-components' {
-  // eslint-disable-next-line
-  export interface DefaultTheme extends Theme {}
-}
+
 
 Amplify.configure({...aws_exports, ssr: true});
 const colors = {

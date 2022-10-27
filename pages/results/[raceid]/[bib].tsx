@@ -4,6 +4,8 @@ import { NextSeo } from 'next-seo';
 import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
 import { useTranslation } from 'next-i18next';
 
+import { useAuthenticator } from '@aws-amplify/ui-react';
+
 import styled from "styled-components";
 import { Flex, Center, Box, Heading, Text, Button, Spacer, Avatar } from '@chakra-ui/react';
 
@@ -204,9 +206,40 @@ function ordinal_suffix_of(i) {
 function ResultPageInd({ result, race }) {
   const { t } = useTranslation('common');
   const [open, setOpen] = useState(null)
+  const { user } = useAuthenticator((context) => [context.user]);
 
   console.log(result)
   console.log(race)
+
+  const handleClaim =  async() => {
+    console.log('claim')
+    try{
+      var send_update = await fetch(
+        `${process.env.NEXT_PUBLIC_MEMBER_URL}/resultClaim.php`
+        ,{  
+          method: 'POST',
+          headers:{
+            // @ts-ignore
+            Authorization:`Bearer ${user?.signInUserSession.accessToken.jwtToken}`, 
+           //     'Content-Type': 'application/json',
+          },
+          body: JSON.stringify(body)
+        }
+      )
+      const response = await send_update.json();
+
+      var getNewData = await Auth.currentAuthenticatedUser({ bypassCache: true });
+      setData(getNewData.attributes)
+      setEdit(null)
+      reset()
+
+    } catch (err) {
+      console.log(err)  
+    }
+
+  }
+
+
   return (
     <Layout header_color='black' >
       <NextSeo
@@ -227,6 +260,7 @@ function ResultPageInd({ result, race }) {
                   colorScheme='green' 
                   sx={{position:'absolute', top:'0', left:'5', zIndex:'1'}}
                   py='1px'
+                  onClick={handleClaim}
                 >
                   Claim
                 </Button>
@@ -430,6 +464,14 @@ export async function getStaticProps({ params, locale }) {
           id
           name
           eimg
+          races {
+            id
+            rid
+            name
+            date
+            extResultUrl
+            status
+          }
         }
         master {
           id
