@@ -84,7 +84,7 @@ export function calculatePace(dist, s, type ,name) {
 	} else if(name.match(/swim/gi) || type == 6){
 		format = '/100m'
 	    var sec_meters = (s/1000)/(dist)
-	    var pace_seconds = sec_meters * 100 
+	    var pace_seconds :any  = sec_meters * 100 
 	   	if(pace_seconds =='Infinity' || pace_seconds == 'NaN'){
 			return '---'
 		}
