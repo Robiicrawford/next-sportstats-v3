@@ -24,7 +24,7 @@ import {client} from "../../../apollo/apollo-client";
 import {msToTime, msToPace, calculatePace} from '../../../utils/formatTime'
 
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faCaretRight, faAngleDown, faHashtag, faUserGroup  } from "@fortawesome/free-solid-svg-icons";
+import { faCaretRight, faAngleDown, faHashtag, faUserGroup, faShareAlt  } from "@fortawesome/free-solid-svg-icons";
 
 const getCountryISO2 = require("country-iso-3-to-2");
 
@@ -141,7 +141,7 @@ const SplitRow = ({info, data, raceInfo, canOpen, setOpen, open}) => {
 
       <td style={{textAlign:'center'}}>
         {[6,7].includes(info.CT) && raceInfo.type.toLowerCase() !== 'triathlon'
-          ?  calculatePace( info.CDS, data?.CD, raceInfo.CT , info.CL ) 
+          ?  calculatePace( info.CDS?info.CDS:info.CD, data?.CD, raceInfo.CT , info.CL ) 
           : data?.CD && info.CD? calculatePace( info.CD, data.ST,  raceInfo.CT, info.CL  ): '---'
         }
       </td>
@@ -208,9 +208,7 @@ function ResultPageInd({ result, race }) {
   const [open, setOpen] = useState(null)
   const { user } = useAuthenticator((context) => [context.user]);
 
-  console.log(result)
-  console.log(race)
-  console.log(user)
+
   const handleClaim =  async() => {
     
     try{
@@ -240,6 +238,26 @@ function ResultPageInd({ result, race }) {
 
   }
 
+  const handleShare = (event) => {
+    event.preventDefault()
+    if (navigator.share) {
+      navigator
+        .share({
+          title: `${race.event.name} | ${'Sportstats'}`,
+          text: `Check out results for ${result.givenName} ${result.familyName}  on Sportstats`,
+          url: document.location.href,
+        })
+        .then(() => {
+          console.log('Successfully shared');
+        })
+        .catch(error => {
+          console.error('Something went wrong sharing the blog', error);
+        });
+    } else{
+      console.log('share not supported')
+    }
+  };
+
 
   return (
     <Layout header_color='black' >
@@ -268,8 +286,13 @@ function ResultPageInd({ result, race }) {
                   </Button>
                 }
 
-              <Box style={{position:'relative'}}>
                
+
+              <Box style={{position:'relative'}}>
+                <Box sx={{position:'absolute', right:'5px', top:'0',zIndex:'1', cursor:'pointer'}} className='shareButton'  onClick={handleShare} >
+                  <FontAwesomeIcon icon={faShareAlt} size="2xl"  />
+                </Box>
+
                 <Avatar size='2xl' name={result.givenName+" "+result.familyName} src={result.user.profilePhoto} />  
                 <Box sx={{position:'absolute' ,right:'0', bottom:'5px'}}> 
                   {result.country&&(
@@ -296,7 +319,7 @@ function ResultPageInd({ result, race }) {
 
               
 
-              <Flex flexWrap='flex' justifyContent='space-evenly' >
+              <Flex flexWrap='wrap' justifyContent='space-evenly' >
                 <Box w={3/9} textAlign='center' my={2} sx={{borderRight: '1px solid #000'}} >
                   <Heading fontSize='1.5em'>Overall</Heading>
                   <Heading fontSize='1.5em'>{ordinal_suffix_of(result?.oRank)} out of {' '} {race?.stats?.PC}</Heading>
@@ -495,7 +518,6 @@ export async function getStaticProps({ params, locale }) {
       }
     });
 
-  console.log(data)
   // Pass post data to the page via props
   return { 
     props: { 
