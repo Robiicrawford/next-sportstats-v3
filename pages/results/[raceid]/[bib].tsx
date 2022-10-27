@@ -337,6 +337,7 @@ function ResultPageInd({ result, race }) {
                   </Heading>
                 </Box>
               </Flex>
+              <div class="fb-share-button" data-href="https://sportstats.today" data-layout="button" data-size="small"><a target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2Fsportstats.today%2F&amp;src=sdkpreparse" class="fb-xfbml-parse-ignore">Share</a></div>
             </Box>
 
           </Flex>
@@ -373,7 +374,6 @@ function ResultPageInd({ result, race }) {
                           canOpen={race?.cols?.[i-1]?.CT == 4 ?true:false}
                           setOpen={setOpen}
                           open={open}
-                          a={a}
                         />
 
                         {open === p.id && 
