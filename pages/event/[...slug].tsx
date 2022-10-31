@@ -112,8 +112,8 @@ function Master({ master }) {
                 {!master && <Text> ...LOADING... </Text>}
                 {master?.info?.description&&
                   <Flex
-                    w='92%'
-                    ml={['3','5']}
+                    w={['100%','92%']}
+                    ml={['0','3','5']}
                     mt='4'
                     justifyContent='center'
                   >
@@ -243,6 +243,7 @@ export async function getStaticProps({ params, locale }) {
           city
           mlimg
           mcimg
+          mbimg
         }
         events {
           id
@@ -350,7 +351,6 @@ const Background = () => (
 );
 
 const Description = styled.div`
-  width: 75%;
   h2 {
     font-size: 36px;
     line-height: 1.156;

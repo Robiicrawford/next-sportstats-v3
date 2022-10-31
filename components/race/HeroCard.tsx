@@ -38,12 +38,13 @@ function HeroCard({ race }) {
           <ModalCloseButton />
           <ModalBody>
             <Flex w='100%' flexWrap='wrap'>
-              {race.event.races.map((r)=>
+              {race?.event?.races.map((r)=>
                 <Link
                   href={`/results/${r.rid}`} 
                   style={{width:'100%'}}
+                  key={r.rid}
                 >
-                  <Box w='100%' px={[1,2]} py={2} style={{borderBottom:'1px solid black'}}>
+                  <Box w='100%' px={[1,2]} py={2} style={{borderBottom:'1px solid black'}} >
                       <Text > <span className={`tag tag-status tag-${r.status}`}> {r.status} </span> {r.name} | {r.date.slice(0,10)}</Text>
                   </Box>
                 </Link>
@@ -72,10 +73,10 @@ function HeroCard({ race }) {
             <Flex  w={['100%','50%','33%','25%']} justifyContent='center' textAlign="center">
                <Link href={`/event/${race?.master?.slug}`} >
                     <Image
-                      src={race?.info.img?`${race.info.img}`: race?.event?.eimg?race?.event?.eimg:'https://ss-event-images.s3.us-west-2.amazonaws.com/ss_triathlon.jpeg'}
-                      alt={race?.info.name}
+                      src={race?.info?.img?`${race.info.img}`: race?.event?.eimg?race?.event?.eimg:'https://ss-event-images.s3.us-west-2.amazonaws.com/ss_triathlon.jpeg'}
+                      alt={race?.info?.name}
                       width='auto'
-                      height='250px'
+                      height={['120px','250px']}
                       my='2' ml='2'
                       objectFit='cover'
                       className="card__image" 
@@ -84,44 +85,46 @@ function HeroCard({ race }) {
               </Link>
             </Flex>
 
-            <Flex flexWrap='wrap' w={['100%','50%','66%','75%']}  alignContent='center'  pl={['2','4']} >
+            <Flex flexWrap='wrap' w={['100%','50%','66%','75%']}  alignContent='center'  px={['1','2','4']} >
               <Link href={`/event/${race?.master?.slug}`} >
                 <Box
                   mt='1' w='100%'
                   fontWeight='semibold'
-                  as='h3'
-                  fontSize={['36px']}
+                  as='h1'
+                  fontSize='2xl'
                   lineHeight='42px'
                   noOfLines={2}
+                  lineHeight='tight'
                   mb='3'
                 >
                   {race?.event?.name}
                 </Box>
               </Link>
               <Box
-                mt='1' w='100%'
+                w='100%'
+                color='#718096'
                 fontWeight='semibold'
-                as='h3'
-                fontSize={['36px']}
-                lineHeight='42px'
-                noOfLines={2}
-                mb='3'
+                letterSpacing='wide'
+                fontSize='lg'
               >
                 {race?.master?.city}, {race?.master?.state} | {countries.getName(race?.master?.country, 'en', {select: "official"})}
               </Box>
 
               <Box 
-                fontSize={['30px']}
-                w='100%'
+                fontSize='lg'
+                w='100%' mt='2'
+                
               > 
                   <Button 
-                    mr='4' variant='outline' colorScheme='gray' size='lg'
+                    mr={['0','4']} variant='outline' colorScheme='gray' size='sm'
+
                     onClick={onOpen}
+                    w={['100%','auto']}
                   > 
                     {race?.info?.name} <FontAwesomeIcon icon={faAngleDown} style={{marginLeft:'0.5rem'}} /> 
                   </Button>
                 { new Date(
-                  race.info?.date?.slice(0,4), race.info?.date?.slice(5,7), race.info?.date?.slice(8,10)
+                  race?.info?.date?.slice(0,4), race?.info?.date?.slice(5,7), race?.info?.date?.slice(8,10)
                   ).toLocaleDateString(locale, { month: 'long', day: 'numeric', year: 'numeric' }
                 )} 
               </Box>

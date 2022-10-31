@@ -40,6 +40,7 @@
     "react-hook-form": "^7.36.1",
     "react-i18next": "^11.18.6",
     "react-lazy-load-image-component": "^1.5.5",
+    "react-table": "^7.8.0",
     "rss-parser": "^3.12.0",
     "styled-components": "^5.3.5",
     "swiper": "^8.4.2"

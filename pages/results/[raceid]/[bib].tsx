@@ -278,8 +278,8 @@ function ResultPageInd({ result, race }) {
                {user && !result.user.ssuid &&
                  <Button 
                     colorScheme='green' 
+                    size='md'
                     sx={{position:'absolute', top:'0', left:'5', zIndex:'1'}}
-                    py='1px'
                     onClick={handleClaim}
                   >
                     Claim

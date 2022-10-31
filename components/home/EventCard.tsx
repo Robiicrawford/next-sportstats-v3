@@ -92,14 +92,14 @@ const Card = ({e}) => {
                            </LinkOverlay>
                          </NextLink>
                        <Box
-                     mt='1'
-                     fontWeight='semibold'
-                     as='h5'
-                     lineHeight='tight'
-                     noOfLines={1}
-                       sx={{whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis'}}
-                           
-                   >
+                         mt='1'
+                         fontWeight='semibold'
+                         as='h5'
+                         lineHeight='tight'
+                         noOfLines={1}
+                           sx={{whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis'}}
+                               
+                       >
                                {e.info?.city}, {e.info?.state} | {e.info?.country}
 
                                <Box sx={{position:'absolute', right:'5px', bottom:'5px'}} className='shareButton'  onClick={handleOnClick} >
