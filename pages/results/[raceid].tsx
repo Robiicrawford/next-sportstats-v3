@@ -402,7 +402,7 @@ function Table({race, columns, data, isLoading}) {
                     {/* !loading && data[0]?.bib == null &&(<tr><td colSpan={999} style={{textAlign:'center'}}> First athlete estimated at {data[0]?.estTod} </td></tr>) */}
                     {isLoading&& new Array(10).fill("").map((_, index) => (
                         <tr key={index}> 
-                          <td colSpan={999} > <Skeleton height='65px' width='100%' startColor='pink.500' endColor='pink.500'  noOfLines={10} spacing='2' /> </td>
+                          <td colSpan={999} > <Skeleton height='65px' width='100%' startColor='pink.500' endColor='pink.500'  noOfLines={10}  /> </td>
                         </tr>
                     ))}
 
