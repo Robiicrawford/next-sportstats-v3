@@ -92,7 +92,6 @@ function HeroCard({ race }) {
                   fontWeight='semibold'
                   as='h1'
                   fontSize='2xl'
-                  lineHeight='42px'
                   noOfLines={2}
                   lineHeight='tight'
                   mb='3'
