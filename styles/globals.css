@@ -302,9 +302,22 @@ background: linear-gradient(to bottom, #FFD194, #D1913C);
 
 }
 
+.filterOprion{
+  cursor: pointer;
+  width: 100%;
+  padding-left: 1em;
+  border-bottom: 1px dotted black;
+}
 
-    
+.filterOprion :hover{
+  color: green;
+}
 
+
+.filterOprionText{
+  padding-right: 1em
+}
+  
 .min-tablet{
   display: none;
 } 
@@ -316,10 +329,9 @@ background: linear-gradient(to bottom, #FFD194, #D1913C);
 }
 
 
-
-    .min-desktop{
-      display: none;
-    }
+.min-desktop{
+  display: none;
+}
     
 @media screen and (min-width: 1024px) {
   .min-desktop{

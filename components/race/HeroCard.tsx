@@ -62,7 +62,7 @@ function HeroCard({ race }) {
       </Modal>
 
        <Flex 
-        flexWrap='wrap' mt='3' 
+        flexWrap='wrap' mt={['1','2','2','3']} 
         className='card__base' 
         style={{borderRadius:'15px', border:'1px solid black', zIndex:'5'}} 
         w='100%'  justifyContent='center' alignItems='center' 
@@ -112,8 +112,7 @@ function HeroCard({ race }) {
 
               <Box 
                 fontSize='lg'
-                w='100%' mt='2'
-                
+                w='100%' my='2'
               > 
                   <Button 
                     mr={['0','4']} variant='outline' colorScheme='gray' size='sm'
@@ -121,12 +120,14 @@ function HeroCard({ race }) {
                     onClick={onOpen}
                     w={['100%','auto']}
                   > 
+                     { new Date(
+                        race?.info?.date?.slice(0,4), race?.info?.date?.slice(5,7), race?.info?.date?.slice(8,10)
+                        ).toLocaleDateString(locale, { month: 'long', day: 'numeric', year: 'numeric' }
+                      )} 
+                        {' - '}
                     {race?.info?.name} <FontAwesomeIcon icon={faAngleDown} style={{marginLeft:'0.5rem'}} /> 
                   </Button>
-                { new Date(
-                  race?.info?.date?.slice(0,4), race?.info?.date?.slice(5,7), race?.info?.date?.slice(8,10)
-                  ).toLocaleDateString(locale, { month: 'long', day: 'numeric', year: 'numeric' }
-                )} 
+               
               </Box>
 
               

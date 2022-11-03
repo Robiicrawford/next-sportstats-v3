@@ -9,7 +9,7 @@ import { useTranslation } from 'next-i18next';
 import { useAuthenticator } from '@aws-amplify/ui-react';
 
 import styled from "styled-components";
-import { Flex, Center, Box, Heading, Text, Button, Spacer, Avatar, ButtonGroup, IconButton, Stack, Skeleton  } from '@chakra-ui/react';
+import { Flex, Center, Box, Heading, Text, Button, Spacer, Avatar, ButtonGroup, IconButton, VStack, Skeleton  } from '@chakra-ui/react';
 
 import {
   Drawer,
@@ -41,7 +41,7 @@ import {client} from "../../apollo/apollo-client";
 import {msToTime, msToPace, calculatePace} from '../../utils/formatTime'
 
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faCaretRight, faAngleDown, faShareAlt, faChartBar, faFilter, faTimes  } from "@fortawesome/free-solid-svg-icons";
+import { faCaretRight, faAngleDown, faShareAlt, faChartBar, faFilter, faTimes, faEye  } from "@fortawesome/free-solid-svg-icons";
 
 const getCountryISO2 = require("country-iso-3-to-2");
 
@@ -285,10 +285,53 @@ function Table({race, columns, data, isLoading}) {
         <DrawerOverlay />
         <DrawerContent>
           <DrawerCloseButton />
-          <DrawerHeader>Filter View</DrawerHeader>
+          <DrawerHeader mx='1' sx={{borderBottom:'1px solid black'}}>Filter View</DrawerHeader>
 
           <DrawerBody>
-            body
+            <VStack 
+              justifyContent='flex-start'
+            >
+              
+              
+              {race?.category?.genders?.length>1 &&
+                 <Box 
+                  className={`div-item`}
+                  pl={3} py={2} 
+
+                //  onClick={e => { onChange('')}}
+                > 
+                  <span className='filterOprion'> {t('common:overall')} </span>
+                  <FontAwesomeIcon icon={faEye} size="1x"/>
+                  
+                </Box>
+              }
+
+              {race?.category?.genders?.map((gender)=>
+                <Box 
+                  className='filterOprion'  
+                  key={gender.GL} w='100$'
+                  fontWeight='bold'
+                  >
+                  <span className='filterOprionText'>  {t('common:overall')}  {t('common:genders.'+gender.GL.toLowerCase())} </span>
+                   <FontAwesomeIcon icon={faEye} size="1x"/>
+                </Box>
+              )}
+
+              {race?.category?.cats?.sort( dynamicSort("CL") )?.map((cat)=>
+                <Box 
+                  className='filterOprion'  
+                  key={cat.CL} w='100$'
+                  fontWeight='bold'
+
+                  >
+                  <span className='filterOprionText'>{cat.CL} </span>
+                   <FontAwesomeIcon icon={faEye} size="1x"/>
+                </Box>
+              )}
+
+  
+            </VStack>
+
           </DrawerBody>
 
           <DrawerFooter>
@@ -306,7 +349,7 @@ function Table({race, columns, data, isLoading}) {
             <SearchBox />
           </Box>
 
-          <Flex w={['100%','50%','35%']} my={['2', 'auto']} justifyContent={['center','flex-end']} >
+          <Flex w={['100%','50%','35%']} my={['2', 'auto']} justifyContent={'flex-end'} >
 
             <ButtonGroup  spacing='6'>
 
@@ -315,11 +358,11 @@ function Table({race, columns, data, isLoading}) {
               <Button colorScheme='blue'  > Stats <FontAwesomeIcon icon={faChartBar} style={{marginLeft:'1em'}} /> </Button>
 
               <ButtonGroup size='md' isAttached  >
-                <Button colorScheme='green' isLoading={isLoading}  ref={btnRefFilter} onClick={onOpen} > Filter </Button>
+                <Button colorScheme='green' isLoading={isLoading}  ref={btnRefFilter} onClick={onOpen} > Filter <FontAwesomeIcon icon={faFilter} style={{marginLeft:'1em'}} /> </Button>
                 {isOpen && <IconButton colorScheme='red' aria-label='Clear Filter' icon={<FontAwesomeIcon icon={faTimes} />} /> }
               </ButtonGroup>
+
             </ButtonGroup>
-          
           
           </Flex>
         
@@ -428,7 +471,7 @@ function ResultPageInd({ race }) {
 
   console.log(data)
 
-
+  console.log(race)
   const handleShare = (event) => {
     event.preventDefault()
     if (navigator.share) {
@@ -554,7 +597,7 @@ function ResultPageInd({ race }) {
           } 
       }).filter((item)=> {return item !== undefined})
 
-      return set.sort((a,b)=> {return a.co - b.co})
+      return set?.sort((a,b)=> {return a.co - b.co}) 
 
     } else {
       return []
@@ -649,6 +692,16 @@ export async function getStaticProps({ params, locale }) {
           CO
           CD
           CHO
+        }
+        category{
+          genders {
+            GL
+            GC
+          }
+          cats {
+            CL
+            CC
+          }
         }
         event {
           id
