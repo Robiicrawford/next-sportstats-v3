@@ -253,6 +253,9 @@ function Table({race, columns, data, isLoading}) {
     
   )
 
+  console changeSort = (i) => {
+    console.log(i)
+  }
 
   const handleShare = (event) => {
     event.preventDefault()
