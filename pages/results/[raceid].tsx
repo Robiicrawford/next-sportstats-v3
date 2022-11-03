@@ -556,7 +556,7 @@ function ResultPageInd({ race }) {
               co: 0,
               className:'center-header',
               accessor: row => (  
-                <Flex flexWrap='inline-wrap'  pr={[1,2,3]}>
+                <Flex  pr={[1,2,3]}>
                       <Flex 
                         px={1} sx={{position:'relative'}} flexWrap='wrap'
                         justifyContent='center' alignContent='center'
