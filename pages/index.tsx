@@ -73,14 +73,14 @@ export default function Home({sportstats, irun, locale}) {
         <Section.Container id="events" Background={Background} >
           <Box my='3'>
             <SectionSlider 
-              data={sportstats?.upcomingEvents?.masterEvents}
+              data={sportstats?.recentEvents?.masterEvents}
               section={t('recent-results')}
               isLoadingSection={(sportstats?.recentEvents?.masterEvents)?false:true}
             />  
           </Box>
           <Box my='3'>
             <SectionSlider 
-              data={sportstats?.recentEvents?.masterEvents}
+              data={sportstats?.upcomingEvents?.masterEvents}
               section={t('upcoming-event')}
               isLoadingSection={(sportstats?.upcomingEvents?.masterEvents)?false:true}
             /> 
