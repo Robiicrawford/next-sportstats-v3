@@ -1,4 +1,4 @@
-import { NextSeo } from 'next-seo';
+import { NextSeo, OrganizationJsonLd } from 'next-seo';
 import Link from 'next/link'
 import Parser from "rss-parser";
 
@@ -45,6 +45,38 @@ export default function Home({sportstats, irun, locale}) {
       <NextSeo
         title={`Home`}
       />
+      <OrganizationJsonLd
+        type="Corporation"
+        id="https://www.sportstats.today"
+        logo="https://sportstats.today/android-chrome-512x512.png"
+        legalName="Sportstats"
+        name="Sportstats"
+        address={{
+          streetAddress: '1600 Saratoga Ave',
+          addressLocality: 'San Jose',
+          addressRegion: 'CA',
+          postalCode: '95129',
+          addressCountry: 'US',
+        }}
+        contactPoint={[
+          {
+         //   telephone: '+1-401-555-1212',
+            contactType: 'customer service',
+            email: 'info@sportstats.ca',
+            areaServed: 'US',
+            availableLanguage: ['English', 'Spanish', 'French'],
+          },{
+          //  telephone: '+1-401-555-1212',
+            contactType: 'customer service',
+            email: 'info@sportstats.ca',
+            areaServed: 'US',
+            availableLanguage: ['English'],
+          },
+        ]}
+        sameAs={['https://www.sportstats.one','https://www.sportstats.ca','https://www.sportstats.us','https://www.sportstats.la','https://www.sportstats.asia']}
+        url="https://www.sportstats.today/"
+      />
+
       <main style={{padding:'0'}} >
         
         <div 
