@@ -52,10 +52,10 @@ export default function Home({sportstats, irun, locale}) {
         legalName="Sportstats"
         name="Sportstats"
         address={{
-          streetAddress: '1600 Saratoga Ave',
-          addressLocality: 'San Jose',
-          addressRegion: 'CA',
-          postalCode: '95129',
+          streetAddress: '112 54th St SW',
+          addressLocality: ' Grand Rapids',
+          addressRegion: 'MI',
+          postalCode: '49548',
           addressCountry: 'US',
         }}
         contactPoint={[
@@ -73,7 +73,10 @@ export default function Home({sportstats, irun, locale}) {
             availableLanguage: ['English'],
           },
         ]}
-        sameAs={['https://www.sportstats.one','https://www.sportstats.ca','https://www.sportstats.us','https://www.sportstats.la','https://www.sportstats.asia']}
+        sameAs={[
+          'https://www.sportstats.one','https://www.sportstats.ca','https://www.sportstats.us','https://www.sportstats.la','https://www.sportstats.asia',
+          'https://www.facebook.com/sportstatsmedia'
+        ]}
         url="https://www.sportstats.today/"
       />
 
