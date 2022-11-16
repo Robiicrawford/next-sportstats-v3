@@ -136,7 +136,7 @@ function Master({ master }) {
           </Flex>
 
           <Flex as="a" id="results" w='100%' flexWrap='wrap' >
-            <ResultSection data={master?.lastEvent} />
+            <ResultSection data={master?.lastEvent} master={master} />
           </Flex>
 
           {master?.sid > 0 &&

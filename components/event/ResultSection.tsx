@@ -6,7 +6,7 @@ import { useTranslation } from 'next-i18next';
 
 import { Box, Flex, Heading, Text } from '@chakra-ui/react';
 
-const Index = ({data}) => {
+const Index = ({data, master}) => {
   const { t } = useTranslation();
 
   return (
@@ -15,18 +15,29 @@ const Index = ({data}) => {
         <Heading color='black' style={{borderBottom:'1px solid black'}}>Results - {data?.info?.start_date.slice(0,10)}</Heading>
       </Box>
 
-      <Flex flexWrap='wrap' justifyContent='left' w='100%' my='3' mx='4' >
+      <Flex flexWrap='wrap'  justifyContent='left' w='100%' my='3' mx='4' >
         {data?.races?.map((r)=>(
-          <Link
-            href={`/results/${r.rid}`}
-            style={{width:'100%', cursor:'pointer !important'}}
-            key={r.id}
-            legacyBehavior>  
-            <Box as='a' w={'100%'} className='resultLink'  sx={{ cursor:'pointer !important'}} >
-              <Text color='black' sx={{borderBottom:'1px dotted black', cursor:'pointer'}} w='fit-content' mb='1' pb='1' > <span className={`tag tag-status tag-${r.status}`}> {r.status} </span> {r.name} - {r.date}</Text>
-            </Box>
-          </Link>
+          <Flex key={r.id} flexWrap='wrap' w='100%' sx={{borderBottom:'1px dotted black'}}>
+            <Link
+              href={`/results/${r.rid}`}
+              style={{cursor:'pointer !important'}}
+            >  
+              <Box as='a' w={'100%'} className='resultLink'  sx={{ cursor:'pointer !important'}} >
+                <Text color='black' sx={{cursor:'pointer'}} w='fit-content' mb='1' pb='1' > 
+                   {r.date.split(" ")[0]} - {r.name}  <span className={`tag tag-status tag-${r.status}`} style={{marginLeft:'2em'}}> {r.status} </span> </Text> 
+              </Box>
+            </Link>
+            {master.sid === 57 &&
+              <Link
+                href={`/club-points/${r.rid}`}
+                style={{cursor:'pointer !important'}}
+              > 
+                <span className={`tag tag-status tag-red`} style={{marginLeft:'2em'}}> Club Points </span>
+              </Link>
+            }
+          </Flex>
         ))}
+
       </Flex>
     
     </Flex>
