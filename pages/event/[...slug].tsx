@@ -5,6 +5,8 @@ import Link from 'next/link'
 
 import { NextSeo } from 'next-seo';
 
+import { useAuthenticator } from '@aws-amplify/ui-react';
+
 import styled from 'styled-components';
 
 import Layout from '../../components/layout/Layout'
@@ -41,7 +43,8 @@ import { Pagination } from "swiper";
 
 function Master({ master }) {
   const router = useRouter()
-
+  const { user } = useAuthenticator((context) => [context.user]);
+  
   const [links, setLinks ] = useState(null)
   
   useEffect(()=>{
@@ -126,8 +129,17 @@ function Master({ master }) {
                 <Flex flexWrap='wrap' w='100%' px={[1,3]} pb={[2,3]}>
                   <Heading w='100%'>Info</Heading>
                   <Flex className="container" mx={[2,3,4]}>
-                    {links && links?.map((link, index)=> 
-                      <EventLinkCard key={link.id} id={link.id} text={link} index={index} />
+                    {links && links?.map((link, index)=> (
+                      <>
+                         {/* @ts-ignore */} 
+                        {link.la !== 'pub' && ["superAdmin", "admin","timer", "RaceDirector"].some( i => user?.signInUserSession?.accessToken?.payload['cognito:groups'].includes(i) ) &&
+                          <EventLinkCard key={link.id} id={link.id} text={link} index={index} />
+                        }
+                        {link.la === 'pub' &&
+                          <EventLinkCard key={link.id} id={link.id} text={link} index={index} />
+                        }
+                      </>
+                    )
                     )}
                   </Flex>
                 </Flex>

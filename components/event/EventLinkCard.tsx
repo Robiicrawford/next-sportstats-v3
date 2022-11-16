@@ -20,6 +20,8 @@ const style = {
 
 const LinkCard = ({ id, text : link, index }) => {
   return (
+   
+  
     <a target="_blank" rel="noopener noreferrer" href={link.lu} style={{ ...style }}  className='card_info' >
       {link.la !== 'pub' && <Text pl={2} bg={'red'} > {link.la === 'pub'? 'Public': 'Private'} </Text> }
       {link.la === 'pub' && <Text pl={2} bg={'none'} color='white' > public </Text>   }
