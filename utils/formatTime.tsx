@@ -3,6 +3,10 @@ const pad = (n, z) => {
     return ('00' + n).slice(-z);
 }
 
+export  const  secondsToTime = (SECONDS) => {
+	 return new Date(SECONDS *1000 ).toISOString().substring(11, 19)
+}
+
 export  const  msToTime = (s) => {
 	if(isNaN(s)){
 		return s
