@@ -330,7 +330,7 @@ function ResultPageInd({ race, results }) {
                 <Button colorScheme='teal' onClick={onOpen}>
                   Category Times
                 </Button>
-
+                {/* @ts-ignore */}
                 {["superAdmin", "admin","timer", "RaceDirector"].some( i => user?.signInUserSession?.accessToken?.payload['cognito:groups'].includes(i) ) &&
                   <Button
                      colorScheme='teal'
