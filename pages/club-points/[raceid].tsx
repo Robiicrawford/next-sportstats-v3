@@ -323,43 +323,47 @@ function ResultPageInd({ race, results }) {
         <Spacer mb='4'/>
         {/* result section */}
         <Flex  flexWrap='wrap'  w='100%' pt={3} className='card__base'  >
-            
-            <ButtonGroup  spacing='6' px='3'>
-              <Button colorScheme='teal' onClick={onOpen}>
-                Category Times
-              </Button>
+          {!results?.divs && <Heading w='100%' textAlign='center'>No Results Yet</Heading>}
+          {results?.divs &&
+            <>
+              <ButtonGroup  spacing='6' px='3'>
+                <Button colorScheme='teal' onClick={onOpen}>
+                  Category Times
+                </Button>
 
-              {["superAdmin", "admin","timer", "RaceDirector"].some( i => user?.signInUserSession?.accessToken?.payload['cognito:groups'].includes(i) ) &&
-                <Button
-                   colorScheme='teal'
-                    as={CSVDownloader}
-                   data={()=>{
-                    if(!results?.clubs){
-                      return false
-                    } else {
-                     
-                      return results?.clubs.map((c)=> {
-                        return {place:c.place, club: c.club, points:c.tp}
-                      })
+                {["superAdmin", "admin","timer", "RaceDirector"].some( i => user?.signInUserSession?.accessToken?.payload['cognito:groups'].includes(i) ) &&
+                  <Button
+                     colorScheme='teal'
+                      as={CSVDownloader}
+                     data={()=>{
+                      if(!results?.clubs){
+                        return false
+                      } else {
+                       
+                        return results?.clubs.map((c)=> {
+                          return {place:c.place, club: c.club, points:c.tp}
+                        })
 
-                   }}}
-                   type={Type.Button}
-                   filename={`${race?.event?.name} - ${race?.info?.name} - Team Points`}
-                   bom={true}
-                 >
-                   Download as CSV
-                 </Button>
-              }
-                
-            </ButtonGroup>
+                     }}}
+                     type={Type.Button}
+                     filename={`${race?.event?.name} - ${race?.info?.name} - Team Points`}
+                     bom={true}
+                   >
+                     Download as CSV
+                   </Button>
+                }
+                  
+              </ButtonGroup>
 
-          <Styles>
-            <Table 
-              columns={columns} 
-              data={dataFinal}
-              renderRowSubComponent={renderRowSubComponent}
-            />
-          </Styles>
+              <Styles>
+                <Table 
+                  columns={columns} 
+                  data={dataFinal}
+                  renderRowSubComponent={renderRowSubComponent}
+                />
+              </Styles>
+            </>
+          }
           
         </Flex>
 
