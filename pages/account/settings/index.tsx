@@ -22,7 +22,6 @@ export default function Settings({locale}) {
   const router = useRouter()
   const auth = useAuth();
 
-
   const routes = [
     {icon:faIdCard, link:'settings/personal-info',title:'personal-info-title', desc:'personal-info-desc'},
     {icon:faShieldAlt, link:'settings/login-and-security',title:'login-info-title', desc:'login-info-desc'},
@@ -31,8 +30,6 @@ export default function Settings({locale}) {
     {icon:faSlidersH, link:'settings/preferences',title:'global-title', desc:'global-desc'},
     {icon:faQuestionCircle, link:'/help',title:'help-title', desc:'help-desc'}
   ]
-
- 
 
   return (
     <Layout>
@@ -49,7 +46,7 @@ export default function Settings({locale}) {
                 <Heading as="h1" >{t('your-settings')}</Heading>
                 <h3 style={{marginLeft:'1em'}}> 
                   {auth.user?.attributes?.given_name} {auth.user?.attributes?.family_name}, {auth.user?.attributes?.email} - 
-                  <Link style={{color:'white'}} href={`/profile/${auth.user?.attributes?.['custom:ssuid']}/${auth.user?.attributes?.family_name}`} > Go To Profile </Link>
+                  <Link  href={`/profile/${auth.user?.attributes?.['custom:ssuid']}/${auth.user?.attributes?.family_name}`} > Go To Profile </Link>
                 </h3>
               </Box>
 
