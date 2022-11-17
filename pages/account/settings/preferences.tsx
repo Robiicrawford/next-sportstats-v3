@@ -123,7 +123,7 @@ export default function Settings({locale}) {
                     {/*Member lang Edit Form*/}
                       <Flex flexWrap='wrap' w='100%' pb={[1]} sx={{borderBottom:'2px solid white'}}  >
                         <Flex flexWrap='wrap' w='100%'>
-                          <h4 style={{marginBottom:'0.3em'}} htmlFor='language'> {t('Preferred language')} </h4>
+                          <h4 style={{marginBottom:'0.3em'}} > {t('Preferred language')} </h4>
                           <div style={{flexGrow:'1'}} />
                           <p 
                             style={{textDecoration:'underline', cursor:'pointer', marginBottom:'0', marginRight:'0.5em'}} 
@@ -163,7 +163,7 @@ export default function Settings({locale}) {
                       {/*Member Unit Edit Form*/}
                       <Flex flexWrap='wrap' w='100%' pb={[1]} sx={{borderBottom:'2px solid white'}}  >
                         <Flex flexWrap='wrap' w='100%'>
-                          <h4 style={{marginBottom:'0.3em'}} htmlFor='distance'> {t('settings-page.preferred-distance-unit')} </h4>
+                          <h4 style={{marginBottom:'0.3em'}} > {t('settings-page.preferred-distance-unit')} </h4>
                           <div style={{flexGrow:'1'}} />
                           <p 
                             style={{textDecoration:'underline', cursor:'pointer', marginBottom:'0', marginRight:'0.5em'}} 
@@ -202,7 +202,7 @@ export default function Settings({locale}) {
 
                       <Flex flexWrap='wrap' w='100%' pb={[1]} sx={{borderBottom:'2px solid white'}}  >
                         <Flex flexWrap='wrap' w='100%'>
-                          <h4 style={{marginBottom:'0.3em'}} htmlFor='region'> {t('Region')} </h4>
+                          <h4 style={{marginBottom:'0.3em'}}> {t('Region')} </h4>
                           <div style={{flexGrow:'1'}} />
                           <p 
                             style={{textDecoration:'underline', cursor:'pointer', marginBottom:'0', marginRight:'0.5em'}} 
