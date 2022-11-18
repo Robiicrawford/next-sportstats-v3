@@ -131,7 +131,7 @@ export default function ConfirmEmail() {
                               onChange={handleChangePass}
                             />
                             <InputRightElement width='4.5rem'>
-                              <Button h='1.75rem' size='sm' onClick={()=>setOpen(show?false:true)}>
+                              <Button h='1.75rem' size='sm' onClick={()=>setShow(show?false:true)}>
                                 {show ? t('public:signup.hide') : t('public:signup.show')}
                               </Button>
                             </InputRightElement>
