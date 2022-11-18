@@ -54,7 +54,7 @@ export default function Settings({locale}) {
             
                   <Link href={node.link} key={node.title} >
 
-                    <Box className="card"  >
+                    <Box className="card" h='100%' >
                       <Box className="card__header" h={['50px','50px']} ml='3' mt='3'>
                         <FontAwesomeIcon className="card__image"  style={{color:'#383'}} icon={node.icon} size="2xl"/>
                       </Box>

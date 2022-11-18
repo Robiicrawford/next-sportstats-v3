@@ -276,9 +276,10 @@ export default function Settings({locale}) {
                               {error && <Text  my={2} sx={{color:'#FE0C0B'}} > <FormatPasswordValidateError errors={error} /> </Text>}
 
                               <Box w='100%' mt='4' px={[0,2]}> 
+                                <label htmlFor='new-password' w='100%' >{t('signup.new-password')}</label>
                                 <InputGroup size='md'>
                                   <Input
-                                    pr='4.5rem'
+                                    pr='4.5rem' id='new-password'
                                     type={show[2] ? 'text' : 'password'}
                                     placeholder={t('public:signup.new-password')} 
                                     {...register('NP',{required: true})}
@@ -296,9 +297,10 @@ export default function Settings({locale}) {
                               </Box>
 
                               <Box w='100%' mt='2' px={[0,2]}> 
+                                <label htmlFor='new-password' w='100%' >{t('signup.confirm-password')}</label>
                                 <InputGroup size='md'>
                                   <Input
-                                    pr='4.5rem'
+                                    pr='4.5rem' id='confirm-password'
                                     type={show[3] ? 'text' : 'password'}
                                     placeholder={t('public:signup.confirm-password')} 
                                     {...register('CNP',{required: true})}

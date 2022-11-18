@@ -9,7 +9,6 @@ import { useTranslation } from 'next-i18next';
 
 import { useAuthenticator } from '@aws-amplify/ui-react';
 import Auth from '@aws-amplify/auth';
-import { useAuth, AuthCheck } from "../../../hooks/use-auth";
 
 import { 
   Box, Flex, Image, Center, Heading, Container, Button, Text, Label, Select, 
@@ -114,7 +113,7 @@ export default function ConfirmEmail() {
             <Box w='100%' py={3} sx={{borderBottom:'2px solid black'}}  >
               <Heading as="h1"  px={2} >{t("common:confirm-email")}</Heading>
             </Box>
-            { code && email && <div> ...loading... </div>}
+            { code && email && <div> ...Validing your email address... </div>}
             { code && !email && 
               <Box  sx={{ mx: 'auto'}} w='100%' py={3} px={2} mx={5}>
                 <Flex mx={-2} mb={3} flexWrap='wrap' px={2} py={2}>
