@@ -82,21 +82,9 @@ export default function Settings({locale}) {
       } else {
         setError(false)
       }
-
       if( watch("CNP").trim() !== watch("NP").trim() && schema.validate(watch("NP").trim()) ){
         setError(['match']);
       }
-
-      /*if (checkMatch()) {
-        if (schema.validate(npass.trim())) {
-          let user = await Auth.currentAuthenticatedUser();
-          let result = await Auth.changePassword(user, opass.trim(), npass.trim());
-          if (result === 'SUCCESS') {
-            setCFMpass(true)
-            setEdit(null)
-          } 
-        } 
-      }*/
     }
   },[edit, watch("NP"), watch("CNP")])
 
@@ -143,18 +131,37 @@ export default function Settings({locale}) {
     }
   }
 
+  const handlePasswordUpdate = async (data) => {
+    
+    console.log('here')
+    if( watch("CNP").trim() === watch("NP").trim() && schema.validate(watch("NP").trim()) ){
+      let user = await Auth.currentAuthenticatedUser();
+      let result = await Auth.changePassword(user, data.CP.trim(), data.NP.trim());
+      console.log(result)
+      if (result === 'SUCCESS') {
+        return {status: 'success', message: t('settings-page.password-change-confirm') }
+      } 
+
+    } else {
+      return {status: 'fail', message:'Something went wrong :('}
+    }
+    
+
+  }
+
+
   const onSubmit = async (data) =>{
     try{
-
       if(edit ==='email'){
         var response = await handleEmailUpdate(data)
       } else {
-
+        var response = await handlePasswordUpdate(data)
       }
 
       if(response.status === 'success'){
         var getNewData = await Auth.currentAuthenticatedUser({ bypassCache: true });
         setData(getNewData.attributes)
+        setError(false)
         setMessage(response.message)
       } else {
         setError(response.message)
@@ -243,15 +250,15 @@ export default function Settings({locale}) {
                           </p>
                         </Flex>
                         {edit !== 'password'  &&  <p style={{marginLeft:'0.4em'}}>Update your login password </p> }
-                        {message && edit === 'password' &&   <p style={{width:'100%'}}> <strong> Your Password is now updated </strong> </p>}
+                        {message && edit === 'password' &&   <p style={{width:'100%'}}> <strong> {message} </strong> </p>}
                         {edit === 'password' &&
-                           <Flex flexWrap='wrap'  w='100%' >
+                           <Flex 
+                              as='form' flexWrap='wrap'
+                              onSubmit={handleSubmit(onSubmit)} 
+                              w='100%'
+                            >
                             <Box width={['100%', 6/8]}  > 
                                
-                               {message&&
-                                 <Text>{t('settings-page.password-change-confirm')} </Text>
-                               } 
-
                                <Box w='100%' px={[0,2]}> 
                                 <InputGroup size='md'>
                                   <Input

@@ -23,7 +23,7 @@ import Triangle from '../../components/triangle';
 const NewCode = () => {
   const {t} = useTranslation("public");
   
-  const [email, setEmail] = useState(false);
+  const [email, setEmail] = useState(null);
   const [sent, setSent] = useState(true);
 
   const onSubmit = async () => {
