@@ -211,7 +211,7 @@ export default function Settings({locale}) {
                             <strong> {edit === 'region' ?'Cancel':'Edit'} </strong> 
                           </p>
                         </Flex>
-                        {edit !== 'region'  &&  <p style={{marginLeft:'0.4em'}}>{userData['custom:region'] ?  regionName[userData['custom:region']] : 'Sportstats World'} </p> }
+                        {edit !== 'region'  &&  <p style={{marginLeft:'0.4em'}}>{userData?.['custom:region'] ?  regionName[userData?.['custom:region']] : 'Sportstats World'} </p> }
                         {edit === 'region' &&
                            <Flex
                               as='form' flexWrap='wrap'
@@ -225,7 +225,7 @@ export default function Settings({locale}) {
                                 name='region'
                                 bg='white' color='black'
                                 {...register('PR')}
-                                defaultValue={userData['custom:region']}
+                                defaultValue={userData?.['custom:region']}
                               >
                                 {Object.keys(regionName).map((c,k)=> (
                                   <option value={c} key={c}> {regionName[c]} </option>  
