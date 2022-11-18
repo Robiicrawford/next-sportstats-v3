@@ -282,7 +282,7 @@ export default function Settings({locale}) {
                               
                               <Link href={`/account/recover`} style={{margin:'0.3em 0'}}>{t('signup.forgot-password')} </Link>
                               
-                              {error && <Text  my={2} sx={{color:'#FE0C0B'}} > {formatPasswordValidateError(error)} /> </Text>}
+                              {error && <Text  my={2} sx={{color:'#FE0C0B'}} > {formatPasswordValidateError(error)} </Text>}
 
                               <Box w='100%' mt='4' px={[0,2]}> 
                                 <label htmlFor='new-password' w='100%' >{t('signup.new-password')}</label>
