@@ -11,7 +11,7 @@ import { useAuthenticator } from '@aws-amplify/ui-react';
 import Auth from '@aws-amplify/auth';
 
 import { 
-  Box, Flex, Image, Center, Heading, Container, Button, Text, Label, Select, 
+  Box, Flex, Image, Center, Heading, Container, Button, Text, Select, 
   Input, InputGroup, InputRightElement, FormErrorMessage
  } from '@chakra-ui/react';
 

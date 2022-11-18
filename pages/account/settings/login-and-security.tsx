@@ -107,6 +107,7 @@ export default function Settings({locale}) {
   const handleEdit = (e) => {
     reset()
     setError(false)
+    setMessage(false)
     setEdit(e)
   }
 
