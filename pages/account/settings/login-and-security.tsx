@@ -152,10 +152,11 @@ export default function Settings({locale}) {
 
   const onSubmit = async (data) =>{
     try{
+      var response ;
       if(edit ==='email'){
-        var response = await handleEmailUpdate(data)
+        response = await handleEmailUpdate(data)
       } else {
-        var response = await handlePasswordUpdate(data)
+        response = await handlePasswordUpdate(data)
       }
 
       if(response.status === 'success'){
