@@ -285,7 +285,7 @@ export default function Settings({locale}) {
                               {error && <Text  my={2} sx={{color:'#FE0C0B'}} > {formatPasswordValidateError(error)} </Text>}
 
                               <Box w='100%' mt='4' px={[0,2]}> 
-                                <label htmlFor='new-password' w='100%' >{t('signup.new-password')}</label>
+                                <label htmlFor='new-password' >{t('signup.new-password')}</label>
                                 <InputGroup size='md'>
                                   <Input
                                     pr='4.5rem' id='new-password'
@@ -306,7 +306,7 @@ export default function Settings({locale}) {
                               </Box>
 
                               <Box w='100%' mt='2' px={[0,2]}> 
-                                <label htmlFor='new-password' w='100%' >{t('signup.confirm-password')}</label>
+                                <label htmlFor='new-password' >{t('signup.confirm-password')}</label>
                                 <InputGroup size='md'>
                                   <Input
                                     pr='4.5rem' id='confirm-password'
