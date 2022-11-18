@@ -65,10 +65,10 @@ export default function ConfirmEmail() {
 
   const [show, setShow] = React.useState(false)
 
-  const [error, setError] = useState(false);
-  const [code, setCode] = useState(false);
-  const [email, setEmail ] = useState(false);
-  const [pass, setPass] = useState(false)
+  const [error, setError] = useState(null);
+  const [code, setCode] = useState(null);
+  const [email, setEmail ] = useState(null);
+  const [pass, setPass] = useState(null)
 
   const onSubmit = async () => {
 
