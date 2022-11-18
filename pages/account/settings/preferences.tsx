@@ -246,7 +246,7 @@ export default function Settings({locale}) {
                 </Box>
 
                 <Flex w={['100%',1/3]} height='fit-content'>
-                  <div  className="card_info" height='fit-content' >
+                  <div  className="card_info" >
                     <div className="card__header" style={{marginTop:'1em'}}>
                       <svg viewBox="0 0 24 24" role="presentation" aria-hidden="true" focusable="false" style={{height: "40px", width:"40px", display:"block", fill:"rgb(255, 180, 0)"}}>
                         <path d="m21.31 5.91a1.31 1.31 0 1 1 -1.31-1.31 1.31 1.31 0 0 1 1.31 1.31zm-8.31 9.69a1.31 1.31 0 1 0 1.31 1.31 1.31 1.31 0 0 0 -1.31-1.31zm-7-11a1.31 1.31 0 1 0 1.31 1.31 1.31 1.31 0 0 0 -1.31-1.31z"></path>

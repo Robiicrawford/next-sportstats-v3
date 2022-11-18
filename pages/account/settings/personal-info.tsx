@@ -23,7 +23,6 @@ import { Country, State, City }  from 'country-state-city';
 var countries = require("i18n-iso-countries");
 countries.registerLocale(require("i18n-iso-countries/langs/en.json"));
 
-
 export default function Settings({locale}) {
   const { t } = useTranslation('public');
   const auth = useAuth();
@@ -55,17 +54,18 @@ export default function Settings({locale}) {
       var getNewData = await Auth.currentAuthenticatedUser({ bypassCache: true });
       setData(getNewData.attributes)
       setEdit(null)
-      reset()
-
     } catch (err) {
       console.log(err)  
     }
   }
 
   useEffect(()=>{
+    reset()
+  },[edit])
+
+  useEffect(()=>{
     setData(user?.attributes?user?.attributes:null)
   },[user])
-
 
   const breadLink = [
     {title:t("account-settings"), to:'/account/settings/', active:false},
@@ -181,7 +181,6 @@ export default function Settings({locale}) {
                           </Flex>
                         }
                       </Flex>
-
 
                       {/*Date of Birth*/}
                       <Flex flexWrap='wrap' w='100%' pb={[1]} sx={{borderBottom:'2px solid white'}}  >
@@ -320,7 +319,6 @@ export default function Settings({locale}) {
                               </Flex>
                             }
                         </Flex>
-
                   </Flex>
                 </Box>
 

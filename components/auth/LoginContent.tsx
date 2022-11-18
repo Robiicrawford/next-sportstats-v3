@@ -66,7 +66,7 @@ const LoginContent = () => {
                           {errors?.email && ( <FormErrorMessage > Account Email is needed </FormErrorMessage> )}
                       </Box>
 
-                              <InputGroup size='md'>
+                          <InputGroup size='md'>
                             <Input
                               pr='4.5rem'
                               type={show ? 'text' : 'password'}

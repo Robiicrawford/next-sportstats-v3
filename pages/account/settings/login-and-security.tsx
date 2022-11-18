@@ -7,7 +7,10 @@ import { useTranslation } from 'next-i18next';
 
 import { useForm, Controller } from 'react-hook-form';
 
-import { Box, Flex, Heading, Container, Button, Input, Select, Text } from '@chakra-ui/react';
+import { 
+  Box, Flex, Heading, Container, Button, Select, Text,
+  Input, InputGroup, InputRightElement,
+ } from '@chakra-ui/react';
 
 import Layout from '../../../components/layout/Layout'
 import Section from '../../../components/section';
@@ -23,6 +26,15 @@ import { Country, State, City }  from 'country-state-city';
 var countries = require("i18n-iso-countries");
 countries.registerLocale(require("i18n-iso-countries/langs/en.json"));
 
+const passwordValidator = require('password-validator');
+const schema = new passwordValidator();
+schema
+  .is().min(8)
+  .has().uppercase()
+  .has().lowercase()
+  .has().digits()
+  .has().symbols();
+
 
 export default function Settings({locale}) {
   const { t } = useTranslation('public');
@@ -34,57 +46,123 @@ export default function Settings({locale}) {
   const [edit, setEdit] = useState(null)
 
   const [error, setError] = useState<any>(false);
-  const [cfmPass, setCFMpass] = useState(false)
-  const [cfmEmail, setCFM] = useState(false)
+  const [message, setMessage] = useState(false)
 
+  const [show, setShow] = useState({1:false,2:false,3:false})
 
   const { register, setValue, handleSubmit, control, watch, reset } = useForm();
+
+  const FormatPasswordValidateError = ({errors}) => {
+    for (let i = 0; i < errors.length; i++) {
+      if (errors[i] === 'min') {
+        return t('signup.error.min') ;
+      } else if (errors[i] === 'lowercase') {
+        return t('signup.error.lowercase');
+      } else if (errors[i] === 'uppercase') {
+        return t('signup.error.uppercase');
+      } else if (errors[i] === 'digits') {
+        return t('signup.error.digits');
+      } else if (errors[i] === 'symbols') {
+        return t('signup.error.symbols');
+      } else if (errors[i] === 'match') {
+        return t('signup.error.match');
+      } else if (errors[i] === 'Invalid code provided, please request a code again.'){
+        return t('signup.error.Invalid code provided, please request a code again.');
+      } else if(errors[i] === 'Email Exists'){
+        return 'Email Exists'
+      }
+    }
+  };
+
+  useEffect(()=>{
+    if(edit === 'password'){
+      if(watch("NP") && !schema.validate(watch("NP").trim())){
+        setError(schema.validate(watch("NP").trim(), { list: true } ))
+        console.log(schema.validate(watch("NP").trim() , { list: true }))
+      } else {
+        setError(false)
+      }
+
+      if( watch("CNP").trim() !== watch("NP").trim() && schema.validate(watch("NP").trim()) ){
+        setError(['match']);
+      }
+
+      /*if (checkMatch()) {
+        if (schema.validate(npass.trim())) {
+          let user = await Auth.currentAuthenticatedUser();
+          let result = await Auth.changePassword(user, opass.trim(), npass.trim());
+          if (result === 'SUCCESS') {
+            setCFMpass(true)
+            setEdit(null)
+          } 
+        } 
+      }*/
+    }
+  },[edit, watch("NP"), watch("CNP")])
 
   useEffect(()=>{
     setData(user?.attributes?user?.attributes:null)
   },[user])
 
+  const handleEdit = (e) => {
+    reset()
+    setError(false)
+    setEdit(e)
+  }
 
   const breadLink = [
     {title:t("account-settings"), to:'/account/settings/', active:false},
     {title:t('settings-page.login-info-title'), to:'/account/settings/login-and-security', active:true }
   ]
 
-
-  const submitEmail = async () => {
-    const userToekn = await Auth.currentAuthenticatedUser()
-    var body = {
-      "SSUID":userToekn.attributes['custom:ssuid'],
-      "EM": (document.getElementById("email") as HTMLInputElement ).value.trim()
-    }
-    
+  const handleEmailUpdate = async (data) => {
+    var body = {...data, SSUID: userData['custom:ssuid'] }
     try{
       var send_update = await fetch(
-        `https://admin.sportstats.ca/member/updateEmail.php`
+        `${process.env.NEXT_PUBLIC_MEMBER_URL}/updateEmail.php`
         ,{  
           method: 'POST',
           headers:{
-            Authorization:`Bearer ${userToekn.signInUserSession.accessToken.jwtToken}`, 
+            // @ts-ignore
+            Authorization:`Bearer ${user?.signInUserSession.accessToken.jwtToken}`, 
            //     'Content-Type': 'application/json',
           },
           body: JSON.stringify(body)
         }
       )
       const response = await send_update.json();
-      if (response.status === 'success') {
-        setCFM(true)
+
+      if(response.status === 'success'){
+        return {status: 'success', message:'An Email has been sent to confirm your new email address'}
+      } else {
+        return {status: 'fail', message:response.data[0].detail}
+      }
+    } catch (err) {
+      console.log(err)  
+    }
+  }
+
+  const onSubmit = async (data) =>{
+    try{
+
+      if(edit ==='email'){
+        var response = await handleEmailUpdate(data)
+      } else {
+
+      }
+
+      if(response.status === 'success'){
         var getNewData = await Auth.currentAuthenticatedUser({ bypassCache: true });
         setData(getNewData.attributes)
-        setEdit(null)
-        setError(false)
+        setMessage(response.message)
       } else {
-        setError([response.data[0].detail])
+        setError(response.message)
       }
 
     } catch (err) {
       console.log(err)  
     }
-
+    
   }
 
   return (
@@ -119,32 +197,134 @@ export default function Settings({locale}) {
                         <div style={{flexGrow:'1'}} />
                         <p 
                           style={{textDecoration:'underline', cursor:'pointer', marginBottom:'0', marginRight:'0.5em'}} 
-                          onClick={()=>setEdit(edit === 'email' ?null:'email')}
+                          onClick={()=>handleEdit(edit === 'email' ?null:'email')}
                         >
                           <strong> {edit === 'email' ?'Cancel':'Edit'} </strong> 
                         </p>
                       </Flex>
                       {edit !== 'email'  &&  <p style={{marginLeft:'0.4em'}}>Update your login email </p> }
-                      {error && <Text sx={{color:'#FE0C0B'}} my={1} > {error} </Text>}
-                      {cfmEmail&&   <p style={{width:'100%', borderBottom:'1px solid white'}}> <strong> An Email has been sent to confirm your new email address </strong> </p>}
+                      {error && edit === 'email' && <Text sx={{color:'#FE0C0B'}} my={1} > {error} </Text>}
+                      {message &&   <p style={{width:'100%', borderBottom:'1px solid white'}}> <strong> {message} </strong> </p>}
                       {edit === 'email' &&
-                         <Flex flexWrap='wrap'  w='100%' >
+                         <Flex 
+                            as='form' flexWrap='wrap'
+                            onSubmit={handleSubmit(onSubmit)} 
+                            w='100%'
+                          >
                             <Box width={['100%', 6/8]} px={[0,2]}> 
+                              <label htmlFor='email' >{t('signup.new-email')}</label>
                                <Input 
-                                 id='email' name='email' 
+                                 id='email' name='EM' 
                                  type='email'  
                                  defaultValue={userData.email}
+                                 {...register('EM',{required: true})}
                                 />
                                
                              </Box>
                           
                            <Box width={'100%'}>
-                             <Button bg='green' onClick={submitEmail} sx={{marginLeft:'1em', marginTop:'0.8em', cursor:'pointer'}}> {t('common:save')}</Button>
+                             <Button type='submit' bg='green' sx={{marginLeft:'1em', marginTop:'0.8em', cursor:'pointer'}}> {t('common:save')}</Button>
                           </Box>
                         </Flex>
                       }
                     </Flex>
-             
+                    
+                    {/*Member password Edit Form*/}
+                      <Flex flexWrap='wrap' w='100%' pb={[1]} sx={{borderBottom:'2px solid white'}}  >
+                        <Flex flexWrap='wrap' w='100%'>
+                          <h4 style={{marginBottom:'0.3em'}} htmlFor='password'> {t('signup.password')} </h4>
+                          <div style={{flexGrow:'1'}} />
+                          <p 
+                            style={{textDecoration:'underline', cursor:'pointer', marginBottom:'0', marginRight:'0.5em'}} 
+                            onClick={()=>handleEdit(edit === 'password' ?false:'password')}
+                          >
+                            <strong> {edit === 'password' ?'Cancel':'Edit'} </strong> 
+                          </p>
+                        </Flex>
+                        {edit !== 'password'  &&  <p style={{marginLeft:'0.4em'}}>Update your login password </p> }
+                        {message && edit === 'password' &&   <p style={{width:'100%'}}> <strong> Your Password is now updated </strong> </p>}
+                        {edit === 'password' &&
+                           <Flex flexWrap='wrap'  w='100%' >
+                            <Box width={['100%', 6/8]}  > 
+                               
+                               {message&&
+                                 <Text>{t('settings-page.password-change-confirm')} </Text>
+                               } 
+
+                               <Box w='100%' px={[0,2]}> 
+                                <InputGroup size='md'>
+                                  <Input
+                                    pr='4.5rem'
+                                    type={show[1] ? 'text' : 'password'}
+                                    placeholder={t('public:signup.enter-password')} 
+                                    {...register('CP',{required: true})}
+                                   // onChange={changeO}
+                                  />
+                                  <InputRightElement width='4.5rem'>
+                                    <Button 
+                                      h='1.75rem' size='sm' 
+                                      onClick={()=> setShow({...show, 1:show[1]?false:true}) } 
+                                    >
+                                      {show[1] ? t('public:signup.hide') : t('public:signup.show')}
+                                    </Button>
+                                  </InputRightElement>
+                                </InputGroup>
+                              </Box>
+                              
+                              <Link href={`/account/recover`} style={{margin:'0.3em 0'}}>{t('signup.forgot-password')} </Link>
+                              
+                              {error && <Text  my={2} sx={{color:'#FE0C0B'}} > <FormatPasswordValidateError errors={error} /> </Text>}
+
+                              <Box w='100%' mt='4' px={[0,2]}> 
+                                <InputGroup size='md'>
+                                  <Input
+                                    pr='4.5rem'
+                                    type={show[2] ? 'text' : 'password'}
+                                    placeholder={t('public:signup.new-password')} 
+                                    {...register('NP',{required: true})}
+                                   // onChange={changeO}
+                                  />
+                                  <InputRightElement width='4.5rem'>
+                                    <Button 
+                                      h='1.75rem' size='sm' 
+                                      onClick={()=> setShow({...show, 2:show[2]?false:true}) } 
+                                    >
+                                      {show[2] ? t('public:signup.hide') : t('public:signup.show')}
+                                    </Button>
+                                  </InputRightElement>
+                                </InputGroup>
+                              </Box>
+
+                              <Box w='100%' mt='2' px={[0,2]}> 
+                                <InputGroup size='md'>
+                                  <Input
+                                    pr='4.5rem'
+                                    type={show[3] ? 'text' : 'password'}
+                                    placeholder={t('public:signup.confirm-password')} 
+                                    {...register('CNP',{required: true})}
+                                   // onChange={changeO}
+                                  />
+                                  <InputRightElement width='4.5rem'>
+                                    <Button 
+                                      h='1.75rem' size='sm' 
+                                      onClick={()=> setShow({...show, 3:show[3]?false:true}) } 
+                                    >
+                                      {show[3] ? t('public:signup.hide') : t('public:signup.show')}
+                                    </Button>
+                                  </InputRightElement>
+                                </InputGroup>
+                              </Box>
+
+                             </Box>
+                            {!error && 
+                              <Box w='100%'>
+                                <Button type='submit' bg='green' sx={{marginLeft:'1em', marginTop:'0.8em', cursor:'pointer'}}> {t('common:save')}</Button>
+                              </Box>
+                            }
+
+                          </Flex>
+                        }
+                      </Flex>
 
 
                   </Flex>
