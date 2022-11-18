@@ -44,7 +44,7 @@ const NewCode = () => {
             <Input id='email' name='email' type='email' placeholder={t('signup.email')} onChange={changeEmail} />
           </Box>
           <Box w='100%' mt={2} >
-            <Button primary style={{width:'100%'}} onClick={onSubmit}>{t('signup.send-confirm-email')}</Button>
+            <Button style={{width:'100%'}} onClick={onSubmit}>{t('signup.send-confirm-email')}</Button>
           </Box>
         </>
       :
@@ -142,7 +142,7 @@ export default function ConfirmEmail() {
                   </Flex>
 
                   <Box w='100%' mt={2}>
-                    <Button primary style={{width:'100%'}} onClick={onSubmitLogin}>{t('signup.confirm-email')}</Button>
+                    <Button style={{width:'100%'}} onClick={onSubmitLogin}>{t('signup.confirm-email')}</Button>
                   </Box>
 
                 </Flex>
