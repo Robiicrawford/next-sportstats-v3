@@ -172,7 +172,7 @@ export default function Settings({locale}) {
                             <strong> {edit === 'distance' ?'Cancel':'Edit'} </strong> 
                           </p>
                         </Flex>
-                        {edit !== 'distance'  &&  <p style={{marginLeft:'0.4em'}}>{userData['custom:preferredUnit']?t(`settings-page.${preferredUnit[userData['custom:preferredUnit']]}`):t('settings-page.metric')} </p> }
+                        {edit !== 'distance'  &&  <p style={{marginLeft:'0.4em'}}>{userData?.['custom:preferredUnit']?t(`settings-page.${preferredUnit[userData?.['custom:preferredUnit']]}`):t('settings-page.metric')} </p> }
                         {edit === 'distance' &&
                            <Flex
                               as='form' flexWrap='wrap'
@@ -185,7 +185,7 @@ export default function Settings({locale}) {
                                 name='distance'
                                 bg='white' color='black'
                                 {...register('PU')}
-                                defaultValue={userData['custom:preferredUnit']}
+                                defaultValue={userData?.['custom:preferredUnit']}
                               >
                                 <option value='0'> {t('settings-page.metric')} </option>
                                 <option value='1'> {t('settings-page.imperial')} </option>
