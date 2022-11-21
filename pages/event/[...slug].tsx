@@ -134,9 +134,9 @@ function Master({ master }) {
                     fontSize='14px' 
                     variant='outline' colorScheme='gray'
                   //  defaultValue={data?.event?.id}
-                    onChange={(e)=>{
-                      setA(e.target.value)
-                    }}
+                  //  onChange={(e)=>{
+                  //    setA(e.target.value)
+                  //  }}
                   >  
                     
                     {master?.events?.map((e)=>
