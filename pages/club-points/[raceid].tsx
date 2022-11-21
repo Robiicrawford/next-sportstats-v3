@@ -466,7 +466,7 @@ export async function getStaticProps({ params, locale }) {
       ...(await serverSideTranslations(locale, ['common', 'public', 'app','translation'], null, ['en', 'fr'])),
       race: data?.race?data?.race:{},
       results: data?.race?data?.allTeamResults:{},
-      revalidate: 160, // In seconds
+      revalidate: 5, // In seconds
     } 
   }
 }
