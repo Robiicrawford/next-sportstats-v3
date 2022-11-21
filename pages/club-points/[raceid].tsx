@@ -72,7 +72,35 @@ const Styles = styled.div`
   }
 `
 
-function Table({ columns: userColumns, data, renderRowSubComponent }) {
+
+const GET_RESULTS = gql`
+  query GetResults($rid: Int!) {
+    allTeamResults(rid: $rid) {
+        clubs {
+          club
+          place
+          tp
+          data{
+            Number
+            FName
+            LName
+            Div
+            DivPlace
+            Time
+            diff
+            points
+          }
+        }
+        divs {
+          CL
+          CT
+        }
+      }
+  }
+`;
+
+
+function Table({ columns: userColumns, data, renderRowSubComponent, isLoading }) {
   const {
     getTableProps,
     getTableBodyProps,
@@ -133,30 +161,40 @@ function Table({ columns: userColumns, data, renderRowSubComponent }) {
           {page.map((row, i) => {
             prepareRow(row)
             return (
-              <>
-                <tr {...row.getRowProps()}>
-                  {row.cells.map(cell => {
-                    return <td {...cell.getCellProps()}>{cell.render('Cell')}</td>
-                  })}
-                </tr>
-                {/*
+               <>
+                {isLoading&& new Array(10).fill("").map((_, index) => (
+                          <tr key={index}> 
+                            <td colSpan={999} > <Skeleton height='65px' width='100%' startColor='pink.500' endColor='pink.500'  noOfLines={10}  /> </td>
+                          </tr>
+                      ))}
+                
+              {data && (
+                <>
+                  <tr {...row.getRowProps()}>
+                    {row.cells.map(cell => {
+                      return <td {...cell.getCellProps()}>{cell.render('Cell')}</td>
+                    })}
+                  </tr>
+                  {/*
                     If the row is in an expanded state, render a row with a
                     column that fills the entire length of the table.
                   */}
-                {row.isExpanded ? (
-                  <tr>
-                    <td colSpan={visibleColumns.length}>
-                      {/*
-                          Inside it, call our renderRowSubComponent function. In reality,
-                          you could pass whatever you want as props to
-                          a component like this, including the entire
-                          table instance. But for this example, we'll just
-                          pass the row
-                        */}
-                      {renderRowSubComponent({ row })}
-                    </td>
-                  </tr>
-                ) : null}
+                  {row.isExpanded ? (
+                    <tr>
+                      <td colSpan={visibleColumns.length}>
+                        {/*
+                            Inside it, call our renderRowSubComponent function. In reality,
+                            you could pass whatever you want as props to
+                            a component like this, including the entire
+                            table instance. But for this example, we'll just
+                            pass the row
+                          */}
+                        {renderRowSubComponent({ row })}
+                      </td>
+                    </tr>
+                  ) : null}
+                  </>
+                )}
               </>
             )
           })}
@@ -210,8 +248,15 @@ function Table({ columns: userColumns, data, renderRowSubComponent }) {
   )
 }
 
-function ResultPageInd({ race, results }) {
+function ResultPageInd({ race }) {
   const { t } = useTranslation('common');
+
+  const { loading, data, called, refetch, networkStatus, fetchMore  } = useQuery(
+    GET_RESULTS, {
+      //fetchPolicy: "no-cache",
+      notifyOnNetworkStatusChange: true, 
+      variables: {rid: parseInt(race.rid) }
+    });
 
   const columns = React.useMemo(
     () => [
@@ -245,8 +290,9 @@ function ResultPageInd({ race, results }) {
   )
 
   const dataFinal = React.useMemo(()=> 
-    results?.clubs?results.clubs:[]
-  ,[results]);
+    data?.allTeamResults?.clubs?data?.allTeamResults?.clubs:[]
+  ,[data]);
+
 
   const renderRowSubComponent = React.useCallback(
     ({ row }) => {
@@ -304,7 +350,7 @@ function ResultPageInd({ race, results }) {
               spacing={1}
               align='stretch'
             >
-              {results?.divs.map((div)=>
+              {data?.allTeamResults?.divs.map((div)=>
                 <Flex flexWrap='wrap' justifyContent='space-evenly' >
                   <strong>{div.CL}</strong> <span> - </span> <span> {secondsToTime(div.CT)} </span>
                 </Flex>
@@ -323,8 +369,8 @@ function ResultPageInd({ race, results }) {
         <Spacer mb='4'/>
         {/* result section */}
         <Flex  flexWrap='wrap'  w='100%' pt={3} className='card__base'  >
-          {!results?.divs && <Heading w='100%' textAlign='center'>No Results Yet</Heading>}
-          {results?.divs &&
+          {!data?.allTeamResults?.divs && <Heading w='100%' textAlign='center'>No Results Yet</Heading>}
+          {data?.allTeamResults?.divs &&
             <>
               <ButtonGroup  spacing='6' px='3'>
                 <Button colorScheme='teal' onClick={onOpen}>
@@ -336,11 +382,11 @@ function ResultPageInd({ race, results }) {
                      colorScheme='teal'
                       as={CSVDownloader}
                      data={()=>{
-                      if(!results?.clubs){
+                      if(!data?.allTeamResults?.clubs){
                         return false
                       } else {
                        
-                        return results?.clubs.map((c)=> {
+                        return data?.allTeamResults?.clubs.map((c)=> {
                           return {place:c.place, club: c.club, points:c.tp}
                         })
 
@@ -357,6 +403,7 @@ function ResultPageInd({ race, results }) {
 
               <Styles>
                 <Table 
+                  isLoading={loading}
                   columns={columns} 
                   data={dataFinal}
                   renderRowSubComponent={renderRowSubComponent}
@@ -394,27 +441,6 @@ export async function getStaticProps({ params, locale }) {
 
   const query = gql`
     query GetRaceResults($rid: Int!) {
-      allTeamResults(rid: $rid) {
-        clubs {
-          club
-          place
-          tp
-          data{
-            Number
-            FName
-            LName
-            Div
-            DivPlace
-            Time
-            diff
-            points
-          }
-        }
-        divs {
-          CL
-          CT
-        }
-      }
       race(rid:$rid){
         id
         rid
@@ -465,8 +491,7 @@ export async function getStaticProps({ params, locale }) {
     props: { 
       ...(await serverSideTranslations(locale, ['common', 'public', 'app','translation'], null, ['en', 'fr'])),
       race: data?.race?data?.race:{},
-      results: data?.race?data?.allTeamResults:{},
-      revalidate: 5, // In seconds
+      revalidate: 130, // In seconds
     } 
   }
 }
