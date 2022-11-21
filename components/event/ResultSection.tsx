@@ -31,7 +31,7 @@ const Index = ({data, master}) => {
               </Flex>
             </Link>
             {master.sid === 57 &&
-              <Flex w='100%' pt='1' sx={{borderTop:'1px dotted black'}}>
+              <Flex w='100%' pt='1AA' sx={{borderTop:'1px dotted black'}}>
                 <Link
                   href={`/club-points/${r.rid}`}
                   style={{cursor:'pointer !important', marginBottom:'5px'}}

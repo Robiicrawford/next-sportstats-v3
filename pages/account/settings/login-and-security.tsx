@@ -36,6 +36,7 @@ schema
   .has().symbols();
 
 
+
 export default function Settings({locale}) {
   const { t } = useTranslation('public');
   const auth = useAuth();
@@ -52,33 +53,12 @@ export default function Settings({locale}) {
 
   const { register, setValue, handleSubmit, control, watch, reset } = useForm();
 
-  const formatPasswordValidateError = (errors) => {
-    for (let i = 0; i < errors.length; i++) {
-      if (errors[i] === 'min') {
-        return t('signup.error.min') ;
-      } else if (errors[i] === 'lowercase') {
-        return t('signup.error.lowercase');
-      } else if (errors[i] === 'uppercase') {
-        return t('signup.error.uppercase');
-      } else if (errors[i] === 'digits') {
-        return t('signup.error.digits');
-      } else if (errors[i] === 'symbols') {
-        return t('signup.error.symbols');
-      } else if (errors[i] === 'match') {
-        return t('signup.error.match');
-      } else if (errors[i] === 'Invalid code provided, please request a code again.'){
-        return t('signup.error.Invalid code provided, please request a code again.');
-      } else if(errors[i] === 'Email Exists'){
-        return 'Email Exists'
-      }
-    }
-  };
+  
 
   useEffect(()=>{
     if(edit === 'password'){
       if(watch("NP") && !schema.validate(watch("NP").trim())){
         setError(schema.validate(watch("NP").trim(), { list: true } ))
-        console.log(schema.validate(watch("NP").trim() , { list: true }))
       } else {
         setError(false)
       }
@@ -173,6 +153,29 @@ export default function Settings({locale}) {
     }
     
   }
+
+
+  const formatPasswordValidateError = (errors) => {
+    for (let i = 0; i < errors.length; i++) {
+      if (errors[i] === 'min') {
+        return t('signup.error.min') ;
+      } else if (errors[i] === 'lowercase') {
+        return t('signup.error.lowercase');
+      } else if (errors[i] === 'uppercase') {
+        return t('signup.error.uppercase');
+      } else if (errors[i] === 'digits') {
+        return t('signup.error.digits');
+      } else if (errors[i] === 'symbols') {
+        return t('signup.error.symbols');
+      } else if (errors[i] === 'match') {
+        return t('signup.error.match');
+      } else if (errors[i] === 'Invalid code provided, please request a code again.'){
+        return t('signup.error.Invalid code provided, please request a code again.');
+      } else if(errors[i] === 'Email Exists'){
+        return 'Email Exists'
+      }
+    }
+  };
 
   return (
     <Layout>
