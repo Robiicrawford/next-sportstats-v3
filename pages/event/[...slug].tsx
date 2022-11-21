@@ -84,7 +84,7 @@ function Master({ master }) {
           w='100%'
           justifyContent='center'
           pt={['20px']}
-          minHeight={['220px','300px','450px']}
+          minHeight={['280px','300px','450px']}
         >
           <Box
             w='100%'
@@ -107,7 +107,7 @@ function Master({ master }) {
             height='fit-content'
             mt='-150px'
             alignSelf='center'
-            justifyContent='center'
+           
             sx={{zIndex:'1'}}
           >
             <Box
@@ -118,12 +118,36 @@ function Master({ master }) {
                   fontSize={['4xl', '48px', '58px']}
                   noOfLines={2}
                   lineHeight='tight'
-                  sx={{textShadow:'2px 2px #021076'}}
-                  mb='3'
+                  color='white'
+                  sx={{textShadow:'2px 2px #000'}}
+                 
                 >
             {master?.info?.name}
           </Box>
- 
+            <Box  >
+                  <Select 
+                    bg='white'
+                    style={{
+                      borderRadius:'15px',
+                      maxWidth:'550px'
+                    }} 
+                    fontSize='14px' 
+                    variant='outline' colorScheme='gray'
+                  //  defaultValue={data?.event?.id}
+                    onChange={(e)=>{
+                      setA(e.target.value)
+                    }}
+                  >  
+                    
+                    {master?.events?.map((e)=>
+                      <option value={e.id} key={e.id}> 
+                        { new Date( e.start_date.slice(0,10)).toLocaleDateString('en', { month: 'short', day: 'numeric' } )} , {e.start_date.slice(0,4)} 
+                      </option>
+                    )}
+                   </Select>
+                </Box>
+
+
           </Flex>
         </Flex>
       

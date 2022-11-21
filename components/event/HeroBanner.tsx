@@ -69,8 +69,8 @@ const Index = ({data, slug, setA}) => {
 
             <Flex flexWrap='wrap' sx={{flexGrow:'1'}} pl={['2','4']}>
              
-              <Box my={[1,2]}  color='#000'>
-                <Box  >
+             <Box my={[1,2]}  color='#000'>
+               {/*  <Box  >
                   <Select 
                     style={{
                       borderRadius:'15px',
@@ -90,7 +90,7 @@ const Index = ({data, slug, setA}) => {
                       </option>
                     )}
                    </Select>
-                </Box>
+                </Box> */}
 
                 <Box
                   w='100%'
@@ -104,10 +104,8 @@ const Index = ({data, slug, setA}) => {
                 
               </Box>
               
-              <Flex flexWrap='wrap' width={['100%',1/2,1/2,1/3,3/4]}>
-                
-                
-              </Flex>
+              <Flex flexWrap='wrap' width={['100%',1/2,1/2,1/3,3/4]} />
+              
 
             </Flex>
             

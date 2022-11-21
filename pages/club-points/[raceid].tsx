@@ -369,7 +369,7 @@ function ResultPageInd({ race }) {
         <Spacer mb='4'/>
         {/* result section */}
         <Flex  flexWrap='wrap'  w='100%' pt={3} className='card__base'  >
-          {!data?.allTeamResults?.divs && <Heading w='100%' textAlign='center'>No Results Yet</Heading>}
+          {!data?.allTeamResults?.divs && !loading && <Heading w='100%' textAlign='center'>No Results Yet</Heading>}
           {data?.allTeamResults?.divs &&
             <>
               <ButtonGroup  spacing='6' px='3'>
