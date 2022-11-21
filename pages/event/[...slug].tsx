@@ -88,7 +88,6 @@ function Master({ master }) {
             top:'0',
             width: '100%',
             maxHeight: '50vh',
-            minHeight: '450px',
             overflow: 'hidden',
             backgroundImage: `url('${master?.info?.mcimg? `https://cdn-1.sportstats.one/img/master_cover/${master?.mid}_${master?.info?.mcimg}.png`: 'https://cdn-1.sportstats.one/img/master_cover/sportstats_paper_full.jpg'}')`,
             backgroundSize: 'cover',
@@ -96,8 +95,20 @@ function Master({ master }) {
           }}
           justifyContent='center'
           pt={['20px']}
+          minHeight={['250px','450px']}
         >
-          <Heading fontSize={['54px','72px']} textAlign='center'>{master?.info?.name}</Heading>
+          <Box
+             mt='-150px'
+                  fontWeight='bold'
+                  as='h1'
+                  fontSize={['4xl', '48px', '58px']}
+                  noOfLines={2}
+                  lineHeight='tight'
+                  alignSelf='center'
+                  mb='3'
+                >
+            {master?.info?.name}
+          </Box>
         </Flex>
       
       <Section.Container id="series" Background={Background} >

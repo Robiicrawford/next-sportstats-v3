@@ -56,12 +56,11 @@ const Index = ({data, slug, setA}) => {
                       currentTarget.onerror = null; // prevents looping
                       currentTarget.src='https://ss-event-images.s3.us-west-2.amazonaws.com/ss_triathlon.jpeg';
                     }}
-                    mt='2'
-                    ml='2'
-                    width='auto'
-                    height='250px'
-                    objectFit='cover'
-                    className="card__image" 
+                   width='auto'
+                      height={['120px','250px']}
+                      my='2' ml='2'
+                      objectFit='cover'
+                      className="card__image" 
                     style={{borderRadius:'15px', border:'1px solid black'}}
                   />
               </Heading>
@@ -72,24 +71,23 @@ const Index = ({data, slug, setA}) => {
              
               <Box my={[1,2]}  color='#000'>
                 <Box
-                  mt='1'
+                  w='100%'
+                  color='#718096'
                   fontWeight='semibold'
-                  as='h3'
-                  fontSize={['36px']}
-                  lineHeight='42px'
-                  noOfLines={2}
-                  mb='3'
+                  letterSpacing='wide'
+                  fontSize='lg'
                 >
-                  {data?.info?.city}, {data?.info?.state} | {countries.getName(data?.info?.country, "en", {select: "official"})}
+                  {data?.info?.city}, {data?.info?.state} | {countries.getName(data?.info?.country, 'en', {select: "official"})}
                 </Box>
                 <Box  >
                   <Select 
                     style={{
-                      marginLeft:'1em', backgroundColor:'grey', 
+                      marginLeft:'1em',
                       borderRadius:'15px',
                       maxWidth:'550px'
                     }} 
-                    fontSize='14px'
+                    fontSize='14px' mt='2'
+                    variant='outline' colorScheme='gray'
                   //  defaultValue={data?.event?.id}
                     onChange={(e)=>{
                       setA(e.target.value)

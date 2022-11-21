@@ -277,6 +277,7 @@ function Table({race, columns, data, isLoading}) {
     }
   };
 
+  console.log(race)
   return (
     <>
        <Drawer
@@ -320,7 +321,7 @@ function Table({race, columns, data, isLoading}) {
                 </Box>
               )}
 
-              {race?.category?.cats?.sort( dynamicSort("CL") )?.map((cat)=>
+              {/*race?.category?.cats?.sort( dynamicSort("CL") )?.map((cat)=>
                 <Box 
                   className='filterOprion'  
                   key={cat.CL} w='100$'
@@ -330,7 +331,7 @@ function Table({race, columns, data, isLoading}) {
                   <span className='filterOprionText'>{cat.CL} </span>
                    <FontAwesomeIcon icon={faEye} size="1x"/>
                 </Box>
-              )}
+              )*/}
 
   
             </VStack>
@@ -472,9 +473,6 @@ function ResultPageInd({ race }) {
       variables: {rid:race.rid }
     });
 
-  console.log(data)
-
-  console.log(race)
   const handleShare = (event) => {
     event.preventDefault()
     if (navigator.share) {
@@ -599,7 +597,6 @@ function ResultPageInd({ race }) {
             } 
           } 
       }).filter((item)=> {return item !== undefined})
-
       return set?.sort((a,b)=> {return a.co - b.co}) 
 
     } else {
@@ -608,8 +605,9 @@ function ResultPageInd({ race }) {
   } 
 
   const columns = React.useMemo( () => computeCols(race)  ,[race] ) ;
-  const dataFinal = React.useMemo(()=> (data && data.results.results.length>= 1)? data.results.results: [],[data]);
+  const dataFinal = React.useMemo(()=> (data && data.results.results.length>= 1)? data.results.results: [],[data, race?.rid]);
 
+  console.log(data)
   useEffect(()=>{
     if(loading === false) {
       setLoading(false)

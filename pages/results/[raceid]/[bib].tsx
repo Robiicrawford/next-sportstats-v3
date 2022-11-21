@@ -116,7 +116,7 @@ const TransitionRow = ({info, data}) => {
       <BlankRow key={info.CL+"_blank"}/>
       <tr className="name_row" key={info.CL+"_row2"}>
         <td colSpan={1}><Heading >Transition - {info.CL}</Heading></td>
-        <td> <Heading fontSize={2} ml={2}><span style={{paddingLeft:'1rem'}}> {msToTime(data?.ST ? data?.ST : parseInt(data?.CD) ) }</span> </Heading> </td>
+        <td> <Heading ><span style={{paddingLeft:'1rem'}}> {msToTime(data?.ST ? data?.ST : parseInt(data?.CD) ) }</span> </Heading> </td>
         <td colSpan={6}></td>
       </tr>
      
@@ -169,16 +169,21 @@ const SubRow = ({info, raceInfo, data, prepareRow}) => {
     <tr className="split_row" style={ {backgroundColor: !data? '#564949ab ':''}}>
       
       <td style={{textTransform: 'capitalize', paddingLeft:'2rem'}} colSpan={1}>
-        <Heading fontSize={info.CD?2:4} ml={2}> {info.name} </Heading>
-        {info.CD ? <Text  pl={[1,2,3]} fontSize={1}>{info.CD/1000}km || {Math.round(( (info.CD*0.000621371192) + Number.EPSILON) * 100) / 100}mi</Text> : null }
+        <Heading fontSize={info.CD?'1em':'2em'} ml={2}> {info.CL} </Heading>
+        {info.CD ? <Text pl={[1,2,3]} >{info.CD/1000}km || {Math.round(( (info.CD*0.000621371192) + Number.EPSILON) * 100) / 100}mi</Text> : null }
       </td>
       
       <td>
-        <Heading fontSize={2}>{msToTime(data?.ST)} | </Heading>
-        <Text fontSize={1} pl={[1,2,3]}>{msToTime(data?.CD)}</Text>
+        {![6,7].includes(info.CT)&&  <Heading fontSize='1.2em' >{msToTime(data?.ST)} | </Heading> }
+        <Text pl={[1,2,3]}>{msToTime(data?.CD)}</Text>
       </td>
 
-      <td style={{textAlign:'center'}}>{data?.CD && info.CD? calculatePace( info.CDS, data.ST, raceInfo.CT, info.name  ): '---'}</td>
+      <td style={{textAlign:'center'}}>
+        {[6,7].includes(info.CT) && raceInfo.type.toLowerCase() !== 'triathlon'
+            ?  calculatePace( info.CDS?info.CDS:info.CD, data?.CD, raceInfo.CT , info.CL ) 
+            : data?.CD && info.CD? calculatePace( info.CD, data.ST,  raceInfo.CT, info.CL  ): '---'
+          }
+      </td>
       <td className='center min-tablet'>{data?.TOD? msToTime(data.TOD):'est. '+data?.estTod}</td>
       <td className='center min-desktop'>{data?.RO} </td>
       <td className='center min-desktop'>{data?.RG} </td>
