@@ -17,7 +17,7 @@ import { useTranslation } from 'next-i18next';
 import { gql } from "@apollo/client";
 import {client} from "../../apollo/apollo-client";
 
-import { Flex, Box, Heading, Text } from '@chakra-ui/react';
+import { Flex, Box, Heading, Text, Select } from '@chakra-ui/react';
 
 import Section from '../../components/section';
 import Triangle from '../../components/triangle';
@@ -82,45 +82,61 @@ function Master({ master }) {
       />
         <Flex 
           w='100%'
-          style={{
-            position:'relative',
-            display:'grid',
-            top:'0',
-            width: '100%',
-            maxHeight: '50vh',
-            overflow: 'hidden',
-            backgroundImage: `url('${master?.info?.mcimg? `https://cdn-1.sportstats.one/img/master_cover/${master?.mid}_${master?.info?.mcimg}.png`: 'https://cdn-1.sportstats.one/img/master_cover/sportstats_paper_full.jpg'}')`,
-            backgroundSize: 'cover',
-            backgroundPosition:'center'
-          }}
           justifyContent='center'
           pt={['20px']}
-          minHeight={['250px','450px']}
+          minHeight={['220px','300px','450px']}
         >
           <Box
-             mt='-150px'
+            w='100%'
+            height='100%'
+             style={{
+              position:'absolute',
+              display:'grid',
+              top:'0',
+              width: '100%',
+              maxHeight: '50vh',
+              overflow: 'hidden',
+              filter: 'brightness(50%) ',
+              backgroundImage: `url('${master?.info?.mcimg? `https://cdn-1.sportstats.one/img/master_cover/${master?.mid}_${master?.info?.mcimg}.png`: 'https://cdn-1.sportstats.one/img/master_cover/sportstats_paper_full.jpg'}')`,
+              backgroundSize: 'cover',
+              backgroundPosition:'center'
+            }}
+          />
+          <Flex
+            flexWrap='wrap'
+            height='fit-content'
+            mt='-150px'
+            alignSelf='center'
+            justifyContent='center'
+            sx={{zIndex:'1'}}
+          >
+            <Box
+              w='100%'
+              textAlign='center'
                   fontWeight='bold'
                   as='h1'
                   fontSize={['4xl', '48px', '58px']}
                   noOfLines={2}
                   lineHeight='tight'
-                  alignSelf='center'
+                  sx={{textShadow:'2px 2px #021076'}}
                   mb='3'
                 >
             {master?.info?.name}
           </Box>
+ 
+          </Flex>
         </Flex>
       
       <Section.Container id="series" Background={Background} >
 
         <Flex  w='100%' flexWrap='wrap' px={['0','3','5']} mt='-150px'>
           <HeroBanner data={master}  setA={null} slug='test'/>  
-       
+          
+          <Flex as="a" id="results" w='100%' flexWrap='wrap' >
+            <ResultSection data={master?.lastEvent} master={master} />
+          </Flex>
+
           <Flex as="a" id="info" flexWrap='wrap' className='card__base' w='100%' mt='4' pt={2} height='fit-content' bg='white' style={{borderRadius:'15px', border:'1px solid black'}} >
-             
-              <Box w='100%' py={[2,3]} px={[2,4]} >
-                <Heading color='black' style={{borderBottom:'1px solid black'}}>{master?.info?.name}</Heading>
-              </Box>
              
               <Box w='100%' pt={[1,3]} px={[1,3]} mb={[2,4]} >
                 {!master && <Text> ...LOADING... </Text>}
@@ -158,9 +174,7 @@ function Master({ master }) {
 
           </Flex>
 
-          <Flex as="a" id="results" w='100%' flexWrap='wrap' >
-            <ResultSection data={master?.lastEvent} master={master} />
-          </Flex>
+
 
           {master?.sid > 0 &&
             <>
@@ -272,6 +286,7 @@ export async function getStaticProps({ params, locale }) {
           id
           eid
           start_date
+          end_date
           name
         }
         series{

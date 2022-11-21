@@ -5,7 +5,7 @@ import Link from 'next/link'
 import { useTranslation } from 'next-i18next';
 
 import styled from "styled-components";
-import { Box, Flex, Heading, Text, Image } from '@chakra-ui/react';
+import { Box, Flex, Heading, Text, Image, Icon } from '@chakra-ui/react';
 import { Select } from '@chakra-ui/react'
 
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
@@ -70,19 +70,9 @@ const Index = ({data, slug, setA}) => {
             <Flex flexWrap='wrap' sx={{flexGrow:'1'}} pl={['2','4']}>
              
               <Box my={[1,2]}  color='#000'>
-                <Box
-                  w='100%'
-                  color='#718096'
-                  fontWeight='semibold'
-                  letterSpacing='wide'
-                  fontSize='lg'
-                >
-                  {data?.info?.city}, {data?.info?.state} | {countries.getName(data?.info?.country, 'en', {select: "official"})}
-                </Box>
                 <Box  >
                   <Select 
                     style={{
-                      marginLeft:'1em',
                       borderRadius:'15px',
                       maxWidth:'550px'
                     }} 
@@ -95,10 +85,23 @@ const Index = ({data, slug, setA}) => {
                   >  
                     
                     {data?.events?.map((e)=>
-                      <option value={e.id} key={e.id}>{e.start_date.slice(0,10)} | {e.name} </option>
+                      <option value={e.id} key={e.id}> 
+                        { new Date( e.start_date.slice(0,10)).toLocaleDateString('en', { month: 'short', day: 'numeric' } )} , {e.start_date.slice(0,4)} 
+                      </option>
                     )}
                    </Select>
                 </Box>
+
+                <Box
+                  w='100%'
+                  color='#718096'
+                  fontWeight='semibold'
+                  letterSpacing='wide'
+                  fontSize='lg'
+                >
+                  {data?.info?.city}, {data?.info?.state} | {countries.getName(data?.info?.country, 'en', {select: "official"})}
+                </Box>
+                
               </Box>
               
               <Flex flexWrap='wrap' width={['100%',1/2,1/2,1/3,3/4]}>
@@ -112,19 +115,23 @@ const Index = ({data, slug, setA}) => {
              
               <Box w={['100%',1/2, 1/3 ,1/4]}  />
 
-              <Flex flexWrap='wrap' w={['100%',3/4,3/4,1/3]} justifyContent='space-around'>
+              <Flex flexWrap='wrap' w={['100%',3/4,3/4,1/3]} justifyContent='space-around' color='black' fontWeight='bold'>
                
                 <Link
                   href={`#info`}
                   style={{textAlign:'center', textDecoration:'none'}}
-                  legacyBehavior>
-                  <Box    mx={2} mt={1} sx={{ cursor:'pointer'}} bg='none'   > 
+                >
+                  <Box    px={2}  sx={{ cursor:'pointer'}} bg='none'   > 
                   
-                    <Box bg='white' width='70px' height='70px' textAlign='center' display='inline-block' p={3} style={{borderRadius:'50%', border:'1px solid black'}} mt={'-55px'}> 
-                      <FontAwesomeIcon icon={faInfo} size='2x' style={{color:'green'}}  />
-                    </Box>
+                    <Icon 
+                      width={['50px','70px']} 
+                      height={['50px','70px']}   
+                      bg='white' p='2'
+                      style={{borderRadius:'50%', border:'1px solid black'}} mt={'-30px'}> 
+                      <FontAwesomeIcon icon={faInfo} size='2x' style={{color:'black'}}  />
+                    </Icon>
 
-                    <Text display='block'  textAlign='center' color='white'  fontSize={'2em'}> Info </Text>
+                    <Text display='block'  textAlign='center'  fontSize={'1.5em'}> Info </Text>
                    </Box>
                   
                 </Link>
@@ -132,26 +139,35 @@ const Index = ({data, slug, setA}) => {
                 <Link
                   href={`#results`}
                   style={{textAlign:'center', textDecoration:'none'}}
-                  legacyBehavior>
-                  <Box    mx={2} mt={1} sx={{ cursor:'pointer'}} bg='none' textAlign='center'   > 
-                  
-                    <Box bg='white' width='70px' height='70px' textAlign='center' display='inline-block' p={3} style={{borderRadius:'50%', border:'1px solid black'}} mt={'-55px'}> 
-                      <FontAwesomeIcon icon={faClock} size='2x' style={{color:'green'}}  />
-                     </Box>
+                >
+                  <Box     sx={{ cursor:'pointer'}}   > 
+                    <Icon 
+                      width={['50px','70px']} 
+                      height={['50px','70px']}   
+                      bg='white' p='2'
+                      style={{borderRadius:'50%', border:'1px solid black'}} mt={'-30px'}> 
+                      <FontAwesomeIcon icon={faClock} size='2x' style={{color:'black'}}  />
+                    </Icon>
 
-                    <Text display='block' textAlign='center' color='white'  fontSize={'2em'}> Results </Text>
+                    
+
+                    <Text display='block' textAlign='center'  fontSize={'1.5em'}> Results </Text>
                    </Box>
                   
                 </Link>
 
                 <Flex >
-                  <Box    mx={2} mt={1} sx={{ cursor:'pointer'}} bg='none' textAlign='center' onClick={handleShareClick}  > 
-                  
-                    <Box bg='white' width='70px' height='70px' textAlign='center' display='inline-block' p={3} style={{borderRadius:'50%', border:'1px solid black'}} mt={'-55px'}> 
-                      <FontAwesomeIcon icon={faShareAlt} size='2x' style={{color:'green'}}  />
-                     </Box>
+                  <Box    mx={2}  sx={{ cursor:'pointer'}} bg='none' textAlign='center' onClick={handleShareClick}  > 
+                    <Icon 
+                      width={['50px','70px']} 
+                      height={['50px','70px']}   
+                      bg='white' p='2'
+                      style={{borderRadius:'50%', border:'1px solid black'}} mt={'-30px'}> 
+                      <FontAwesomeIcon icon={faShareAlt} size='2x' style={{color:'black'}}  />
+                    </Icon>
 
-                    <Text display='block'  textAlign='center' color='white'  fontSize={'2em'}> Share </Text>
+
+                    <Text display='block'  textAlign='center' fontSize={'1.5em'}> Share </Text>
                    </Box>
                   
                 </Flex>
