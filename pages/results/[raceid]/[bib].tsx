@@ -1,13 +1,15 @@
 import React, {useState, useEffect} from "react"
 import { NextSeo } from 'next-seo';
 
+import { useRouter } from "next/router";
+
 import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
 import { useTranslation } from 'next-i18next';
 
 import { useAuthenticator } from '@aws-amplify/ui-react';
 
 import styled from "styled-components";
-import { Flex, Center, Box, Heading, Text, Button, Spacer, Avatar } from '@chakra-ui/react';
+import { Flex, Center, Box, Heading, Text, Button, Spacer, Avatar, CloseButton } from '@chakra-ui/react';
 
 import Layout from '../../../components/layout/Layout'
 
@@ -22,6 +24,8 @@ import { useLazyQuery, gql } from "@apollo/client";
 import {client} from "../../../apollo/apollo-client";
 
 import {msToTime, msToPace, calculatePace} from '../../../utils/formatTime'
+
+
 
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCaretRight, faAngleDown, faHashtag, faUserGroup, faShareAlt  } from "@fortawesome/free-solid-svg-icons";
@@ -208,7 +212,7 @@ function ordinal_suffix_of(i) {
     return i + "th";
 }
 
-function ResultPageInd({ result, race }) {
+function ResultPageInd({ result, race, rid }) {
   const { t } = useTranslation('common');
   const [open, setOpen] = useState(null)
   const { user } = useAuthenticator((context) => [context.user]);
@@ -263,6 +267,7 @@ function ResultPageInd({ result, race }) {
     }
   };
 
+  const router = useRouter()
 
   return (
     <Layout header_color='black' >
@@ -275,8 +280,13 @@ function ResultPageInd({ result, race }) {
 
         <Spacer mb='4'/>
         {/* result section */}
-        <Flex  flexWrap='wrap'  w='100%' pt={3} className='card__base'  >
+        <Flex  flexWrap='wrap'  w='100%' pt={3} className='card__base' position='relative'  >
           
+          <CloseButton 
+            style={{border:'1px solid black', position:'absolute', right:'5px', top:'5px'}} 
+            onClick={()=>router.push(`/results/${rid}`)}
+          />
+
           <Flex flexWrap='wrap' w='100%'>
 
             <Flex flexWrap='wrap' w='35%' flex='1 1 15%' sx={{position:'relative'}} justifyContent='space-evenly' >
@@ -530,6 +540,7 @@ export async function getStaticProps({ params, locale }) {
       result: data.result,
       race: data.race,
       revalidate: 160, // In seconds
+      rid: parseInt(params.raceid)
     } 
   }
 }
