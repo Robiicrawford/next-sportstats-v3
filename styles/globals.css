@@ -220,6 +220,11 @@ background: linear-gradient(to bottom, #2F80ED, #56CCF2);
   color: white;
 }
 
+.tag-results:hover {
+ /* background: linear-gradient(to bottom, #000000, #00000085); */
+  color: white;
+}
+
 .tag-live {
   background: var(--chakra-colors-ss_green);
   color: #fafafa;
@@ -319,6 +324,7 @@ background: linear-gradient(to bottom, #2F80ED, #56CCF2);
   color: green;
 }
 
+.filterOprion:last-child { border-bottom: none; }
 
 .filterOprionText{
   padding-right: 1em

@@ -1,4 +1,4 @@
-import React, {useState, useEffect} from "react"
+import React, {useState, useEffect, Suspense} from "react"
 import { NextSeo } from 'next-seo';
 
 import { useRouter } from 'next/router'
@@ -22,6 +22,14 @@ import {
   useDisclosure
 } from '@chakra-ui/react'
 
+import {
+  Accordion,
+  AccordionItem,
+  AccordionButton,
+  AccordionPanel,
+  AccordionIcon,
+} from '@chakra-ui/react'
+
 import { useTable, useFilters, useGlobalFilter, useSortBy, useAsyncDebounce, usePagination, useControlledState } from 'react-table'
 
 import Layout from '../../components/layout/Layout'
@@ -41,9 +49,13 @@ import {client} from "../../apollo/apollo-client";
 import {msToTime, msToPace, calculatePace} from '../../utils/formatTime'
 
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faCaretRight, faAngleDown, faShareAlt, faChartBar, faFilter, faTimes, faEye  } from "@fortawesome/free-solid-svg-icons";
+import { faCaretRight, faAngleDown, faShareAlt, faChartBar, faFilter, faTimes, faEye, faArrowRight, faBackward, faBackwardStep  } from "@fortawesome/free-solid-svg-icons";
+
+const RaceStats = React.lazy(() => import('../../components/race/RaceStats'));
 
 const getCountryISO2 = require("country-iso-3-to-2");
+
+const arrow_right = <FontAwesomeIcon icon={faArrowRight} size="lg"/>;
 
 const label_to_col = {
   name:'name',
@@ -132,8 +144,8 @@ const Styles = styled.div`
 `
 
 const GET_RESULTS = gql`
-  query GetResults($rid: String!) {
-    results(rid: $rid ) {
+  query GetResults($rid: String!, $page: Int, $gender: String) {
+    results(rid: $rid, page: $page, gender: $gender ) {
       id
       rid
       pageInfo {
@@ -180,7 +192,7 @@ const GET_RESULTS = gql`
   }
 `;
 
-function Table({race, columns, data, isLoading}) {
+function Table({race, columns, data, isLoading, setOpenStats, fetchMore}) {
   const { t } = useTranslation('common');
   const router = useRouter()
 
@@ -192,6 +204,8 @@ function Table({race, columns, data, isLoading}) {
 
   const rowClick =(row)=>{ router.push(`/results/${race.rid}/${row.original.bib}`)}
 
+
+  
   const {
     getTableProps,
     getTableBodyProps,
@@ -253,6 +267,19 @@ function Table({race, columns, data, isLoading}) {
     
   )
 
+
+  useEffect(()=> {
+    if(!isLoading){
+      console.log(state)
+      fetchMore({
+        variables: {
+          rid: race.rid,
+          page: state.pageIndex
+        }
+      })
+    }
+  },[state])
+
   const changeSort = (i) => {
     console.log(i)
   }
@@ -277,7 +304,17 @@ function Table({race, columns, data, isLoading}) {
     }
   };
 
-  console.log(race)
+  const handleNext = (scroll) => {
+    let i = controlledPageIndex ;
+    setControlledPage(i+1)
+    nextPage(); 
+  }
+
+  const handleBack = (value) => {
+    setControlledPage(value)
+    previousPage()
+  }
+
   return (
     <>
        <Drawer
@@ -296,30 +333,53 @@ function Table({race, columns, data, isLoading}) {
               justifyContent='flex-start'
             >
               
-              
               {race?.category?.genders?.length>1 &&
                  <Box 
                   className={`div-item`}
                   pl={3} py={2} 
-
+                  w='100%'
+                  fontWeight='bold'
+                  sx={{cursor:'pointer'}}
                 //  onClick={e => { onChange('')}}
                 > 
-                  <span className='filterOprion'> {t('common:overall')} </span>
-                  <FontAwesomeIcon icon={faEye} size="1x"/>
+                  <span className='filterOprionText' > {t('common:overall')} </span>
                   
                 </Box>
               }
 
-              {race?.category?.genders?.map((gender)=>
-                <Box 
-                  className='filterOprion'  
-                  key={gender.GL} w='100$'
-                  fontWeight='bold'
+              <Accordion w='100%'>
+                {race?.category?.genders?.map((gender)=>
+                  <AccordionItem  
+                    key={gender.GL} w='100$'
+                    fontWeight='bold'
                   >
-                  <span className='filterOprionText'>  {t('common:overall')}  {t('common:genders.'+gender.GL.toLowerCase())} </span>
-                   <FontAwesomeIcon icon={faEye} size="1x"/>
-                </Box>
-              )}
+                     <h2>
+                      <AccordionButton>
+                        <Box flex='1' textAlign='left' >
+                          {t('common:overall')}  {t('common:genders.'+gender.GL.toLowerCase())} 
+                        </Box>
+                        <AccordionIcon />
+                      </AccordionButton>
+                    </h2>
+                     <AccordionPanel pb={4}>
+                      <VStack justifyContent='flex-start'>
+                        <Box className='filterOprion'>  <span className='filterOprionText'> {t('common:overall')} </span> </Box>
+                        {race?.category?.cats?.filter((op)=> op?.CL?.charAt(0).toLowerCase() == gender.GL.toLowerCase() ).sort( dynamicSort("CL") )?.map((cat)=>
+                          <Box 
+                            className='filterOprion'  
+                            key={cat.CL} w='100$'
+                            fontWeight='bold'
+
+                            >
+                            <span className='filterOprionText'>{cat.CL} </span>
+                          </Box>
+                        )}
+                      </VStack>
+                    </AccordionPanel>
+                  </AccordionItem>
+                )}
+              </Accordion>
+              
 
               {/*race?.category?.cats?.sort( dynamicSort("CL") )?.map((cat)=>
                 <Box 
@@ -353,18 +413,18 @@ function Table({race, columns, data, isLoading}) {
             <SearchBox />
           </Box>
 
-          <Flex w={['100%','50%','35%']} my={['2', 'auto']} justifyContent={'flex-end'} >
+          <Flex w={['100%','100%','50%','35%']} pb='1' my={['2', 'auto']} justifyContent={'flex-end'}  >
 
             <ButtonGroup  spacing='6'>
-
-              <Button colorScheme='black' variant='outline' onClick={handleShare}  > Share <FontAwesomeIcon icon={faShareAlt} style={{marginLeft:'1em'}} /> </Button>
-
-              <Button colorScheme='blue'  > Stats <FontAwesomeIcon icon={faChartBar} style={{marginLeft:'1em'}} /> </Button>
 
               <ButtonGroup size='md' isAttached  >
                 <Button colorScheme='green' isLoading={isLoading}  ref={btnRefFilter} onClick={onOpen} > Filter <FontAwesomeIcon icon={faFilter} style={{marginLeft:'1em'}} /> </Button>
                 {isOpen && <IconButton colorScheme='red' aria-label='Clear Filter' icon={<FontAwesomeIcon icon={faTimes} />} /> }
               </ButtonGroup>
+
+              <Button colorScheme='blue' onClick={()=>setOpenStats(true)}  > Stats <FontAwesomeIcon icon={faChartBar} style={{marginLeft:'1em'}} /> </Button>
+
+              <Button colorScheme='black' variant='outline' onClick={handleShare}  > Share <FontAwesomeIcon icon={faShareAlt} style={{marginLeft:'1em'}} /> </Button>
 
             </ButtonGroup>
           
@@ -426,6 +486,16 @@ function Table({race, columns, data, isLoading}) {
           
         </Flex>
 
+        <Flex w='100%' pb='1' my={['2', 'auto']} justifyContent={'center'}  >
+          <ButtonGroup gap='3' colorScheme='green' variant='outline'>
+            <Button isDisabled={pageIndex==0?true:false} onClick={()=>handleBack(0)} > <FontAwesomeIcon icon={faBackward} size='lg' /> </Button> 
+            <Button isDisabled={pageIndex==0?true:false} onClick={()=>handleBack(controlledPageIndex-1)} >  <FontAwesomeIcon icon={faBackwardStep} size='lg' /> </Button> 
+            <Box fontWeight='semibold'> 
+              {pageSize*pageIndex+1} - { (pageSize*pageIndex)+(data.length>0?data.length:0) } out of {race?.stats.PC}
+            </Box>     
+            <Button isDisabled={data.length == 10 ?false:true} onClick={handleNext} >{arrow_right}</Button>
+          </ButtonGroup>
+        </Flex>
       </Flex>
     </>
   )
@@ -470,7 +540,7 @@ function ResultPageInd({ race }) {
     GET_RESULTS, {
       //fetchPolicy: "no-cache",
       notifyOnNetworkStatusChange: true, 
-      variables: {rid:race.rid }
+      variables: {rid:race.rid, page: 0, gender: null}
     });
 
   const handleShare = (event) => {
@@ -511,6 +581,7 @@ function ResultPageInd({ race }) {
         }
         else if(item.CID && ['live', 'results'].includes(race.info.status)) {
             // output for result fields
+
             return {
               id:id,
               Header: label,
@@ -526,7 +597,7 @@ function ResultPageInd({ race }) {
                 }
               } ,
               className:`center ${ !["6","7"].includes(item.CT) && 'min-tablet' }`,
-              co: item.CHO+3,
+              co: item.CO+3,
               rci: item.CID,
               filter: (item.CID) ? 'sort' :'',
               sortType: compareNumericString,
@@ -604,15 +675,17 @@ function ResultPageInd({ race }) {
     }
   } 
 
-  const columns = React.useMemo( () => computeCols(race)  ,[race] ) ;
-  const dataFinal = React.useMemo(()=> (data && data.results.results.length>= 1)? data.results.results: [],[data, race?.rid]);
+  const columns = React.useMemo( () => computeCols(race)  ,[race, race?.rid, data?.results] ) ;
+  const dataFinal = React.useMemo(()=> (data && data.results.results.length>= 1)? data.results.results: [],[data?.results, race?.rid]);
 
-  console.log(data)
+
+  const [openStats, setOpenStats] = useState(false)
+
   useEffect(()=>{
     if(loading === false) {
       setLoading(false)
     }
-  },[loading])
+  },[loading, race?.rid])
 
   return (
     <Layout header_color='black' >
@@ -626,13 +699,23 @@ function ResultPageInd({ race }) {
         <Spacer mb='4'/>
         {/* result section */}
         <Flex  flexWrap='wrap'  w='100%' pt={3} className='card__base'  >
-        
-          <Table 
-            race={race} 
-            columns={columns} 
-            data={dataFinal} 
-            isLoading={isLoading}
-          />
+          {!openStats
+            ? <Table 
+                race={race} 
+                columns={columns} 
+                data={dataFinal} 
+                isLoading={isLoading}
+                setOpenStats={setOpenStats}
+                fetchMore={fetchMore}
+              />
+            : <Suspense fallback={<div>Loading...</div>}>
+                <RaceStats 
+                  race={race} 
+                  setOpenStats={setOpenStats}
+                />
+              </Suspense>
+          }
+          
         
         </Flex>
 
@@ -704,6 +787,14 @@ export async function getStaticProps({ params, locale }) {
             CC
           }
         }
+        stats {
+          id
+          PC
+          DNS
+          DNF
+          DSQ
+          FIN
+        }
         event {
           id
           name
@@ -741,7 +832,6 @@ export async function getStaticProps({ params, locale }) {
     props: { 
       ...(await serverSideTranslations(locale, ['common', 'public', 'app','translation'], null, ['en', 'fr'])),
       race: data?.race?data?.race:{},
-      results: [],
       revalidate: 160, // In seconds
     } 
   }

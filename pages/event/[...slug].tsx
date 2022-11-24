@@ -17,7 +17,10 @@ import { useTranslation } from 'next-i18next';
 import { gql } from "@apollo/client";
 import {client} from "../../apollo/apollo-client";
 
-import { Flex, Box, Heading, Text, Select } from '@chakra-ui/react';
+import { 
+    Flex, Box, Heading, Text, Select,
+  ButtonGroup, Button
+} from '@chakra-ui/react';
 
 import Section from '../../components/section';
 import Triangle from '../../components/triangle';
@@ -155,7 +158,8 @@ function Master({ master }) {
 
         <Flex  w='100%' flexWrap='wrap' px={['0','3','5']} mt='-150px'>
           <HeroBanner data={master}  setA={null} slug='test'/>  
-          
+
+
           <Flex as="a" id="results" w='100%' flexWrap='wrap' >
             <ResultSection data={master?.lastEvent} master={master} />
           </Flex>
