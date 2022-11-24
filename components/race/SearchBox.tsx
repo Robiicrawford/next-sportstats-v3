@@ -7,13 +7,11 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faTimes, faSearch } from "@fortawesome/free-solid-svg-icons";
 
 
-const SearchBox = () => {
+const SearchBox = ({searchText, setSearchText}) => {
 	const {t} = useTranslation();
-	const [words, setWords] = useState<any>('');
 
 	const changeWords = (input) => {
-		console.log('here')
-    	setWords(input)
+    	setSearchText(input)
   	}
 
 	return(
@@ -29,7 +27,7 @@ const SearchBox = () => {
               onChange={(e)=>changeWords(e.target.value)}
               autoComplete="off"
               placeholder={`${t('common:search-athlete')}...`} 
-              value={words? words:''}   
+              value={searchText? searchText:''}   
             />
             <InputRightElement
               children={<Button h='1.75rem' size='sm' ><FontAwesomeIcon icon={faTimes} size='xl' color='red' onClick={()=>changeWords('')} /></Button>}

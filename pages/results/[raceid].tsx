@@ -9,26 +9,9 @@ import { useTranslation } from 'next-i18next';
 import { useAuthenticator } from '@aws-amplify/ui-react';
 
 import styled from "styled-components";
-import { Flex, Center, Box, Heading, Text, Button, Spacer, Avatar, ButtonGroup, IconButton, VStack, Skeleton  } from '@chakra-ui/react';
+import { Flex, Center, Box, Heading, Text, Button, Spacer, Avatar, ButtonGroup, IconButton, VStack, Skeleton, useDisclosure  } from '@chakra-ui/react';
 
-import {
-  Drawer,
-  DrawerBody,
-  DrawerFooter,
-  DrawerHeader,
-  DrawerOverlay,
-  DrawerContent,
-  DrawerCloseButton,
-  useDisclosure
-} from '@chakra-ui/react'
 
-import {
-  Accordion,
-  AccordionItem,
-  AccordionButton,
-  AccordionPanel,
-  AccordionIcon,
-} from '@chakra-ui/react'
 
 import { useTable, useFilters, useGlobalFilter, useSortBy, useAsyncDebounce, usePagination, useControlledState } from 'react-table'
 
@@ -49,13 +32,17 @@ import {client} from "../../apollo/apollo-client";
 import {msToTime, msToPace, calculatePace} from '../../utils/formatTime'
 
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faCaretRight, faAngleDown, faShareAlt, faChartBar, faFilter, faTimes, faEye, faArrowRight, faBackward, faBackwardStep  } from "@fortawesome/free-solid-svg-icons";
+import { faShareAlt, faChartBar, faFilter, faTimes, faEye, faBackward, faBackwardStep, faForwardStep  } from "@fortawesome/free-solid-svg-icons";
+
+import Select from 'react-select';
+import makeAnimated from 'react-select/animated';
 
 const RaceStats = React.lazy(() => import('../../components/race/RaceStats'));
 
 const getCountryISO2 = require("country-iso-3-to-2");
 
-const arrow_right = <FontAwesomeIcon icon={faArrowRight} size="lg"/>;
+const animatedComponents = makeAnimated();
+
 
 const label_to_col = {
   name:'name',
@@ -144,8 +131,8 @@ const Styles = styled.div`
 `
 
 const GET_RESULTS = gql`
-  query GetResults($rid: String!, $page: Int, $gender: String) {
-    results(rid: $rid, page: $page, gender: $gender ) {
+  query GetResults($rid: String!, $page: Int, $gender: String, $cat: String, $searchData: String, $sort: String) {
+    results(rid: $rid, page: $page, gender: $gender, cat: $cat, searchData: $searchData, sort: $sort ) {
       id
       rid
       pageInfo {
@@ -201,11 +188,13 @@ function Table({race, columns, data, isLoading, setOpenStats, fetchMore}) {
 
   const skipPageResetRef = React.useRef()
   const [controlledPageIndex, setControlledPage] = React.useState(0)
-
-  const rowClick =(row)=>{ router.push(`/results/${race.rid}/${row.original.bib}`)}
-
+  const [filters, setFilter] = React.useState([])
+  const [searchText, setSearchText] = useState('')
+  const [sort, setSort] = useState('')
 
   
+  const rowClick =(row)=>{ router.push(`/results/${race.rid}/${row.original.bib}`)}
+
   const {
     getTableProps,
     getTableBodyProps,
@@ -217,7 +206,6 @@ function Table({race, columns, data, isLoading, setOpenStats, fetchMore}) {
     visibleColumns,
     preGlobalFilteredRows,
     setGlobalFilter,
-    setFilter,
     setSortBy,
     // The rest of these things are super handy, too ;)
     canPreviousPage,
@@ -228,7 +216,7 @@ function Table({race, columns, data, isLoading, setOpenStats, fetchMore}) {
     nextPage,
     previousPage,
     setPageSize,
-    state: { pageIndex, pageSize, sortBy, filters },
+    state: { pageIndex, pageSize, sortBy },
   } = useTable(
     {
       columns,
@@ -270,18 +258,29 @@ function Table({race, columns, data, isLoading, setOpenStats, fetchMore}) {
 
   useEffect(()=> {
     if(!isLoading){
-      console.log(state)
+      console.log(searchText)
       fetchMore({
         variables: {
           rid: race.rid,
-          page: state.pageIndex
+          page: state.pageIndex,
+          gender: filters.filter((f)=> f.type ==='gender').map(a => a.value).join(";"),
+          cat: filters.filter((f)=> f.type ==='category').map(a => a.value).join(";"),
+          searchData: searchText, 
+          sort:sort
         }
       })
     }
-  },[state])
+  },[state,filters, searchText, sort])
 
-  const changeSort = (i) => {
-    console.log(i)
+  const changeSort = (id) => {
+    var ss = {...sort}
+      ss = (sort?.split(";")[0] == 'asc' && sort?.split(";")[1] == id)?'desc':'asc';
+      if(sort?.split(";")[0] === 'desc') {
+        ss = ''
+      }else {
+        ss += `;${id}`
+      }
+    setSort(ss)
   }
 
   const handleShare = (event) => {
@@ -315,111 +314,52 @@ function Table({race, columns, data, isLoading, setOpenStats, fetchMore}) {
     previousPage()
   }
 
+
   return (
     <>
-       <Drawer
-        isOpen={isOpen}
-        placement='right'
-        onClose={onClose}
-        finalFocusRef={btnRefFilter}
-      >
-        <DrawerOverlay />
-        <DrawerContent>
-          <DrawerCloseButton />
-          <DrawerHeader mx='1' sx={{borderBottom:'1px solid black'}}>Filter View</DrawerHeader>
-
-          <DrawerBody>
-            <VStack 
-              justifyContent='flex-start'
-            >
-              
-              {race?.category?.genders?.length>1 &&
-                 <Box 
-                  className={`div-item`}
-                  pl={3} py={2} 
-                  w='100%'
-                  fontWeight='bold'
-                  sx={{cursor:'pointer'}}
-                //  onClick={e => { onChange('')}}
-                > 
-                  <span className='filterOprionText' > {t('common:overall')} </span>
-                  
-                </Box>
-              }
-
-              <Accordion w='100%'>
-                {race?.category?.genders?.map((gender)=>
-                  <AccordionItem  
-                    key={gender.GL} w='100$'
-                    fontWeight='bold'
-                  >
-                     <h2>
-                      <AccordionButton>
-                        <Box flex='1' textAlign='left' >
-                          {t('common:overall')}  {t('common:genders.'+gender.GL.toLowerCase())} 
-                        </Box>
-                        <AccordionIcon />
-                      </AccordionButton>
-                    </h2>
-                     <AccordionPanel pb={4}>
-                      <VStack justifyContent='flex-start'>
-                        <Box className='filterOprion'>  <span className='filterOprionText'> {t('common:overall')} </span> </Box>
-                        {race?.category?.cats?.filter((op)=> op?.CL?.charAt(0).toLowerCase() == gender.GL.toLowerCase() ).sort( dynamicSort("CL") )?.map((cat)=>
-                          <Box 
-                            className='filterOprion'  
-                            key={cat.CL} w='100$'
-                            fontWeight='bold'
-
-                            >
-                            <span className='filterOprionText'>{cat.CL} </span>
-                          </Box>
-                        )}
-                      </VStack>
-                    </AccordionPanel>
-                  </AccordionItem>
-                )}
-              </Accordion>
-              
-
-              {/*race?.category?.cats?.sort( dynamicSort("CL") )?.map((cat)=>
-                <Box 
-                  className='filterOprion'  
-                  key={cat.CL} w='100$'
-                  fontWeight='bold'
-
-                  >
-                  <span className='filterOprionText'>{cat.CL} </span>
-                   <FontAwesomeIcon icon={faEye} size="1x"/>
-                </Box>
-              )*/}
-
-  
-            </VStack>
-
-          </DrawerBody>
-
-          <DrawerFooter>
-            <Button variant='outline' mr={3} onClick={onClose}>
-              Cancel
-            </Button>
-            <Button colorScheme='blue'>Clear Filter</Button>
-          </DrawerFooter>
-        </DrawerContent>
-      </Drawer>
+   
 
       <Flex flexWrap='wrap' w='100%'>
-        <Flex flexWrap='wrap' w='100%' mx='2' sx={{borderBottom:'1px solid black'}}>
+        <Flex flexWrap='wrap' w='100%' mx='2' sx={{borderBottom:'1px solid black'}} justifyContent='space-around'>
           <Box w={['100%','50%','65%']} p='1'>
-            <SearchBox />
+            <SearchBox  searchText={searchText} setSearchText={setSearchText} />
           </Box>
 
-          <Flex w={['100%','100%','50%','35%']} pb='1' my={['2', 'auto']} justifyContent={'flex-end'}  >
+          <Flex w={['100%','100%','100%', '50%','35%']} pb='1' my={['2', 'auto']} justifyContent={'flex-end'}  >
 
-            <ButtonGroup  spacing='6'>
+            <ButtonGroup  spacing='6' w='100%' justifyContent={'flex-end'} >
 
-              <ButtonGroup size='md' isAttached  >
+              <ButtonGroup size='md' isAttached ml='4' sx={{flexGrow:isOpen?1:0}}  >
                 <Button colorScheme='green' isLoading={isLoading}  ref={btnRefFilter} onClick={onOpen} > Filter <FontAwesomeIcon icon={faFilter} style={{marginLeft:'1em'}} /> </Button>
-                {isOpen && <IconButton colorScheme='red' aria-label='Clear Filter' icon={<FontAwesomeIcon icon={faTimes} />} /> }
+                {isOpen && <Select
+                  closeMenuOnSelect={false}
+                  components={animatedComponents}
+                  //defaultValue={[colourOptions[4], colourOptions[5]]}
+                  isMulti
+                  styles={{
+                    container: (baseStyles, state) => ({
+                      ...baseStyles,
+                      flexGrow:1
+                    }),
+                    control: (baseStyles, state) => ({
+                      ...baseStyles,
+                      height:'100%'
+                    }),
+                  }}
+                  onChange={(e)=>setFilter(e)}
+                  defaultValue={filters}
+                  options={[
+                    {
+                      label:  t('public:signup.gender'),
+                      options:  race?.category?.genders?.map((s)=> {return {label:t('public:signup.gender-data.'+s.GL.toLowerCase()) , value:s.GL, type:'gender', count: s.GC}}) ,
+                    },
+                    {
+                      label: 'Category',
+                      options:  race?.category?.cats?.map((cat)=> {return {label:cat.CL, value:cat.CL, type:'category', count: cat.CC}}) ,
+                    },
+                  ]}
+                /> }
+                {isOpen  && <IconButton colorScheme='black' variant='solid'  aria-label='Clear Filter' onClick={onClose} icon={<FontAwesomeIcon icon={faTimes} />} /> }
               </ButtonGroup>
 
               <Button colorScheme='blue' onClick={()=>setOpenStats(true)}  > Stats <FontAwesomeIcon icon={faChartBar} style={{marginLeft:'1em'}} /> </Button>
@@ -447,19 +387,20 @@ function Table({race, columns, data, isLoading, setOpenStats, fetchMore}) {
                             style={column.rci&&{cursor:'pointer'}}
                           > 
                             {t(column.render('Header'))} 
-                            {/*column.filter == 'sort' &&
-                              view.sort?.split(";")[1] == column.rci &&(
+                            {column.filter == 'sort' &&
+                              sort?.split(";")[1] == column.rci &&(
                                 <span className='sortIcon'> 
-                                  {view.sort?.split(";")[0] == 'asc' ? '🔽' : '🔼' }
+                                  {sort?.split(";")[0] == 'asc' ? '🔽' : '🔼' }
                                 </span>
                               )
-                            */}
+                            }
                           </th>
                         ))}
                       </tr>
                     ))}
                   </thead>
                   <tbody {...getTableBodyProps()}>
+                    { !isLoading && data.length == 0 &&(<tr><td colSpan={999} style={{textAlign:'center'}}> No Results Found </td></tr>) }
                     {/* !loading && data[0]?.bib == null &&(<tr><td colSpan={999} style={{textAlign:'center'}}> First athlete estimated at {data[0]?.estTod} </td></tr>) */}
                     {isLoading&& new Array(10).fill("").map((_, index) => (
                         <tr key={index}> 
@@ -493,7 +434,7 @@ function Table({race, columns, data, isLoading, setOpenStats, fetchMore}) {
             <Box fontWeight='semibold'> 
               {pageSize*pageIndex+1} - { (pageSize*pageIndex)+(data.length>0?data.length:0) } out of {race?.stats.PC}
             </Box>     
-            <Button isDisabled={data.length == 10 ?false:true} onClick={handleNext} >{arrow_right}</Button>
+            <Button isDisabled={data.length == 10 ?false:true} onClick={handleNext} > <FontAwesomeIcon icon={faForwardStep} size='lg' />  </Button>
           </ButtonGroup>
         </Flex>
       </Flex>
@@ -540,7 +481,7 @@ function ResultPageInd({ race }) {
     GET_RESULTS, {
       //fetchPolicy: "no-cache",
       notifyOnNetworkStatusChange: true, 
-      variables: {rid:race.rid, page: 0, gender: null}
+      variables: {rid:race.rid, page: 0}
     });
 
   const handleShare = (event) => {
@@ -676,7 +617,7 @@ function ResultPageInd({ race }) {
   } 
 
   const columns = React.useMemo( () => computeCols(race)  ,[race, race?.rid, data?.results] ) ;
-  const dataFinal = React.useMemo(()=> (data && data.results.results.length>= 1)? data.results.results: [],[data?.results, race?.rid]);
+  const dataFinal = React.useMemo(()=> (data && data?.results?.results?.length>= 1)? data?.results?.results: [],[data?.results, race?.rid]);
 
 
   const [openStats, setOpenStats] = useState(false)
