@@ -71,19 +71,7 @@ let percentage = function(partialValue, totalValue) {
    return (100 * partialValue) / totalValue;
 } 
 
-const CustomTooltip = ({ active, payload, label }) => {
-  if (active && payload && payload.length) {
-    return (
-      <div className="custom-tooltip" style={{backgroundColor:'grey', padding:'2em', borderRadius:'5px'}}>
-        <p className="label">{`Category : ${payload[0].name}`}</p>
-        <p className="label">{`Total #  : ${payload[0].value}`}</p>
-        <p className="desc">Anything you want can be displayed here.</p>
-      </div>
-    );
-  }
 
-  return null;
-};
 
 function HeroCard({ race, setOpenStats }) {
   const { t } = useTranslation('common');
@@ -206,7 +194,20 @@ function HeroCard({ race, setOpenStats }) {
                     ))}
                   </Pie>
                   
-                  <Tooltip content={<CustomTooltip />} />
+                  <Tooltip 
+                    content={({ active, payload, label }) => {
+                      if (active && payload && payload.length) {
+                        return (
+                          <div className="custom-tooltip" style={{backgroundColor:'grey', padding:'2em', borderRadius:'5px'}}>
+                            <p className="label">{`Category : ${payload[0].name}`}</p>
+                            <p className="label">{`Total #  : ${payload[0].value}`}</p>
+                            <p className="desc">Anything you want can be displayed here.</p>
+                          </div>
+                        );
+                      }
+                      return null
+                    }} 
+                  />
                 </PieChart>
               </ResponsiveContainer>
           </Box>
