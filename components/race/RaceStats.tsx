@@ -219,21 +219,20 @@ function HeroCard({ race, setOpenStats }) {
                   <Legend
                     layout="vertical" verticalAlign="top" align="right"
                     content={({payload})=>{
-                      var sum = payload.reduce((accumulator, object) => { return accumulator + object.value }, 0);
                       return payload.map((entry, index) => (
                         <span key={`item-${index}`} className="legend-item" style={{display:'block'}}> 
                           <Surface width={10} height={10} style={{display:'inline', marginRight:'1em'}} >
-                            <Symbols cx={5} cy={5} type="circle" size={60} fill={entry.fill} />
+                            <Symbols cx={5} cy={5} type="circle" size={60} fill={entry.color} />
                           </Surface>
                           {entry.value} 
                         </span>
                       ))
                     }}
                     payload={[
-                      { value:`Finish : ${race.stats.FIN} ( ${Math.round( percentage( race.stats.FIN, sumGender ) * 100) /100 }% )`, fill: COLORS[1 % COLORS.length]},
-                      { value: `DNS : ${race.stats.DNS} ( ${Math.round( percentage( race.stats.DNS, sumGender ) * 100) /100 }% )`, fill: COLORS[2 % COLORS.length]},
-                      { value: `DNF : ${race.stats.DNF} ( ${Math.round( percentage( race.stats.DNF, sumGender ) * 100) /100 }% )`, fill: COLORS[3 % COLORS.length]},
-                      {value: ` DSQ :${race.stats.DSQ} ( ${Math.round( percentage( race.stats.DSQ, sumGender ) * 100) /100 }% )`, fill: COLORS[4 % COLORS.length]},
+                      { value:`Finish : ${race.stats.FIN} ( ${Math.round( percentage( race.stats.FIN, sumGender ) * 100) /100 }% )`, color: COLORS[1 % COLORS.length]},
+                      { value: `DNS : ${race.stats.DNS} ( ${Math.round( percentage( race.stats.DNS, sumGender ) * 100) /100 }% )`, color: COLORS[2 % COLORS.length]},
+                      { value: `DNF : ${race.stats.DNF} ( ${Math.round( percentage( race.stats.DNF, sumGender ) * 100) /100 }% )`, color: COLORS[3 % COLORS.length]},
+                      {value: ` DSQ :${race.stats.DSQ} ( ${Math.round( percentage( race.stats.DSQ, sumGender ) * 100) /100 }% )`, color: COLORS[4 % COLORS.length]},
                     ]}
                   />
 
