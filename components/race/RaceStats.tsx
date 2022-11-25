@@ -171,7 +171,7 @@ function HeroCard({ race, setOpenStats }) {
           <Box sx={{border:'1px solid black', borderRadius:'15px'}} w={['100%','100%','100%','45%']}   p={['0','2']} >
               <Heading sx={{borderBottom:'1px solid black'}}> Athletes / Registered </Heading>
               <ResponsiveContainer width="99%" height="90%">
-                <PieChart width={'99%'} height="90%" >
+                <PieChart  >
                   <Legend
                     layout="vertical" verticalAlign="top" align="right"
                     content={renderCusomizedLegend}
@@ -214,7 +214,7 @@ function HeroCard({ race, setOpenStats }) {
           <Box sx={{border:'1px solid black', borderRadius:'15px'}} w={['100%','100%','100%','45%']}   p={['0','2']} >
               <Heading sx={{borderBottom:'1px solid black'}}>   Athletes / Finish </Heading>
               <ResponsiveContainer width="99%" height="90%">
-                <PieChart width={'99%'} height="90%" >
+                <PieChart >
                   <Legend
                     layout="vertical" verticalAlign="top" align="right"
                     content={({payload})=>{
