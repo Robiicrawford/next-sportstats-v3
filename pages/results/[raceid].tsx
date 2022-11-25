@@ -190,7 +190,7 @@ function Table({race, columns, data, isLoading, setOpenStats, fetchMore, pageInf
   const [controlledPageIndex, setControlledPage] = React.useState(0)
   const [filters, setFilter] = React.useState([])
   const [searchText, setSearchText] = useState('')
-  const [sort, setSort] = useState('')
+  const [sort, setSort] = useState(null)
 
   
   const rowClick =(row)=>{ router.push(`/results/${race.rid}/${row.original.bib}`)}
@@ -273,7 +273,7 @@ function Table({race, columns, data, isLoading, setOpenStats, fetchMore, pageInf
   },[state,filters, searchText, sort])
 
   const changeSort = (id) => {
-    var ss = {...sort}
+    var ss = sort ? {...sort}:{}
       ss = (sort?.split(";")[0] == 'asc' && sort?.split(";")[1] == id)?'desc':'asc';
       if(sort?.split(";")[0] === 'desc') {
         ss = ''
