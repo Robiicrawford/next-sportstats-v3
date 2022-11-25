@@ -224,22 +224,19 @@ function HeroCard({ race, setOpenStats }) {
                         <span key={`item-${index}`} className="legend-item" style={{display:'block'}}> 
                           <Surface width={10} height={10} style={{display:'inline', marginRight:'1em'}} >
                             <Symbols cx={5} cy={5} type="circle" size={60} fill={entry.fill} />
-                            
-                              
                           </Surface>
-                          {entry.name} : {entry.value} ( {Math.round( percentage( entry.value, sum ) * 100) /100 }% ) 
+                          {entry.value} 
                         </span>
                       ))
                     }}
                     payload={[
-                        {name:'Finished', value: race.stats.FIN, fill: COLORS[1 % COLORS.length]},
-                        {name:'DNS', value: race.stats.DNS, fill: COLORS[2 % COLORS.length]},
-                        {name:'DNF', value: race.stats.DNF, fill: COLORS[3 % COLORS.length]},
-                        {name:'DSQ', value: race.stats.DSQ, fill: COLORS[4 % COLORS.length]},
-                      ]
-                    }
-
+                      { value:`Finish : ${race.stats.FIN} ( ${Math.round( percentage( race.stats.FIN, sumGender ) * 100) /100 }% )`, fill: COLORS[1 % COLORS.length]},
+                      { value: `DNS : ${race.stats.DNS} ( ${Math.round( percentage( race.stats.DNS, sumGender ) * 100) /100 }% )`, fill: COLORS[2 % COLORS.length]},
+                      { value: `DNF : ${race.stats.DNF} ( ${Math.round( percentage( race.stats.DNF, sumGender ) * 100) /100 }% )`, fill: COLORS[3 % COLORS.length]},
+                      {value: ` DSQ :${race.stats.DSQ} ( ${Math.round( percentage( race.stats.DSQ, sumGender ) * 100) /100 }% )`, fill: COLORS[4 % COLORS.length]},
+                    ]}
                   />
+
                   <Pie 
                     data={[
                       {name:'Finished', value: race.stats.FIN, fill: COLORS[1 % COLORS.length]},

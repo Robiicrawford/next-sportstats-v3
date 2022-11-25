@@ -179,7 +179,7 @@ const GET_RESULTS = gql`
   }
 `;
 
-function Table({race, columns, data, isLoading, setOpenStats, fetchMore}) {
+function Table({race, columns, data, isLoading, setOpenStats, fetchMore, pageInfo}) {
   const { t } = useTranslation('common');
   const router = useRouter()
 
@@ -432,7 +432,7 @@ function Table({race, columns, data, isLoading, setOpenStats, fetchMore}) {
             <Button isDisabled={pageIndex==0?true:false} onClick={()=>handleBack(0)} > <FontAwesomeIcon icon={faBackward} size='lg' /> </Button> 
             <Button isDisabled={pageIndex==0?true:false} onClick={()=>handleBack(controlledPageIndex-1)} >  <FontAwesomeIcon icon={faBackwardStep} size='lg' /> </Button> 
             <Box fontWeight='semibold'> 
-              {pageSize*pageIndex+1} - { (pageSize*pageIndex)+(data.length>0?data.length:0) } out of {race?.stats.PC}
+              {pageSize*pageIndex+1} - { (pageSize*pageIndex)+(data.length>0?data.length:0) } out of {pageInfo?.totalRecords}
             </Box>     
             <Button isDisabled={data.length == 10 ?false:true} onClick={handleNext} > <FontAwesomeIcon icon={faForwardStep} size='lg' />  </Button>
           </ButtonGroup>
@@ -648,6 +648,7 @@ function ResultPageInd({ race }) {
                 isLoading={isLoading}
                 setOpenStats={setOpenStats}
                 fetchMore={fetchMore}
+                pageInfo={data?.results.pageInfo}
               />
             : <Suspense fallback={<div>Loading...</div>}>
                 <RaceStats 
