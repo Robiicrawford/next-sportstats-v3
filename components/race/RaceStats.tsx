@@ -32,7 +32,7 @@ const renderActiveShape = (props) => {
   const RADIAN = Math.PI / 180;
   const { cx, cy, midAngle, innerRadius, outerRadius, startAngle, endAngle, fill, payload, percent, value, name } = props;
 
-  if( (percent * 100).toFixed(0) < 3) {
+  if( parseInt((percent * 100).toFixed(0)) < 3) {
     return null
   }
   const sin = Math.sin(-RADIAN * midAngle);
