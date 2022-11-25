@@ -761,13 +761,22 @@ export async function getStaticProps({ params, locale }) {
     }
   `;
 
-  //var data = {}
-  const { data } = await client.query({
-      query: query,
-      variables: {
-        rid: parseInt(params.raceid)
-      }
-    });
+  var data
+
+  try{
+      var { data } = await client.query({
+        query: query,
+        variables: {
+          rid: parseInt(params.raceid)
+        }
+      });
+    } catch(err) {
+      console.log(err)
+      console.log(err.graphQLErrors)
+      console.log(err.graphQLErrors[0].locations)
+      console.log(err.graphQLErrors[0].extensions)
+    }
+
 
   // Pass post data to the page via props
   return { 
