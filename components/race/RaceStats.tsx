@@ -95,7 +95,7 @@ function HeroCard({ race, setOpenStats }) {
 
   const countedNames = race?.category.cats.filter((cat)=> cat.CL.charAt(0) != filter  ).reduce((allNames, name) => {
     var currCount = allNames[filter.length>0?name.CL:name.CL.slice(1)] ?? 0; 
-    if( percentage(name.CC, sumGender).toFixed(0)  < 3 ){
+    if( parseInt(percentage(name.CC, sumGender).toFixed(0))  < 3 ){
        currCount = allNames["other"] ?? 0;
 
       return {
