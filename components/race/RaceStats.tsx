@@ -138,7 +138,7 @@ function HeroCard({ race, setOpenStats }) {
               onClick={()=>{handleClickFilter(id)}}
               style={style}
             >
-              <Surface width={10} height={10} viewBox="0 0 20 10" style={{display:'inline', marginRight:'1em'}} >
+              <Surface width={10} height={10}  style={{display:'inline', marginRight:'1em'}} >
                 <Symbols cx={5} cy={5} type="circle" size={60} fill={color} />
                 {active && (
                   <Symbols
@@ -221,7 +221,7 @@ function HeroCard({ race, setOpenStats }) {
                       var sum = payload.reduce((accumulator, object) => { return accumulator + object.value }, 0);
                       return payload.map((entry, index) => (
                         <span key={`item-${index}`} className="legend-item" style={{display:'block'}}> 
-                          <Surface width={10} height={10} viewBox="0 0 20 10" style={{display:'inline', marginRight:'1em'}} >
+                          <Surface width={10} height={10} style={{display:'inline', marginRight:'1em'}} >
                             <Symbols cx={5} cy={5} type="circle" size={60} fill={entry.fill} />
                             
                               
