@@ -164,11 +164,11 @@ function HeroCard({ race, setOpenStats }) {
                     layout="vertical" verticalAlign="top" align="right"
                     content={renderCusomizedLegend}
                     payload={
-                      race?.category.genders.map((gender)=> { return {name:gender.GL, value:gender.GC}}).map(
+                      race?.category.genders.map(
                         (item, index) => ({
-                          id: item.name,
+                          id: item.GL,
                           type: "square",
-                          value: `${t('public:signup.gender-data.'+item.name.toLowerCase())} - ${item.value} (${ Math.round( percentage( item.value, sumGender ) * 100) /100  }%)`,
+                          value: `${t('public:signup.gender-data.'+item.GL.toLowerCase())} - ${item.GC} (${ Math.round( percentage( item.GC, sumGender ) * 100) /100  }%)`,
                           color: COLORS[index % COLORS.length]
                         })
                       )
