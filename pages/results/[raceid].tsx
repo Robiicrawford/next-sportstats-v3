@@ -179,6 +179,7 @@ const GET_RESULTS = gql`
   }
 `;
 
+
 function Table({race, columns, data, isLoading, setOpenStats, fetchMore, pageInfo}) {
   const { t } = useTranslation('common');
   const router = useRouter()
@@ -355,11 +356,11 @@ function Table({race, columns, data, isLoading, setOpenStats, fetchMore, pageInf
                     },
                     {
                       label: 'Category',
-                      options:  race?.category?.cats?.map((cat)=> {return {label:cat.CL, value:cat.CL, type:'category', count: cat.CC}}) ,
+                      options:  race?.category?.cats?.sort( dynamicSort("CL") ).map((cat)=> {return {label:cat.CL, value:cat.CL, type:'category', count: cat.CC}}) ,
                     },
                   ]}
                 /> }
-                {isOpen  && <IconButton colorScheme='black' variant='solid'  aria-label='Clear Filter' onClick={onClose} icon={<FontAwesomeIcon icon={faTimes} />} /> }
+                {isOpen  && <IconButton sx={{backgroundColor:'grey'}} variant='solid'  aria-label='Clear Filter' onClick={onClose} icon={<FontAwesomeIcon icon={faTimes} />} /> }
               </ButtonGroup>
 
               <Button colorScheme='blue' onClick={()=>setOpenStats(true)}  > Stats <FontAwesomeIcon icon={faChartBar} style={{marginLeft:'1em'}} /> </Button>
