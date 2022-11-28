@@ -184,7 +184,6 @@ function Table({race, columns, data, isLoading, setOpenStats, fetchMore, pageInf
   const { t } = useTranslation('common');
   const router = useRouter()
 
-  const { isOpen, onOpen, onClose } = useDisclosure()
   const btnRefFilter = React.useRef()
 
   const skipPageResetRef = React.useRef()
@@ -259,7 +258,7 @@ function Table({race, columns, data, isLoading, setOpenStats, fetchMore, pageInf
 
   useEffect(()=> {
     if(!isLoading){
-      console.log(searchText)
+
       fetchMore({
         variables: {
           rid: race.rid,
@@ -315,24 +314,26 @@ function Table({race, columns, data, isLoading, setOpenStats, fetchMore, pageInf
     previousPage()
   }
 
+  console.log(data)
 
   return (
     <>
    
 
       <Flex flexWrap='wrap' w='100%'>
-        <Flex flexWrap='wrap' w='100%' mx='2' sx={{borderBottom:'1px solid black'}} justifyContent='space-around'>
-          <Box w={['100%','50%','65%']} p='1'>
+        <Flex flexWrap='wrap' w='100%' px='3' sx={{borderBottom:'1px solid black'}} justifyContent='space-around'>
+         
+          <Box w={['100%','100%','100%', '100%', '50%']} p='1'>
             <SearchBox  searchText={searchText} setSearchText={setSearchText} />
           </Box>
 
-          <Flex w={['100%','100%','100%', '50%','35%']} pb='1' my={['2', 'auto']} justifyContent={'flex-end'}  >
+          <Flex w={['100%','100%','100%', '100%', '50%', '40%']} pb='1' my={['2', 'auto']} justifyContent={'flex-end'}  >
 
-            <ButtonGroup  spacing='6' w='100%' justifyContent={'flex-end'} >
+            <ButtonGroup  spacing='6' w='100%' flexWrap='wrap' justifyContent={'flex-end'} >
 
-              <ButtonGroup size='md' isAttached ml='4' sx={{flexGrow:isOpen?1:0}}  >
-                <Button colorScheme='green' isLoading={isLoading}  ref={btnRefFilter} onClick={onOpen} > Filter <FontAwesomeIcon icon={faFilter} style={{marginLeft:'1em'}} /> </Button>
-                {isOpen && <Select
+              <ButtonGroup size='md' isAttached mb='1' w={['100%', '100%','50%']} sx={{flexGrow:1}}  >
+                <Button colorScheme='green' isLoading={isLoading}   ref={btnRefFilter} > Filter <FontAwesomeIcon icon={faFilter}  /> </Button>
+                <Select
                   closeMenuOnSelect={false}
                   components={animatedComponents}
                   //defaultValue={[colourOptions[4], colourOptions[5]]}
@@ -352,15 +353,22 @@ function Table({race, columns, data, isLoading, setOpenStats, fetchMore, pageInf
                   options={[
                     {
                       label:  t('public:signup.gender'),
-                      options:  race?.category?.genders?.map((s)=> {return {label:t('public:signup.gender-data.'+s.GL.toLowerCase()) , value:s.GL, type:'gender', count: s.GC}}) ,
+                      options:  race?.category?.genders?.map((s)=> {
+                        return {
+                          label:t('public:signup.gender-data.'+s.GL.toLowerCase()) , 
+                          value:s.GL, type:'gender', 
+                          count: s.GC,
+                          isDisabled: filters?.map(a => a.type).includes('category')
+
+                        }}) ,
                     },
                     {
                       label: 'Category',
                       options:  race?.category?.cats?.sort( dynamicSort("CL") ).map((cat)=> {return {label:cat.CL, value:cat.CL, type:'category', count: cat.CC}}) ,
                     },
                   ]}
-                /> }
-                {isOpen  && <IconButton sx={{backgroundColor:'grey'}} variant='solid'  aria-label='Clear Filter' onClick={onClose} icon={<FontAwesomeIcon icon={faTimes} />} /> }
+                /> 
+
               </ButtonGroup>
 
               <Button colorScheme='blue' onClick={()=>setOpenStats(true)}  > Stats <FontAwesomeIcon icon={faChartBar} style={{marginLeft:'1em'}} /> </Button>
@@ -402,19 +410,19 @@ function Table({race, columns, data, isLoading, setOpenStats, fetchMore, pageInf
                   </thead>
                   <tbody {...getTableBodyProps()}>
                     { !isLoading && data.length == 0 &&(<tr><td colSpan={999} style={{textAlign:'center'}}> No Results Found </td></tr>) }
-                    {/* !loading && data[0]?.bib == null &&(<tr><td colSpan={999} style={{textAlign:'center'}}> First athlete estimated at {data[0]?.estTod} </td></tr>) */}
+                    {/* !loading && data[0]?.bib == null &&(<tr><td colSpan={999} style={{textAlign:'center'}}> First athlete estimated at {data[0]?.estTod} </td></tr>) */} 
                     {isLoading&& new Array(10).fill("").map((_, index) => (
                         <tr key={index}> 
                           <td colSpan={999} > <Skeleton height='65px' width='100%' startColor='pink.500' endColor='pink.500'  noOfLines={10}  /> </td>
                         </tr>
                     ))}
 
-                    {data && (
-                      page.map((row, i) => {
+                    {!isLoading && data && (
+                      page?.map((row, i) => {
                         prepareRow(row)
                           return (
                             <tr {...row.getRowProps()} onClick={()=> rowClick(row)}>
-                              {row.cells.map(cell => {
+                              {row?.cells?.map(cell => {
                                 return <td {...cell.getCellProps({className: cell.column.className})}>{cell.render('Cell')}</td>
                               })}
                             </tr>
@@ -629,6 +637,7 @@ function ResultPageInd({ race }) {
     }
   },[loading, race?.rid])
 
+  
   return (
     <Layout header_color='black' >
       <NextSeo
@@ -778,7 +787,7 @@ export async function getStaticProps({ params, locale }) {
       console.log(err.graphQLErrors[0].extensions)
     }
 
-
+    console.log(data)
   // Pass post data to the page via props
   return { 
     props: { 

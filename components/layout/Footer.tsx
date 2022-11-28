@@ -86,6 +86,10 @@ export default function Footer() {
           
           <Box  h='40px'>
             <Heading>{t('common:about')} </Heading>
+            <Stack direction='column' ml='4'  >
+              <NextLink href='/about' > {t('public:help.topics.about-sportstats')} </NextLink>
+
+            </Stack>
           </Box>
 
           <Box >
@@ -93,7 +97,7 @@ export default function Footer() {
             <Stack direction='column' ml='4'  >
               <NextLink href='/help/privacy-policy' > {t('footer.privacy')} </NextLink>
               <NextLink href='/help/terms-of-use'> {t('footer.terms')} </NextLink>
-            
+              <NextLink href='/help'> {t('public:menu.help-center')} </NextLink>
 
             </Stack>
           </Box>
