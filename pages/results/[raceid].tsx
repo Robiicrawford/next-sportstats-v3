@@ -12,7 +12,6 @@ import styled from "styled-components";
 import { Flex, Center, Box, Heading, Text, Button, Spacer, Avatar, ButtonGroup, IconButton, VStack, Skeleton, useDisclosure  } from '@chakra-ui/react';
 
 
-
 import { useTable, useFilters, useGlobalFilter, useSortBy, useAsyncDebounce, usePagination, useControlledState } from 'react-table'
 
 import Layout from '../../components/layout/Layout'

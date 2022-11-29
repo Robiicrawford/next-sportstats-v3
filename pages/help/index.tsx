@@ -16,14 +16,6 @@ import Triangle from '../../components/triangle';
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faUserCircle, faRunning, faUserShield} from "@fortawesome/free-solid-svg-icons";
 
-const Image = ({ data, max }) => {
-  
-
-  if (!data?.childImageSharp?.gatsbyImageData) {
-    return <div>Picture not found</div>
-  }
-  return <GatsbyImage image={data.childImageSharp.gatsbyImageData} style={{ maxWidth: max }} />;
-}
 
 const IndexPage = ({ data }) => {
   const content = data?.allBuilderModels.oneHepCenter?.content;

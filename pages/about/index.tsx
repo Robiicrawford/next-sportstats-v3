@@ -8,8 +8,6 @@ import Link from 'next/link'
 
 import { Box, Flex, Heading, Text  } from '@chakra-ui/react';
 
-import { BuilderComponent, builder } from '@builder.io/react'
-
 import Layout from '../../components/layout/Layout'
 
 import Section from '../../components/section';
@@ -20,28 +18,16 @@ import Triangle from '../../components/triangle';
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faUserCircle, faRunning, faUserShield} from "@fortawesome/free-solid-svg-icons";
 
-builder.init('400888070f69401c9656d5988c0c74cc')
 
 const IndexPage = () => {
 
   const {t} = useTranslation('public');
 
-   const [builderContentJson, setBuilderContentJson] = useState(null)
-
-   useEffect(() => { 
-      builder.get('about-us', { url: location.pathname, entry: 'adbf8224d713492f87004b50a2a8420f' })
-        .promise().then(setBuilderContentJson)
-    }, [])
 
   return (
     <Layout>
       <NextSeo title={t('public:help.topics.about-sportstats')} />
-      <BuilderComponent model="about-us" content={builderContentJson} />
-      
-      <Section.Container id="about-us" Background={Background} >
-  
 
-      </Section.Container>
     </Layout>
   )
 }
