@@ -130,7 +130,7 @@ const Styles = styled.div`
 `
 
 const GET_RESULTS = gql`
-  query GetResults($rid: String!, $page: Int, $gender: String, $cat: String, $searchData: String, $sort: String) {
+  query GetResults($rid: Int!, $page: Int, $gender: String, $cat: String, $searchData: String, $sort: String) {
     results(rid: $rid, page: $page, gender: $gender, cat: $cat, searchData: $searchData, sort: $sort ) {
       id
       rid
@@ -260,7 +260,7 @@ function Table({race, columns, data, isLoading, setOpenStats, fetchMore, pageInf
 
       fetchMore({
         variables: {
-          rid: race.rid,
+          rid: parseInt(race.rid),
           page: state.pageIndex,
           gender: filters.filter((f)=> f.type ==='gender').map(a => a.value).join(";"),
           cat: filters.filter((f)=> f.type ==='category').map(a => a.value).join(";"),
@@ -313,8 +313,7 @@ function Table({race, columns, data, isLoading, setOpenStats, fetchMore, pageInf
     previousPage()
   }
 
-  console.log(data)
-
+  console.log(race)
   return (
     <>
    
@@ -328,47 +327,49 @@ function Table({race, columns, data, isLoading, setOpenStats, fetchMore, pageInf
 
           <Flex w={['100%','100%','100%', '100%', '50%', '40%']} pb='1' my={['2', 'auto']} justifyContent={'flex-end'}  >
 
+            
             <ButtonGroup  spacing='6' w='100%' flexWrap='wrap' justifyContent={'flex-end'} >
+              {(race?.category?.genders.length > 0 || race?.category?.cats.length > 0 ) && 
+                <ButtonGroup size='md' isAttached mb='1' w={['100%', '100%','50%']} sx={{flexGrow:1}}  >
+                  <Button colorScheme='green' isLoading={isLoading}   ref={btnRefFilter} > Filter <FontAwesomeIcon icon={faFilter}  /> </Button>
+                  <Select
+                    closeMenuOnSelect={false}
+                    components={animatedComponents}
+                    //defaultValue={[colourOptions[4], colourOptions[5]]}
+                    isMulti
+                    styles={{
+                      container: (baseStyles, state) => ({
+                        ...baseStyles,
+                        flexGrow:1
+                      }),
+                      control: (baseStyles, state) => ({
+                        ...baseStyles,
+                        height:'100%'
+                      }),
+                    }}
+                    onChange={(e)=>setFilter(e)}
+                    defaultValue={filters}
+                    options={[
+                      {
+                        label:  t('public:signup.gender'),
+                        options:  race?.category?.genders?.map((s)=> {
+                          return {
+                            label:t('public:signup.gender-data.'+s.GL?.toLowerCase()) , 
+                            value:s.GL, type:'gender', 
+                            count: s.GC,
+                            isDisabled: filters?.map(a => a.type).includes('category')
 
-              <ButtonGroup size='md' isAttached mb='1' w={['100%', '100%','50%']} sx={{flexGrow:1}}  >
-                <Button colorScheme='green' isLoading={isLoading}   ref={btnRefFilter} > Filter <FontAwesomeIcon icon={faFilter}  /> </Button>
-                <Select
-                  closeMenuOnSelect={false}
-                  components={animatedComponents}
-                  //defaultValue={[colourOptions[4], colourOptions[5]]}
-                  isMulti
-                  styles={{
-                    container: (baseStyles, state) => ({
-                      ...baseStyles,
-                      flexGrow:1
-                    }),
-                    control: (baseStyles, state) => ({
-                      ...baseStyles,
-                      height:'100%'
-                    }),
-                  }}
-                  onChange={(e)=>setFilter(e)}
-                  defaultValue={filters}
-                  options={[
-                    {
-                      label:  t('public:signup.gender'),
-                      options:  race?.category?.genders?.map((s)=> {
-                        return {
-                          label:t('public:signup.gender-data.'+s.GL.toLowerCase()) , 
-                          value:s.GL, type:'gender', 
-                          count: s.GC,
-                          isDisabled: filters?.map(a => a.type).includes('category')
+                          }}) ,
+                      },
+                      {
+                        label: 'Category',
+                        options:  race?.category?.cats?.sort( dynamicSort("CL") ).map((cat)=> {return {label:cat.CL, value:cat.CL, type:'category', count: cat.CC}}) ,
+                      },
+                    ]}
+                  /> 
 
-                        }}) ,
-                    },
-                    {
-                      label: 'Category',
-                      options:  race?.category?.cats?.sort( dynamicSort("CL") ).map((cat)=> {return {label:cat.CL, value:cat.CL, type:'category', count: cat.CC}}) ,
-                    },
-                  ]}
-                /> 
-
-              </ButtonGroup>
+                </ButtonGroup>
+              }
 
               <Button colorScheme='blue' onClick={()=>setOpenStats(true)}  > Stats <FontAwesomeIcon icon={faChartBar} style={{marginLeft:'1em'}} /> </Button>
 
@@ -382,7 +383,7 @@ function Table({race, columns, data, isLoading, setOpenStats, fetchMore, pageInf
 
         <Flex flexWrap='wrap' w='100%' px={['0','3','4']}>
           <Styles>
-            {columns &&
+            {columns && columns.length > 0  &&
                 <table {...getTableProps()} style={{marginBottom:'1em'}} className="tableWrap" >
                   <thead>
                     {headerGroups.map(headerGroup => (
@@ -410,13 +411,13 @@ function Table({race, columns, data, isLoading, setOpenStats, fetchMore, pageInf
                   <tbody {...getTableBodyProps()}>
                     { !isLoading && data.length == 0 &&(<tr><td colSpan={999} style={{textAlign:'center'}}> No Results Found </td></tr>) }
                     {/* !loading && data[0]?.bib == null &&(<tr><td colSpan={999} style={{textAlign:'center'}}> First athlete estimated at {data[0]?.estTod} </td></tr>) */} 
-                    {isLoading&& new Array(10).fill("").map((_, index) => (
+                    {isLoading && new Array(10).fill("").map((_, index) => (
                         <tr key={index}> 
                           <td colSpan={999} > <Skeleton height='65px' width='100%' startColor='pink.500' endColor='pink.500'  noOfLines={10}  /> </td>
                         </tr>
                     ))}
 
-                    {!isLoading && data && (
+                    {!isLoading && data && data.length > 0 && (
                       page?.map((row, i) => {
                         prepareRow(row)
                           return (
@@ -489,7 +490,7 @@ function ResultPageInd({ race }) {
     GET_RESULTS, {
       //fetchPolicy: "no-cache",
       notifyOnNetworkStatusChange: true, 
-      variables: {rid:race.rid, page: 0}
+      variables: {rid:parseInt(race.rid), page: 0}
     });
 
   const handleShare = (event) => {
@@ -636,7 +637,7 @@ function ResultPageInd({ race }) {
     }
   },[loading, race?.rid])
 
-  
+  console.log(data)
   return (
     <Layout header_color='black' >
       <NextSeo
