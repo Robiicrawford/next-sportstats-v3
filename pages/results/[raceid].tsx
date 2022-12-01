@@ -256,7 +256,7 @@ function Table({race, columns, data, isLoading, setOpenStats, fetchMore, pageInf
 
 
   useEffect(()=> {
-    if(!isLoading){
+    if(!isLoading && race.rid){
 
       fetchMore({
         variables: {
@@ -363,7 +363,7 @@ function Table({race, columns, data, isLoading, setOpenStats, fetchMore, pageInf
                       },
                       {
                         label: 'Category',
-                        options:  race?.category?.cats?.sort( dynamicSort("CL") ).map((cat)=> {return {label:cat.CL, value:cat.CL, type:'category', count: cat.CC}}) ,
+                        options:  race?.category?.cats?.map((cat)=> {return {label:cat.CL, value:cat.CL, type:'category', count: cat.CC}}).sort( dynamicSort("label") ) ,
                       },
                     ]}
                   /> 
@@ -382,57 +382,60 @@ function Table({race, columns, data, isLoading, setOpenStats, fetchMore, pageInf
         </Flex> 
 
         <Flex flexWrap='wrap' w='100%' px={['0','3','4']}>
-          <Styles>
-            {columns && columns.length > 0  &&
-                <table {...getTableProps()} style={{marginBottom:'1em'}} className="tableWrap" >
-                  <thead>
-                    {headerGroups.map(headerGroup => (
-                      <tr {...headerGroup.getHeaderGroupProps()}>
-                        {headerGroup.headers.map(column => (
-                          <th 
-                           {...column.getHeaderProps(column.getSortByToggleProps())}
-                            {...column.getHeaderProps({className: column.className})} 
-                            onClick={()=>changeSort(column.rci)}
-                            style={column.rci&&{cursor:'pointer'}}
-                          > 
-                            {t(column.render('Header'))} 
-                            {column.filter == 'sort' &&
-                              sort?.split(";")[1] == column.rci &&(
-                                <span className='sortIcon'> 
-                                  {sort?.split(";")[0] == 'asc' ? '🔽' : '🔼' }
-                                </span>
-                              )
-                            }
-                          </th>
-                        ))}
-                      </tr>
-                    ))}
-                  </thead>
-                  <tbody {...getTableBodyProps()}>
-                    { !isLoading && data.length == 0 &&(<tr><td colSpan={999} style={{textAlign:'center'}}> No Results Found </td></tr>) }
-                    {/* !loading && data[0]?.bib == null &&(<tr><td colSpan={999} style={{textAlign:'center'}}> First athlete estimated at {data[0]?.estTod} </td></tr>) */} 
-                    {isLoading && new Array(10).fill("").map((_, index) => (
-                        <tr key={index}> 
-                          <td colSpan={999} > <Skeleton height='65px' width='100%' startColor='pink.500' endColor='pink.500'  noOfLines={10}  /> </td>
+         
+            <Styles>
+              {columns && columns.length > 0  &&
+                  <table {...getTableProps()} style={{marginBottom:'1em'}} className="tableWrap" >
+                    <thead>
+                      {headerGroups.map(headerGroup => (
+                        <tr {...headerGroup.getHeaderGroupProps()}>
+                          {headerGroup.headers.map(column => (
+                            <th 
+                             {...column.getHeaderProps(column.getSortByToggleProps())}
+                              {...column.getHeaderProps({className: column.className})} 
+                              onClick={()=>changeSort(column.rci)}
+                              style={column.rci&&{cursor:'pointer'}}
+                            > 
+                              {t(column.render('Header'))} 
+                              {column.filter == 'sort' &&
+                                sort?.split(";")[1] == column.rci &&(
+                                  <span className='sortIcon'> 
+                                    {sort?.split(";")[0] == 'asc' ? '🔽' : '🔼' }
+                                  </span>
+                                )
+                              }
+                            </th>
+                          ))}
                         </tr>
-                    ))}
+                      ))}
+                    </thead>
+                    <tbody {...getTableBodyProps()}>
+                      { !isLoading && data.length == 0 &&(<tr><td colSpan={999} style={{textAlign:'center'}}> No Results Found </td></tr>) }
+                      {/* !loading && data[0]?.bib == null &&(<tr><td colSpan={999} style={{textAlign:'center'}}> First athlete estimated at {data[0]?.estTod} </td></tr>) */} 
+                      {isLoading && new Array(10).fill("").map((_, index) => (
+                          <tr key={index}> 
+                            <td colSpan={999} > <Skeleton height='65px' width='100%' startColor='pink.500' endColor='pink.500'  noOfLines={10}  /> </td>
+                          </tr>
+                      ))}
 
-                    {!isLoading && data && data.length > 0 && (
-                      page?.map((row, i) => {
-                        prepareRow(row)
-                          return (
-                            <tr {...row.getRowProps()} onClick={()=> rowClick(row)}>
-                              {row?.cells?.map(cell => {
-                                return <td {...cell.getCellProps({className: cell.column.className})}>{cell.render('Cell')}</td>
-                              })}
-                            </tr>
-                          )
-                      })
-                    )}  
-                  </tbody>
-                </table>
-              }
-            </Styles>
+                      {!isLoading && data && data.length > 0 && (
+                        page?.map((row, i) => {
+                          prepareRow(row)
+                            return (
+                              <tr {...row.getRowProps()} onClick={()=> rowClick(row)}>
+                                {row?.cells?.map(cell => {
+                                  return <td {...cell.getCellProps({className: cell.column.className})}>{cell.render('Cell')}</td>
+                                })}
+                              </tr>
+                            )
+                        })
+                      )}  
+                    </tbody>
+                  </table>
+                }
+              </Styles>
+            
+          
           
         </Flex>
 
@@ -480,7 +483,7 @@ function dynamicSort(property) {
   }
 }
 
-function ResultPageInd({ race }) {
+function ResultPageInd({ race, rid }) {
   const { t } = useTranslation('common');
   const [view, setView] = useState(null)
 
@@ -490,7 +493,7 @@ function ResultPageInd({ race }) {
     GET_RESULTS, {
       //fetchPolicy: "no-cache",
       notifyOnNetworkStatusChange: true, 
-      variables: {rid:parseInt(race.rid), page: 0}
+      variables: {rid:parseInt(rid), page: 0}
     });
 
   const handleShare = (event) => {
@@ -793,6 +796,7 @@ export async function getStaticProps({ params, locale }) {
     props: { 
       ...(await serverSideTranslations(locale, ['common', 'public', 'app','translation'], null, ['en', 'fr'])),
       race: data?.race?data?.race:{},
+      rid: parseInt(params.raceid),
       revalidate: 160, // In seconds
     } 
   }
