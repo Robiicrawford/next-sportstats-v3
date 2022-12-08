@@ -40,8 +40,8 @@ const IndexPage = ({ data }) => {
       <Section.Container id="settings"  Background={Background} >
       
       
-          <Flex flexWrap='wrap' justifyContent='center' gap='2em' px={[1,3,5]} pt={2}>
-            <SideMenu active='faq' />
+          <Flex flexWrap='wrap' justifyContent='center' gap='2em'  px={[1,3,5]} pt={2}>
+            <SideMenu active='copyright' />
 
 
             <Flex
@@ -49,46 +49,21 @@ const IndexPage = ({ data }) => {
               flexWrap='wrap' height='fit-content'
               px={['1','6em']} className='card'
             >
-              <Heading mb='4' pb='2' sx={{borderBottom:'3px solid black'}}> FAQ </Heading>
-           
-
-
-
+              <Heading mb='4' pb='2' sx={{borderBottom:'3px solid black'}}>  Copyright </Heading>
+              <p style={{paddingBottom:'1em'}}>
+                No part of this web site may be reproduced, distributed, or transmitted in any form or by any means, including copying, recording, downloading or other electronic or mechanical methods, without the prior written permission of Sportstats, except certain non-commercial uses permitted by copyright law.
+              </p>
+              <p>
+                For permission requests, contact Sportstats, Att: Permissions Coordinator.
+              </p>
             </Flex>
           </Flex>
           
-        {/*
-             <Flex flexWrap='wrap' width={1} >
-               {menudata.map(topic=>(
-                 <Box width={[1,1/2,1/4]} key={topic.title} spacing={1} mb={1}>
-                   <Box width={1} justifyContent="flex-start" alignItems="center" >
-                      {icons[topic.title]}               
-                      <Heading py={1} ml={2} display='inline-block' color='#fff'>{t('help.topics.'+topic.title)}</Heading>
-                    </Box>
-                    {topic.data.map(a=>(
-                      <Box width={1} key={a.i18} my={2} ml={3}>
-                        <LangLink to={a.link} >
-                            {t('help.topics.'+a.i18)}
-                        </LangLink>
-                      </Box>
-                    ))}
-                 </Box>
-               ))}
-             </Flex>
-             <hr/>
-            <Flex flexWrap='wrap' width={1}>
-
-               <Box width={1} mb={2}>
-                 <Heading color='#fff'>{t("help.popular")}</Heading>
-               </Box>
-
-            </Flex>
-            <hr/>
-          */}
+       
 
 
       </Section.Container>
-      <Flex flexWrap='wrap' w='100%' color='#fff' pb={4} bg='black' sx={{position:'absolute', bottom:0}}>
+     <Flex flexWrap='wrap' w='100%' color='#fff' pb={4} bg='black' sx={{position:'absolute', bottom:0}}>
 
            <Box w='100%' mt={1} textAlign='center' >
              <Heading mb={1} >Contact Us</Heading>

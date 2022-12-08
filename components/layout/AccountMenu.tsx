@@ -65,7 +65,7 @@ const Header = () => {
             <MenuDivider />
             <MenuGroup title='Help'>
               {auth.user && <MenuItem onClick={()=>auth.signout()}>{ t('common:logout') }</MenuItem> }
-              <MenuItem>{ t('public:menu.help-center') }</MenuItem>
+              <Link href="/help"><MenuItem>{ t('public:menu.help-center') }</MenuItem></Link>
             </MenuGroup>
 
           </MenuList>

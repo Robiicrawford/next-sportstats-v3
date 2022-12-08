@@ -95,7 +95,7 @@ export default function Footer() {
           <Box >
             <Heading mb='3'>{t('common:support')} </Heading>
             <Stack direction='column' ml='4'  >
-              <NextLink href='/help/privacy-policy' > {t('footer.privacy')} </NextLink>
+              <NextLink href='/help/privacy' > {t('footer.privacy')} </NextLink>
               <NextLink href='/help/terms-of-use'> {t('footer.terms')} </NextLink>
               <NextLink href='/help'> {t('public:menu.help-center')} </NextLink>
 

@@ -178,7 +178,8 @@
             "m":"Male",
             "f":"Female",
             "n":"Non-Binary",
-            "u":"Undisclosed"
+            "u":"Undisclosed",
+            "x":"Mixed"
         },
         "error":{
             "min":"Password length should be a at least 8 characters",
