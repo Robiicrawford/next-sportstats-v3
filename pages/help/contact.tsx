@@ -13,8 +13,7 @@ import Section from '../../components/section';
 import Triangle from '../../components/triangle';
 
 import SideMenu from '../../components/help/SideMenu';
-
-
+import ContactForm from '../../components/help/ContactForm';
 
 const IndexPage = () => {
 
@@ -31,7 +30,7 @@ const IndexPage = () => {
       
       
           <Flex flexWrap='wrap' mb='150px' justifyContent='center' gap='2em'  px={[1,3,5]} pt={2}>
-            <SideMenu active='copyright' />
+            <SideMenu active='contact' />
 
 
             <Flex
@@ -39,13 +38,8 @@ const IndexPage = () => {
               flexWrap='wrap' height='fit-content'
               px={['1','6em']} className='card'
             >
-              <Heading mb='4' pb='2' sx={{borderBottom:'3px solid black'}}>  Copyright </Heading>
-              <p style={{paddingBottom:'1em'}}>
-                No part of this web site may be reproduced, distributed, or transmitted in any form or by any means, including copying, recording, downloading or other electronic or mechanical methods, without the prior written permission of Sportstats, except certain non-commercial uses permitted by copyright law.
-              </p>
-              <p>
-                For permission requests, contact Sportstats, Att: Permissions Coordinator.
-              </p>
+              <Heading mb='4' pb='2' sx={{borderBottom:'3px solid black'}}>  Contact Us </Heading>
+              <ContactForm info={null} />
             </Flex>
           </Flex>
           

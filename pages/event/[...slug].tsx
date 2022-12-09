@@ -78,6 +78,8 @@ function Master({ master }) {
     return <div> ... error on page ... </div>
   }
 
+  console.log(master)
+
   return (
     <Layout header_color='black' >
       <NextSeo

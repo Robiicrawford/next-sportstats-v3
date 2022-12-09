@@ -39,26 +39,30 @@ const IndexPage = ({ data }) => {
       <Section.Container id="settings"  Background={Background} >
       
       
-          <Flex flexWrap='wrap' justifyContent='center' gap='2em' pb='150px'  px={[1,3,5]} pt={2}>
+          <Flex 
+            flexWrap='wrap' justifyContent='center' 
+            gap='2em' pb='150px'  px={[1,3,5]} pt={2}
+          >
             <SideMenu active='offices' />
 
 
             <Flex
-              w={['100%','60%']}
+              w={['100%','100%','60%']}
               flexWrap='wrap' height='fit-content'
               px={['1','6em']} className='card'
             >
               <Heading mb='4' pb='2' sx={{borderBottom:'3px solid black'}}>  Office Locations </Heading>
-              <SimpleGrid columns={2} spacing={10} pb='5'>
+              <SimpleGrid columns={[1,1,2]} spacing={10} pb='5'>
                 <Card
-                  direction={{ base: 'column', sm: 'row' }}
+                  direction={{ base: 'column', sm: 'column', md:'row' }}
                   overflow='hidden'
                   variant='outline'
                 >
                   <Image
                     objectFit='cover'
                     maxW={{ base: '100%', sm: '200px' }}
-                    maxH={{ base: '100%', sm: '130px' }}
+                    maxH={{ base: '100%', sm: '100%' }}
+                    style={{objectFit:'contain'}}
                     src='https://a.cdn-hotels.com/gdcs/production163/d857/cc29dd0e-f745-4507-80e1-6ae5a3532338.jpg'
                     alt='Caffe Latte'
                   />
@@ -70,11 +74,16 @@ const IndexPage = ({ data }) => {
                           svg 
                           countryCode='CA'
                           title='Canada'
-                          style={{marginRight:'1em'}}
+                          style={{marginRight:'0.6em'}}
                         /> 
 
                         Sportstats East
-                       
+                        
+                        <Badge ml='1' colorScheme='green'>
+                          HQ
+                        </Badge>
+
+
                       </Heading>
 
                       <Text py='2'>
@@ -86,7 +95,7 @@ const IndexPage = ({ data }) => {
                 </Card>
                 
                 <Card
-                  direction={{ base: 'column', sm: 'row' }}
+                  direction={{ base: 'column', sm: 'column', md:'row' }}
                   overflow='hidden'
                   variant='outline'
                 >
@@ -105,7 +114,7 @@ const IndexPage = ({ data }) => {
                           svg 
                           countryCode='CA'
                           title='Canada'
-                          style={{marginRight:'1em'}}
+                          style={{marginRight:'0.6em'}}
                         /> 
 
                         Sportstats West
@@ -121,7 +130,7 @@ const IndexPage = ({ data }) => {
                 </Card>
 
                 <Card
-                  direction={{ base: 'column', sm: 'row' }}
+                  direction={{ base: 'column', sm: 'column', md:'row' }}
                   overflow='hidden'
                   variant='outline'
                 >
@@ -140,15 +149,12 @@ const IndexPage = ({ data }) => {
                           svg 
                           countryCode='US'
                           title='USA'
-                          style={{marginRight:'1em'}}
+                          style={{marginRight:'0.6em'}}
                         /> 
 
                         Sportstats USA
 
-                        <Badge ml='1' colorScheme='green'>
-                          HQ
-                        </Badge>
-
+                        
                       </Heading>
 
                       <Text py='2'>
@@ -160,7 +166,7 @@ const IndexPage = ({ data }) => {
                 </Card>
 
                  <Card
-                  direction={{ base: 'column', sm: 'row' }}
+                  direction={{ base: 'column', sm: 'column', md:'row' }}
                   overflow='hidden'
                   variant='outline'
                 >
@@ -179,7 +185,7 @@ const IndexPage = ({ data }) => {
                           svg 
                           countryCode='CA'
                           title='Canada'
-                          style={{marginRight:'1em'}}
+                          style={{marginRight:'0.6em'}}
                         /> 
 
                         Sportstats Quebec
@@ -196,7 +202,7 @@ const IndexPage = ({ data }) => {
 
 
                 <Card
-                  direction={{ base: 'column', sm: 'row' }}
+                  direction={{ base: 'column', sm: 'column', md:'row' }}
                   overflow='hidden'
                   variant='outline'
                 >
@@ -215,7 +221,7 @@ const IndexPage = ({ data }) => {
                           svg 
                           countryCode='TH'
                           title='Thailand'
-                          style={{marginRight:'1em'}}
+                          style={{marginRight:'0.6em'}}
                         /> 
 
                         Sportstats Asia
@@ -231,7 +237,7 @@ const IndexPage = ({ data }) => {
                 </Card>
 
                 <Card
-                  direction={{ base: 'column', sm: 'row' }}
+                  direction={{ base: 'column', sm: 'column', md:'row' }}
                   overflow='hidden'
                   variant='outline'
                 >
@@ -250,7 +256,7 @@ const IndexPage = ({ data }) => {
                           svg 
                           countryCode='IN'
                           title='India'
-                          style={{marginRight:'1em'}}
+                          style={{marginRight:'0.6em'}}
                         /> 
 
                         Sportstats India 

@@ -1,6 +1,8 @@
 import React, {useState, useEffect, Suspense} from "react"
 import { NextSeo } from 'next-seo';
 
+import Link from 'next/link'
+
 import { useRouter } from 'next/router'
 
 import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
@@ -9,10 +11,28 @@ import { useTranslation } from 'next-i18next';
 import { useAuthenticator } from '@aws-amplify/ui-react';
 
 import styled from "styled-components";
-import { Flex, Center, Box, Heading, Text, Button, Spacer, Avatar, ButtonGroup, IconButton, VStack, Skeleton, useDisclosure  } from '@chakra-ui/react';
+import { 
+  Flex, Center, Box, Heading, Text, Button, 
+  Spacer, Avatar, ButtonGroup, IconButton, VStack, Skeleton, 
+  useDisclosure  
+} from '@chakra-ui/react';
+
+import {
+  Modal,
+  ModalOverlay,
+  ModalContent,
+  ModalHeader,
+  ModalFooter,
+  ModalBody,
+  ModalCloseButton,
+} from '@chakra-ui/react'
 
 
-import { useTable, useFilters, useGlobalFilter, useSortBy, useAsyncDebounce, usePagination, useControlledState } from 'react-table'
+import { 
+  useTable, useFilters, 
+  useGlobalFilter, useSortBy, 
+  useAsyncDebounce, usePagination, useControlledState 
+} from 'react-table'
 
 import Layout from '../../components/layout/Layout'
 
@@ -37,6 +57,7 @@ import Select from 'react-select';
 import makeAnimated from 'react-select/animated';
 
 const RaceStats = React.lazy(() => import('../../components/race/RaceStats'));
+const ContactForm = React.lazy(() => import('../../components/help/ContactForm'));
 
 const getCountryISO2 = require("country-iso-3-to-2");
 
@@ -182,6 +203,11 @@ const GET_RESULTS = gql`
 function Table({race, columns, data, isLoading, setOpenStats, fetchMore, pageInfo}) {
   const { t } = useTranslation('common');
   const router = useRouter()
+
+  //state of support modal // used to open or close support modal
+  const { isOpen, onOpen, onClose } = useDisclosure()
+  /// state of open help form 
+  const [open, setOpen] = useState(false)
 
   const btnRefFilter = React.useRef()
 
@@ -435,11 +461,9 @@ function Table({race, columns, data, isLoading, setOpenStats, fetchMore, pageInf
                 }
               </Styles>
             
-          
-          
         </Flex>
 
-        <Flex w='100%' pb='1' my={['2', 'auto']} justifyContent={'center'}  >
+        <Flex w='100%' pb='1' my={['2', 'auto']} justifyContent={'center'} position='relative'  >
           <ButtonGroup gap='3' colorScheme='green' variant='outline'>
             <Button isDisabled={pageIndex==0?true:false} onClick={()=>handleBack(0)} > <FontAwesomeIcon icon={faBackward} size='lg' /> </Button> 
             <Button isDisabled={pageIndex==0?true:false} onClick={()=>handleBack(controlledPageIndex-1)} >  <FontAwesomeIcon icon={faBackwardStep} size='lg' /> </Button> 
@@ -448,8 +472,78 @@ function Table({race, columns, data, isLoading, setOpenStats, fetchMore, pageInf
             </Box>     
             <Button isDisabled={data.length == 10 ?false:true} onClick={handleNext} > <FontAwesomeIcon icon={faForwardStep} size='lg' />  </Button>
           </ButtonGroup>
+          
+          <Text 
+            sx={{
+              position:'absolute', 
+              right:'25px', 
+              borderBottom:'1px solid black', 
+              cursor:'pointer'
+            }}
+            onClick={onOpen}
+          > 
+            Need Help? 
+          </Text>
+
         </Flex>
       </Flex>
+
+      <Modal isOpen={isOpen} onClose={onClose}>
+        <ModalOverlay />
+        <ModalContent>
+          <ModalHeader>Support</ModalHeader>
+          <ModalCloseButton />
+          <ModalBody>
+            {!open?
+              <Flex flexWrap='wrap' gap='8'>
+
+                {/* email contact for the event */}
+                <Flex w='100%' flexWrap='wrap' justifyContent='center'>
+                  <Text w='100%' textAlign='center'>For General Event questions</Text>
+                  <Button >Contact : org@email.com </Button>
+                </Flex>
+
+                {/* link to sportstats FAQ */}
+                <Flex w='100%' flexWrap='wrap' justifyContent='center'>
+                  <Text w='100%' pb='2'  textAlign='center'>For General Result Questions </Text>
+                  <Link href='/help'><Button colorScheme='teal' >Help Center</Button></Link>
+                </Flex>
+
+                {/* open corrections form*/}
+                <Flex w='100%' flexWrap='wrap' justifyContent='center'>
+                  <Text w='100%' pb='2' textAlign='center'>Live Result Corrections </Text>
+                 <Button colorScheme='teal' onClick={()=>setOpen(true)} >Contact Us</Button>
+                </Flex>
+              
+              </Flex>
+              :
+                <Suspense fallback={<div>Loading...</div>}>
+                  <ContactForm 
+                    info={{
+                      category:'corrections',
+                      event: race?.event?.name,
+                      eid: race?.event?.eid,
+                      race: race?.info?.name,
+                      rid: race?.event?.rid
+                    }} 
+                  />
+                </Suspense>
+            }
+          </ModalBody>
+
+          <ModalFooter>
+            {open &&
+              <Button colorScheme='gray' mr={3} onClick={()=>setOpen(false)}>
+                Back
+              </Button>
+            }
+            <Button colorScheme='blue' mr={3} onClick={onClose}>
+              Close
+            </Button>
+          </ModalFooter>
+        </ModalContent>
+      </Modal>
+
     </>
   )
 }
