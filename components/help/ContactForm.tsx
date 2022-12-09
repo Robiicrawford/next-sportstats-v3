@@ -16,17 +16,22 @@ const ContactForm = ({info}) => {
       var subject = ''
 
       if(info){
-        meta.push({eid: info.eid})
-        meta.push({rid: info.rid})
-        meta.push({bib: info.bib})
-        tags.push({name: `${info.event}`})
-        tags.push({name: `${info.event} - ${info.race}`})
+        meta = [...meta, 
+          {eid: info.eid},
+          {rid: info.rid},
+          {bib: info.bib}
+        ]
+
+        tags =[
+          ...tags,
+          {name: `${info.event}`},
+          {name: `${info.event} - ${info.race}`}
+        ]
+
         subject += `${info.event} | ${info.race} | BIB:${info.bib} - `
       }
 
       subject += formData.subject
-
-      console.log(subject)
 
       const response = await fetch('https://2tdxe2ivhf.execute-api.us-west-2.amazonaws.com/dev/gorgias/tickets', {
         method: 'POST',
