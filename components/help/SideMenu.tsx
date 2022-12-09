@@ -22,7 +22,7 @@ const SideMenu = ({ data, active }) => {
           > 
             <Heading w='100%' pb='1' sx={{borderBottom:'2px solid black', paddingRight:'2em', textAlign:'center'}}> SUPPORT </Heading>
             <Stack 
-              spacing='14px'w={['100%','20%']}
+              spacing='14px'
               direction={['row','column']}
                py='3' w='100%'
             >
