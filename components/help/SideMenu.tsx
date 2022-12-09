@@ -4,18 +4,15 @@ import { useTranslation } from 'next-i18next';
 
 import Link from 'next/link'
 
-import { Box, Flex, Heading, Text, Center, Stack , Container, StackDivider   } from '@chakra-ui/react';
+import { Flex, Heading, Stack } from '@chakra-ui/react';
 
-
-const SideMenu = ({ data, active }) => {
-  const content = data?.allBuilderModels.oneHepCenter?.content;
+const SideMenu = ({ active }) => {
 
   const {t} = useTranslation('public');
 
  
   return (
    
-      
           <Flex 
             flexWrap='wrap' justifyContent='center' 
             className='card__base' px={[1,3,5]} pt={2} h='fit-content'
@@ -40,4 +37,3 @@ const SideMenu = ({ data, active }) => {
 }
 
 export default SideMenu
-
