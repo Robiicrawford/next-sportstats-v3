@@ -16,9 +16,13 @@ const ContactForm = ({info}) => {
       var subject = ''
 
       if(info){
+        // @ts-ignore
         meta = [...meta, 
+          // @ts-ignore
           {eid: info.eid},
+          // @ts-ignore
           {rid: info.rid},
+          // @ts-ignore
           {bib: info.bib}
         ]
 
