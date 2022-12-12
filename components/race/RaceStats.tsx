@@ -149,13 +149,13 @@ function HeroCard({ race, setOpenStats }) {
 
   return (
     <>
-      <Flex className='card__base' flexWrap='wrap' position='relative' w='100%' pb='2'>
+      <Flex  flexWrap='wrap' position='relative' w='100%' pb='2'>
         <CloseButton 
             style={{border:'1px solid black', position:'absolute', right:'5px', top:'5px'}} 
             onClick={()=>setOpenStats(false)}
           />
         <Heading w='100%' px='2' sx={{borderBottom:'1px solid black'}}>Statistics </Heading>
-        <Flex flexWrap='wrap' gap='3' p={'2'} justifyContent='space-evenly' mt='2'> 
+        <Flex flexWrap='wrap' w='100%' gap='3' p={'2'} justifyContent='space-evenly' mt='2'> 
           <Box sx={{border:'1px solid black', borderRadius:'15px'}} w={['100%','100%','100%','45%']}   p={['0','2']} >
               <Heading sx={{borderBottom:'1px solid black'}}> Athletes / Registered </Heading>
               <ResponsiveContainer width="99%" height="90%">

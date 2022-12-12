@@ -36,7 +36,6 @@ const Styles = styled.div`
   width: 100%;
 
   table {
-    
     border-spacing: 2px;
     border-collapse: collapse;
     width: 100%;
@@ -46,7 +45,6 @@ const Styles = styled.div`
           border-bottom: 0;
         }
       }
-   
     }
     tbody {
       :before {
@@ -70,7 +68,6 @@ const Styles = styled.div`
     th {
       margin: 0;
       padding: 0.1rem;
-    
       :last-child {
         border-right: 0;
       }
@@ -95,8 +92,6 @@ const Styles = styled.div`
         }
       }
     }
-
-    
   }
 `
 
@@ -214,12 +209,12 @@ function ordinal_suffix_of(i) {
 
 function ResultPageInd({ result, race, rid }) {
   const { t } = useTranslation('common');
+  const router = useRouter()
+
   const [open, setOpen] = useState(null)
   const { user } = useAuthenticator((context) => [context.user]);
 
-
   const handleClaim =  async() => {
-    
     try{
       var claim = await fetch(
         `${process.env.NEXT_PUBLIC_MEMBER_URL}/resultClaim.php`
@@ -244,7 +239,6 @@ function ResultPageInd({ result, race, rid }) {
     } catch (err) {
       console.log(err)  
     }
-
   }
 
   const handleShare = (event) => {
@@ -267,8 +261,6 @@ function ResultPageInd({ result, race, rid }) {
     }
   };
 
-  const router = useRouter()
-
   return (
     <Layout header_color='black' >
       <NextSeo
@@ -289,7 +281,7 @@ function ResultPageInd({ result, race, rid }) {
 
           <Flex flexWrap='wrap' w='100%'>
 
-            <Flex flexWrap='wrap' w='35%' flex='1 1 15%' sx={{position:'relative'}} justifyContent='space-evenly' >
+            <Flex flexWrap='wrap' w={['100%','35%']} flex='1 1 15%' sx={{position:'relative'}} justifyContent='space-evenly' >
                {user && !result.user.ssuid &&
                  <Button 
                     colorScheme='green' 
@@ -301,14 +293,12 @@ function ResultPageInd({ result, race, rid }) {
                   </Button>
                 }
 
-               
-
-              <Box style={{position:'relative'}}>
+              <Box style={{position:'relative'}} w='35%'>
                 <Box sx={{position:'absolute', right:'5px', top:'0',zIndex:'1', cursor:'pointer'}} className='shareButton'  onClick={handleShare} >
                   <FontAwesomeIcon icon={faShareAlt} size="2xl"  />
                 </Box>
 
-                <Avatar size='2xl' name={result.givenName+" "+result.familyName} src={result.user.profilePhoto} />  
+                <Avatar size={['xl','2xl']} ml='2' name={result.givenName+" "+result.familyName} src={result.user.profilePhoto} />  
                 <Box sx={{position:'absolute' ,right:'0', bottom:'5px'}}> 
                   {result.country&&(
                     <ReactCountryFlag 
@@ -321,7 +311,7 @@ function ResultPageInd({ result, race, rid }) {
                 </Box>
               </Box>
               
-              <Flex flexWrap='wrap' h='fit-content'>
+              <Flex flexWrap='wrap' h='fit-content' w='65%' pl='6'>
                 <Heading w='100%' textAlign='center' pb='2' >{result.givenName+" "+result.familyName} </Heading>
               
                 <Flex w='100%'  flexWrap='wrap'><FontAwesomeIcon style={{margin:'auto 0'}} icon={faHashtag} />  <Text ml='2' fontSize='1.2em'>{result.bib} </Text></Flex>
@@ -330,7 +320,7 @@ function ResultPageInd({ result, race, rid }) {
               </Flex>
             </Flex>
 
-            <Box w='65%' mb={[0,2]}   h='fit-content'>
+            <Box w={['100%','65%']} mb={[0,2]}   h='fit-content'>
 
               
 
@@ -432,7 +422,6 @@ export async function getStaticPaths() {
   // prerender any static pages
   // (faster builds, but slower initial page load)
 
- 
     return {
       paths: [],
       fallback: 'blocking',

@@ -80,7 +80,7 @@ const LoginContent = () => {
                             </InputRightElement>
                           </InputGroup>
 
-                  <Button w='100%' mt='3' type='submit'>{t('common:continue')}</Button>
+                  <Button w='100%' mt='3' type='submit' colorScheme='teal'>{t('common:continue')}</Button>
           
               </Flex>
           }
@@ -94,7 +94,7 @@ const LoginContent = () => {
                   <Heading as="h6" my={2}  mb={3}>{t('public:signup.title')}</Heading>
                   
                   <Link href={`/sign-up`}>
-                      <Button style={{width:'100%'}} color='black'>{t('common:sign-up')}</Button>
+                      <Button style={{width:'100%'}} colorScheme='pink' variant='outline'  >{t('common:sign-up')}</Button>
                   </Link>
               </Box>
           

@@ -34,12 +34,22 @@ const Header = () => {
         bg='white' 
       >
         <Flex p='1' >
-          <Avatar 
-            size='sm'
-            mr='2' 
-            name={auth.user&& auth.user?.attributes?.given_name+" "+auth.user?.attributes?.family_name }
-            src={auth?.user?.attributes?.picture}
-          />
+          {auth.user?.attributes?.given_name
+            ?
+              <Avatar 
+                size='sm'
+                mr='2' 
+                name={auth.user&& auth.user?.attributes?.given_name+" "+auth.user?.attributes?.family_name }
+                src={auth?.user?.attributes?.picture}
+              />
+            :
+              <Avatar 
+                size='sm'
+                mr='2' bg='ss_green'
+                src='https://bit.ly/broken-link'
+              />
+          }
+          
    
           <StyledBurger aria-hidden="false" aria-label="open menu" >
             <div />
