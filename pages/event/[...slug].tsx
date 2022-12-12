@@ -40,7 +40,6 @@ import "swiper/css";
 import "swiper/css/navigation";
 import "swiper/css/pagination";
 
-
 // import required modules
 import { Pagination } from "swiper";
 
