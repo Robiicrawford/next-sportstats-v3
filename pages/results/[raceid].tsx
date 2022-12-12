@@ -339,7 +339,6 @@ function Table({race, columns, data, isLoading, setOpenStats, fetchMore, pageInf
     previousPage()
   }
 
-  console.log(race)
   return (
     <>
    
