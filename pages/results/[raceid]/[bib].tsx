@@ -293,12 +293,17 @@ function ResultPageInd({ result, race, rid }) {
                   </Button>
                 }
 
-              <Box style={{position:'relative'}} w='35%'>
+              <Flex flexWrap='wrap' justifyContent='center' style={{position:'relative'}} w='35%'>
                 <Box sx={{position:'absolute', right:'5px', top:'0',zIndex:'1', cursor:'pointer'}} className='shareButton'  onClick={handleShare} >
                   <FontAwesomeIcon icon={faShareAlt} size="2xl"  />
                 </Box>
 
-                <Avatar size={['xl','2xl']} ml='2' name={result.givenName+" "+result.familyName} src={result.user.profilePhoto} />  
+                <Avatar 
+                  size={['xl','2xl']} 
+                  ml='2' 
+                  name={result.givenName+" "+result.familyName} 
+                  src={result.user.profilePhoto} 
+                />  
                 <Box sx={{position:'absolute' ,right:'0', bottom:'5px'}}> 
                   {result.country&&(
                     <ReactCountryFlag 
@@ -309,7 +314,7 @@ function ResultPageInd({ result, race, rid }) {
                     /> 
                   )}
                 </Box>
-              </Box>
+              </Flex>
               
               <Flex flexWrap='wrap' h='fit-content' w='65%' pl='6'>
                 <Heading w='100%' textAlign='center' pb='2' >{result.givenName+" "+result.familyName} </Heading>

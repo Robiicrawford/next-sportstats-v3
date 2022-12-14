@@ -13,6 +13,7 @@ import {Amplify } from 'aws-amplify';
 import aws_exports from '../aws-exports'
 
 import { ChakraProvider, extendTheme  } from '@chakra-ui/react'
+import { theme } from '../theme'
 
 import { DefaultSeo } from 'next-seo';
 
@@ -23,40 +24,7 @@ import 'styled-components';
 
 
 Amplify.configure({...aws_exports, ssr: true});
-const colors = {
-  
-  brand: {
-    900: '#1a365d',
-    800: '#153e75',
-    700: '#2a69ac',
-  },
- 
-    background: '#FFFFFF',
-    surface: '#242526',
-    wash: '#18191a',
-    muted: '#f0e6f6',
-    gray: '#e4e6eb',
-    text: '#e4e6eb',
 
-    slate: '#2f4f4ff7',
-
-    primary: '#000',
-    ss_green: '#0CAA56',
-    secondary: '#0CAA56',
-    highlight: '#0CAA56',
-
-}
-
-const queries = {
-    xs: '@media screen and (max-width: 40em)',
-    sm: '@media screen and (min-width: 40em) and (max-width: 52em)',
-    'sm+': '@media screen and (min-width: 40em)',
-    md: '@media screen and (min-width: 52em) and (max-width: 64em)',
-    'md+': '@media screen and (min-width: 52em)',
-    lg: '@media screen and (min-width: 64em)',
-  }
-
-const theme = extendTheme({ colors, queries });
 
 function Application({ Component, pageProps }: AppProps) {
 
