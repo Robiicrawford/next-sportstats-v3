@@ -37,7 +37,6 @@ function Application({ Component, pageProps }: AppProps) {
             title = 'This is my title'
             titleTemplate = '%s | Sportstats'
             description= 'Claim and share your race results, receive live race notifications and more!'
-            themeColor='#0CAA56'
             openGraph={{
               type: 'website',
               locale: 'en_CA',

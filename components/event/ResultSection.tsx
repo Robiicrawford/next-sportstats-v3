@@ -11,6 +11,9 @@ const link_url = (link) => {
   if(link.lt === 19) {
     return `/club-points/${link.lu}`
   }
+  if(link.lt === 21) {
+    return `/slots/${link.lu}`
+  }
 }
 
 const Index = ({data, master}) => {
@@ -36,14 +39,14 @@ const Index = ({data, master}) => {
 
             {/* race links section, sits below main result link  */}
             {r.links.length > 0 && 
-              <Flex w='100%' pt='1AA' sx={{borderTop:'1px dotted black'}}>
+              <Flex w='100%' pt='1AA' gap='3' pl='3' sx={{borderTop:'1px dotted black'}}>
                 {r.links.map((link) =>
                   <Link
                     key={link.id}
                     href={`${[19].includes(link.lt)?link_url(link):link.lu}`}
                     style={{cursor:'pointer !important', marginBottom:'5px'}}
                   > 
-                    <span className={`tag tag-status tag-grey`} style={{marginLeft:'2em'}}> 
+                    <span className={`tag tag-status tag-grey`} > 
                       {link.ll}
                     </span>
                   </Link>
