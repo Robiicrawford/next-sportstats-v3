@@ -38,7 +38,7 @@ const Index = ({data, master}) => {
             </Link>
 
             {/* race links section, sits below main result link  */}
-            {r.links.length > 0 && 
+            {r?.links?.length > 0 && 
               <Flex w='100%' pt='1AA' gap='3' pl='3' sx={{borderTop:'1px dotted black'}}>
                 {r.links.map((link) =>
                   <Link
