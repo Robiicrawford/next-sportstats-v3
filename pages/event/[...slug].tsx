@@ -83,6 +83,17 @@ function Master({ master }) {
     <Layout header_color='black' >
       <NextSeo
         title={`${master?.info?.name}`}
+         openGraph={{
+          images: [
+                {
+                  url: master?.info.mlimg? `https://cdn-1.sportstats.one/img/master_logo/${master?.mid}_${master?.info.mlimg}.png` : 'https://sportstats.today/android-chrome-512x512.png' ,
+                  width: 800,
+                  height: 600,
+                  alt: 'Og Image Alt',
+                  type: 'image/jpeg',
+                },
+          ]
+        }}
       />
         <Flex 
           w='100%'
@@ -349,6 +360,14 @@ export async function getStaticProps({ params, locale }) {
             name
             status
             date
+            links {
+              id:lid
+              lt
+              la
+              lu
+              ll
+              lo
+            }
           }
           links{
             id:lid

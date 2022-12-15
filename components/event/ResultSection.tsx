@@ -6,16 +6,19 @@ import { useTranslation } from 'next-i18next';
 
 import { Box, Flex, Heading, Text } from '@chakra-ui/react';
 
+
+const link_url = (link) => {
+  if(link.lt === 19) {
+    return `/club-points/${link.lu}`
+  }
+}
+
 const Index = ({data, master}) => {
   const { t } = useTranslation();
 
   return (
     <Flex flexWrap='wrap' mt='3' className='card__base' style={{borderRadius:'15px', border:'1px solid black'}} w='100%'   alignItems='center' >
-      
-      {/*<Box w='100%' py={[2,3]} px={[2,4]} >
-        <Heading color='black' style={{borderBottom:'1px solid black'}}>Results - {data?.info?.start_date.slice(0,10)}</Heading>
-      </Box>
-*/}
+
       <Flex flexWrap='wrap'   w={['100%', '75%', '50%']} my='3' px='2' >
         {data?.races.map((r, i)=>(
           <Flex key={r.id} flexWrap='wrap' pt='1' w='100%' className='race-list' >
@@ -30,16 +33,24 @@ const Index = ({data, master}) => {
                  
               </Flex>
             </Link>
-            {master.sid === 57 &&
+
+            {/* race links section, sits below main result link  */}
+            {r.links.length > 0 && 
               <Flex w='100%' pt='1AA' sx={{borderTop:'1px dotted black'}}>
-                <Link
-                  href={`/club-points/${r.rid}`}
-                  style={{cursor:'pointer !important', marginBottom:'5px'}}
-                > 
-                  <span className={`tag tag-status tag-grey`} style={{marginLeft:'2em'}}> Club Points </span>
-                </Link>
+                {r.links.map((link) =>
+                  <Link
+                    key={link.id}
+                    href={`${[19].includes(link.lt)?link_url(link):link.lu}`}
+                    style={{cursor:'pointer !important', marginBottom:'5px'}}
+                  > 
+                    <span className={`tag tag-status tag-grey`} style={{marginLeft:'2em'}}> 
+                      {link.ll}
+                    </span>
+                  </Link>
+                )}
               </Flex>
             }
+
           </Flex>
         ))}
 
