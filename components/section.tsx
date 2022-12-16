@@ -43,12 +43,10 @@ const SectionContainer = styled('div')<{ place?: string }>`
   flex: 0 1 auto;
  /* flex-direction: column; */
   justify-content: ${({ place }) => place ? place : 'center'};
-  padding: '1em 0.5em';
   scroll-behavior: smooth;
-  
   @media only screen and (min-width: 768px) {
     /* For everything bigger than 768px */
-    padding: ${({ place }) => place ? '1em 0.5em' : '2em 1em'};
+   
   }
 
 `;

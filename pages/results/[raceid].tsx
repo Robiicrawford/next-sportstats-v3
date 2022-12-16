@@ -650,7 +650,7 @@ function ResultPageInd({ race, rid }) {
               Cell: (props)=> 
                 !["1", "2"].includes(item.CT)?
                   <>
-                    <Heading fontSize={'22px'} sx={{borderBottom:'1px dotted grey'}}> {msToTime(props.cell.value.split(';')[0])}  </Heading>
+                    <Heading fontSize={'22px'} lineHeight='1.5em' sx={{borderBottom:'1px dotted grey'}}> {msToTime(props.cell.value.split(';')[0])}  </Heading>
                     <Text fontSize={'20px'} display={['none','none', 'block' ]}> {msToTime(props.cell.value.split(';')[1])}  </Text>
                   </>
                 : <Heading fontSize={'22px'} > {item.CF === "1" ?msToTime(props.cell.value.split(';')[1]) : props.cell.value.split(';')[1] }  </Heading>  

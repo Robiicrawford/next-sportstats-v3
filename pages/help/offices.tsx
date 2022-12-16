@@ -14,6 +14,7 @@ import {
 import Layout from '../../components/layout/Layout'
 import Section from '../../components/section';
 import Triangle from '../../components/triangle';
+import ContactUsBanner from "../../components/help/ContactUsBanner"
 
 import SideMenu from '../../components/help/SideMenu';
 
@@ -33,7 +34,7 @@ const IndexPage = ({ data }) => {
     <Layout>
       <NextSeo title={t("help.title")} />
 
-      <Center bg='tomato' h='100px' color='white'>
+      <Center bg='tomato' h='100px' w='100%' color='white'>
         <Heading> {t("help.welcome")} </Heading>
       </Center >
       <Section.Container id="settings"  Background={Background} >
@@ -280,20 +281,8 @@ const IndexPage = ({ data }) => {
 
 
       </Section.Container>
-     <Flex flexWrap='wrap' w='100%' color='#fff' pb={4} bg='black' sx={{position:'absolute', bottom:0}}>
-
-           <Box w='100%' mt={1} textAlign='center' >
-             <Heading mb={1} >Contact Us</Heading>
-           </Box>
-           <Box w='100%' mt={2} textAlign='center'>
-             <Text mb={1}>
-               {t('help.cant-find-help')} 
-               <Link href={`/help/contact`} style={{marginLeft:'10px', borderBottom:'3px solid green'}}>
-                 {t('help.contact-us')}
-                </Link>
-              </Text>
-           </Box>
-      </Flex>
+      
+       <ContactUsBanner />
 
     </Layout>
   )

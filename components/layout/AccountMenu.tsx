@@ -49,7 +49,6 @@ const Header = () => {
                 src='https://bit.ly/broken-link'
               />
           }
-          
    
           <StyledBurger aria-hidden="false" aria-label="open menu" >
             <div />
@@ -64,9 +63,9 @@ const Header = () => {
             <MenuGroup title='Profile'>
               {auth?.user ?
                 <>
-                  <MenuItem>My Account</MenuItem>
-                  <MenuItem>{ t('common:dashboard').toLowerCase() } </MenuItem>
-                  <Link href="/account/settings"><MenuItem>{ t('common:settings').toLowerCase() } </MenuItem></Link>
+                  <Link href="/account"><MenuItem> { t('common:dashboard').toLowerCase() } </MenuItem></Link>
+                  <Link href={`/profile/${auth.user?.attributes?.['custom:ssuid']}`}><MenuItem> My Profile </MenuItem></Link>
+                  <Link href="/account/settings"><MenuItem> My Account </MenuItem></Link>
                 </>
                 : <MenuItem onClick={onOpen} >{ t('common:login') }</MenuItem>
               }

@@ -7,11 +7,11 @@ import { NextSeo } from 'next-seo';
 import Link from 'next/link'
 
 import { Box, Flex, Heading, Text, Center , SimpleGrid,
+  Accordion,
   Card, CardBody, CardFooter, Stack, Image, Badge  
 } from '@chakra-ui/react';
 
 import {
-  Accordion,
   AccordionItem,
   AccordionButton,
   AccordionPanel,
@@ -21,6 +21,8 @@ import {
 import Layout from '../../components/layout/Layout'
 import Section from '../../components/section';
 import Triangle from '../../components/triangle';
+import ContactUsBanner from "../../components/help/ContactUsBanner"
+
 
 import SideMenu from '../../components/help/SideMenu';
 
@@ -44,7 +46,7 @@ const IndexPage = ({ data }) => {
     <Layout>
       <NextSeo title={t("help.title")} />
 
-      <Center bg='tomato' h='100px' color='white'>
+      <Center bg='tomato' h='100px' w='100%' color='white'>
         <Heading> {t("help.welcome")} </Heading>
       </Center >
       <Section.Container id="settings"  Background={Background} >
@@ -280,52 +282,12 @@ const IndexPage = ({ data }) => {
 
             </Flex>
           </Flex>
-          
-        {/*
-             <Flex flexWrap='wrap' width={1} >
-               {menudata.map(topic=>(
-                 <Box width={[1,1/2,1/4]} key={topic.title} spacing={1} mb={1}>
-                   <Box width={1} justifyContent="flex-start" alignItems="center" >
-                      {icons[topic.title]}               
-                      <Heading py={1} ml={2} display='inline-block' color='#fff'>{t('help.topics.'+topic.title)}</Heading>
-                    </Box>
-                    {topic.data.map(a=>(
-                      <Box width={1} key={a.i18} my={2} ml={3}>
-                        <LangLink to={a.link} >
-                            {t('help.topics.'+a.i18)}
-                        </LangLink>
-                      </Box>
-                    ))}
-                 </Box>
-               ))}
-             </Flex>
-             <hr/>
-            <Flex flexWrap='wrap' width={1}>
-
-               <Box width={1} mb={2}>
-                 <Heading color='#fff'>{t("help.popular")}</Heading>
-               </Box>
-
-            </Flex>
-            <hr/>
-          */}
+  
 
 
       </Section.Container>
-      <Flex flexWrap='wrap' w='100%' color='#fff' pb={4} bg='black' sx={{position:'absolute', bottom:0}}>
 
-           <Box w='100%' mt={1} textAlign='center' >
-             <Heading mb={1} >Contact Us</Heading>
-           </Box>
-           <Box w='100%' mt={2} textAlign='center'>
-             <Text mb={1}>
-               {t('help.cant-find-help')} 
-               <Link href={`/help/contact`} style={{marginLeft:'10px', borderBottom:'3px solid green'}}>
-                 {t('help.contact-us')}
-                </Link>
-              </Text>
-           </Box>
-      </Flex>
+      <ContactUsBanner />
 
     </Layout>
   )

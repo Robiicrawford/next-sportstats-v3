@@ -37,66 +37,70 @@ export default function Settings({locale}) {
         title={`Settings`}
         noindex={true}
       />
-        <Section.Container id="settings" Background={Background} >
-          <AuthCheck>
-           
-
-            <Container maxW='1500' flexWrap='wrap' px={[1,3,5,6]} pb={[1,2,3,5]} py={2} sx={{display:'flex', flexDirection:'row', gap:'1em'}} justifyContent='center'>
-              <Box w='100%' my={[2,4]}>
-                <Heading as="h1" >{t('your-settings')}</Heading>
-                <h3 style={{marginLeft:'1em'}}> 
-                  {auth.user?.attributes?.given_name} {auth.user?.attributes?.family_name}, {auth.user?.attributes?.email} - 
-                  <Link  href={`/profile/${auth.user?.attributes?.['custom:ssuid']}/${auth.user?.attributes?.family_name}`} > Go To Profile </Link>
-                </h3>
-              </Box>
-
-              {routes.map((node, p)=>
+        <AuthCheck>
+          <Section.Container id="settings" Background={Background} >
             
-                  <Link href={node.link} key={node.title} >
+             
 
-                    <Box className="card" h='100%' >
-                      <Box className="card__header" h={['50px','50px']} ml='3' mt='3'>
-                        <FontAwesomeIcon className="card__image"  style={{color:'#383'}} icon={node.icon} size="2xl"/>
+              <Container maxW='1500' flexWrap='wrap' px={[1,3,5,6]} pb={[1,2,3,5]} py={2} sx={{display:'flex', flexDirection:'row', gap:'1em'}} justifyContent='center'>
+                <Box w='100%' my={[2,4]}>
+                  <Heading as="h1" >{t('your-settings')}</Heading>
+                  <h3 style={{marginLeft:'1em'}}> 
+                    {auth.user?.attributes?.given_name} {auth.user?.attributes?.family_name}, {auth.user?.attributes?.email} - 
+                    <Link  href={`/profile/${auth.user?.attributes?.['custom:ssuid']}/${auth.user?.attributes?.family_name}`} > Go To Profile </Link>
+                  </h3>
+                </Box>
+
+                {routes.map((node, p)=>
+              
+                    <Link href={node.link} key={node.title} >
+
+                      <Box className="card" h='100%' >
+                        <Box className="card__header" h={['50px','50px']} ml='3' mt='3'>
+                          <FontAwesomeIcon className="card__image"  style={{color:'#383'}} icon={node.icon} size="2xl"/>
+                        </Box>
+
+                        <div className="card__body" style={{paddingTop:'0.1em'}} >
+                         
+                          <Box 
+                            className='card__title'
+                            noOfLines={2}
+                            fontWeight='semibold'
+                            as='h4'
+                          >
+                            {t('settings-page.'+node.title)}
+                            <FontAwesomeIcon style={{color:'#383', marginLeft:'8px'}} icon={faCaretRight} size="sm"  />
+                          </Box>
+
+                           <Box 
+                            className='card__content' style={{color:'black'}}
+                            noOfLines={4}
+                          >
+                            {t('settings-page.'+node.desc)}
+                          </Box>
+
+                        </div>
+
                       </Box>
 
-                      <div className="card__body" style={{paddingTop:'0.1em'}} >
-                       
-                        <Box 
-                          className='card__title'
-                          noOfLines={2}
-                          fontWeight='semibold'
-                          as='h4'
-                        >
-                          {t('settings-page.'+node.title)}
-                          <FontAwesomeIcon style={{color:'#383', marginLeft:'8px'}} icon={faCaretRight} size="sm"  />
-                        </Box>
+                    </Link>
+                )}
+              </Container>
 
-                         <Box 
-                          className='card__content' style={{color:'black'}}
-                          noOfLines={4}
-                        >
-                          {t('settings-page.'+node.desc)}
-                        </Box>
+              <Flex flexWrap='wrap' bg='black' color='white'  w='100%' pb='2' >
+                <Box w='100%' textAlign='center' sx={{borderTop:'1px solid black'}} my='3' py='3'>
+                    <Button onClick={()=>auth.signout()} bg='ss_green'>{t('common:logout')} </Button>
+                </Box>
 
-                      </div>
+                <Box w='100%' textAlign='center'>
+                  <Text textAlign='center'>{t('settings-page.deactivate-desc')} </Text>
+                  <Link href='/account/deactivate'> <Button colorScheme='red'> {t('settings-page.deactivate')} </Button> </Link>
+                </Box>
+              </Flex>
 
-                    </Box>
-
-                  </Link>
-              )}
-            </Container>
-
-            <Box w='100%' textAlign='center' sx={{borderTop:'1px solid black'}} my='3' py='3'>
-                <Button onClick={()=>auth.signout()} bg='ss_green'>{t('common:logout')} </Button>
-            </Box>
-
-            <Box w='100%' textAlign='center'>
-              <Text textAlign='center'>{t('settings-page.deactivate-desc')} </Text>
-              <Link href='/account/deactivate'> <Button> {t('settings-page.deactivate')} </Button> </Link>
-            </Box>
-          </AuthCheck>
-        </Section.Container>
- 
+            
+          </Section.Container>
+      </AuthCheck>
     </Layout>
   );
 }
