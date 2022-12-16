@@ -36,7 +36,7 @@ const queries = {
 
 export const theme = extendTheme(
   {
-    colors: { ...colors , ...proTheme.colors, brand: proTheme.colors.purple },
+    colors: { ...colors , ...proTheme.colors, brand: proTheme.colors.green },
   },
   queries,
   proTheme,

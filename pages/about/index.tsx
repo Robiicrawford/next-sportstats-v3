@@ -44,28 +44,3 @@ export async function getStaticProps({locale}) {
    };
 }
 
-
-const Background = () => (
-  <>
-    <Triangle
-      color="#f0e6f6"
-      height={['25vh', '20vh']}
-      width={['100vw', '100vw']}
-      position="top-left"
-    />
-
-    <Triangle
-      color="#0CAA56"
-      height={['50vh', '35vh']}
-      width={['70vw', '40vw']}
-      position="bottom-left"
-    />
-
-    <Triangle
-      color="#f0e6f6"
-      height={['70vh', '35vh']}
-      width={['100vw', '100vw']}
-      position="bottom-right"
-    />
-  </>
-);

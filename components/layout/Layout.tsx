@@ -1,5 +1,7 @@
 import * as React from "react"
 
+import { Flex, Container } from '@chakra-ui/react'
+
 import Header from "./Header"
 import Footer from "./Footer"
 
@@ -19,11 +21,14 @@ type LayoutType = {
 const Layout = ({ children, header_color }:LayoutType) => {
  
   return (
-   <>
-    <Header header_color={header_color} />
-      <main style={{position:'relative'}}>{children}</main>
-    <Footer/>
-   </>
+   <Flex direction="column" flex="1">
+      <Header header_color={header_color} />
+      <Flex as="main" role="main" direction="column" flex="1"  >
+        
+          {children}
+      </Flex>
+      <Footer/>
+   </Flex>
   )
 }
 
