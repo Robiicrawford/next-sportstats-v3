@@ -39,10 +39,8 @@ export default function Settings({locale}) {
       />
         <AuthCheck>
           <Section.Container id="settings" Background={Background} >
-            
-             
 
-              <Container maxW='1500' flexWrap='wrap' px={[1,3,5,6]} pb={[1,2,3,5]} py={2} sx={{display:'flex', flexDirection:'row', gap:'1em'}} justifyContent='center'>
+              <Container maxW='1500' flexWrap='wrap' px={[1,3,5,6]} pb={[1,2,3,5,9]} py={2} sx={{display:'flex', flexDirection:'row', gap:'1em'}} justifyContent='center'>
                 <Box w='100%' my={[2,4]}>
                   <Heading as="h1" >{t('your-settings')}</Heading>
                   <h3 style={{marginLeft:'1em'}}> 
@@ -50,7 +48,7 @@ export default function Settings({locale}) {
                     <Link  href={`/profile/${auth.user?.attributes?.['custom:ssuid']}/${auth.user?.attributes?.family_name}`} > Go To Profile </Link>
                   </h3>
                 </Box>
-
+                
                 {routes.map((node, p)=>
               
                     <Link href={node.link} key={node.title} >
@@ -87,7 +85,7 @@ export default function Settings({locale}) {
                 )}
               </Container>
 
-              <Flex flexWrap='wrap' bg='black' color='white'  w='100%' pb='2' >
+              <Flex flexWrap='wrap' bg='black' color='white'  w='100%' pb='5' >
                 <Box w='100%' textAlign='center' sx={{borderTop:'1px solid black'}} my='3' py='3'>
                     <Button onClick={()=>auth.signout()} bg='ss_green'>{t('common:logout')} </Button>
                 </Box>
