@@ -50,7 +50,7 @@ export default function Settings({locale}) {
                 
                 {routes.map((node, p)=>
               
-                    <Link as={Card} href={node.link} key={node.title} >
+                    <Card as={Link} href={node.link} key={node.title} >
 
                       <Box className="card" h='100%' >
                         <Box className="card__header" h={['50px','50px']} ml='3' mt='3'>
@@ -80,7 +80,7 @@ export default function Settings({locale}) {
 
                       </Box>
 
-                    </Link>
+                    </Card>
                 )}
               </Container>
 
