@@ -6,14 +6,13 @@ import { useRouter } from 'next/router'
 import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
 import { useTranslation } from 'next-i18next';
 
-import { Box, Flex, Image, Center, Heading, Container, Button, Text } from '@chakra-ui/react';
+import { Box, Flex, Image, Center, Heading, Container, Button, Text, Card } from '@chakra-ui/react';
 
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCaretRight, faIdCard, faShieldAlt, faBell, faEye, faSlidersH, faQuestionCircle } from "@fortawesome/free-solid-svg-icons";
 
 import Layout from '../../../components/layout/Layout'
-import Section from '../../../components/section';
-import Triangle from '../../../components/triangle';
+import LayoutAccount from '../../../components/account/Layout'
 
 import { useAuth, AuthCheck } from "../../../hooks/use-auth";
 
@@ -38,10 +37,10 @@ export default function Settings({locale}) {
         noindex={true}
       />
         <AuthCheck>
-          <Section.Container id="settings" Background={Background} >
+          <LayoutAccount>
 
-              <Container maxW='1500' flexWrap='wrap' px={[1,3,5,6]} pb={[1,2,3,5,9]} py={2} sx={{display:'flex', flexDirection:'row', gap:'1em'}} justifyContent='center'>
-                <Box w='100%' my={[2,4]}>
+              <Container maxW='1500' flexWrap='wrap' sx={{display:'flex', flexDirection:'row', gap:'3em'}} justifyContent='center'>
+                <Box w='100%' mb={[2,4]}>
                   <Heading as="h1" >{t('your-settings')}</Heading>
                   <h3 style={{marginLeft:'1em'}}> 
                     {auth.user?.attributes?.given_name} {auth.user?.attributes?.family_name}, {auth.user?.attributes?.email} - 
@@ -51,7 +50,7 @@ export default function Settings({locale}) {
                 
                 {routes.map((node, p)=>
               
-                    <Link href={node.link} key={node.title} >
+                    <Link as={Card} href={node.link} key={node.title} >
 
                       <Box className="card" h='100%' >
                         <Box className="card__header" h={['50px','50px']} ml='3' mt='3'>
@@ -85,8 +84,8 @@ export default function Settings({locale}) {
                 )}
               </Container>
 
-              <Flex flexWrap='wrap' bg='black' color='white'  w='100%' pb='5' >
-                <Box w='100%' textAlign='center' sx={{borderTop:'1px solid black'}} my='3' py='3'>
+              <Card flexWrap='wrap' color='black'  w='100%' pb='5' >
+                <Box w='100%' textAlign='center'  my='3' py='3'>
                     <Button onClick={()=>auth.signout()} bg='ss_green'>{t('common:logout')} </Button>
                 </Box>
 
@@ -94,10 +93,10 @@ export default function Settings({locale}) {
                   <Text textAlign='center'>{t('settings-page.deactivate-desc')} </Text>
                   <Link href='/account/deactivate'> <Button colorScheme='red'> {t('settings-page.deactivate')} </Button> </Link>
                 </Box>
-              </Flex>
+              </Card>
 
             
-          </Section.Container>
+          </LayoutAccount>
       </AuthCheck>
     </Layout>
   );
@@ -112,28 +111,3 @@ export async function getStaticProps({locale}) {
       },
    };
 }
-
-const Background = () => (
-  <>
-    <Triangle
-      color="#f0e6f6"
-      height={['25vh', '20vh']}
-      width={['100vw', '100vw']}
-      position="top-left"
-    />
-
-    <Triangle
-      color="#0CAA56"
-      height={['50vh', '35vh']}
-      width={['70vw', '40vw']}
-      position="bottom-left"
-    />
-
-    <Triangle
-      color="#f0e6f6"
-      height={['70vh', '35vh']}
-      width={['100vw', '100vw']}
-      position="bottom-right"
-    />
-  </>
-);

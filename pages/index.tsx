@@ -26,7 +26,6 @@ import "react-lazy-load-image-component/src/effects/opacity.css";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faShareAlt} from "@fortawesome/free-solid-svg-icons";
 
-
 import { Swiper, SwiperSlide } from "swiper/react";
 
 import "swiper/css";

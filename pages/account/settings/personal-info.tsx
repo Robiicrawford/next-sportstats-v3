@@ -10,8 +10,7 @@ import { useForm, Controller } from 'react-hook-form';
 import { Box, Flex, Heading, Container, Button, Input, Select } from '@chakra-ui/react';
 
 import Layout from '../../../components/layout/Layout'
-import Section from '../../../components/section';
-import Triangle from '../../../components/triangle';
+import LayoutAccount from '../../../components/account/Layout'
 import Breadcrumb from '../../../components/breadcrumb';
 
 import { useAuthenticator } from '@aws-amplify/ui-react';
@@ -78,7 +77,7 @@ export default function Settings({locale}) {
         title={t('settings-page.personal-info-title')}
         noindex={true}
       />
-        <Section.Container id="settings" Background={Background} >
+        <LayoutAccount>
           <AuthCheck>
             <Container maxW='1500' flexWrap='wrap' px={[1,3,5,6]} pb={[1,2,3,5]} py={2}>
               
@@ -345,7 +344,7 @@ export default function Settings({locale}) {
 
             </Container>
           </AuthCheck>
-        </Section.Container>
+        </LayoutAccount>
  
     </Layout>
   )
@@ -360,28 +359,3 @@ export async function getStaticProps({locale}) {
       },
    };
 }
-
-const Background = () => (
-  <>
-    <Triangle
-      color="#f0e6f6"
-      height={['25vh', '20vh']}
-      width={['100vw', '100vw']}
-      position="top-left"
-    />
-
-    <Triangle
-      color="#0CAA56"
-      height={['50vh', '35vh']}
-      width={['70vw', '40vw']}
-      position="bottom-left"
-    />
-
-    <Triangle
-      color="#f0e6f6"
-      height={['70vh', '35vh']}
-      width={['100vw', '100vw']}
-      position="bottom-right"
-    />
-  </>
-);
