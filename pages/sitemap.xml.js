@@ -43,9 +43,22 @@ export async function getServerSideProps({ res }) {
   // We make an API call to gather the URLs for our site
   //const request = await fetch('https://admin.sportstats.ca');
   //const posts = await request.json();
-	const posts = [{slug:'1'}]
+
+  const get_master_slugs = await fetch('https://admin.sportstats.ca/event_master/adminapi.php', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({ 
+        "cmd": "getAllMasterSlugs",
+        'idToken': 'apS3gn4%nv^gjBEQF12!!b15'
+      }) 
+    });
+
+  const slug_list = await get_master_slugs.json()
+
   // We generate the XML sitemap with the posts data
-  const sitemap = generateSiteMap(posts);
+  const sitemap = generateSiteMap(slug_list.data.slugs);
 
   res.setHeader('Content-Type', 'text/xml');
   // we send the XML to the browser

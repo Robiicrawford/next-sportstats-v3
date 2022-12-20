@@ -18,6 +18,7 @@ const colors = {
 
     slate: '#2f4f4ff7',
 
+    green: '#0CAA56',
     primary: '#000',
     ss_green: '#0CAA56',
     secondary: '#0CAA56',

@@ -8,7 +8,9 @@ import Layout from '../../components/layout/Layout'
 import Hero from '../../components/about/Hero';
 import MainFeature from '../../components/about/MainFeature';
 import Features from '../../components/about/Features';
+import Testimonials from '../../components/about/Testimonials';
 
+import ContactUs from '../../components/about/ContactUs';
 
 import ClientBanner from '../../components/about/ClientBanner';
 
@@ -24,7 +26,9 @@ const IndexPage = () => {
       <Hero />
       <MainFeature />
       <Features />
+      <Testimonials />
 
+      <ContactUs />
       <ClientBanner />
     </Layout>
   )

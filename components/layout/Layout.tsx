@@ -23,7 +23,7 @@ const Layout = ({ children, header_color }:LayoutType) => {
   return (
    <Flex direction="column" flex="1">
       <Header header_color={header_color} />
-      <Flex as="main" role="main" direction="column" flex="1"  >
+      <Flex as="main" role="main" direction="column" flex="1" sx={{overflow:'hidden'}}  >
         
           {children}
       </Flex>
