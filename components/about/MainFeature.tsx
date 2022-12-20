@@ -23,7 +23,7 @@ const HeroBackgroundImage = () => {
           alt='Track Record' 
         />
       </Center>
-      <Container flexWrap='wrap' h='fit-content'  direction="column" m='auto' maxW='2xl'>
+      <Container flexWrap='wrap' h='fit-content'  m='auto' maxW='2xl'>
         <Text color='ss_green' fontSize='lg' fontWeight='bold' w='100%'> Our Track Record </Text>
         <Heading mb='3' > We have been doing this since <Text sx={{display:'inline'}} color='ss_green'> 1991. </Text> </Heading>
         <Text fontWeight='bold'>
