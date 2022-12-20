@@ -7,7 +7,7 @@ const EXTERNAL_DATA_URL_SERIES = 'https://sportstats.today/series';
 
 function generateSiteMap(posts) {
   return `<?xml version="1.0" encoding="UTF-8"?>
-   <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+   <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:xhtml="http://www.w3.org/1999/xhtml">
      <!--We manually set the URLs we know already-->
      <url>
        <loc>https://sportstats.today</loc>
