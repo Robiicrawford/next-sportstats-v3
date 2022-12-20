@@ -53,7 +53,7 @@ const IndexPage = ({ data }) => {
               px={['1','6em']} className='card'
             >
               <Heading mb='4' pb='2' sx={{borderBottom:'3px solid black'}}>  Office Locations </Heading>
-              <SimpleGrid columns={[1,1,2]} spacing={10} pb='5'>
+              <SimpleGrid columns={[1]} spacing={10} pb='5'>
                 <Card
                   direction={{ base: 'column', sm: 'column', md:'row' }}
                   overflow='hidden'
@@ -61,7 +61,7 @@ const IndexPage = ({ data }) => {
                 >
                   <Image
                     objectFit='cover'
-                    maxW={{ base: '100%', sm: '200px' }}
+                    maxW={{ base: '100%', sm: '220px' }}
                     maxH={{ base: '100%', sm: '100%' }}
                     style={{objectFit:'contain'}}
                     src='https://a.cdn-hotels.com/gdcs/production163/d857/cc29dd0e-f745-4507-80e1-6ae5a3532338.jpg'
@@ -102,8 +102,8 @@ const IndexPage = ({ data }) => {
                 >
                   <Image
                     objectFit='cover'
-                    maxW={{ base: '100%', sm: '200px' }}
-                    maxH={{ base: '100%', sm: '130px' }}
+                    maxW={{ base: '100%', sm: '230px' }}
+                    maxH={{ base: '100%', sm: '100%' }}
                     src='https://d3exkutavo4sli.cloudfront.net/wp-content/uploads/2019/04/the_heights_on_austin_rendering_1.jpg'
                     alt='Caffe Latte'
                   />
@@ -137,8 +137,8 @@ const IndexPage = ({ data }) => {
                 >
                   <Image
                     objectFit='cover'
-                    maxW={{ base: '100%', sm: '200px' }}
-                    maxH={{ base: '100%', sm: '130px' }}
+                    maxW={{ base: '100%', sm: '230px' }}
+                    maxH={{ base: '100%', sm: '100%' }}
                     src='https://www.mercyhealth.com/assets/images/medical-education/grand-rapids/grand-rapids-banner.jpg'
                     alt='Caffe Latte'
                   />
@@ -173,8 +173,8 @@ const IndexPage = ({ data }) => {
                 >
                   <Image
                     objectFit='cover'
-                    maxW={{ base: '100%', sm: '200px' }}
-                    maxH={{ base: '100%', sm: '130px' }}
+                    maxW={{ base: '100%', sm: '230px' }}
+                    maxH={{ base: '100%', sm: '100%' }}
                     src='https://i0.wp.com/thevalemagazine.com/wp-content/uploads/2019/03/fairmont-le-ch%C3%A2teau-frontenac-que%CC%81bec-city-canada.jpg?fit=1200%2C800&ssl=1'
                     alt='Caffe Latte'
                   />
@@ -209,8 +209,8 @@ const IndexPage = ({ data }) => {
                 >
                   <Image
                     objectFit='cover'
-                    maxW={{ base: '100%', sm: '200px' }}
-                    maxH={{ base: '100%', sm: '150px' }}
+                    maxW={{ base: '100%', sm: '230px' }}
+                    maxH={{ base: '100%', sm: '100%' }}
                     src='https://www.trailsofindochina.com/wp-content/uploads/2018/04/Bangkok_header.jpg'
                     alt='Caffe Latte'
                   />
@@ -244,8 +244,8 @@ const IndexPage = ({ data }) => {
                 >
                   <Image
                     objectFit='cover'
-                    maxW={{ base: '100%', sm: '200px' }}
-                    maxH={{ base: '100%', sm: '150px' }}
+                    maxW={{ base: '100%', sm: '230px' }}
+                    maxH={{ base: '100%', sm: '100%' }}
                     src='https://static.toiimg.com/photo/50913699.cms'
                     alt='Caffe Latte'
                   />
