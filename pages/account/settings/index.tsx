@@ -84,7 +84,7 @@ export default function Settings({locale}) {
                 )}
               </Container>
 
-              <Card flexWrap='wrap' color='black'  w='100%' pb='5' >
+              <Card flexWrap='wrap' color='black' mt='6'  w='100%' pb='5' >
                 <Box w='100%' textAlign='center'  my='3' py='3'>
                     <Button onClick={()=>auth.signout()} bg='ss_green'>{t('common:logout')} </Button>
                 </Box>

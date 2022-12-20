@@ -6,6 +6,7 @@ import Link from 'next/link'
 interface NavButtonProps extends ButtonProps {
   icon: As
   label: string
+  link: string
 }
 
 export const NavButton = (props: NavButtonProps) => {

@@ -7,23 +7,17 @@ import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
 import { useTranslation } from 'next-i18next';
 
 import { 
-    Box, Flex, Image, Center, 
+    Box, Flex,
     Heading, Container, Button, 
     Text, Stack, HStack, VStack,
-    Card, Avatar, Icon,
+    Card, Avatar,
     Wrap, Tag,
     useBreakpointValue,
     useColorModeValue
 } from '@chakra-ui/react';
 
-
 import Layout from '../../components/layout/Layout'
 import LayoutAccount from '../../components/account/Layout'
-
-
-import { FiDownloadCloud } from 'react-icons/fi'
-import { Navbar } from '../../components/account/Navbar'
-import { Sidebar } from '../../components/account/Sidebar'
 
 import { useAuth, AuthCheck } from "../../hooks/use-auth";
 
@@ -127,12 +121,7 @@ export default function Settings({locale}) {
                       </Heading>
                       <Text color="muted">All your events at a glance</Text>
                     </Stack>
-                    <HStack spacing="3">
-                      <Button variant="secondary" leftIcon={<FiDownloadCloud fontSize="1.25rem" />}>
-                        Download
-                      </Button>
-                     
-                    </HStack>
+                   
                   </Stack>
                   <Box 
                     bg="bg-surface" 
