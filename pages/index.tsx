@@ -38,8 +38,6 @@ import { Navigation, Pagination } from "swiper";
 export default function Home({sportstats, irun, locale}) {
   const { t } = useTranslation('common');
 
-
-
   return (
     <Layout header_color='none'>
       <NextSeo
@@ -80,7 +78,10 @@ export default function Home({sportstats, irun, locale}) {
         url="https://www.sportstats.today/"
       />
 
-      <main style={{padding:'0'}} >
+      <Flex
+          w='100%' minH='60vh' mt='0' pt='0' justifyContent='center'
+         position='relative'
+      >  
         
         <div 
           className='home_image'
@@ -95,15 +96,15 @@ export default function Home({sportstats, irun, locale}) {
           }} 
         >
           
-          <Show above='sm'>
-            <video width="1414" autoPlay muted loop style={{display: 'block', height: '100%', width: '100vw', filter: 'grayscale(100%) brightness(80%) sepia(300%) hue-rotate(50deg) saturate(500%)'}} >
-              <source src="https://d33vaoadodpfl.cloudfront.net/miami-cut.mp4" type="video/mp4"/>Please update your browser to support video
-            </video>
-          </Show>
+            <Show above='sm'>
+              <video width="1414" autoPlay muted loop style={{display: 'block', height: '100%', width: '100vw', filter: 'grayscale(100%) brightness(80%) sepia(300%) hue-rotate(50deg) saturate(500%)'}} >
+                <source src="https://d33vaoadodpfl.cloudfront.net/miami-cut.mp4" type="video/mp4"/>Please update your browser to support video
+              </video>
+            </Show>
 
-          <Search />    
-      
-        </div>
+            <Search />    
+          </div>
+        </Flex>
           
         <Section.Container id="events" Background={Background} >
           <Box my='3'>
@@ -261,8 +262,7 @@ export default function Home({sportstats, irun, locale}) {
           }}
         >
         series llinks
-        </Flex>
-      </main>
+      </Flex>
 
     </Layout>
   );
