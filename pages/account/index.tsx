@@ -105,10 +105,7 @@ export default function Settings({locale}) {
                   </Stack>
                 </Card>
 
-                <Stack 
-                  spacing={{ base: '8', lg: '6' }} 
-                 
-                >
+                <Stack spacing={{ base: '8', lg: '6' }} >
                   <Stack
                     spacing="4"
                     direction={{ base: 'column', lg: 'row' }}
@@ -143,7 +140,7 @@ export async function getStaticProps({locale}) {
     return {
       props: {
         isPassedToWithAuthenticator: true,
-        ...(await serverSideTranslations(locale, ['common', 'public', 'app','translation'], null, ['en', 'fr'])),
+        ...(await serverSideTranslations(locale, ['common', 'public', 'app','translation', 'member'], null, ['en', 'fr'])),
       },
    };
 }

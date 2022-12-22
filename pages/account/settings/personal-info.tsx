@@ -355,7 +355,7 @@ export async function getStaticProps({locale}) {
     return {
       props: {
         isPassedToWithAuthenticator: true,
-        ...(await serverSideTranslations(locale, ['common', 'public', 'app','translation'], null, ['en', 'fr'])),
+        ...(await serverSideTranslations(locale, ['common', 'public', 'app','translation', 'member'], null, ['en', 'fr'])),
       },
    };
 }

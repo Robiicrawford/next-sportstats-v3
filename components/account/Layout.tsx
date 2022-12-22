@@ -33,7 +33,7 @@ export default function Settings({children}) {
         <Flex
           as="section" w='100%'
           direction={{ base: 'column', lg: 'row' }}
-          height="100vh"
+          minH="100vh"
           bg="bg-canvas" 
           overflowY="auto"
         >

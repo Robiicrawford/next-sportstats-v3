@@ -14,12 +14,16 @@
     "requests":"Requests ",
     "view-profile":"View Profile",
   	"your-watchlist":"Your Watchlist",
+    "home":"Home",
+    "settings":"Settings",
+    "my-stuff":"My Stuff",
+    "results":"results",
   	"photos":"Photos",
   	"awards":"Awards",
   	"friends":"Friends",
   	"you":"You",
   	"news":"News",
-    "my-stats":"My Stats",
+    "my-stats":"Stats",
     "confirm":"Confirm",
     "delete":"Delete"
   }

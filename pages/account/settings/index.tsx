@@ -6,7 +6,12 @@ import { useRouter } from 'next/router'
 import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
 import { useTranslation } from 'next-i18next';
 
-import { Box, Flex, Image, Center, Heading, Container, Button, Text, Card } from '@chakra-ui/react';
+import { 
+  Box, Flex, Image, Center, 
+  Heading, Container, Button, 
+  Text, Card,
+  useBreakpointValue
+} from '@chakra-ui/react';
 
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCaretRight, faIdCard, faShieldAlt, faBell, faEye, faSlidersH, faQuestionCircle } from "@fortawesome/free-solid-svg-icons";
@@ -41,7 +46,9 @@ export default function Settings({locale}) {
 
               <Container maxW='1500' flexWrap='wrap' sx={{display:'flex', flexDirection:'row', gap:'3em'}} justifyContent='center'>
                 <Box w='100%' mb={[2,4]}>
-                  <Heading as="h1" >{t('your-settings')}</Heading>
+                  <Heading size={useBreakpointValue({ base: 'xs', lg: 'md' })} fontWeight="medium">
+                    {t('your-settings')}
+                  </Heading>
                   <h3 style={{marginLeft:'1em'}}> 
                     {auth.user?.attributes?.given_name} {auth.user?.attributes?.family_name}, {auth.user?.attributes?.email} - 
                     <Link  href={`/profile/${auth.user?.attributes?.['custom:ssuid']}/${auth.user?.attributes?.family_name}`} > Go To Profile </Link>
@@ -107,7 +114,7 @@ export async function getStaticProps({locale}) {
     return {
       props: {
         isPassedToWithAuthenticator: true,
-        ...(await serverSideTranslations(locale, ['common', 'public', 'app','translation'], null, ['en', 'fr'])),
+        ...(await serverSideTranslations(locale, ['common', 'public', 'app','translation', 'member'], null, ['en', 'fr'])),
       },
    };
 }
