@@ -77,7 +77,6 @@ function Master({ master }) {
     return <div> ... error on page ... </div>
   }
 
-  console.log(master)
 
   return (
     <Layout header_color='black' >
@@ -269,23 +268,23 @@ export async function getStaticPaths() {
   }
 
   // Call an external API endpoint to get posts
-  const { data } = await client.query({
-      query: gql`
-        query Sportstats {
-          masterEvents {
-            masterEvents{
-              id
-              mid
-              slug
-            }
-          }
-        }
-      `,
+  const get_master_slugs = await fetch('https://admin.sportstats.ca/event_master/adminapi.php', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({ 
+        "cmd": "getAllMasterSlugs",
+        'idToken': 'apS3gn4%nv^gjBEQF12!!b15'
+      }) 
     });
+
+  const slug_list = await get_master_slugs.json()
+  
 
   // Get the paths we want to pre-render based on posts
 
-  const paths = data.masterEvents.masterEvents.map((master) => ({
+  const paths = slug_list.data.slugs.map((master) => ({
     
     params: { 
       slug: [master.slug]

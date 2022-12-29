@@ -1,3 +1,7 @@
+// pages/account/index
+
+// landing page of a users dashboard when they login
+
 import React, { useEffect } from "react";
 import { NextSeo } from 'next-seo';
 import Link from 'next/link'
@@ -10,7 +14,7 @@ import {
     Box, Flex,
     Heading, Container, Button, 
     Text, Stack, HStack, VStack,
-    Card, Avatar,
+    Card, Avatar, SimpleGrid,
     Wrap, Tag,
     useBreakpointValue,
     useColorModeValue
@@ -18,6 +22,9 @@ import {
 
 import Layout from '../../components/layout/Layout'
 import LayoutAccount from '../../components/account/Layout'
+
+import ResultCard from '../../components/cards/ResultCardOverviewWithLink'
+import ResultCardVR from '../../components/cards/ResultCardOverviewVR'
 
 import { useAuth, AuthCheck } from "../../hooks/use-auth";
 
@@ -37,73 +44,7 @@ export default function Settings({locale}) {
         <AuthCheck>
         <LayoutAccount>
 
-                <Card p='3' mb='3'>
-                  <Stack
-                    direction={{ base: 'column', md: 'row' }}
-                    spacing={{ base: '3', md: '10' }}
-                    align="flex-start"
-                  >
-                    <Stack spacing="4">
-                      <Avatar
-                        size="2xl"
-                        name={auth.user&& auth.user?.attributes?.given_name+" "+auth.user?.attributes?.family_name }
-                        src={auth?.user?.attributes?.picture}
-                      />
-                    </Stack>
-                    <Box>
-                      <Stack spacing={{ base: '1', md: '2' }} direction={{ base: 'column', md: 'row' }}>
-                        <Text as="h2" fontWeight="bold" fontSize="xl">
-                          {auth.user&& auth.user?.attributes?.given_name+" "+auth.user?.attributes?.family_name }
-                        </Text>
-                        
-                      </Stack>
-                       <Wrap shouldWrapChildren my="4" spacing="10">
-                       
-                        <VStack>
-                           <Text fontSize="3xl" mb='0' >0</Text>
-                           <Text
-                            fontSize="2xl"
-                            fontWeight="medium"
-                            color={useColorModeValue('gray.600', 'gray.300')}
-                          >
-                            Awards
-                          </Text>
-                        </VStack>
-
-                        <VStack>
-                           <Text fontSize="3xl" mb='0' >0</Text>
-                           <Text
-                            fontSize="2xl"
-                            fontWeight="medium"
-                            color={useColorModeValue('gray.600', 'gray.300')}
-                          >
-                            Races
-                          </Text>
-                        </VStack>
-
-                        <VStack>
-                           <Text fontSize="3xl" mb='0' >0</Text>
-                           <Text
-                            fontSize="2xl"
-                            fontWeight="medium"
-                            color={useColorModeValue('gray.600', 'gray.300')}
-                          >
-                            Followers
-                          </Text>
-                        </VStack>
-
-                      </Wrap>
-                     
-                      <Wrap shouldWrapChildren mt="5" color={useColorModeValue('gray.600', 'gray.300')}>
-                        {['Triathlon', 'Running'].map((tag) => (
-                          <Tag key={tag} color="inherit" px="3">
-                            {tag}
-                          </Tag>
-                        ))}
-                      </Wrap>
-                    </Box>
-                  </Stack>
-                </Card>
+                
 
                 <Stack spacing={{ base: '8', lg: '6' }} >
                   <Stack
@@ -114,7 +55,7 @@ export default function Settings({locale}) {
                   >
                     <Stack spacing="1">
                       <Heading size={useBreakpointValue({ base: 'xs', lg: 'sm' })} fontWeight="medium">
-                        Recent Events
+                        My Events
                       </Heading>
                       <Text color="muted">All your events at a glance</Text>
                     </Stack>
@@ -126,7 +67,11 @@ export default function Settings({locale}) {
                     borderWidth="1px" 
                     minH="300px" 
                   >
-                      event cards here
+                    <SimpleGrid px='3' py='5' columns={{ base: 1 }} spacing="7">
+                      {claims.map((result)=>
+                        result.RT === 10 ? <ResultCardVR result={result} />:<ResultCard result={result} />
+                      )}
+                    </SimpleGrid>
                   </Box>
                 </Stack>
         </LayoutAccount>
@@ -145,3 +90,63 @@ export async function getStaticProps({locale}) {
    };
 }
 
+const claims =
+  [
+    {
+      "EID": 4177,
+      "EL": "Winterlude Triathlon",
+      "RID": 17257,
+      "RL": "Individual Results",
+      "RDT": "2001-02-11",
+      "RT": 10,
+      "RD": 18000,
+      "BIB": "153",
+      "ANF": "MARC",
+      "ANL": "ROY",
+      "RO": 107,
+      "AG": "M",
+      "AC": "M30-39",
+      "AL1": "Ottawa",
+      "AL2": "ON",
+      "AL3": "CAN",
+      "CD": "4739000"
+    },
+    {
+      "EID": 3656,
+      "EL": "Belwood Triathlon & Duathlon",
+      "RID": 14964,
+      "RL": "Try a Tri Results",
+      "RDT": "2001-08-04",
+      "RT": 2,
+      "RD": 13000,
+      "BIB": "844",
+      "ANF": "MARC",
+      "ANL": "ROY",
+      "RO": 3,
+      "AG": "M",
+      "AC": "M30-39",
+      "AL1": "Ottawa",
+      "AL2": "ON",
+      "AL3": "CAN",
+      "CD": "2230000"
+    },
+    {
+      "EID": 948,
+      "EL": "National Capital Triathlon, Duathlon & 8km Run",
+      "RID": 2348,
+      "RL": "1/2 Ironman Triathlon Results",
+      "RDT": "2001-09-01",
+      "RT": 2,
+      "RD": 113100,
+      "BIB": "321",
+      "ANF": "MARC",
+      "ANL": "ROY",
+      "RO": 34,
+      "AG": "M",
+      "AC": "M30-34",
+      "AL1": "Ottawa",
+      "AL2": "ON",
+      "AL3": "CAN",
+      "CD": "19079000"
+    },
+  ]
