@@ -5,6 +5,8 @@ import { useAuth } from "../../hooks/use-auth";
 
 import { useTranslation } from 'next-i18next';
 
+import Link from 'next/link'
+
 import { 
     Box,
     Heading, Container, Button, 
@@ -49,7 +51,12 @@ export const Sidebar = () => {
                     spacing={{ base: '3', md: '10' }}
                     align="flex-start"
                   >
-                    <Stack spacing="4"  direction={{ base: 'column', md: 'row' }}>
+                    <Stack 
+                      spacing="4"  
+                      direction={{ base: 'column', md: 'row' }}
+                      as={Link}
+                      href={`/profile/${auth?.user?.attributes?.['custom:ssuid']}`}
+                    >
                       <Avatar
                         size="md"
                         name={auth.user&& auth.user?.attributes?.given_name+" "+auth.user?.attributes?.family_name }
@@ -62,36 +69,51 @@ export const Sidebar = () => {
                     <Box >
                        <Wrap shouldWrapChildren  spacing="10">
                        
-                        <VStack>
-                           <Text fontSize="md" mb='0' >0</Text>
+                        <VStack
+                          as={Link}
+                          href={`/account/friends`}
+                        >
+                           <Text fontSize="md" mb='0' >
+                             {auth?.user?.data.followers.count}
+                           </Text>
                            <Text
                             fontSize="sm"
                             fontWeight="medium"
                             color={useColorModeValue('gray.600', 'gray.300')}
                           >
-                            Awards
+                            {t('member:dashboard.followers')}
                           </Text>
                         </VStack>
 
-                        <VStack>
-                           <Text fontSize="ms" mb='0' >0</Text>
+                        <VStack
+                          as={Link}
+                          href={`/account`}
+                        >
+                           <Text fontSize="ms" mb='0' >
+                             {auth?.user?.data.info.totalRace}
+                           </Text>
                            <Text
                             fontSize="sm"
                             fontWeight="medium"
                             color={useColorModeValue('gray.600', 'gray.300')}
                           >
-                            Races
+                            {t('public:races')}
                           </Text>
                         </VStack>
 
-                        <VStack>
-                           <Text fontSize="md" mb='0' >0</Text>
+                        <VStack
+                          as={Link}
+                          href={`/account/awards`}
+                        >
+                           <Text fontSize="md" mb='0' >
+                             {auth?.user?.data.info.totalBadges}
+                           </Text>
                            <Text
                             fontSize="sm"
                             fontWeight="medium"
                             color={useColorModeValue('gray.600', 'gray.300')}
                           >
-                            Followers
+                            {t('dashboard.awards')}
                           </Text>
                         </VStack>
 

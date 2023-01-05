@@ -24,23 +24,23 @@ const Testimonials = () => {
   const defaultTestimonials = [
     {
       imageSrc:
-        "https://ironman.kleecks-cdn.com/cdn1/attachments/photo/69ef-136057864/201907_EMEA_IRONMAN_African_Championship_Nelson_Mandela_Bay_Swim.png",
+        "https://www.stjude.org/get-involved/fitness-fundraisers/memphis-marathon/register/_jcr_content/image.img.800.high.jpg/1663968112974.jpg",
       profileImageSrc:
-        "https://sportstats.today/android-chrome-512x512.png",
+        "https://images.squarespace-cdn.com/content/v1/56c0b287859fd03b65eb5e8a/1465910308895-6E1CO3NWSCY9SJRGS3A9/St._Judes_Logo_child_only.jpg",
       quote:
-        "Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia.",
-      customerName: "Marc Roy",
-      customerTitle: "CEO, Sportstats."
+        "Sportstats is one of the central reasons our event provides a successful participant experience. They provide so much more than just timing services; they have a friendly, helpful attitude and always give positive responses to our many requests of them. Sportstats brings over 30 years of experience helping us run a successful event year after year!",
+      customerName: "Jayla Hubbard",
+      customerTitle: "Specialist – Fitness – Registration & Logistics ALSAC – The fundraising and awarenes"
     },
     {
       imageSrc:
-        "https://images.unsplash.com/photo-1523952578875-e6bb18b26645?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1024&q=80",
+        "https://wabano.com/wp-content/uploads/2022/04/iStock-459240817-1-scaled.jpg",
       profileImageSrc:
-        "https://images.unsplash.com/photo-1531427186611-ecfd6d936c79?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2.25&w=512&h=512&q=80",
+        "https://www.runottawa.ca/wp-content/uploads/2016/04/Run_Ottawa_EN_Reversed.jpg",
       quote:
-        "Sinor Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia.",
-      customerName: "Adam Cuppy",
-      customerTitle: "Founder, EventsNYC"
+        "We are so pleased to have Sportstats as our timing partner.  Great timing is an art form that should be a seamless piece of our participant's event experience.  Knowing that the team from Sportstats is onsite, ontime and ready to go makes all of us at Run Ottawa breathe a little easier on race day.  One less thing to think about or worry about!",
+      customerName: "Ian Fraser",
+      customerTitle: "Race Director, Run Ottawa"
     }
   ];
 
@@ -115,55 +115,60 @@ const Testimonials = () => {
       	</Box>
 
       </Container>
-      <Container flexWrap='wrap' h='100%' m='auto' maxW='2xl'>
-        
+      <Container 
+      	flexWrap='wrap' h='100%' m='auto' maxW='2xl'
+      	as={Center}
+      >
+        <Center w='100%'>
       		<Card 
       			maxW='md'
       			position='relative'
       			h='fit-content'
+      			w='100%'
       			m='auto'
       		>
 			 
-			  <Image
-			  	sx={{borderRadius:'10px'}}
-			    objectFit='cover'
-			    w='100%'
-			    minH='30em'
-			    maxH='30em'
-			    src={defaultTestimonials[thumbsSwiper].imageSrc}
-			    alt='Chakra UI'
-			  />
+					  <Image
+					  	sx={{borderRadius:'10px'}}
+					    objectFit='cover'
+					    w='100%'
+					    minH='30em'
+					    maxH='30em'
+					    src={defaultTestimonials[thumbsSwiper].imageSrc}
+					    alt='Chakra UI'
+					  />
 
-			  <CardFooter
-			  	position='absolute'
-			    justify='space-between'
-			    flexWrap='wrap'
-			    bg='white'
-			    gap='5'
-			    sx={{
-			    	bottom:0,
-			    	right:0,
-			    	zIndex:1,
-			    	borderRadius:'40px 0 0 0'
-			    }}
-			  >
-			  	
-			  	<IconButton 
-			  		flex='1' aria-label='Next Slide' 
-			  		colorScheme='green' 
-			  		isRound={true} icon={<FaChevronLeft />} 
-			  		className='review-swiper-button-prev'
-			  	/>
-			    
-			    <IconButton 
-			    	flex='1' aria-label='Next Slide' 
-			    	colorScheme='green' isRound={true} 
-			    	icon={<FaChevronRight />} 
-			    	className='review-swiper-button-next'
-			    />
-			     
-			  </CardFooter>
-			</Card>
+					  <CardFooter
+					  	position='absolute'
+					    justify='space-between'
+					    flexWrap='wrap'
+					    bg='white'
+					    gap='5'
+					    sx={{
+					    	bottom:0,
+					    	right:0,
+					    	zIndex:1,
+					    	borderRadius:'40px 0 0 0'
+					    }}
+					  >
+					  	
+					  	<IconButton 
+					  		flex='1' aria-label='Next Slide' 
+					  		colorScheme='green' 
+					  		isRound={true} icon={<FaChevronLeft />} 
+					  		className='review-swiper-button-prev'
+					  	/>
+					    
+					    <IconButton 
+					    	flex='1' aria-label='Next Slide' 
+					    	colorScheme='green' isRound={true} 
+					    	icon={<FaChevronRight />} 
+					    	className='review-swiper-button-next'
+					    />
+					     
+					  </CardFooter>
+					</Card>
+				</Center>
 
       </Container>
       

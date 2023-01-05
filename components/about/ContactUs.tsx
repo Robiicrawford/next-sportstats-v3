@@ -17,7 +17,6 @@ const HeroBackgroundImage = () => {
 
   const {t} = useTranslation('public');
 
-
   const services = [
     {name:'Timing Clocks', bio:'Lorem ipsum donor amet siti ceali ut enim ad minim veniam, quis nostrud. Sic Semper Tyrannis. Neoas Calie artel.', icon:<FaRegClock/>},
     {name:'Race Day Changes', bio:'Lorem ipsum donor amet siti ceali ut enim ad minim veniam, quis nostrud. Sic Semper Tyrannis. Neoas Calie artel.', icon:<FaTwitter/>},
@@ -55,7 +54,6 @@ const HeroBackgroundImage = () => {
       </SimpleGrid>
 
     </Container>
-   
 
     <Icon 
         viewBox="0 0 600 600" 

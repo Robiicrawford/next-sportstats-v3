@@ -5,6 +5,9 @@ import { useAuthenticator } from '@aws-amplify/ui-react';
 
 import { useRouter } from 'next/router'
 
+import {client} from "../apollo/apollo-client";
+import gql from 'graphql-tag';
+
 import LoginContent from '../components/auth/LoginContent';
 
 import { 
@@ -14,6 +17,21 @@ import {
 import aws_exports from '../aws-exports'
 Amplify.configure({...aws_exports, ssr: true});
 
+const GET_USER = gql`
+  query GetUser($id: Int!) {
+    user(id: $id) {
+      id
+      followers{
+        id
+        count
+      }
+      info{
+        totalRace
+        totalBadges
+      }
+    }
+  }
+`;
 
 type AuthContextType = {
     auth?: any,
@@ -64,13 +82,24 @@ const useProvideAuth =  () => {
   const [error, setError] = useState<any>(null);
   // Wrap any Firebase methods we want to use making sure ...
   // ... to save the user to state.
+ 
+  
+
 
  const router = useRouter()
 
  const getUser = async ()  => {
  	var unsubscribe = await Auth.currentUserInfo()
+
+  const { data } = await client.query({
+      query: GET_USER,
+      variables: {
+        id:  parseInt(unsubscribe?.attributes?.['custom:ssuid'])
+      }
+    });
+
   if(unsubscribe){
-    setUser(unsubscribe)
+    setUser({...unsubscribe, data:{...data.user}})
     setLoading(false)
   } else {
     setUser(false)
