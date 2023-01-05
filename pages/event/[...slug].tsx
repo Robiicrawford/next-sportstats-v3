@@ -381,12 +381,19 @@ export async function getStaticProps({ params, locale }) {
     }
   `;
 
-  const { data } = await client.query({
+  var data
+
+  try {
+    var { data } = await client.query({
       query: query,
       variables: {
         slug: params.slug[0]
       }
     });
+  } catch (err){
+    console.log(err)
+  }
+  
 
   
 
@@ -394,8 +401,8 @@ export async function getStaticProps({ params, locale }) {
   // Pass post data to the page via props
   return { 
     props: { 
-    ...(await serverSideTranslations(locale, ['common', 'public', 'app','translation'], null, ['en', 'fr'])),
-    master: data.masterEvent
+      ...(await serverSideTranslations(locale, ['common', 'public', 'app','translation'], null, ['en', 'fr'])),
+      master: data?.masterEvent? data.masterEvent : null
     },
     // Next.js will attempt to re-generate the page:
     // - When a request comes in
