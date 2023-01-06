@@ -3,7 +3,10 @@ import Link from 'next/link'
 import { useRouter } from "next/router";
 import { useTranslation } from 'next-i18next';
 
-import { Flex, Box, Image, Button, Text } from '@chakra-ui/react';
+import { 
+  Flex, Box, Image, Button, Text,
+  Center
+} from '@chakra-ui/react';
 
 import {
   Modal,
@@ -64,11 +67,16 @@ function HeroCard({ race }) {
        <Flex 
         flexWrap='wrap' mt={['1','2','2','3']} 
         className='card__base' 
-        style={{borderRadius:'15px', border:'1px solid black', zIndex:'5'}} 
+        sx={{
+          borderRadius:'15px 15px 0 0 ', 
+          border:'1px solid black', 
+          zIndex:'5',
+          borderBottom:'20px solid green'
+        }} 
         w='100%'  justifyContent='center' alignItems='center' 
         h='fit-content'
       >
-        <Flex w='100%' flexWrap='wrap' >
+        <Flex w='100%' direction={{base:'column', md:'row'}} >
           
             <Flex  w={['100%','50%','33%','25%']} justifyContent='center' textAlign="center">
                <Link href={`/event/${race?.master?.slug}`} >
@@ -85,10 +93,17 @@ function HeroCard({ race }) {
               </Link>
             </Flex>
 
-            <Flex flexWrap='wrap' w={['100%','50%','66%','75%']}  alignContent='center'  px={['1','2','4']} >
-              <Link href={`/event/${race?.master?.slug}`} >
+            <Box 
+              direction='column'
+              justifyContent='center'
+              my='auto'
+              w={['100%','50%','66%','75%']}  
+              px={['1','2','4']} 
+            >
+
+              <Center as={Link} href={`/event/${race?.master?.slug}`} >
                 <Box
-                  mt='1' w='100%'
+                  mt='1'
                   fontWeight='semibold'
                   as='h1'
                   fontSize='2xl'
@@ -98,20 +113,21 @@ function HeroCard({ race }) {
                 >
                   {race?.event?.name}
                 </Box>
-              </Link>
-              <Box
-                w='100%'
+              </Center>
+
+              <Center
+                
                 color='#718096'
                 fontWeight='semibold'
                 letterSpacing='wide'
                 fontSize='lg'
               >
                 {race?.master?.city}, {race?.master?.state} | {countries.getName(race?.master?.country, 'en', {select: "official"})}
-              </Box>
+              </Center>
 
-              <Box 
+              <Center 
                 fontSize='lg'
-                w='100%' my='2'
+                my='2'
               > 
                   <Button 
                     mr={['0','4']} variant='outline' colorScheme='gray' size='sm'
@@ -126,12 +142,10 @@ function HeroCard({ race }) {
                         {' - '}
                     {race?.info?.name} <FontAwesomeIcon icon={faAngleDown} style={{marginLeft:'0.5rem'}} /> 
                   </Button>
-               
-              </Box>
-
-              
+              </Center>
             
-            </Flex>
+            </Box>
+
         </Flex>  
       </Flex>
     </>

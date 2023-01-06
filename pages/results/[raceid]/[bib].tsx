@@ -286,9 +286,8 @@ function ResultPageInd({ result, race, rid }) {
           {/* race card */}
           <HeroCard race={race} />
 
-          <Spacer mb='4'/>
           {/* result section */}
-          <Flex  flexWrap='wrap'  w='100%' pt={3} className='card__base' position='relative'  >
+          <Flex  flexWrap='wrap'  w='100%' pt={3} className='card__base' sx={{borderRadius:'0 0 15px 15px'}} position='relative'  >
             
             <CloseButton 
               style={{border:'1px solid black', position:'absolute', right:'5px', top:'5px'}} 

@@ -754,9 +754,8 @@ function ResultPageInd({ race, rid }) {
         >
           <HeroCard race={race} />
 
-          <Spacer mb='4'/>
           {/* result section */}
-          <Flex  flexWrap='wrap'  w='100%' pt={3} className='card__base'  >
+          <Flex  flexWrap='wrap' w='100%' pt={3} className='card__base' sx={{borderRadius:'0 0 15px 15px',}} >
             {!openStats
               ? <Table 
                   race={race} 

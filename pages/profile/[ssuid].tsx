@@ -52,7 +52,14 @@ function ResultPageInd({ data, ssuid }) {
   const [user_follow, { loading }] = useMutation(FOLLOW_USER);
 
   const handleFollow = async() =>{
-    var run_follow = await user_follow({ variables: {  sid: parseInt(auth?.user?.attributes?.['custom:ssuid']),  pid: parseInt(ssuid), follow: true } });
+    var run_follow = await user_follow({ 
+      variables: {  
+        sid: parseInt(auth?.user?.attributes?.['custom:ssuid']),  
+        pid: parseInt(ssuid), 
+        follow: data?.user?.followers.idList?.includes(parseInt(auth?.user?.attributes?.['custom:ssuid']) )  ? false:true
+      } 
+    });
+    
     console.log(run_follow)
   }
 
@@ -153,7 +160,6 @@ function ResultPageInd({ data, ssuid }) {
                   <IconButton _hover={{ bg: 'ss_green' }} color='black' target="_blank" as="a" href="https://www.instagram.com/sportstatsworld" aria-label="Instagram" icon={<FaInstagram fontSize="1.25rem" />} />
                   <IconButton _hover={{ bg: 'ss_green' }} color='black' target="_blank" as="a" href="https://www.youtube.com/channel/UCrEE7G1Za12M2kUGRENTf_w" aria-label="Youtube" icon={<FaYoutube fontSize="1.25rem" />} />
                
-
                 </ButtonGroup>
               </HStack>
               
@@ -234,7 +240,7 @@ function ResultPageInd({ data, ssuid }) {
                   </Tr>
                 </Thead>
                 <Tbody>
-                  {claims.map((race, idx)=>
+                  {claims.sort((a, b)=> new Date(b.RDT) - new Date(a.RDT) ).map((race, idx)=>
                     <Tr
                       sx={{
                         cursor:'pointer'
