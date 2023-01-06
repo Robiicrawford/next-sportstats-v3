@@ -10,20 +10,25 @@ import { useAuth } from "../../hooks/use-auth";
 import { useForm } from "react-hook-form"
 
 import { 
-	Box, Flex, Heading, Button, Divider, Spinner,
-	Input, InputGroup, InputRightElement, FormErrorMessage
+	Box, Flex, Heading, Button, Divider, Spinner, Stack, Image, HStack ,Text, 
+	Input, InputGroup, InputRightElement, FormErrorMessage,
+  useBreakpointValue
 } from '@chakra-ui/react';
 
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faEye, faEyeSlash } from "@fortawesome/free-solid-svg-icons";
 
+import sportstats_logo from '../../public/images/sportstats_logo.png'
+
 const eye = <FontAwesomeIcon icon={faEye} size="lg" style={{color:'black'}}/>;
 const eyex = <FontAwesomeIcon icon={faEyeSlash} size="lg" style={{color:'black'}}/>;
 
-const LoginContent = () => {
+
+const LoginContent = (props) => {
 	const auth = useAuth();
 	const {t} = useTranslation();
 	const router = useRouter()
+  const isMobile = useBreakpointValue({ base: true, md: false })
 
 	const { register, handleSubmit, formState: { errors } } = useForm();
 	
@@ -43,18 +48,41 @@ const LoginContent = () => {
 	}
 
   return (
-      <Flex flexWrap='wrap'  >
+    <Stack 
+      spacing="8" {...props}
+    >
           {loading
               ? <Flex my={3} py={3} flexWrap='wrap' justifyContent="center"> <Spinner/> </Flex>
               :
-      <Flex
-          flexWrap='wrap'
-          w='100%'
+      <Stack
+       
           color='black'
                 as='form'
                 onSubmit={handleSubmit(onSubmit)}
                 py={3}
-          >
+      >
+        <Stack spacing="6">
+          {isMobile && 
+            <Image 
+              src={sportstats_logo}
+              alt="Sportstats"
+              priority
+            />
+          }
+          <Stack spacing={{ base: '2', md: '3' }} textAlign="center">
+            <Heading size={useBreakpointValue({ base: 'xs', md: 'sm' })}>
+              Log in to your account
+            </Heading>
+            <HStack spacing="1" justify="center">
+              <Text color="muted">Don't have an account?</Text>
+              <Button variant="link" colorScheme="blue" as={Link} href={'/sign-up'}>
+                Sign up
+              </Button>
+            </HStack>
+          </Stack>
+        </Stack>
+
+
                   <Box w='100%' pb={1}>
                       {errors?.password && <FormErrorMessage > Password is needed </FormErrorMessage> }
                       {auth.error && <FormErrorMessage> {t('member:'+auth.error)} </FormErrorMessage> }
@@ -82,21 +110,13 @@ const LoginContent = () => {
 
                   <Button w='100%' mt='3' type='submit' colorScheme='teal'>{t('common:continue')}</Button>
           
-              </Flex>
+              </Stack>
           }
           
           <Divider/>
 
           <Flex mb={1} w='100%' flexWrap='wrap'>
           
-              <Box w='100%' px={2} mt={2}>
-                  
-                  <Heading as="h6" my={2}  mb={3}>{t('public:signup.title')}</Heading>
-                  
-                  <Link href={`/sign-up`}>
-                      <Button style={{width:'100%'}} colorScheme='pink' variant='outline'  >{t('common:sign-up')}</Button>
-                  </Link>
-              </Box>
           
               <Box w='100%' px={2} mt={2} style={{textAlign:'center'}}>
                   <Link href={`/account/recover`}>
@@ -105,7 +125,7 @@ const LoginContent = () => {
               </Box>
           
           </Flex>
-  </Flex>
+    </Stack>
   );
 }
 

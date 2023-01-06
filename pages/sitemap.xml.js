@@ -13,6 +13,9 @@ function generateSiteMap(posts) {
        <loc>https://sportstats.today</loc>
      </url>
      <url>
+       <loc>https://sportstats.today/sign-up</loc>
+     </url>
+     <url>
        <loc>https://sportstats.today/about</loc>
      </url>
      <url>
