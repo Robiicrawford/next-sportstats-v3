@@ -170,9 +170,7 @@ const GET_RESULTS = gql`
         user {
           id
           ssuid
-          info{
-            profilePhoto
-          }
+          profilePhoto
         }
         name
         country
@@ -677,7 +675,15 @@ function ResultPageInd({ race, rid }) {
                         justifyContent='center' alignContent='center'
                         ml={race.info.status === 'preview'? 4: 1}
                       >
-                        <Avatar size='lg' name={row.givenName+" "+row.familyName} src={row.user?.profilePhoto} />  
+                        <Avatar 
+                          size='lg' 
+                          name={row.givenName+" "+row.familyName} 
+                          src={
+                            row?.user?.profilePhoto?.split(":")[1]
+                            ? 'https://s3-us-west-2.amazonaws.com/ss-profile-pics/'+row?.user?.profilePhoto.split(":")[1]
+                            :row?.user?.profilePhoto
+                          }
+                        />  
 
                               {row.country && (
                                 <ReactCountryFlag 
@@ -741,30 +747,36 @@ function ResultPageInd({ race, rid }) {
       />
       <Section.Container id="series" Background={Background} >
         {/* race card */}
-        <HeroCard race={race} />
+        <Flex
+          justifyContent='center'
+          direction="column"
+          maxW='8xl' pb='6' mx='auto'
+        >
+          <HeroCard race={race} />
 
-        <Spacer mb='4'/>
-        {/* result section */}
-        <Flex  flexWrap='wrap'  w='100%' pt={3} className='card__base'  >
-          {!openStats
-            ? <Table 
-                race={race} 
-                columns={columns} 
-                data={dataFinal} 
-                isLoading={isLoading}
-                setOpenStats={setOpenStats}
-                fetchMore={fetchMore}
-                pageInfo={data?.results.pageInfo}
-              />
-            : <Suspense fallback={<div>Loading...</div>}>
-                <RaceStats 
+          <Spacer mb='4'/>
+          {/* result section */}
+          <Flex  flexWrap='wrap'  w='100%' pt={3} className='card__base'  >
+            {!openStats
+              ? <Table 
                   race={race} 
+                  columns={columns} 
+                  data={dataFinal} 
+                  isLoading={isLoading}
                   setOpenStats={setOpenStats}
+                  fetchMore={fetchMore}
+                  pageInfo={data?.results.pageInfo}
                 />
-              </Suspense>
-          }
+              : <Suspense fallback={<div>Loading...</div>}>
+                  <RaceStats 
+                    race={race} 
+                    setOpenStats={setOpenStats}
+                  />
+                </Suspense>
+            }
+            
           
-        
+          </Flex>
         </Flex>
 
       </Section.Container>

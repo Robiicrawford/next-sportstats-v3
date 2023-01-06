@@ -80,6 +80,7 @@ function ResultPageInd({ data, ssuid }) {
             src: `${data?.user?.info.profilePhoto}`,
             name: `${data?.user?.info.givenName} ${data?.user?.info.familyName}`,
           }}
+          ssuid={ssuid}
           action={
             <ButtonGroup>
 
@@ -233,13 +234,14 @@ function ResultPageInd({ data, ssuid }) {
                   </Tr>
                 </Thead>
                 <Tbody>
-                  {claims.map((race)=>
+                  {claims.map((race, idx)=>
                     <Tr
                       sx={{
                         cursor:'pointer'
                       }}
                       _hover={{ bg: 'ss_green' }}
                       onClick={() => router.push(`/results/${race.RID}/${race.BIB}`)}
+                      key={race.RID+"idx"+idx}
                     >
                       <Td>{race.EL} <br/> {race.RDT} </Td>
                       <Td>  {race.RL}</Td>

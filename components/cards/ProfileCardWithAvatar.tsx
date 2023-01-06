@@ -1,5 +1,8 @@
-import { Avatar, AvatarProps, Box, Flex, FlexProps, useColorModeValue } from '@chakra-ui/react'
+import { Avatar, AvatarProps, Box, Flex, FlexProps, Button, useColorModeValue } from '@chakra-ui/react'
 import * as React from 'react'
+
+import {PhotoUploadModal} from "../upload/PhotoUploadModal"
+import { useAuth } from "../../hooks/use-auth";
 
 interface CardWithAvatarProps extends FlexProps {
   avatarProps: AvatarProps
@@ -7,7 +10,10 @@ interface CardWithAvatarProps extends FlexProps {
 }
 
 export const CardWithAvatar = (props: CardWithAvatarProps) => {
-  const { action, avatarProps, children, ...rest } = props
+  const { ssuid, action, avatarProps, children, ...rest } = props
+
+  const auth = useAuth();
+
   return (
     <Flex
       position="relative"
@@ -26,9 +32,17 @@ export const CardWithAvatar = (props: CardWithAvatarProps) => {
         mt="-10"
         borderWidth="6px"
         borderColor={useColorModeValue('white', 'gray.700')}
-        size="xl" 
+        size={{base:"xl", lg:'2xl'}} 
         {...avatarProps}
+        src={
+          avatarProps.src?.split(":")[1]
+            ? 'https://s3-us-west-2.amazonaws.com/ss-profile-pics/'+avatarProps.src.split(":")[1]
+            :avatarProps.src
+        }
       />
+      {auth?.user && auth?.user.attributes?.['custom:ssuid'] == ssuid &&
+        <PhotoUploadModal />
+      }
       <Box position="absolute" top="4" insetEnd={{ base: '6', md: '8' }}>
         {action}
       </Box>

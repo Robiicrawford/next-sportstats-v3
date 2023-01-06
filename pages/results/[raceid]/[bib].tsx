@@ -1,6 +1,7 @@
 import React, {useState, useEffect} from "react"
 import { NextSeo } from 'next-seo';
 
+import Link from 'next/link'
 import { useRouter } from "next/router";
 
 import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
@@ -9,7 +10,10 @@ import { useTranslation } from 'next-i18next';
 import { useAuthenticator } from '@aws-amplify/ui-react';
 
 import styled from "styled-components";
-import { Flex, Center, Box, Heading, Text, Button, Spacer, Avatar, CloseButton } from '@chakra-ui/react';
+import { 
+  Flex, Center, Box, Heading, Icon,
+  Text, Button, Spacer, Avatar, CloseButton 
+} from '@chakra-ui/react';
 
 import Layout from '../../../components/layout/Layout'
 
@@ -25,10 +29,17 @@ import {client} from "../../../apollo/apollo-client";
 
 import {msToTime, msToPace, calculatePace} from '../../../utils/formatTime'
 
+import {
+  FiShare2,
+  FiHash,
+  FiUsers,
+  FiArrowRight,
+  FiArrowDown
+} from 'react-icons/fi'
 
-
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faCaretRight, faAngleDown, faHashtag, faUserGroup, faShareAlt  } from "@fortawesome/free-solid-svg-icons";
+import {
+  MdVerified
+} from 'react-icons/md'
 
 const getCountryISO2 = require("country-iso-3-to-2");
 
@@ -154,7 +165,7 @@ const SplitRow = ({info, data, raceInfo, canOpen, setOpen, open}) => {
           className='center' style={{width:'20px'}}
           onClick={()=>setOpen(open === info.id ?null:info.id)}
         >
-          <FontAwesomeIcon icon={open !== info.id ? faCaretRight : faAngleDown} size='3x' style={{color:'green'}} />
+          <Icon as={open !== info.id ? FiArrowRight : FiArrowDown} boxSize="6" color="black"  color='ss_green' />
         </td>
         :<td/>
       }
@@ -267,152 +278,174 @@ function ResultPageInd({ result, race, rid }) {
         title={`${race?.event.name} - ${race?.info?.name}`}
       />
       <Section.Container id="series" Background={Background} >
-        {/* race card */}
-        <HeroCard race={race} />
+        <Flex
+          justifyContent='center'
+          direction="column"
+          maxW='8xl' pb='6' mx='auto'
+        >
+          {/* race card */}
+          <HeroCard race={race} />
 
-        <Spacer mb='4'/>
-        {/* result section */}
-        <Flex  flexWrap='wrap'  w='100%' pt={3} className='card__base' position='relative'  >
-          
-          <CloseButton 
-            style={{border:'1px solid black', position:'absolute', right:'5px', top:'5px'}} 
-            onClick={()=>router.push(`/results/${rid}`)}
-          />
+          <Spacer mb='4'/>
+          {/* result section */}
+          <Flex  flexWrap='wrap'  w='100%' pt={3} className='card__base' position='relative'  >
+            
+            <CloseButton 
+              style={{border:'1px solid black', position:'absolute', right:'5px', top:'5px'}} 
+              as={Link}
+              href={`/results/${rid}`}
+            />
 
-          <Flex flexWrap='wrap' w='100%'>
+            <Flex flexWrap='wrap' w='100%'>
 
-            <Flex flexWrap='wrap' w={['100%','35%']} flex='1 1 15%' sx={{position:'relative'}} justifyContent='space-evenly' >
-               {user && !result.user.ssuid &&
-                 <Button 
-                    colorScheme='green' 
-                    size='md'
-                    sx={{position:'absolute', top:'0', left:'5', zIndex:'1'}}
-                    onClick={handleClaim}
-                  >
-                    Claim
-                  </Button>
-                }
+              <Flex flexWrap='wrap' w={['100%','35%']} flex='1 1 15%' sx={{position:'relative'}} justifyContent='space-evenly' >
+                 {user && !result.user.ssuid ?
+                   <Button 
+                      colorScheme='green' 
+                      size='md'
+                      sx={{position:'absolute', top:'0', left:'5', zIndex:'1'}}
+                      onClick={handleClaim}
+                    >
+                      Claim
+                    </Button>
+                    :<Icon 
+                      as={MdVerified} 
+                      boxSize="9"
+                      color='ss_green'
+                      sx={{position:'absolute', top:'0', left:'5', zIndex:'1'}}
+                    />
+                  }
 
-              <Flex flexWrap='wrap' justifyContent='center' style={{position:'relative'}} w='35%'>
-                <Box sx={{position:'absolute', right:'5px', top:'0',zIndex:'1', cursor:'pointer'}} className='shareButton'  onClick={handleShare} >
-                  <FontAwesomeIcon icon={faShareAlt} size="2xl"  />
-                </Box>
+                <Flex flexWrap='wrap' justifyContent='center' style={{position:'relative'}} w='35%'>
 
-                <Avatar 
-                  size={['xl','2xl']} 
-                  ml='2' 
-                  name={result.givenName+" "+result.familyName} 
-                  src={result.user.profilePhoto} 
-                />  
-                <Box sx={{position:'absolute' ,right:'0', bottom:'5px'}}> 
-                  {result.country&&(
-                    <ReactCountryFlag 
-                      svg 
-                      countryCode={getCountryISO2(result.country)}
-                      title={result.country}
-                      style={{marginBottom:'0',width:'2.5em', height:'2.5em'}}
-                    /> 
-                  )}
-                </Box>
+                  <Box sx={{position:'absolute', right:'5px', top:'0',zIndex:'1', cursor:'pointer'}} className='shareButton'  onClick={handleShare} >
+                    <Icon as={FiShare2} boxSize="8" color="black" />
+                  </Box>
+
+                  <Avatar 
+                    size={['xl','2xl']} 
+                    ml='2' 
+                    as={Link}
+                    href={`/profile/${result?.user?.ssuid}`}
+                    sx={{pointerEvents: result?.user?'':'none'}}
+                    name={result.givenName+" "+result.familyName} 
+                    src={
+                      result.user?.profilePhoto?.split(":")[1]
+                      ? 'https://s3-us-west-2.amazonaws.com/ss-profile-pics/'+result?.user?.profilePhoto.split(":")[1]
+                      :result?.user?.profilePhoto
+                    }
+                  />  
+
+                  <Box sx={{position:'absolute' ,right:'0', bottom:'5px'}}> 
+                    {result.country&&(
+                      <ReactCountryFlag 
+                        svg 
+                        countryCode={getCountryISO2(result.country)}
+                        title={result.country}
+                        style={{marginBottom:'0',width:'2.5em', height:'2.5em'}}
+                      /> 
+                    )}
+                  </Box>
+                </Flex>
+                
+                <Flex direction='column' h='fit-content' w='65%' pl='6'>
+                  <Text w='100%' fontSize='2em' fontWeight='bold' textAlign='center' pb='2' >{result.givenName+" "+result.familyName} </Text>
+                
+                  <Flex   flexWrap='wrap'>
+                    <Icon as={FiHash} boxSize="6" color="black" />  <Text ml='2' fontSize='1.2em'>{result.bib} </Text>
+                  </Flex>
+                  <Flex   flexWrap='wrap'>
+                    <Icon as={FiUsers} boxSize="6" color="black" /><Text ml='2' fontSize='1.2em'>  {result.cat} </Text>
+                  </Flex>
+                
+                </Flex>
               </Flex>
-              
-              <Flex flexWrap='wrap' h='fit-content' w='65%' pl='6'>
-                <Heading w='100%' textAlign='center' pb='2' >{result.givenName+" "+result.familyName} </Heading>
-              
-                <Flex w='100%'  flexWrap='wrap'><FontAwesomeIcon style={{margin:'auto 0'}} icon={faHashtag} />  <Text ml='2' fontSize='1.2em'>{result.bib} </Text></Flex>
-                <Flex w='100%'  flexWrap='wrap'><FontAwesomeIcon style={{margin:'auto 0'}} icon={faUserGroup} /><Text ml='2' fontSize='1.2em'>  {result.cat} </Text></Flex>
-              
-              </Flex>
+
+              <Box w={['100%','65%']} mb={[0,2]}   h='fit-content'>
+
+                
+
+                <Flex flexWrap='wrap' mb='3' justifyContent='space-evenly' sx={{borderBottom: '1px solid #000'}} >
+                  <Box w={3/9} textAlign='center' my={2} sx={{borderRight: '1px solid #000'}} >
+                    <Text fontSize='1.5em'>Overall</Text>
+                    <Text fontSize='1.5em'>{ordinal_suffix_of(result?.oRank)} </Text>
+                  </Box>
+                  <Box w={3/9} textAlign='center' my={2} sx={{borderRight: '1px solid #000'}}>
+                    <Text fontSize='1.5em'>Gender</Text>
+                    <Text fontSize='1.5em'>{ordinal_suffix_of(result?.gRank)} </Text>
+                  </Box>
+                  <Box w={3/9} textAlign='center' my={2}>
+                    <Text fontSize='1.5em' >Category</Text>
+                    <Text fontSize='1.5em'>{ordinal_suffix_of(result?.cRank)} </Text>
+                  </Box>
+                </Flex>
+
+              </Box>
+
             </Flex>
 
-            <Box w={['100%','65%']} mb={[0,2]}   h='fit-content'>
+            <Box w='100%' className='timingTable' px={[1,2,3]} mx={[0,2,3]} >
+              <Styles>  
+                <table style={{width:"100%"}}>
+                  <thead>
+                    <tr className="eventColors" style={{color:''}}>
 
-              
+                      <th colSpan={1} className="pboxpoint center" style={{paddingLeft:"0.5rem",textAlign:"left"}}>Point</th>
+                      <th className="pboxtime fulltime">Time</th>
+                      <th className="pboxpace center">Pace</th>
+                      <th className="pboxtod timeofdaytext center min-tablet">Time of Day</th>
+                      <th className="pboxtod rank center min-desktop">Overall</th>
+                      <th className="pboxtod rank center min-desktop">Gender</th>
+                      <th className="pboxtod rank center min-desktop">Category</th>
+                      <th/>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    {race?.cols?.filter(item => item != null).filter(item => !item.CL?.match(/_meta/g) ).sort((a, b) => a.CO - b.CO).map((p, i, a )=> 
 
-              <Flex flexWrap='wrap' mb='3' justifyContent='space-evenly' sx={{borderBottom: '1px solid #000'}} >
-                <Box w={3/9} textAlign='center' my={2} sx={{borderRight: '1px solid #000'}} >
-                  <Heading fontSize='1.5em'>Overall</Heading>
-                  <Heading fontSize='1.5em'>{ordinal_suffix_of(result?.oRank)} out of {' '} {race?.stats?.PC}</Heading>
-                </Box>
-                <Box w={3/9} textAlign='center' my={2} sx={{borderRight: '1px solid #000'}}>
-                  <Heading fontSize='1.5em'>Gender</Heading>
-                  <Heading fontSize='1.5em'>{ordinal_suffix_of(result?.gRank)} out of {" "}
-                    {race?.genders?.map((item)=> { if( item.label === result.gender ) { return item.count }})}
-                  </Heading>
-                </Box>
-                <Box w={3/9} textAlign='center' my={2}>
-                  <Heading fontSize='1.5em' >Category</Heading>
-                  <Heading fontSize='1.5em'>{ordinal_suffix_of(result?.cRank)} out of {' '} 
-                    {race?.cats?.map((item)=> { if( item.label === result.cat ) { return item.count }})}
-                  </Heading>
-                </Box>
-              </Flex>
+                      //check if it's the first row
+                      [9,6,7].includes(p.CT) ?
+                        <>
+                         <BlankRow key={p.id+"blank"}/> 
+                          <NameRow  info={p} data={result?.coldata.filter((col)=>col.CID == p.id)[0]} key={p.id} canOpen={race?.cols[i-1]?.CT == 4 ?true:false}/> 
+                          <SplitRow 
+                            info={{...p, RCDS: p.RCD}} 
+                            data={result?.coldata.filter((col)=>col.CID == p.id)[0]}  
+                            key={p.id+"splitrow"} 
+                            raceInfo={race?.info}
+                            canOpen={race?.cols?.[i-1]?.CT == 4 ?true:false}
+                            setOpen={setOpen}
+                            open={open}
+                          />
 
+                          {open === p.id && 
+                          
+                            a.slice(0, i).filter(row=> row.CT !== 5).map((pp, ii, aa )=> {
+                              if( pp.CT === 4 && ii > aa.map(element=> element.CT === 9).lastIndexOf(true) || aa.map(element=> element.CT === 9).lastIndexOf(true) === -1  ){
+                             
+                               return (
+                                <SubRow 
+                                  info={{...pp, RCDS: aa[ii-1]?.RCD && aa[ii-1]?.CT === 4 ? pp.RCD - aa[ii-1].RCD : pp.RCD }} 
+                                  data={result?.coldata.filter((col)=>col.CID == pp.id)[0]}  
+                                  prepareRow={{data : result?.coldata.filter((col)=>col.CID == aa[ii-1]?.id)?.[0], info:  aa[ii-1]   }}
+                                  raceInfo={race?.info}
+                                  key={pp.id+"splitrow"} 
+                                />
+                              )}}
+                            )}
+                        </>
+                      : p.CT === 5 && 
+                        <>
+                         <TransitionRow info={p}  data={result?.coldata.filter((col)=>col.CID == p.id)[0]} key={p.data+"ta"} />
+                        </>
+                      
+                                      
+                    )}
+                  </tbody>
+                </table>
+              </Styles>
             </Box>
-
           </Flex>
-
-          <Box w='100%' className='timingTable' px={[1,2,3]} mx={[0,2,3]} >
-            <Styles>  
-              <table style={{width:"100%"}}>
-                <thead>
-                  <tr className="eventColors" style={{color:''}}>
-
-                    <th colSpan={1} className="pboxpoint center" style={{paddingLeft:"0.5rem",textAlign:"left"}}>Point</th>
-                    <th className="pboxtime fulltime">Time</th>
-                    <th className="pboxpace center">Pace</th>
-                    <th className="pboxtod timeofdaytext center min-tablet">Time of Day</th>
-                    <th className="pboxtod rank center min-desktop">Overall</th>
-                    <th className="pboxtod rank center min-desktop">Gender</th>
-                    <th className="pboxtod rank center min-desktop">Category</th>
-                    <th/>
-                  </tr>
-                </thead>
-                <tbody>
-                  {race?.cols?.filter(item => item != null).filter(item => !item.CL?.match(/_meta/g) ).sort((a, b) => a.CO - b.CO).map((p, i, a )=> 
-
-                    //check if it's the first row
-                    [9,6,7].includes(p.CT) ?
-                      <>
-                       <BlankRow key={p.id+"blank"}/> 
-                        <NameRow  info={p} data={result?.coldata.filter((col)=>col.CID == p.id)[0]} key={p.id} canOpen={race?.cols[i-1]?.CT == 4 ?true:false}/> 
-                        <SplitRow 
-                          info={{...p, RCDS: p.RCD}} 
-                          data={result?.coldata.filter((col)=>col.CID == p.id)[0]}  
-                          key={p.id+"splitrow"} 
-                          raceInfo={race?.info}
-                          canOpen={race?.cols?.[i-1]?.CT == 4 ?true:false}
-                          setOpen={setOpen}
-                          open={open}
-                        />
-
-                        {open === p.id && 
-                        
-                          a.slice(0, i).filter(row=> row.CT !== 5).map((pp, ii, aa )=> {
-                            if( pp.CT === 4 && ii > aa.map(element=> element.CT === 9).lastIndexOf(true) || aa.map(element=> element.CT === 9).lastIndexOf(true) === -1  ){
-                           
-                             return (
-                              <SubRow 
-                                info={{...pp, RCDS: aa[ii-1]?.RCD && aa[ii-1]?.CT === 4 ? pp.RCD - aa[ii-1].RCD : pp.RCD }} 
-                                data={result?.coldata.filter((col)=>col.CID == pp.id)[0]}  
-                                prepareRow={{data : result?.coldata.filter((col)=>col.CID == aa[ii-1]?.id)?.[0], info:  aa[ii-1]   }}
-                                raceInfo={race?.info}
-                                key={pp.id+"splitrow"} 
-                              />
-                            )}}
-                          )}
-                      </>
-                    : p.CT === 5 && 
-                      <>
-                       <TransitionRow info={p}  data={result?.coldata.filter((col)=>col.CID == p.id)[0]} key={p.data+"ta"} />
-                      </>
-                    
-                                    
-                  )}
-                </tbody>
-              </table>
-            </Styles>
-          </Box>
         </Flex>
 
       </Section.Container>
@@ -461,6 +494,7 @@ export async function getStaticProps({ params, locale }) {
         user{
           id
           ssuid
+          profilePhoto
         }
         coldata{
           id: CID
