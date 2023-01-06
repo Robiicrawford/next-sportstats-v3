@@ -20,7 +20,7 @@ const Index = ({data, master}) => {
   const { t } = useTranslation();
 
   return (
-    <Flex flexWrap='wrap' mt='3' className='card__base' style={{borderRadius:'15px', border:'1px solid black'}} w='100%'   alignItems='center' >
+    <Flex flexWrap='wrap' className='card__base' style={{borderRadius:'0', border:'1px solid black'}} w='100%'   alignItems='center' >
 
       <Flex flexWrap='wrap'   w={['100%', '75%', '50%']} my='3' px='2' >
         {data?.races.map((r, i)=>(

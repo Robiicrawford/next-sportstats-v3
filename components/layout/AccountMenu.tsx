@@ -40,11 +40,7 @@ const Header = () => {
                 size='sm'
                 mr='2' 
                 name={auth.user&& auth.user?.attributes?.given_name+" "+auth.user?.attributes?.family_name }
-                src={
-                  auth?.user?.attributes?.picture?.split(":")[1]
-                    ? 'https://s3-us-west-2.amazonaws.com/ss-profile-pics/'+auth?.user?.attributes?.picture.split(":")[1]
-                    :auth?.user?.attributes?.picture
-                }
+                src={auth?.user?.attributes?.picture}
               />
             :
               <Avatar 

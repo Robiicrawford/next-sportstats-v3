@@ -19,7 +19,7 @@ import {client} from "../../apollo/apollo-client";
 
 import { 
     Flex, Box, Heading, Text, Select,
-  ButtonGroup, Button
+  ButtonGroup, Button, Spacer
 } from '@chakra-ui/react';
 
 import Section from '../../components/section';
@@ -77,6 +77,7 @@ function Master({ master }) {
     return <div> ... error on page ... </div>
   }
 
+  console.log(master)
 
   return (
     <Layout header_color='black' >
@@ -94,10 +95,12 @@ function Master({ master }) {
           ]
         }}
       />
+
         <Flex 
           w='100%'
           justifyContent='center'
           pt={['20px']}
+          sx={{backgroundColor:master?.info.bc?master?.info.bc:'white'}}
           minHeight={['280px','300px','450px']}
         >
           <Box
@@ -165,17 +168,32 @@ function Master({ master }) {
           </Flex>
         </Flex>
       
-      <Section.Container id="series" Background={Background} >
+      <Section.Container 
+        id="event" 
+        Background={Background} 
+        bc={master?.info.bc}
+      >
 
-        <Flex  w='100%' flexWrap='wrap' px={['0','3','5']} mt='-150px'>
+        <Flex
+          justifyContent='center'
+          direction="column"
+          maxW='6xl' pb='6' mx='auto'
+          mt='-220px'
+        >
           <HeroBanner data={master}  setA={null} slug='test'/>  
 
+          <ResultSection data={master?.lastEvent} master={master} />
 
-          <Flex as="a" id="results" w='100%' flexWrap='wrap' >
-            <ResultSection data={master?.lastEvent} master={master} />
-          </Flex>
+          <Spacer bg='ss_green' pb='4' sx={{border:'1px solid black'}} />
 
-          <Flex as="a" id="info" flexWrap='wrap' className='card__base' w='100%' mt='4' pt={2} height='fit-content' bg='white' style={{borderRadius:'15px', border:'1px solid black'}} >
+          <Flex 
+            as="a" 
+            id="info" 
+            flexWrap='wrap' 
+            className='card__base' w='100%'  pt={2} 
+            height='fit-content' bg='white' 
+            style={{borderRadius:'0 0 15px 15px', border:'1px solid black'}} 
+          >
              
               <Box w='100%' pt={[1,3]} px={[1,3]} mb={[2,4]} >
                 {!master && <Text> ...LOADING... </Text>}
@@ -320,6 +338,8 @@ export async function getStaticProps({ params, locale }) {
           mlimg
           mcimg
           mbimg
+          bc
+          fc
         }
         events {
           id

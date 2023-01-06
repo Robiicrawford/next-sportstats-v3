@@ -8,6 +8,7 @@ type ContainerProps = {
   children: ReactNode;
   Background?: () => JSX.Element;
   place?: string;
+  bc: string
 };
 
 const Container = ({
@@ -15,10 +16,16 @@ const Container = ({
   children,
   place,
   Background = DefaultBackground,
+  bc
 }: ContainerProps) => (
-  <div id={id} style={{ position: 'relative', width:'100%' }}>
-    {Background&&  <Background /> }
-    <SectionContainer place={place}>{children}</SectionContainer>
+  <div id={id} style={{ position: 'relative', width:'100%', backgroundColor: bc?bc:'none' }}>
+    {Background && !bc &&  <Background /> }
+    <SectionContainer 
+      place={place} 
+      bc={bc}
+    >
+      {children}
+    </SectionContainer>
   </div>
 );
 
@@ -41,6 +48,7 @@ const SectionContainer = styled('div')<{ place?: string }>`
   max-width: 100vw;
   margin: auto;
   flex: 0 1 auto;
+
  /* flex-direction: column; */
   justify-content: ${({ place }) => place ? place : 'center'};
   scroll-behavior: smooth;

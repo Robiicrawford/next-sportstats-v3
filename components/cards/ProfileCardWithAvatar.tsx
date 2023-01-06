@@ -41,7 +41,7 @@ export const CardWithAvatar = (props: CardWithAvatarProps) => {
         }
       />
       {auth?.user && auth?.user.attributes?.['custom:ssuid'] == ssuid &&
-        <PhotoUploadModal />
+        <PhotoUploadModal ssuid={ssuid} />
       }
       <Box position="absolute" top="4" insetEnd={{ base: '6', md: '8' }}>
         {action}

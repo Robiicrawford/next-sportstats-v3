@@ -42,7 +42,7 @@ const Index = ({data, slug, setA}) => {
     <Flex 
       flexWrap='wrap' mt='3' 
       className='card__base' 
-      style={{borderRadius:'15px', border:'1px solid black', zIndex:'5'}} 
+      style={{borderRadius:'15px 15px 0 0 ', border:'1px solid black', zIndex:'5'}} 
       w='100%'  justifyContent='center' alignItems='center' 
       h='fit-content'
     >
@@ -109,7 +109,7 @@ const Index = ({data, slug, setA}) => {
 
             </Flex>
             
-            <Flex w='100%' bg='ss_green' mt={['50px', 4]} pb={1} flexWrap='wrap' style={{borderRadius:' 0 0 15px 15px', borderTop:'1px solid black'}}>
+            <Flex w='100%' bg='ss_green' mt={['50px', 4]} pb={1} flexWrap='wrap' style={{borderRadius:' 0', borderTop:'1px solid black'}}>
              
               <Box w={['100%',1/2, 1/3 ,1/4]}  />
 
