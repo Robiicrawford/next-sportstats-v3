@@ -59,7 +59,6 @@ const LoginContent = (props) => {
             as='form'
             onSubmit={handleSubmit(onSubmit)}
             py={3}
-            autocomplete="on"
           >
             <Stack spacing="6">
               <Stack spacing={{ base: '2', md: '3' }} textAlign="center">

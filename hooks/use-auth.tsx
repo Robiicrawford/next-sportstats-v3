@@ -91,12 +91,19 @@ const useProvideAuth =  () => {
  const getUser = async ()  => {
  	var unsubscribe = await Auth.currentUserInfo()
 
-  const { data } = await client.query({
+  let data 
+
+  if (unsubscribe?.attributes?.['custom:ssuid']) {
+     data  = await client.query({
       query: GET_USER,
       variables: {
         id:  parseInt(unsubscribe?.attributes?.['custom:ssuid'])
       }
     });
+  } else {
+    data = {}
+  }
+  
 
   if(unsubscribe){
     setUser({...unsubscribe, data:{...data.user}})
