@@ -43,7 +43,7 @@ const LoginContent = (props) => {
 		setLoading(true)
 	  	var user = await auth.signin(data.email.trim(), data['current-password'].trim()) ;
 	  	if(user){
-	  		router.push('/app/home')
+	  		router.push('/account')
 	  	}	  
 	}
 

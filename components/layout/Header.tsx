@@ -16,6 +16,7 @@ import sportstats_logo from '../../public/images/sportstats_logo.png'
 
 type HeaderType = {
     header_color?: string
+    logo?: string
 }
 
 const  LanguageMenu = ()=> {
@@ -30,9 +31,10 @@ const  LanguageMenu = ()=> {
   );
 }
 
-export default function Header({ header_color }:HeaderType) {
+export default function Header({ header_color, logo }:HeaderType) {
   header_color = header_color?header_color:'rgb(23, 29, 37)'
   
+  console.log(logo)
   return (
     <header 
       className="header" 
@@ -56,7 +58,7 @@ export default function Header({ header_color }:HeaderType) {
             <Link href="/">
 
               <Image 
-                src={sportstats_logo}
+                src={logo?logo:sportstats_logo}
                 alt="Sportstats"
                 priority
               />

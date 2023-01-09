@@ -19,13 +19,13 @@ import { SignUpForm } from '../components/SignUpForm'
 
 import Layout from '../components/layout/Layout'
 
-import sportstats_logo from '../public/images/sportstats_logo.png'
+import logo from '../public/images/logo_black.png'
 
 export default function Home({sportstats, irun, locale}) {
   const { t } = useTranslation('common');
 
   return (
-    <Layout header_color='none' >
+    <Layout header_color='none' logo={logo} >
       <NextSeo
         title={`Sign Up`}
       />

@@ -84,7 +84,6 @@ const Header = () => {
     <Modal isOpen={isOpen} onClose={onClose}  >
       <ModalOverlay />
       <ModalContent>
-        <ModalHeader >{ t('common:login') }</ModalHeader>
         <ModalCloseButton />
         <ModalBody>
           <LoginContent /> 

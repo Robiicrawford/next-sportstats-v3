@@ -14,15 +14,16 @@ config.autoAddCss = false; /* eslint-disable import/first */
 
 type LayoutType = {
     header_color?: string,
+    logo?: string,
     children?: React.ReactNode
 }
 
 
-const Layout = ({ children, header_color }:LayoutType) => {
+const Layout = ({ children, header_color, logo }:LayoutType) => {
  
   return (
    <Flex direction="column" flex="1">
-      <Header header_color={header_color} />
+      <Header header_color={header_color} logo={logo} />
       <Flex as="main" role="main" direction="column" flex="1" sx={{overflow:'hidden'}}  >
         
           {children}
