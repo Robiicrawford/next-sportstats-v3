@@ -2,6 +2,7 @@
 
 import { NextSeo, OrganizationJsonLd } from 'next-seo';
 import Link from 'next/link'
+import Script from "next/script";
 
 import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
 import { useTranslation } from 'next-i18next';
@@ -14,24 +15,25 @@ import {
 	useColorModeValue as mode 
 } from '@chakra-ui/react'
 
-
 import LoginContent from '../components/auth/LoginContent'
 
 import Layout from '../components/layout/Layout'
 
-import logo from '../public/images/logo_black.png'
 
 export default function Home({sportstats, irun, locale}) {
   const { t } = useTranslation('common');
 
+  
+  
   return (
-    <Layout 
-    	header_color='none' 
-    	logo={logo}
-    >
+    <Layout >
       <NextSeo
         title={`Log In`}
       />
+      <Script 
+        src="https://www.google.com/recaptcha/enterprise.js?render=6LcUReQjAAAAAC0gUWKYsWuPfyLoCFvk8ZsuFTte" 
+      />
+
 
       	<Flex
 		    minH={{ base: 'auto', md: '100vh' }}

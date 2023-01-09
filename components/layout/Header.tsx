@@ -45,7 +45,7 @@ export default function Header({ header_color, logo }:HeaderType) {
       }}
     > 
       <Flex
-          px={2} pl={[2,5]} pt={2}
+          px={2} pl={[2,5]} pt={2} pb='3'
           color='white'
           style={{
             backgroundColor: header_color

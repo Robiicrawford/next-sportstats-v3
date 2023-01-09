@@ -51,52 +51,44 @@ const LoginContent = (props) => {
     <Stack 
       spacing="8" {...props}
     >
-          {loading
-              ? <Flex my={3} py={3} flexWrap='wrap' justifyContent="center"> <Spinner/> </Flex>
-              :
-      <Stack
-       
-          color='black'
-                as='form'
-                onSubmit={handleSubmit(onSubmit)}
-                py={3}
-      >
-        <Stack spacing="6">
-          {isMobile && 
-            <Image 
-              src={sportstats_logo}
-              alt="Sportstats"
-              priority
-            />
-          }
-          <Stack spacing={{ base: '2', md: '3' }} textAlign="center">
-            <Heading size={useBreakpointValue({ base: 'xs', md: 'sm' })}>
-              Log in to your account
-            </Heading>
-            <HStack spacing="1" justify="center">
-              <Text color="muted">Don't have an account?</Text>
-              <Button variant="link" colorScheme="blue" as={Link} href={'/sign-up'}>
-                Sign up
-              </Button>
-            </HStack>
-          </Stack>
-        </Stack>
-
-
-                  <Box w='100%' pb={1}>
-                      {errors?.password && <FormErrorMessage > Password is needed </FormErrorMessage> }
-                      {auth.error && <FormErrorMessage> {t('member:'+auth.error)} </FormErrorMessage> }
-                  
-                  </Box>
-              
-                      <Box w='100%' mb='3' >
-                           <Input {...register('email',{required: true})} placeholder={t('public:signup.email')} /> 
-                          {errors?.email && ( <FormErrorMessage > Account Email is needed </FormErrorMessage> )}
-                      </Box>
+      {loading
+        ? <Flex my={3} py={3} flexWrap='wrap' justifyContent="center"> <Spinner/> </Flex>
+        :
+          <Stack
+            color='black'
+            as='form'
+            onSubmit={handleSubmit(onSubmit)}
+            py={3}
+            autocomplete="on"
+          >
+            <Stack spacing="6">
+              <Stack spacing={{ base: '2', md: '3' }} textAlign="center">
+                <Heading size={useBreakpointValue({ base: 'xs', md: 'sm' })}>
+                  Log in to your account
+                </Heading>
+                <HStack spacing="1" justify="center">
+                  <Text color="muted">Don't have an account?</Text>
+                  <Button variant="link" colorScheme="blue" as={Link} href={'/sign-up'}>
+                    Sign up
+                  </Button>
+                </HStack>
+              </Stack>
+            </Stack>
+            
+            <Box w='100%' pb={1}>
+              {errors?.password && <FormErrorMessage > Password is needed </FormErrorMessage> }
+              {auth.error && <FormErrorMessage> {t('member:'+auth.error)} </FormErrorMessage> }
+            </Box>
+            
+            <Box w='100%' mb='3' >
+              <Input {...register('email',{required: true})} id='email' placeholder={t('public:signup.email')} /> 
+              {errors?.email && ( <FormErrorMessage > Account Email is needed </FormErrorMessage> )}
+            </Box>
 
                           <InputGroup size='md'>
                             <Input
                               pr='4.5rem'
+                              id='password'
                               type={show ? 'text' : 'password'}
                               placeholder={t('public:signup.enter-password')} 
                               {...register('current-password',{required: true})}

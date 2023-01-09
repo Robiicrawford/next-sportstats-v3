@@ -15,6 +15,11 @@ import {
   Text, Button, Spacer, Avatar, CloseButton 
 } from '@chakra-ui/react';
 
+import { 
+  Td, Tr,
+  Table, Tbody
+} from '@chakra-ui/react';
+
 import Layout from '../../../components/layout/Layout'
 
 import Section from '../../../components/section';
@@ -34,7 +39,8 @@ import {
   FiHash,
   FiUsers,
   FiArrowRight,
-  FiArrowDown
+  FiArrowDown,
+  FiClock
 } from 'react-icons/fi'
 
 import {
@@ -97,7 +103,6 @@ const Styles = styled.div`
       border-bottom: solid 2px black;
     
       td {
-        padding: 3px;
         .name_row_time{
           padding-left: 10px;
         }
@@ -111,11 +116,11 @@ const BlankRow = () => <tr ><td colSpan={8} style={{height:'15px'}}></td></tr>
 const NameRow = ({info, data, canOpen }) => {
 
   return (
-    <tr className="name_row" style={{textTransform: 'capitalize'}}>
-      <td colSpan={1}><Heading> {info.CL}</Heading></td>
-      <td ><Heading ><span style={{paddingLeft:'1rem'}}>{!data?.ST && !data?.CD ? '00:00:00' :msToTime( data?.ST?data?.ST:parseInt(data?.CD) )}</span></Heading> </td>
-      <td colSpan={6}></td>
-    </tr>
+    <Tr className="name_row" style={{textTransform: 'capitalize'}} pb='2'>
+      <Td colSpan={1}><Text fontSize='30'> {info.CL}</Text></Td>
+      <Td ><Text fontSize='25'><span style={{paddingLeft:'1rem'}}>{!data?.ST && !data?.CD ? '00:00:00' :msToTime( data?.ST?data?.ST:parseInt(data?.CD) )}</span></Text> </Td>
+      <Td colSpan={6}></Td>
+    </Tr>
   )
 }
 
@@ -124,11 +129,11 @@ const TransitionRow = ({info, data}) => {
   return(
     <>
       <BlankRow key={info.CL+"_blank"}/>
-      <tr className="name_row" key={info.CL+"_row2"}>
+      <Tr className="name_row" key={info.CL+"_row2"}>
         <td colSpan={1}><Heading >Transition - {info.CL}</Heading></td>
         <td> <Heading ><span style={{paddingLeft:'1rem'}}> {msToTime(data?.ST ? data?.ST : parseInt(data?.CD) ) }</span> </Heading> </td>
-        <td colSpan={6}></td>
-      </tr>
+        <Td colSpan={6}></Td>
+      </Tr>
      
     </>
   )
@@ -137,39 +142,39 @@ const TransitionRow = ({info, data}) => {
 const SplitRow = ({info, data, raceInfo, canOpen, setOpen, open}) => {
 
   return (
-    <tr className="split_row">
+    <Tr className="split_row">
       
-      <td style={{textTransform: 'capitalize'}} colSpan={1}>
-        <Heading fontSize={info.CD?'1em':'2em'} ml={2}> {info.CL} </Heading>
-        {info.CD ? <Text pl={[1,2,3]} >{info.CD/1000}km || {Math.round(( (info.CD*0.000621371192) + Number.EPSILON) * 100) / 100}mi</Text> : null }
-      </td>
+      <Td style={{textTransform: 'capitalize'}} colSpan={1}>
+        <Text fontSize={'1em'} ml={2} fontWeight='bold' > {info.CL} </Text>
+        {info.CD ? <Text pl={[1,2,3]} pt='0' mt='0' >{info.CD/1000}km || {Math.round(( (info.CD*0.000621371192) + Number.EPSILON) * 100) / 100}mi</Text> : null }
+      </Td>
       
-      <td>
-      {![6,7].includes(info.CT)&&  <Heading fontSize='1.2em' >{msToTime(data?.ST)} | </Heading> }
+      <Td direction={{base:'row', sm:'column'}}>
+        {![6,7].includes(info.CT)&&  <Text fontSize='1.2em' >{msToTime(data?.ST)} | </Text> }
         <Text pl={[1,2,3]}>{msToTime(data?.CD)}</Text>
-      </td>
+      </Td>
 
-      <td style={{textAlign:'center'}}>
+      <Td style={{textAlign:'center'}}>
         {[6,7].includes(info.CT) && raceInfo.type.toLowerCase() !== 'triathlon'
           ?  calculatePace( info.CDS?info.CDS:info.CD, data?.CD, raceInfo.CT , info.CL ) 
           : data?.CD && info.CD? calculatePace( info.CD, data.ST,  raceInfo.CT, info.CL  ): '---'
         }
-      </td>
-      <td className='center min-tablet'>{data?.TOD? msToTime(data?.TOD):'est. '+data?.estTod}</td>
-      <td className='center min-desktop'>{data?.RO} </td>
-      <td className='center min-desktop'>{data?.RG} </td>
-      <td className='center min-desktop'>{data?.RC} </td>
+      </Td>
+      <Td className='center min-tablet'>{data?.TOD? msToTime(data?.TOD):'est. '+data?.estTod}</Td>
+      <Td className='center min-desktop'>{data?.RO} </Td>
+      <Td className='center min-desktop'>{data?.RG} </Td>
+      <Td className='center min-desktop'>{data?.RC} </Td>
       
       {canOpen ? 
-        <td 
+        <Td 
           className='center' style={{width:'20px'}}
           onClick={()=>setOpen(open === info.id ?null:info.id)}
         >
           <Icon as={open !== info.id ? FiArrowRight : FiArrowDown} boxSize="6" color="black"  color='ss_green' />
-        </td>
-        :<td/>
+        </Td>
+        :<Td/>
       }
-    </tr>
+    </Tr>
   )
 }
 
@@ -179,7 +184,7 @@ const SubRow = ({info, raceInfo, data, prepareRow}) => {
     <tr className="split_row" style={ {backgroundColor: !data? '#564949ab ':''}}>
       
       <td style={{textTransform: 'capitalize', paddingLeft:'2rem'}} colSpan={1}>
-        <Heading fontSize={info.CD?'1em':'2em'} ml={2}> {info.CL} </Heading>
+        <Text fontSize={'1em'} ml={2} fontWeight='bold' ml='3' > {info.CL} </Text>
         {info.CD ? <Text pl={[1,2,3]} >{info.CD/1000}km || {Math.round(( (info.CD*0.000621371192) + Number.EPSILON) * 100) / 100}mi</Text> : null }
       </td>
       
@@ -272,6 +277,7 @@ function ResultPageInd({ result, race, rid }) {
     }
   };
 
+
   return (
     <Layout header_color='black' >
       <NextSeo
@@ -311,7 +317,7 @@ function ResultPageInd({ result, race, rid }) {
                       as={MdVerified} 
                       boxSize="9"
                       color='ss_green'
-                      sx={{position:'absolute', top:'0', left:'5', zIndex:'1'}}
+                      sx={{position:'absolute', top:'0', left:'0', zIndex:'1'}}
                     />
                   }
 
@@ -348,13 +354,16 @@ function ResultPageInd({ result, race, rid }) {
                 </Flex>
                 
                 <Flex direction='column' h='fit-content' w='65%' pl='6'>
-                  <Text w='100%' fontSize='2em' fontWeight='bold' textAlign='center' pb='2' >{result.givenName+" "+result.familyName} </Text>
+                  <Text w='100%' fontSize='2em' fontWeight='bold' textAlign='center' pb='2' > {result.givenName+" "+result.familyName} </Text>
                 
                   <Flex   flexWrap='wrap'>
-                    <Icon as={FiHash} boxSize="6" color="black" />  <Text ml='2' fontSize='1.2em'>{result.bib} </Text>
+                    <Icon as={FiHash} boxSize="5" color="black" />  <Text ml='2' fontSize='1.1em'>{result.bib} </Text>
                   </Flex>
                   <Flex   flexWrap='wrap'>
-                    <Icon as={FiUsers} boxSize="6" color="black" /><Text ml='2' fontSize='1.2em'>  {result.cat} </Text>
+                    <Icon as={FiUsers} boxSize="5" color="black" /><Text ml='2' fontSize='1.1em'>  {result.cat} </Text>
+                  </Flex>
+                  <Flex   flexWrap='wrap'>
+                    <Icon as={FiClock} boxSize="5" color="black" /><Text ml='2' fontSize='1.1em'>  {msToTime(result.OT)} </Text>
                   </Flex>
                 
                 </Flex>
@@ -383,9 +392,10 @@ function ResultPageInd({ result, race, rid }) {
 
             </Flex>
 
-            <Box w='100%' className='timingTable' px={[1,2,3]} mx={[0,2,3]} >
+            <Box w='100%' className='timingTable' px={[1,2,3]} pb='6' >
               <Styles>  
-                <table style={{width:"100%"}}>
+
+                <Table style={{width:"100%"}} bg='none' >
                   <thead>
                     <tr className="eventColors" style={{color:''}}>
 
@@ -399,7 +409,7 @@ function ResultPageInd({ result, race, rid }) {
                       <th/>
                     </tr>
                   </thead>
-                  <tbody>
+                  <Tbody>
                     {race?.cols?.filter(item => item != null).filter(item => !item.CL?.match(/_meta/g) ).sort((a, b) => a.CO - b.CO).map((p, i, a )=> 
 
                       //check if it's the first row
@@ -440,8 +450,9 @@ function ResultPageInd({ result, race, rid }) {
                       
                                       
                     )}
-                  </tbody>
-                </table>
+                  </Tbody>
+                </Table>
+
               </Styles>
             </Box>
           </Flex>

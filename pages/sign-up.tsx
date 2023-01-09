@@ -2,6 +2,8 @@
 
 import { NextSeo, OrganizationJsonLd } from 'next-seo';
 import Link from 'next/link'
+import Script from "next/script";
+
 
 import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
 import { useTranslation } from 'next-i18next';
@@ -19,16 +21,18 @@ import { SignUpForm } from '../components/SignUpForm'
 
 import Layout from '../components/layout/Layout'
 
-import logo from '../public/images/logo_black.png'
-
 export default function Home({sportstats, irun, locale}) {
   const { t } = useTranslation('common');
 
   return (
-    <Layout header_color='none' logo={logo} >
+    <Layout >
       <NextSeo
         title={`Sign Up`}
       />
+      <Script 
+        src="https://www.google.com/recaptcha/enterprise.js?render=6LcUReQjAAAAAC0gUWKYsWuPfyLoCFvk8ZsuFTte" 
+      />
+
 
       	<Flex
 		    minH={{ base: 'auto', md: '100vh' }}
@@ -79,7 +83,7 @@ export default function Home({sportstats, irun, locale}) {
 		          </Flex>
 		        </DarkMode>
 		      </Box>
-		      <Center flex="1">
+		      <Center flex="1" py='4' >
 		        <SignUpForm
 		          px={{ base: '4', md: '8' }}
 		          py={{ base: '12', md: '48' }}
