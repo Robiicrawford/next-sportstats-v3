@@ -31,7 +31,7 @@ const LoginContent = (props) => {
   const isMobile = useBreakpointValue({ base: true, md: false })
 
   const [loading, setLoading] = useState(false);
-  const [error, setError] = useState(false);
+  const [error, setError] = useState<any>(false);
   
   const [show, setShow] = useState(false)
 
