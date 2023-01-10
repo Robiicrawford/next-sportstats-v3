@@ -727,8 +727,8 @@ function ResultPageInd({ race, rid }) {
     }
   } 
 
-  const columns = React.useMemo( () => computeCols(race)  ,[race, race?.rid, data?.results] ) ;
-  const dataFinal = React.useMemo(()=> (data && data?.results?.results?.length>= 1)? data?.results?.results: [],[data?.results, race?.rid]);
+  const columns = React.useMemo( () => computeCols(race)  ,[race, race?.rid, data?.results, rid] ) ;
+  const dataFinal = React.useMemo(()=> (data && data?.results?.results?.length>= 1)? data?.results?.results: [],[data?.results, race?.rid, rid]);
 
 
   const [openStats, setOpenStats] = useState(false)
