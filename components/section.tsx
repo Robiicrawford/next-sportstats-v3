@@ -8,7 +8,7 @@ type ContainerProps = {
   children: ReactNode;
   Background?: () => JSX.Element;
   place?: string;
-  bc: string
+  bc?: string
 };
 
 const Container = ({
