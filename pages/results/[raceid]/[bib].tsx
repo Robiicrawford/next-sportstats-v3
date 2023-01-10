@@ -149,7 +149,7 @@ const SplitRow = ({info, data, raceInfo, canOpen, setOpen, open}) => {
         {info.CD ? <Text pl={[1,2,3]} pt='0' mt='0' >{info.CD/1000}km || {Math.round(( (info.CD*0.000621371192) + Number.EPSILON) * 100) / 100}mi</Text> : null }
       </Td>
       
-      <Td direction={{base:'row', sm:'column'}}>
+      <Td >
         {![6,7].includes(info.CT)&&  <Text fontSize='1.2em' >{msToTime(data?.ST)} | </Text> }
         <Text pl={[1,2,3]}>{msToTime(data?.CD)}</Text>
       </Td>
