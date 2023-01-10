@@ -51,7 +51,7 @@ export default function Settings({locale}) {
                   </Heading>
                   <h3 style={{marginLeft:'1em'}}> 
                     {auth.user?.attributes?.given_name} {auth.user?.attributes?.family_name}, {auth.user?.attributes?.email} - 
-                    <Link  href={`/profile/${auth.user?.attributes?.['custom:ssuid']}/${auth.user?.attributes?.family_name}`} > Go To Profile </Link>
+                    <Link  href={`/profile/${auth.user?.attributes?.['custom:ssuid']}`} > Go To Profile </Link>
                   </h3>
                 </Box>
                 
