@@ -159,7 +159,7 @@ export const PhotoUploadModal = ({ssuid}) => {
                       noKeyboard
                       accept={{'image/png': ['.png'],'image/jpeg': ['.jpeg'],}}
                       maxFiles={1}
-                      style={{ width: '250px', height: '250px', margin:'auto'}}
+                 //     style={{ width: '250px', height: '250px', margin:'auto'}}
                     >
                       {({ getRootProps, getInputProps }) => (
                         <div {...getRootProps()} style={{textAlign:'center'}}>
