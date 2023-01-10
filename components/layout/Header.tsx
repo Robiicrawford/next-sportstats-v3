@@ -34,7 +34,6 @@ const  LanguageMenu = ()=> {
 export default function Header({ header_color, logo }:HeaderType) {
   header_color = header_color?header_color:'rgb(23, 29, 37)'
   
-  console.log(logo)
   return (
     <header 
       className="header" 

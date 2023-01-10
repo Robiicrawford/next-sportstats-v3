@@ -44,7 +44,7 @@ const IndexPage = ({ data }) => {
       
       
           <Flex flexWrap='wrap' justifyContent='center' gap='2em' px={[1,3,5]} pt={2}>
-            <SideMenu active='privacy' />
+            <SideMenu active={3} />
 
 
             <Flex

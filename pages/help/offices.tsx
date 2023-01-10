@@ -88,7 +88,7 @@ const IndexPage = ({ data }) => {
             flexWrap='wrap' justifyContent='center' 
             gap='2em' pb='150px'  px={[1,3,5]} pt={2}
           >
-            <SideMenu active='offices' />
+            <SideMenu active={1} />
 
             <Flex
               w={['100%','100%','60%']}

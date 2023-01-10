@@ -91,29 +91,21 @@ const useProvideAuth =  () => {
  const getUser = async ()  => {
  	var unsubscribe = await Auth.currentUserInfo()
 
-  let data 
 
-  if (unsubscribe?.attributes?.['custom:ssuid']) {
-     data  = await client.query({
+  if(unsubscribe){
+    const {data}  = await client.query({
       query: GET_USER,
       variables: {
         id:  parseInt(unsubscribe?.attributes?.['custom:ssuid'])
       }
     });
-  } else {
-    data = {}
-  }
-  
 
-  if(unsubscribe){
     setUser({...unsubscribe, data:{...data.user}})
     setLoading(false)
   } else {
     setUser(false)
     setLoading(false)
   }
- 	
-  
  }
 
   const signout = async ()  => {
@@ -133,8 +125,15 @@ const useProvideAuth =  () => {
     try {
       const user2 = await Auth.signIn(email.trim(), password.trim());
       if(user2) {
-        setUser(user2);
-        return user2
+        var {data}  = await client.query({
+              query: GET_USER,
+              variables: {
+                id:  parseInt(user2?.attributes?.['custom:ssuid'])
+              }
+            });
+
+        setUser({...user2, data:{...data.user}});
+        return {...user2, data:{...data.user}}
       } 
     }catch (error) {
       try {
@@ -143,13 +142,24 @@ const useProvideAuth =  () => {
         if(user) {
           Auth.configure({authenticationFlowType:'USER_SRP_AUTH'});
           const user3 = await Auth.signIn(email.trim(), password.trim());
+          console.log(user3)
+          
+
           if(user3) {
-            setUser(user3);
-            return user3
+            var {data}  = await client.query({
+              query: GET_USER,
+              variables: {
+                id:  parseInt(user3?.attributes?.['custom:ssuid'])
+              }
+            });
+
+            setUser({...user3, data:{...data.user}});
+            return {...user3, data:{...data.user}}
           }
         }
       } catch (error) { 
         setError(error.code)
+        return(error)
         console.log('error signing in', error);
       }
     }

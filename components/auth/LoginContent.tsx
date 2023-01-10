@@ -11,7 +11,7 @@ import { useForm } from "react-hook-form"
 
 import { 
 	Box, Flex, Heading, Button, Divider, Spinner, Stack, Image, HStack ,Text, 
-	Input, InputGroup, InputRightElement, FormErrorMessage,
+	Input, InputGroup, InputRightElement, FormErrorMessage, FormControl,
   useBreakpointValue
 } from '@chakra-ui/react';
 
@@ -30,22 +30,36 @@ const LoginContent = (props) => {
 	const router = useRouter()
   const isMobile = useBreakpointValue({ base: true, md: false })
 
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState(false);
+  
+  const [show, setShow] = useState(false)
+
 	const { register, handleSubmit, formState: { errors } } = useForm();
 	
 	
-	const [loading, setLoading] = useState(false);
-
-  
-  const [show, setShow] = React.useState(false)
   const handleClick = () => setShow(!show)
 
-  	const onSubmit = async data => {
+  const onSubmit = async data => {
 		setLoading(true)
-	  	var user = await auth.signin(data.email.trim(), data['current-password'].trim()) ;
-	  	if(user){
-	  		router.push('/account')
-	  	}	  
+
+    try{
+      var user = await auth.signin(data.email.trim(), data['current-password'].trim()) ;
+      if(user.attributes){
+        router.push(`/profile/${user.attributes['custom:ssuid']}`)
+      } else {
+        console.log(user)
+        setLoading(false)
+        setError({cognito:user})
+      }
+    } catch(err){
+      setLoading(false)
+      console.log(err)
+      setError({cognito:err})
+    } 
 	}
+
+  const isError = ( error || auth.error || errors.email || errors.password) ? true : false ;
 
   return (
     <Stack 
@@ -54,15 +68,15 @@ const LoginContent = (props) => {
       {loading
         ? <Flex my={3} py={3} flexWrap='wrap' justifyContent="center"> <Spinner/> </Flex>
         :
-          <Stack
+          <FormControl
             color='black'
             as='form'
             onSubmit={handleSubmit(onSubmit)}
-            py={3}
+            py={3} isInvalid={isError}
           >
             <Stack spacing="6">
               <Stack spacing={{ base: '2', md: '3' }} textAlign="center">
-                <Heading size={useBreakpointValue({ base: 'xs', md: 'sm' })}>
+                <Heading size={{ base: 'xs', md: 'sm' }}>
                   Log in to your account
                 </Heading>
                 <HStack spacing="1" justify="center">
@@ -76,15 +90,17 @@ const LoginContent = (props) => {
             
             <Box w='100%' pb={1}>
               {errors?.password && <FormErrorMessage > Password is needed </FormErrorMessage> }
-              {auth.error && <FormErrorMessage> {t('member:'+auth.error)} </FormErrorMessage> }
+              {auth.error && (<FormErrorMessage> {t('member:'+auth.error)} </FormErrorMessage> )}
+              {error?.cognito &&  <FormErrorMessage > {error?.cognito.Error} </FormErrorMessage> }
             </Box>
             
             <Box w='100%' mb='3' >
               <Input {...register('email',{required: true})} id='email' placeholder={t('public:signup.email')} /> 
-              {errors?.email && ( <FormErrorMessage > Account Email is needed </FormErrorMessage> )}
+              {errors?.email && <FormErrorMessage > Account Email is needed </FormErrorMessage> }
             </Box>
 
-                          <InputGroup size='md'>
+            <Box w='100%' >
+              <InputGroup size='md'>
                             <Input
                               pr='4.5rem'
                               id='password'
@@ -97,11 +113,13 @@ const LoginContent = (props) => {
                                 {show ? t('public:signup.hide') : t('public:signup.show')}
                               </Button>
                             </InputRightElement>
-                          </InputGroup>
+              </InputGroup>
+              {errors?.email && <FormErrorMessage > Password is needed </FormErrorMessage> }
+            </Box>
 
-                  <Button w='100%' mt='3' type='submit' colorScheme='teal'>{t('common:continue')}</Button>
+              <Button w='100%' mt='3' type='submit' colorScheme='teal'>{t('common:continue')}</Button>
           
-              </Stack>
+            </FormControl>
           }
           
           <Divider/>

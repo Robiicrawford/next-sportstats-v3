@@ -53,7 +53,7 @@ const IndexPage = ({ data }) => {
       
       
           <Flex flexWrap='wrap' justifyContent='center' gap='2em' px={[1,3,5]} pt={2} pb='150px'>
-            <SideMenu active='faq' />
+            <SideMenu active={0} />
 
 
             <Flex

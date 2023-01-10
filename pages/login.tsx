@@ -2,7 +2,6 @@
 
 import { NextSeo, OrganizationJsonLd } from 'next-seo';
 import Link from 'next/link'
-import Script from "next/script";
 
 import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
 import { useTranslation } from 'next-i18next';
@@ -24,18 +23,14 @@ export default function Home({sportstats, irun, locale}) {
   const { t } = useTranslation('common');
 
   
-  
+
   return (
     <Layout >
       <NextSeo
         title={`Log In`}
       />
-      <Script 
-        src="https://www.google.com/recaptcha/enterprise.js?render=6LcUReQjAAAAAC0gUWKYsWuPfyLoCFvk8ZsuFTte" 
-      />
-
-
-      	<Flex
+      
+      <Flex
 		    minH={{ base: 'auto', md: '100vh' }}
 		    width="full"
 		    bgGradient={useBreakpointValue({

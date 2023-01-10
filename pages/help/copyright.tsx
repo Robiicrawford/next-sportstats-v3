@@ -32,7 +32,7 @@ const IndexPage = () => {
       
       
           <Flex flexWrap='wrap' mb='150px' justifyContent='center' gap='2em'  px={[1,3,5]} pt={2}>
-            <SideMenu active='copyright' />
+            <SideMenu active={4} />
 
 
             <Flex

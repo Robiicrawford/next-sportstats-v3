@@ -7,7 +7,7 @@ import { useAuth } from "../../hooks/use-auth";
 interface CardWithAvatarProps extends FlexProps {
   avatarProps: AvatarProps
   action?: React.ReactNode
-  ssuid: Int
+  ssuid?: int
 }
 
 export const CardWithAvatar = (props: CardWithAvatarProps) => {
