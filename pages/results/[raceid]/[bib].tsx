@@ -170,7 +170,7 @@ const SplitRow = ({info, data, raceInfo, canOpen, setOpen, open}) => {
           className='center' style={{width:'20px'}}
           onClick={()=>setOpen(open === info.id ?null:info.id)}
         >
-          <Icon as={open !== info.id ? FiArrowRight : FiArrowDown} boxSize="6" color="black"  color='ss_green' />
+          <Icon as={open !== info.id ? FiArrowRight : FiArrowDown} boxSize="6" color='ss_green' />
         </Td>
         :<Td/>
       }
