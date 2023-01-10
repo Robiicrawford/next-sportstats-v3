@@ -268,7 +268,10 @@ function ResultPageInd({ data, ssuid }) {
               </Table>
             </Box>
 
-            <Box>
+            <Box
+              w='100%'
+              minH='250px'
+            >
               <ins 
                 className="adsbygoogle"
                  style={{display:"block"}}
@@ -279,7 +282,7 @@ function ResultPageInd({ data, ssuid }) {
               >
               </ins>
               <script>
-                  (adsbygoogle = window.adsbygoogle || []).push({});    
+                  ;(adsbygoogle = window.adsbygoogle || []).push({});    
              </script>
             </Box>
 
