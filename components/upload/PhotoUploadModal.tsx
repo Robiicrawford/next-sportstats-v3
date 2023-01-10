@@ -157,7 +157,7 @@ export const PhotoUploadModal = ({ssuid}) => {
                       maxSize={5242880}
                     //  noClick
                       noKeyboard
-                      accept='image/jpeg, image/png'
+                      accept={['image/jpeg, image/png']}
                       maxFiles={1}
                       style={{ width: '250px', height: '250px', margin:'auto'}}
                     >

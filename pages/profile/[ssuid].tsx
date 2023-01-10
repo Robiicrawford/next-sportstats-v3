@@ -2,6 +2,7 @@ import React, {useState, useEffect} from "react"
 import { NextSeo } from 'next-seo';
 
 import Link from 'next/link'
+import Script from "next/script";
 import { useRouter } from "next/router";
 
 import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
@@ -62,6 +63,8 @@ function ResultPageInd({ data, ssuid }) {
     
     console.log(run_follow)
   }
+
+
 
   return (
     <Layout header_color='black' >
@@ -229,6 +232,7 @@ function ResultPageInd({ data, ssuid }) {
             w='100%'
           >
             <Text mx='3' fontWeight='bold' fontSize='25'>Results</Text>
+            
             <Box overflowX="auto">
               <Table>
                 <Thead>
@@ -258,6 +262,21 @@ function ResultPageInd({ data, ssuid }) {
                 </Tbody>
               </Table>
             </Box>
+
+            <ins 
+              className="adsbygoogle"
+               style={{display:"block"}}
+               data-ad-client="ca-pub-6314308690124297"
+               data-ad-slot="8954336761"
+               data-ad-format="auto"
+               data-full-width-responsive="true"
+            >
+            </ins>
+            <script>
+                (adsbygoogle = window.adsbygoogle || []).push({});    
+           </script>
+
+
           </Stack> 
           <Stack 
             direction={{ base: 'column', sm: 'column' }}
