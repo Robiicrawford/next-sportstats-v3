@@ -272,6 +272,8 @@ function ResultPageInd({ data, ssuid }) {
               w='100%'
               minH='250px'
             >
+              <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-6314308690124297"
+                crossOrigin="anonymous"></script>
               <ins 
                 className="adsbygoogle"
                  style={{display:"block"}}
@@ -279,7 +281,6 @@ function ResultPageInd({ data, ssuid }) {
                  data-ad-slot="8954336761"
                  data-ad-format="auto"
                  data-full-width-responsive="true"
-                 data-adtest='on'
               >
               </ins>
               <script>
