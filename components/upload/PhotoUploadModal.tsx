@@ -79,7 +79,7 @@ export const PhotoUploadModal = ({ssuid}) => {
 
   const updateUser = async()=>{
       var getNewData = await Auth.currentAuthenticatedUser({ bypassCache: true })
-      setUser(getNewData)
+  //    setUser(getNewData)
   }
 
   useEffect(()=> {
