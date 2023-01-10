@@ -184,7 +184,7 @@ const SubRow = ({info, raceInfo, data, prepareRow}) => {
     <tr className="split_row" style={ {backgroundColor: !data? '#564949ab ':''}}>
       
       <td style={{textTransform: 'capitalize', paddingLeft:'2rem'}} colSpan={1}>
-        <Text fontSize={'1em'} ml={2} fontWeight='bold' ml='3' > {info.CL} </Text>
+        <Text fontSize={'1em'} fontWeight='bold' ml='3' > {info.CL} </Text>
         {info.CD ? <Text pl={[1,2,3]} >{info.CD/1000}km || {Math.round(( (info.CD*0.000621371192) + Number.EPSILON) * 100) / 100}mi</Text> : null }
       </td>
       

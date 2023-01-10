@@ -268,20 +268,21 @@ function ResultPageInd({ data, ssuid }) {
               </Table>
             </Box>
 
-            <ins 
-              className="adsbygoogle"
-               style={{display:"block"}}
-               data-ad-client="ca-pub-6314308690124297"
-               data-ad-slot="8954336761"
-               data-ad-format="auto"
-               data-full-width-responsive="true"
-
-            >
-            </ins>
-            <script>
-                (adsbygoogle = window.adsbygoogle || []).push({});    
-           </script>
-
+            <Box>
+              <ins 
+                className="adsbygoogle"
+                 style={{display:"block"}}
+                 data-ad-client="ca-pub-6314308690124297"
+                 data-ad-slot="8954336761"
+                 data-ad-format="auto"
+                 data-full-width-responsive="true"
+                 data-adtest="on"
+              >
+              </ins>
+              <script>
+                  (adsbygoogle = window.adsbygoogle || []).push({});    
+             </script>
+            </Box>
 
           </Stack> 
           <Stack 
