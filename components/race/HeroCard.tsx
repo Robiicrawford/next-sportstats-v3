@@ -94,7 +94,6 @@ function HeroCard({ race }) {
             </Flex>
 
             <Box 
-              direction='column'
               justifyContent='center'
               my='auto'
               w={['100%','50%','66%','75%']}  
