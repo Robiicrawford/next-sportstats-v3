@@ -53,7 +53,7 @@ export const PhotoUploadModal = ({ssuid}) => {
   const auth = useAuth();
 
 
-  const [image, setimage] = useState(false)
+  const [image, setimage] = useState<any>(false)
 
   const [imgSet, setImg] = useState({scale:1})
 
@@ -63,7 +63,7 @@ export const PhotoUploadModal = ({ssuid}) => {
 
   const [int , setInt] = useState<any>(0)
 
-  const [editor, setEditor] = useState(false)
+  const [editor, setEditor] = useState<any>(false)
 
   const startTimer = () => {
     const current = setInterval(() => {
