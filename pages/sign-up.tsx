@@ -85,8 +85,6 @@ export default function Home({sportstats, irun, locale}) {
 		      </Box>
 		      <Center flex="1" py='4' >
 		        <SignUpForm
-		          width="full"
-		          maxW="md"
 		        />
 		      </Center>
 		    </Flex>
