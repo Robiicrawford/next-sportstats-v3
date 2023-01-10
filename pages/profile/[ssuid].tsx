@@ -45,6 +45,11 @@ const FOLLOW_USER = gql`
   }
 `;
 
+
+const todate = (d) =>{
+  return new Date(d).getTime()
+}
+
 function ResultPageInd({ data, ssuid }) {
   const { t } = useTranslation('public');
   const router = useRouter();
@@ -244,7 +249,7 @@ function ResultPageInd({ data, ssuid }) {
                   </Tr>
                 </Thead>
                 <Tbody>
-                  {claims.sort((a, b)=> new Date(b.RDT) - new Date(a.RDT) ).map((race, idx)=>
+                  {claims.sort((a, b)=> todate(b.RDT) - todate(a.RDT) ).map((race, idx)=>
                     <Tr
                       sx={{
                         cursor:'pointer'
@@ -270,7 +275,7 @@ function ResultPageInd({ data, ssuid }) {
                data-ad-slot="8954336761"
                data-ad-format="auto"
                data-full-width-responsive="true"
-               
+
             >
             </ins>
             <script>
