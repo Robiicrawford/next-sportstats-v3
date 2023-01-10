@@ -69,9 +69,9 @@ function Application({ Component, pageProps }: AppProps) {
           />
           <Script 
             id="Adsense-id"
-            data-ad-client="ca-pub-631430869012429"
-            strategy="afterInteractive"
+           // strategy="afterInteractive"
             onError={ (e) => { console.error('Script failed to load', e) }}
+            crossOrigin="anonymous"
             src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-6314308690124297" 
           />
           <Script
