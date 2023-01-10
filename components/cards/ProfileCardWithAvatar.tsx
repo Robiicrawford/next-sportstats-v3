@@ -36,7 +36,7 @@ export const CardWithAvatar = (props) => {
         {...avatarProps}
         src={
           avatarProps.src?.split(":")[1]
-            ? 'https://s3-us-west-2.amazonaws.com/ss-profile-pics/'+avatarProps.src.split(":")[1]
+            ? 'https://s3-us-west-2.amazonaws.com/ss-profile-pics/'+avatarProps.src.split(":")[1].split("/")[avatarProps.src.split(":")[1].split("/").length-1]
             :avatarProps.src
         }
       />
