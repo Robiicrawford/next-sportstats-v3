@@ -128,13 +128,13 @@ const TransitionRow = ({info, data}) => {
 
   return(
     <>
-      <BlankRow key={info.CL+"_blank"}/>
-      <Tr className="name_row" key={info.CL+"_row2"}>
-        <td colSpan={1}><Heading >Transition - {info.CL}</Heading></td>
-        <td> <Heading ><span style={{paddingLeft:'1rem'}}> {msToTime(data?.ST ? data?.ST : parseInt(data?.CD) ) }</span> </Heading> </td>
+      <BlankRow />
+      <Tr className="name_row" style={{textTransform: 'capitalize'}} pb='2'>
+        <Td colSpan={1}><Text fontSize='30'> Transition - {info.CL}</Text></Td>
+        <Td ><Text fontSize='25'><span style={{paddingLeft:'1rem'}}>{!data?.ST && !data?.CD ? '00:00:00' :msToTime( data?.ST?data?.ST:parseInt(data?.CD) )}</span></Text> </Td>
         <Td colSpan={6}></Td>
       </Tr>
-     
+      <BlankRow />
     </>
   )
 }
@@ -150,7 +150,7 @@ const SplitRow = ({info, data, raceInfo, canOpen, setOpen, open}) => {
       </Td>
       
       <Td >
-        {![6,7].includes(info.CT)&&  <Text fontSize='1.2em' >{msToTime(data?.ST)} | </Text> }
+        {![6,7].includes(info.CT)&&  <Text fontSize='1em' >{msToTime(data?.ST)} | </Text> }
         <Text pl={[1,2,3]}>{msToTime(data?.CD)}</Text>
       </Td>
 
@@ -181,30 +181,30 @@ const SplitRow = ({info, data, raceInfo, canOpen, setOpen, open}) => {
 const SubRow = ({info, raceInfo, data, prepareRow}) => {
 
   return (
-    <tr className="split_row" style={ {backgroundColor: !data? '#564949ab ':''}}>
+    <Tr className="split_row" style={ {backgroundColor: !data? '#564949ab ':''}}>
       
-      <td style={{textTransform: 'capitalize', paddingLeft:'2rem'}} colSpan={1}>
+      <Td style={{textTransform: 'capitalize', paddingLeft:'2rem'}} colSpan={1}>
         <Text fontSize={'1em'} fontWeight='bold' ml='3' > {info.CL} </Text>
         {info.CD ? <Text pl={[1,2,3]} >{info.CD/1000}km || {Math.round(( (info.CD*0.000621371192) + Number.EPSILON) * 100) / 100}mi</Text> : null }
-      </td>
+      </Td>
       
-      <td>
-        {![6,7].includes(info.CT)&&  <Heading fontSize='1.2em' >{msToTime(data?.ST)} | </Heading> }
+      <Td>
+        {![6,7].includes(info.CT)&&  <Text fontSize='1.1em' fontWeight='bold' >{msToTime(data?.ST)} | </Text> }
         <Text pl={[1,2,3]}>{msToTime(data?.CD)}</Text>
-      </td>
+      </Td>
 
-      <td style={{textAlign:'center'}}>
+      <Td style={{textAlign:'center'}}>
         {[6,7].includes(info.CT) && raceInfo.type.toLowerCase() !== 'triathlon'
             ?  calculatePace( info.CDS?info.CDS:info.CD, data?.CD, raceInfo.CT , info.CL ) 
             : data?.CD && info.CD? calculatePace( info.CD, data.ST,  raceInfo.CT, info.CL  ): '---'
           }
-      </td>
-      <td className='center min-tablet'>{data?.TOD? msToTime(data.TOD):'est. '+data?.estTod}</td>
-      <td className='center min-desktop'>{data?.RO} </td>
-      <td className='center min-desktop'>{data?.RG} </td>
-      <td className='center min-desktop'>{data?.RC} </td>
-      <td/>
-    </tr>
+      </Td>
+      <Td className='center min-tablet'>{data?.TOD? msToTime(data.TOD):'est. '+data?.estTod}</Td>
+      <Td className='center min-desktop'>{data?.RO} </Td>
+      <Td className='center min-desktop'>{data?.RG} </Td>
+      <Td className='center min-desktop'>{data?.RC} </Td>
+      <Td/>
+    </Tr>
   )
 }
 
@@ -332,6 +332,7 @@ function ResultPageInd({ result, race, rid }) {
                     ml='2' 
                     as={Link}
                     href={`/profile/${result?.user?.ssuid}`}
+                    className={result?.user?.ssuid?"":"disabled"}
                     sx={{pointerEvents: result?.user?'':'none'}}
                     name={result.givenName+" "+result.familyName} 
                     src={

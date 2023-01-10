@@ -279,6 +279,7 @@ function ResultPageInd({ data, ssuid }) {
                  data-ad-slot="8954336761"
                  data-ad-format="auto"
                  data-full-width-responsive="true"
+                 data-adtest='on'
               >
               </ins>
               <script>
