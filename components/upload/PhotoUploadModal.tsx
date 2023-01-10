@@ -149,7 +149,7 @@ export const PhotoUploadModal = ({ssuid}) => {
               {!loading ?
                 <>
                   <Box 
-                    direction='column' justifyContent='center'
+                    justifyContent='center'
                     my={2} w='100%' py={[2,3,4]}
                    >
                     <Dropzone
