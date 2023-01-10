@@ -194,7 +194,7 @@ export const PhotoUploadModal = ({ssuid}) => {
                   </Box>
                   {image&&
                     <Box w='100%'>
-                      <Button onClick={handleUpload} style={{width:'100%'}} primary> Upload </Button>
+                      <Button onClick={handleUpload} w='100%'> Upload </Button>
                     </Box>
                   }
                 </>
