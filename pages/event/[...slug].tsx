@@ -286,7 +286,7 @@ export async function getStaticPaths() {
   }
 
   // Call an external API endpoint to get posts
-  const get_master_slugs = await fetch('https://admin.sportstats.ca/event_master/adminapi.php', {
+  {/*const get_master_slugs = await fetch('https://admin.sportstats.ca/event_master/adminapi.php', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json'
@@ -308,11 +308,11 @@ export async function getStaticPaths() {
       slug: [master.slug]
     }
   }))
-
+ */}
   // We'll pre-render only these paths at build time.
   // { fallback: false } means other routes should 404.
   return { 
-    paths, 
+    paths:[], 
     fallback: 'blocking' 
   }
 }
