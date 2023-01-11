@@ -87,9 +87,8 @@ export const SignUpForm = () => {
 
 
   useEffect(()=> {
-    console.log(watch('password'))
-    console.log(schema.validate(watch("password").trim(), { list: true } ))
-    if( watch('password').length > 1 && schema.validate(watch("password").trim(), { list: true } ) )
+
+    if( watch('password')?.length > 1 && schema.validate(watch("password")?.trim(), { list: true } ) )
       setError('password', { type: 'custom', message:schema.validate(watch("password").trim(), { list: true } )}  )
 
   },[watch('password')])
