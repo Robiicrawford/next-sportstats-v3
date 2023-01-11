@@ -47,8 +47,8 @@ const IndexPage = ({ data }) => {
     },
     { hq: false, name:'Sportstats USA', 
       image: 'https://www.mercyhealth.com/assets/images/medical-education/grand-rapids/grand-rapids-banner.jpg',
-      addressLine1: "88 54th St. SW Suite 106",
-      addressLine2: "Grand Rapids, MI 49548",
+      addressLine1: "112 54th St. SW Suite 112",
+      addressLine2: "Grand Rapids, MI 40548",
       addressLine3: "",
       countryCode:'US'
     },
