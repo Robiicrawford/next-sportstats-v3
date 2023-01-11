@@ -137,7 +137,7 @@ export const SignUpForm = () => {
               {errors?.lname && <FormErrorMessage > Last Name is needed </FormErrorMessage> }
             </Box>
 
-            <Box>
+            <Box pb='4'>
               <FormLabel htmlFor="email">{t('signup.email')}</FormLabel>
               <Input id="email" type="email" {...register('email',{required: true})} />
               {errors?.email && <FormErrorMessage > Account Email is needed </FormErrorMessage> }
