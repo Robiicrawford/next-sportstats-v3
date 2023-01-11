@@ -10,12 +10,14 @@ import {
   Heading,
   HStack,
   Input,
+  InputRightElement,
+  InputGroup,
   Stack,
   Text,
   useBreakpointValue,
   useColorModeValue,
 } from '@chakra-ui/react'
-import React, {useEffect} from 'react'
+import React, {useEffect, useState} from 'react'
 
 import Link from 'next/link'
 
@@ -36,6 +38,10 @@ const schema = new passwordValidator();
 export const SignUpForm = () => {
   const { t } = useTranslation('public');
   const { register, handleSubmit, formState: { errors }, watch, setError } = useForm();
+
+  const [show, setShow] = useState(false)
+
+  const handleClick = () => setShow(!show)
 
   const onSubmit = async data => {
     grecaptcha.enterprise.ready(function() {
@@ -91,9 +97,6 @@ export const SignUpForm = () => {
 
   const isError = (  errors.email || errors.password || errors.fname || errors.lname) ? true : false ;
 
-  console.log(isError)
-
-  console.log(errors.password)
   return (
     <Container
       maxW="md"
@@ -143,7 +146,19 @@ export const SignUpForm = () => {
 
             <Box pb='3'>
               <FormLabel htmlFor="password">{t('signup.password')}</FormLabel>
-              <Input id="password" type="password" {...register('password',{required: true})} />
+              <InputGroup size='md'>
+                  <Input
+                    id='password'
+                    type={show ? 'text' : 'password'} 
+                    {...register('password',{required: true})}
+                  />
+                  <InputRightElement width='4.5rem'>
+                    <Button h='1.75rem' size='sm' onClick={handleClick}>
+                      {show ? t('public:signup.hide') : t('public:signup.show')}
+                    </Button>
+                  </InputRightElement>
+              </InputGroup>
+
               <FormHelperText color="muted">At least 8 characters long</FormHelperText>
               {errors?.password && <FormErrorMessage > {errors.password.message?formatPasswordValidateError(errors.password.message):'Password is needed'} </FormErrorMessage> }
             </Box>
