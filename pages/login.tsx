@@ -7,7 +7,7 @@ import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
 import { useTranslation } from 'next-i18next';
 
 import { 
-	Avatar, Box, Center, Flex, 
+	Avatar, Box, Center, Flex, Container,
 	DarkMode, Heading, Icon, Stack, Text, 
 	VStack, HStack , AvatarGroup, Image,
 	useBreakpointValue, 
@@ -80,12 +80,20 @@ export default function Home({sportstats, irun, locale}) {
 		        </DarkMode>
 		      </Box>
 		      <Center flex="1">
-		        <LoginContent
-		          px={{ base: '4', md: '8' }}
-		          py={{ base: '12', md: '48' }}
-		          width="full"
-		          maxW="md"
-		        />
+		      	<Container
+					      maxW="md"
+					      
+					      bg={useBreakpointValue({ base: 'transparent', sm: 'bg-surface' })}
+					      boxShadow={{ base: 'none', sm: mode('md', 'md-dark') }}
+					      borderRadius={{ base: 'none', sm: 'xl' }}
+					    >
+			        <LoginContent
+			          px={{ base: '4', md: '8' }}
+			          py={{ base: '12', md: '48' }}
+			          width="full"
+			          maxW="md"
+			        />
+			       </Container>
 		      </Center>
 		    </Flex>
 		  </Flex>

@@ -48,14 +48,12 @@ const LoginContent = (props) => {
       if(user.attributes){
         router.push(`/profile/${user.attributes['custom:ssuid']}`)
       } else {
-        console.log(user)
         setLoading(false)
-        setError({cognito:user})
+        setError({cognito:user.message})
       }
     } catch(err){
       setLoading(false)
-      console.log(err)
-      setError({cognito:err})
+      setError({cognito:err.message})
     } 
 	}
 
@@ -73,6 +71,7 @@ const LoginContent = (props) => {
             as='form'
             onSubmit={handleSubmit(onSubmit)}
             py={3} isInvalid={isError}
+
           >
             <Stack spacing="6">
               <Stack spacing={{ base: '2', md: '3' }} textAlign="center">
@@ -90,8 +89,8 @@ const LoginContent = (props) => {
             
             <Box w='100%' pb={1}>
               {errors?.password && <FormErrorMessage > Password is needed </FormErrorMessage> }
-              {auth.error && (<FormErrorMessage> {t('member:'+auth.error)} </FormErrorMessage> )}
-              {error?.cognito &&  <FormErrorMessage > {error?.cognito.Error} </FormErrorMessage> }
+              {auth.error && !error?.cognito &&(<FormErrorMessage> {t('member:'+auth.error)} </FormErrorMessage> )}
+              {error?.cognito &&  <FormErrorMessage > {error?.cognito} </FormErrorMessage> }
             </Box>
             
             <Box w='100%' mb='3' >
@@ -117,7 +116,7 @@ const LoginContent = (props) => {
               {errors?.email && <FormErrorMessage > Password is needed </FormErrorMessage> }
             </Box>
 
-              <Button w='100%' mt='3' type='submit' colorScheme='teal'>{t('common:continue')}</Button>
+              <Button w='100%' mt='3' type='submit' variant="primary" >{t('common:continue')}</Button>
           
             </FormControl>
           }
