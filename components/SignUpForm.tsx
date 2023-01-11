@@ -40,7 +40,19 @@ export const SignUpForm = () => {
   const onSubmit = async data => {
     grecaptcha.enterprise.ready(function() {
       grecaptcha.enterprise.execute('6LcUReQjAAAAAC0gUWKYsWuPfyLoCFvk8ZsuFTte', {action: 'login'}).then(function(token) {
-        console.log(token)
+
+          console.log(token)
+          // send token to backend to check is valid user 
+          // backend will also check if the email is already in use for an account
+          const response = null
+          if(response?.ssud){
+            // backend reutned a ssuid move onto step two 
+
+          } else {
+            // succesfull call from backend but problem with data 
+            setError('email', { type: 'custom', message:'Account already in use' } )
+          }
+        
       });
     });
   }

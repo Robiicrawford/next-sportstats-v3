@@ -18,12 +18,12 @@ const HeroBackgroundImage = () => {
 
 
   const services = [
-    {name:'Timing & Result Services', bio:'Lorem ipsum donor amet siti ceali ut enim ad minim veniam, quis nostrud. Sic Semper Tyrannis. Neoas Calie artel.', icon:<FaRegClock/>},
-    {name:'Marketing & Promotion', bio:'Lorem ipsum donor amet siti ceali ut enim ad minim veniam, quis nostrud. Sic Semper Tyrannis. Neoas Calie artel.', icon:<FaTwitter/>},
-    {name:'Race Supply', bio:'Lorem ipsum donor amet siti ceali ut enim ad minim veniam, quis nostrud. Sic Semper Tyrannis. Neoas Calie artel.', icon:<FaAward/>},
-    {name:'Online Advertising', bio:'Lorem ipsum donor amet siti ceali ut enim ad minim veniam, quis nostrud. Sic Semper Tyrannis. Neoas Calie artel.', icon:<FaTwitter/>},
-    {name:'Data & Participant Management', bio:'Lorem ipsum donor amet siti ceali ut enim ad minim veniam, quis nostrud. Sic Semper Tyrannis. Neoas Calie artel.', icon:<FaCertificate/>},
-    {name:'Race Series/Points', bio:'Lorem ipsum donor amet siti ceali ut enim ad minim veniam, quis nostrud. Sic Semper Tyrannis. Neoas Calie artel.', icon:<FaChartBar/>}
+    {name:'Timing & Result Services', bio:"Accurate timing and professional results management services for your road race events. Trust our experienced team to capture your participants' finish times and provide comprehensive online results in real-time.", icon:<FaRegClock/>},
+    {name:'Marketing & Promotion', bio:'Boost your business and increase revenue with our comprehensive marketing and promotion strategies. From email campaigns to social media, our team will help you reach your target audience and drive sales. ', icon:<FaTwitter/>},
+    {name:'Race Supply', bio:'Recognize and reward your participants with our custom designed medals and bibs. Our high quality, durable products will make your road race a memorable and successful event.', icon:<FaAward/>},
+    {name:'Online Advertising', bio:'Maximize your online presence and increase brand awareness with our effective and efficient online advertising solutions. From targeting the right audience to delivering measurable results, we can help your business succeed in the digital age.', icon:<FaTwitter/>},
+    {name:'Data & Participant Management', bio:'Easily integrate and manage data with other service providers using our flexible and customizable platform. From registration to results and everything in between, our platform will provide the seamless flow of data you need to create a smooth and efficient event experience for all involved.', icon:<FaCertificate/>},
+    {name:'Race Series/Points', bio:'Efficiently manage series points and standings with our intuitive and automated platform. Accurately track and display results and participant progress throughout the series, providing an fair and enjoyable experience for everyone involved', icon:<FaChartBar/>}
   ]
 
   return (
