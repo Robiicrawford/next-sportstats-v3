@@ -364,54 +364,59 @@ function ResultPageInd({ race }) {
 
       <Section.Container id="series" Background={Background} >
         {/* race card */}
-        <HeroCard race={race} />
+        <Flex
+          justifyContent='center'
+          direction="column"
+          maxW='8xl' pb='6' mx='auto'
+        >
+          <HeroCard race={race} />
 
-        <Spacer mb='4'/>
-        {/* result section */}
-        <Flex  flexWrap='wrap'  w='100%' pt={3} className='card__base'  >
-          {!data?.allTeamResults?.divs && !loading && <Heading w='100%' textAlign='center'>No Results Yet</Heading>}
-          {data?.allTeamResults?.divs &&
-            <>
-              <ButtonGroup  spacing='6' px='3'>
-                <Button colorScheme='teal' onClick={onOpen}>
-                  Category Times
-                </Button>
-                {/* @ts-ignore */}
-                {["superAdmin", "admin","timer", "RaceDirector"].some( i => user?.signInUserSession?.accessToken?.payload['cognito:groups'].includes(i) ) &&
-                  <Button
-                     colorScheme='teal'
-                      as={CSVDownloader}
-                     data={()=>{
-                      if(!data?.allTeamResults?.clubs){
-                        return false
-                      } else {
-                       
-                        return data?.allTeamResults?.clubs.map((c)=> {
-                          return {place:c.place, club: c.club, points:c.tp}
-                        })
+          {/* result section */}
+          <Flex  flexWrap='wrap'  w='100%' pt={3} className='card__base' sx={{borderRadius:'0 0 15px 15px',}}  >
+            {!data?.allTeamResults?.divs && !loading && <Heading w='100%' textAlign='center'>No Results Yet</Heading>}
+            {data?.allTeamResults?.divs &&
+              <>
+                <ButtonGroup  spacing='6' px='3'>
+                  <Button colorScheme='teal' onClick={onOpen}>
+                    Category Times
+                  </Button>
+                  {/* @ts-ignore */}
+                  {["superAdmin", "admin","timer", "RaceDirector"].some( i => user?.signInUserSession?.accessToken?.payload['cognito:groups'].includes(i) ) &&
+                    <Button
+                       colorScheme='teal'
+                        as={CSVDownloader}
+                       data={()=>{
+                        if(!data?.allTeamResults?.clubs){
+                          return false
+                        } else {
+                         
+                          return data?.allTeamResults?.clubs.map((c)=> {
+                            return {place:c.place, club: c.club, points:c.tp}
+                          })
 
-                     }}}
-                     type={Type.Button}
-                     filename={`${race?.event?.name} - ${race?.info?.name} - Team Points`}
-                     bom={true}
-                   >
-                     Download as CSV
-                   </Button>
-                }
-                  
-              </ButtonGroup>
+                       }}}
+                       type={Type.Button}
+                       filename={`${race?.event?.name} - ${race?.info?.name} - Team Points`}
+                       bom={true}
+                     >
+                       Download as CSV
+                     </Button>
+                  }
+                    
+                </ButtonGroup>
 
-              <Styles>
-                <Table 
-                  isLoading={loading}
-                  columns={columns} 
-                  data={dataFinal}
-                  renderRowSubComponent={renderRowSubComponent}
-                />
-              </Styles>
-            </>
-          }
-          
+                <Styles>
+                  <Table 
+                    isLoading={loading}
+                    columns={columns} 
+                    data={dataFinal}
+                    renderRowSubComponent={renderRowSubComponent}
+                  />
+                </Styles>
+              </>
+            }
+            
+          </Flex>
         </Flex>
 
       </Section.Container>
