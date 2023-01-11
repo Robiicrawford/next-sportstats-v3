@@ -2,7 +2,11 @@ import React, {useState, useEffect} from "react"
 
 import { useTranslation } from 'next-i18next';
 
-import { Flex, Box, SimpleGrid, Container, Center, Text, Heading, Image } from '@chakra-ui/react';
+import { Flex, Box, SimpleGrid, Container, Center, Text, Heading } from '@chakra-ui/react';
+
+import Image from 'next/image'
+
+import sportstats_logo from '../../public/about/test.jpeg'
 
 
 const HeroBackgroundImage = () => {
@@ -17,11 +21,18 @@ const HeroBackgroundImage = () => {
    >  
     <SimpleGrid columns={{ base: 1, md: 2 }} gap="6" >
       <Center>
-        <Image 
-          boxSize='400px'
-          src='https://treact.owaiskhan.me/static/media/stats-illustration.89e20edcbf2cccadc1f28b4a73a486ac.svg' 
-          alt='Track Record' 
-        />
+        <Box
+          p='4'
+          maxW='400px'
+          sx={{borderRadius:'2em'}}
+        >
+          <Image 
+          //  boxSize='400px'
+            style={{borderRadius:'2em'}}
+            src={sportstats_logo} 
+            alt='Track Record' 
+          />
+        </Box>
       </Center>
       <Container flexWrap='wrap' h='fit-content'  m='auto' maxW='2xl'>
         <Text color='ss_green' fontSize='lg' fontWeight='bold' w='100%'> Our Track Record </Text>

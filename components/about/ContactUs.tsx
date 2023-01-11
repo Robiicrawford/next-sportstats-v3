@@ -13,18 +13,10 @@ import { Avatar } from '@chakra-ui/react'
 
 import { FaTwitter, FaRegClock, FaCertificate, FaChartBar, FaAward } from 'react-icons/fa'
 
+
 const HeroBackgroundImage = () => {
 
   const {t} = useTranslation('public');
-
-  const services = [
-    {name:'Timing Clocks', bio:'Lorem ipsum donor amet siti ceali ut enim ad minim veniam, quis nostrud. Sic Semper Tyrannis. Neoas Calie artel.', icon:<FaRegClock/>},
-    {name:'Race Day Changes', bio:'Lorem ipsum donor amet siti ceali ut enim ad minim veniam, quis nostrud. Sic Semper Tyrannis. Neoas Calie artel.', icon:<FaTwitter/>},
-    {name:'Race Supply', bio:'Lorem ipsum donor amet siti ceali ut enim ad minim veniam, quis nostrud. Sic Semper Tyrannis. Neoas Calie artel.', icon:<FaAward/>},
-    {name:'Online Advertising', bio:'Lorem ipsum donor amet siti ceali ut enim ad minim veniam, quis nostrud. Sic Semper Tyrannis. Neoas Calie artel.', icon:<FaTwitter/>},
-    {name:'Finisher Certificates', bio:'Lorem ipsum donor amet siti ceali ut enim ad minim veniam, quis nostrud. Sic Semper Tyrannis. Neoas Calie artel.', icon:<FaCertificate/>},
-    {name:'Race Series/Points', bio:'Lorem ipsum donor amet siti ceali ut enim ad minim veniam, quis nostrud. Sic Semper Tyrannis. Neoas Calie artel.', icon:<FaChartBar/>}
-  ]
 
   return (
    <Flex
@@ -44,10 +36,10 @@ const HeroBackgroundImage = () => {
           </Link>
         </Flex>
 
-        <Center>
+        <Center p='5'>
           <Image 
-            boxSize='400px'
-            src='https://treact.owaiskhan.me/static/media/email-illustration.84fb82b841c197337a4bc2c1e660d5a0.svg' 
+            maxW='320px'
+            src="https://cdn-1.sportstats.one/img/general/envelope_no_man.png" 
             alt='contact us' 
           />
         </Center>

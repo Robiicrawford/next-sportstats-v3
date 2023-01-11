@@ -95,7 +95,7 @@ export const SignUpForm = () => {
   },[watch('password')])
 
 
-  const isError = (  errors.email || errors.password || errors.fname || errors.lname) ? true : false ;
+  const isError = (  errors.email || errors.fname || errors.lname) ? true : false ;
 
   return (
     <Container
@@ -142,25 +142,6 @@ export const SignUpForm = () => {
               <FormLabel htmlFor="email">{t('signup.email')}</FormLabel>
               <Input id="email" type="email" {...register('email',{required: true})} />
               {errors?.email && <FormErrorMessage > Account Email is needed </FormErrorMessage> }
-            </Box>
-
-            <Box pb='3'>
-              <FormLabel htmlFor="password">{t('signup.password')}</FormLabel>
-              <InputGroup size='md'>
-                  <Input
-                    id='password'
-                    type={show ? 'text' : 'password'} 
-                    {...register('password',{required: true})}
-                  />
-                  <InputRightElement width='4.5rem'>
-                    <Button h='1.75rem' size='sm' onClick={handleClick}>
-                      {show ? t('public:signup.hide') : t('public:signup.show')}
-                    </Button>
-                  </InputRightElement>
-              </InputGroup>
-
-              <FormHelperText color="muted">At least 8 characters long</FormHelperText>
-              {errors?.password && <FormErrorMessage > {errors.password.message?formatPasswordValidateError(errors.password.message):'Password is needed'} </FormErrorMessage> }
             </Box>
 
             <Stack spacing="4">
