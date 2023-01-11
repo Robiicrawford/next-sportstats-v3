@@ -63,7 +63,7 @@ export const SignUpForm = () => {
         return t('signup.error.Invalid code provided, please request a code again.');
       } else if(errors[i] === 'Email Exists'){
         return 'Email Exists'
-      }
+      } 
     }
   };
 
@@ -72,7 +72,7 @@ export const SignUpForm = () => {
     console.log(watch('password'))
     console.log(schema.validate(watch("password").trim(), { list: true } ))
     if( watch('password').length > 1 && schema.validate(watch("password").trim(), { list: true } ) )
-      setError('password', { type: 'custom', message: formatPasswordValidateError(schema.validate(watch("password").trim() , { list: true } ) ) } )
+      setError('password', { type: 'custom', message:schema.validate(watch("password").trim(), { list: true } )}  )
 
   },[watch('password')])
 
@@ -106,7 +106,6 @@ export const SignUpForm = () => {
         </Stack>
         <Stack spacing="6">
           <FormControl 
-            spacing="5"
             as='form'
             onSubmit={handleSubmit(onSubmit)}
             isInvalid={isError}
@@ -130,11 +129,11 @@ export const SignUpForm = () => {
               {errors?.email && <FormErrorMessage > Account Email is needed </FormErrorMessage> }
             </Box>
 
-            <Box>
+            <Box pb='3'>
               <FormLabel htmlFor="password">{t('signup.password')}</FormLabel>
               <Input id="password" type="password" {...register('password',{required: true})} />
               <FormHelperText color="muted">At least 8 characters long</FormHelperText>
-              {errors?.password && <FormErrorMessage > {errors.password.message} </FormErrorMessage> }
+              {errors?.password && <FormErrorMessage > {errors.password.message?formatPasswordValidateError(errors.password.message):'Password is needed'} </FormErrorMessage> }
             </Box>
 
             <Stack spacing="4">

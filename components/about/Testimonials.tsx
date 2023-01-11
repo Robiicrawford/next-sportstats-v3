@@ -54,7 +54,7 @@ const Testimonials = () => {
       <Container flexWrap='wrap' h='fit-content'  m='auto' maxW='2xl'>
         <Text color='ss_green' fontSize='lg' fontWeight='bold' w='100%'> Testimonials </Text>
         <Heading mb='3' > Our Clients <Text sx={{display:'inline'}} color='ss_green'> Love Us. </Text> </Heading>
-        <Text fontWeight='500'> Here are what some of our amazing customers are saying about our timing professionals. Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</Text>
+        <Text fontWeight='500'> Here are what some of our amazing customers are saying about our timing professionals. </Text>
       	
       	<Box mt='8'>
       		<Swiper
