@@ -38,7 +38,7 @@ const HeroBackgroundImage = () => {
         <Flex flexWrap='wrap'  height='fit-content' m='auto' color='black'>
           <Text color='ss_green' fontSize='lg' fontWeight='bold' w='100%'> Contact Us </Text>
           <Heading mb='3' color='black' > Feel free to <Text sx={{display:'inline'}} color='ss_green'> get in touch </Text> with us. </Heading>
-          <Text fontWeight='500' mb='3'> Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</Text>
+          <Text fontWeight='500' mb='3'> We love to work with new events, answer questions about our services, and find creative solutions to help make your event stand out. Shoot us a message below!</Text>
           <Link href='/help/contact'>
             <Button colorScheme='green' >Contact Us</Button>
           </Link>

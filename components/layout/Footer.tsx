@@ -47,7 +47,7 @@ export default function Footer() {
                 </Text>
                 <Stack spacing="3" shouldWrapChildren >
                   <Button variant="link" as={NextLink}  href='/about'  _hover={{ color: 'ss_green' }} color='#c2c7d5' >{t('public:help.topics.about-sportstats')}</Button>
-                  <Button variant="link" _hover={{ color: 'ss_green' }} color='#c2c7d5'>Race Suppy</Button>
+                  <Button variant="link" _hover={{ color: 'ss_green' }} color='#c2c7d5'>Race Supply</Button>
                 </Stack>
               </Stack>
               <Stack spacing="4" minW="36" flex="1">

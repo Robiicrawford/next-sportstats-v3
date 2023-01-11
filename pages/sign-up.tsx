@@ -33,7 +33,6 @@ export default function Home({sportstats, irun, locale}) {
         src="https://www.google.com/recaptcha/enterprise.js?render=6LcUReQjAAAAAC0gUWKYsWuPfyLoCFvk8ZsuFTte" 
       />
 
-
       	<Flex
 		    minH={{ base: 'auto', md: '100vh' }}
 		    width="full"

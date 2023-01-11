@@ -42,9 +42,7 @@ export default function Settings({locale}) {
         noindex={true}
       />
         <AuthCheck>
-        <LayoutAccount>
-
-                
+          <LayoutAccount>
 
                 <Stack spacing={{ base: '8', lg: '6' }} >
                   <Stack

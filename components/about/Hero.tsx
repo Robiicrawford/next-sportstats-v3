@@ -9,7 +9,6 @@ const HeroBackgroundImage = () => {
 
   const {t} = useTranslation('public');
 
-
   return (
    <Flex
       w='100%' minH='60vh' mt='0' pt='0' justifyContent='center'
@@ -73,7 +72,7 @@ const HeroBackgroundImage = () => {
                   width: "100%",
                   height: "100%"
                 }}
-                src={'https://d33vaoadodpfl.cloudfront.net/miami-cut.mp4'}
+                src={'https://cdn-1.sportstats.one/video/the-new-sportstats-world.mp4'}
                 frameBorder="0"
               />
             </div>

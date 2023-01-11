@@ -27,7 +27,7 @@ const HeroBackgroundImage = () => {
         <Text color='ss_green' fontSize='lg' fontWeight='bold' w='100%'> Our Track Record </Text>
         <Heading mb='3' > We have been doing this for <Text sx={{display:'inline'}} color='ss_green'> 30+ years. </Text> </Heading>
         <Text fontWeight='bold'>
-          State of the art timing systems using technology from MyLaps (ChampionChip, ProChip and BibTag) and race|result. We always cater for each of your race age divisions, special categories, overall standings, teams and relays. Style your athletes experience with customized finishing certificates and access to finishline photos
+          Using state of the art timing systems from technology leaders MyLaps (ChampionChip, ProChip and BibTag) and race|result, we build a timing solution specifically suited to your race and each of your race age divisions, special categories, overall standings, teams and relays. Style your athletes experience with customized finishing certificates and access to finish line photos.
         </Text>
 
         <SimpleGrid columns={{ base: 3, md: 3 }} gap="1" my='6' >

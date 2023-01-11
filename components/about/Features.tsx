@@ -18,11 +18,11 @@ const HeroBackgroundImage = () => {
 
 
   const services = [
-    {name:'Timing Clocks', bio:'Lorem ipsum donor amet siti ceali ut enim ad minim veniam, quis nostrud. Sic Semper Tyrannis. Neoas Calie artel.', icon:<FaRegClock/>},
-    {name:'Race Day Changes', bio:'Lorem ipsum donor amet siti ceali ut enim ad minim veniam, quis nostrud. Sic Semper Tyrannis. Neoas Calie artel.', icon:<FaTwitter/>},
+    {name:'Timing & Result Services', bio:'Lorem ipsum donor amet siti ceali ut enim ad minim veniam, quis nostrud. Sic Semper Tyrannis. Neoas Calie artel.', icon:<FaRegClock/>},
+    {name:'Marketing & Promotion', bio:'Lorem ipsum donor amet siti ceali ut enim ad minim veniam, quis nostrud. Sic Semper Tyrannis. Neoas Calie artel.', icon:<FaTwitter/>},
     {name:'Race Supply', bio:'Lorem ipsum donor amet siti ceali ut enim ad minim veniam, quis nostrud. Sic Semper Tyrannis. Neoas Calie artel.', icon:<FaAward/>},
     {name:'Online Advertising', bio:'Lorem ipsum donor amet siti ceali ut enim ad minim veniam, quis nostrud. Sic Semper Tyrannis. Neoas Calie artel.', icon:<FaTwitter/>},
-    {name:'Finisher Certificates', bio:'Lorem ipsum donor amet siti ceali ut enim ad minim veniam, quis nostrud. Sic Semper Tyrannis. Neoas Calie artel.', icon:<FaCertificate/>},
+    {name:'Data & Participant Management', bio:'Lorem ipsum donor amet siti ceali ut enim ad minim veniam, quis nostrud. Sic Semper Tyrannis. Neoas Calie artel.', icon:<FaCertificate/>},
     {name:'Race Series/Points', bio:'Lorem ipsum donor amet siti ceali ut enim ad minim veniam, quis nostrud. Sic Semper Tyrannis. Neoas Calie artel.', icon:<FaChartBar/>}
   ]
 
@@ -54,7 +54,7 @@ const HeroBackgroundImage = () => {
       
                   icon={user.icon}
                 />
-                <Text color='ss_green' fontWeight='bold' fontSize='2xl'> {user.name} </Text>
+                <Text color='ss_green' textAlign='center' fontWeight='bold' fontSize='2xl'> {user.name} </Text>
                 <Text pt='2'> {user.bio} </Text>
               </Flex>
           )}
